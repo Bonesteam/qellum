@@ -281,7 +281,7 @@ So we built a platform where real chefs craft courses with AI support — combin
                 "See how our members improved their nutrition and cooking with chefs and AI support.",
             testimonials: [
                 {
-                    name: "Anna Rossi",
+                    name: "Alex Rossi",
                     role: "Entrepreneur",
                     image: "review1",
                     text: "My chef created a perfect plan in hours. AI tracking keeps me on target daily!",
@@ -302,7 +302,7 @@ So we built a platform where real chefs craft courses with AI support — combin
                     rating: 5,
                 },
                 {
-                    name: "Mark Evans",
+                    name: "Anna Kowalski",
                     role: "Engineer",
                     image: "review4",
                     text: "Chef adapted the plan to my dietary needs. I've never felt better.",

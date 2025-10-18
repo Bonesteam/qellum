@@ -30,7 +30,7 @@
 .card {
   background: #fff;
   border-radius: 1.2rem;
-  padding: 1.8rem 1.5rem;
+  padding: 2.6rem 1.5rem 1.8rem; /* extra top padding for avatar */
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.05);
@@ -50,7 +50,8 @@
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 1rem;
+  margin: 0 0 0.75rem 0;
+  margin-top: -40px; /* pull avatar upwards to sit over card header area */
   border: 3px solid var(--secondary-color);
 }
 

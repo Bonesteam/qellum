@@ -52,12 +52,11 @@
 /* === Інформаційні картки === */
 .infoGrid {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   gap: 1.5rem;
   width: 100%;
-  max-width: 1400px;
   margin-bottom: 2rem;
 
   @media (max-width: 768px) {
@@ -69,22 +68,36 @@
   }
 }
 
+/* === Page content two-column layout === */
+.content {
+  display: grid;
+  grid-template-columns: 1fr 560px;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1200px;
+  align-items: start;
+  margin-bottom: 3rem;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+  }
+}
+
 .infoCard {
-  background: #fff;
-  border: 1px solid var(--border-color);
-  border-radius: 1.5rem;
-  padding: 2rem;
+  background: linear-gradient(180deg, var(--surface-color), var(--surface-muted));
+  border: 1px solid rgba(233, 216, 200, 0.6);
+  border-radius: 1rem;
+  padding: 1.6rem;
   text-align: center;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
+  box-shadow: 0 8px 28px rgba(217, 140, 92, 0.06);
+  transition: all 0.28s ease;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 300px;
-  height: 200px;
+  min-height: 150px;
 
   @media  (max-width: 480px) {
     max-width: 100%;
@@ -129,16 +142,14 @@
 /* === Форма === */
 .formWrapper {
   width: 100%;
-  max-width: 700px;
-  background: #ffffffcc;
-  backdrop-filter: blur(10px);
-  border-radius: 1.5rem;
-  padding: 2.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  background: linear-gradient(180deg, #ffffff, #fffaf2);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 12px 36px rgba(217, 140, 92, 0.08);
   position: relative;
 
   @media (max-width: 992px) {
-    padding: 2rem;
+    padding: 1.6rem;
   }
 
   @media (max-width: 600px) {

@@ -16,7 +16,7 @@ const ContactUsForm = () => {
     const [showConfetti, setShowConfetti] = useState(false);
     const [successMsg, setSuccessMsg] = useState("");
 
-    const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    const handleSubmit = async (values: any, { setSubmitting, resetForm }: any) => {
         try {
             await sendContactRequest(values);
             resetForm();
@@ -46,8 +46,10 @@ const ContactUsForm = () => {
                 </p>
             </motion.div>
 
-            {/* Contact info cards */}
-            <div className={styles.infoGrid}>
+            {/* Page content: left = info, right = form */}
+            <div className={styles.content}>
+                {/* Contact info cards */}
+                <div className={styles.infoGrid}>
                 <motion.div className={styles.infoCard} whileHover={{ y: -5 }}>
                     <FaMapMarkerAlt className={styles.icon} />
                     <h4>Address</h4>
@@ -65,11 +67,11 @@ const ContactUsForm = () => {
                     <h4>Phone</h4>
                     <p>{COMPANY_PHONE}</p>
                 </motion.div>
-            </div>
+                </div>
 
-            {/* Floating form */}
-            <motion.div
-                className={styles.formWrapper}
+                {/* Floating form */}
+                <motion.div
+                    className={styles.formWrapper}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
@@ -86,25 +88,25 @@ const ContactUsForm = () => {
                             <Form className={styles.form}>
                                 <div className={styles.row}>
                                     <Field name="name">
-                                        {({ field }) => (
+                                        {({ field }: any) => (
                                             <Input {...field} placeholder="First Name" fullWidth />
                                         )}
                                     </Field>
                                     <Field name="secondName">
-                                        {({ field }) => (
+                                        {({ field }: any) => (
                                             <Input {...field} placeholder="Last Name" fullWidth />
                                         )}
                                     </Field>
                                 </div>
 
                                 <Field name="email">
-                                    {({ field }) => (
+                                    {({ field }: any) => (
                                         <Input {...field} type="email" placeholder="Email" fullWidth />
                                     )}
                                 </Field>
 
                                 <Field name="message">
-                                    {({ field }) => (
+                                    {({ field }: any) => (
                                         <Textarea {...field} placeholder="Your message" minRows={5} />
                                     )}
                                 </Field>
@@ -122,6 +124,7 @@ const ContactUsForm = () => {
                     </Formik>
                 )}
             </motion.div>
+            </div>
         </section>
     );
 };

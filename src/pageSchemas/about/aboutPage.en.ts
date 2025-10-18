@@ -23,37 +23,32 @@ const schema: PageSchema = {
     },
 
     blocks: [
-        // 🔹 HERO
+        // 🔹 HERO (centered)
         {
             type: "custom",
             component: "HeroSection",
             title: `Who We Are`,
             highlight: `${COMPANY_NAME}`,
-            description: `We are a global community of professional chefs, nutrition experts, and developers united by one belief — that cooking should be personal, intelligent, and enjoyable.  
-${COMPANY_NAME} was created to make expert-level meal planning accessible to everyone, blending human creativity and AI technology for smarter culinary experiences.`,
+            description: `We’re a community of chefs, nutrition experts, and engineers who believe cooking should be personal, intelligent, and joyful. ${COMPANY_NAME} blends chef creativity and smart technology to deliver meal plans that fit your life and tastes.`,
             image: "image1",
             align: "left",
         },
 
-        // 🔹 OUR STORY
+        // 🔹 OUR STORY (condensed)
         {
             type: "section",
-            title: "Our Story — From Kitchens to Global Culinary Platform",
-            description: `It started as a small group of chefs frustrated by generic meal apps and one-size-fits-all recipes.  
-Too many people struggled to plan meals that fit their tastes, dietary needs, or schedules.  
-We wanted to bring cooking back to its roots: real chefs creating meals for real people.`,
+            title: "Our Story",
+            description: `Born from chefs who wanted better tools, ${COMPANY_NAME} started as a service connecting professionals with people who needed personalized meal plans. Over time we added AI to speed planning and track preferences — always keeping chefs in the loop.`,
             left: {
                 type: "custom",
                 component: "InfoBlock",
                 image: "aboutStory",
                 title: `How ${COMPANY_NAME} Came to Life`,
-                description: `When our founders saw how many people lacked guidance in meal planning, they decided to create a solution combining personal chef expertise with AI.  
-The first version of ${COMPANY_NAME} connected certified chefs with users requesting custom meal plans.  
-Later, AI-assisted planning was added — not to replace chefs, but to enhance convenience and personalization.`,
+                description: `Our founders built a platform that combines verified culinary expertise with machine assistance — helping real people cook better and eat healthier.`,
                 bullets: [
-                    "Launched by chefs for people who love real food",
-                    "Focused on lasting healthy eating habits, not quick fixes",
-                    "Rooted in culinary expertise, empathy, and innovation",
+                    "Created by chefs, for real food lovers",
+                    "Designed for long-term healthy habits",
+                    "Grounded in culinary craft and empathy",
                 ],
             },
             right: {
@@ -64,14 +59,26 @@ Later, AI-assisted planning was added — not to replace chefs, but to enhance c
             },
         },
 
-        // 🔹 MISSION
+        // 🔹 BY THE NUMBERS (using InfoBlock for compatibility)
+        {
+            type: "custom",
+            component: "InfoBlock",
+            title: "By the Numbers",
+            description: "A quick look at what we do and who we serve.",
+            bullets: [
+                "120+ chefs onboard",
+                "30+ countries served",
+                "50k+ meal plans created",
+                "4.8/5 average rating",
+            ],
+        },
+
+        // 🔹 MISSION (moved after stats)
         {
             type: "custom",
             component: "MissionBanner",
             title: "Our Mission",
-            description: `${COMPANY_NAME} exists to merge the creativity of chefs with intelligent AI meal planning.  
-We empower chefs to deliver personalized meal plans while AI helps track preferences, adjust recipes, and streamline planning.  
-Our mission is simple: make exceptional culinary experiences accessible to everyone.`,
+            description: `${COMPANY_NAME} merges chef creativity with smart meal planning tools. We enable chefs to craft tailored plans while AI supports personalization and efficiency. Our goal: make exceptional, sustainable eating accessible to all.`,
             image: "missionBanner",
         },
 
@@ -79,20 +86,17 @@ Our mission is simple: make exceptional culinary experiences accessible to every
         {
             type: "section",
             title: `The Chefs Behind ${COMPANY_NAME}`,
-            description: `Every great meal starts with a human touch.  
-Our chefs are certified professionals from around the world — experts not only in cooking but also in nutrition, meal prep, and client engagement.`,
+            description: `Human creativity guides every plan. Our chefs are verified professionals skilled in cuisine, nutrition, and client care. AI supports their work; it never replaces the human touch.`,
             left: {
                 type: "custom",
                 component: "InfoBlock",
                 image: "image1",
                 title: "Who Our Chefs Are",
-                description: `Each chef on ${COMPANY_NAME} undergoes strict verification — certifications, experience, and interviews.  
-We look for people who understand that cooking is more than recipes — it’s about creativity, taste, and client satisfaction.`,
+                description: `Chefs on ${COMPANY_NAME} pass verification checks for skill and client care. They design meal plans that are both tasty and practical.`,
                 bullets: [
-                    "Certified culinary professionals",
-                    "Experienced in diverse cuisines, nutrition, and dietary restrictions",
-                    "Skilled in creating personalized meal plans",
-                    "Dedicated to guiding and teaching clients",
+                    "Verified culinary professionals",
+                    "Experienced across cuisines and dietary needs",
+                    "Focused on practical, delicious plans",
                 ],
             },
             right: {
@@ -100,13 +104,11 @@ We look for people who understand that cooking is more than recipes — it’s a
                 component: "InfoBlock",
                 image: "image1",
                 title: "Our Culinary Philosophy",
-                description: `At ${COMPANY_NAME}, cooking is a partnership.  
-Our chefs design evolving meal plans that grow with your preferences, health goals, and schedule.  
-AI assists by analyzing feedback and optimizing plans, but it’s the chef’s creativity that ensures delicious, satisfying meals.`,
+                description: `We treat meal planning as a collaboration: chefs craft, AI recommends, and clients enjoy. The result is sustainable, flavorful, and personalized food.`,
                 bullets: [
-                    "Every plan is tailored to your tastes, goals, and time",
-                    "AI measures and tracks, chefs interpret and refine",
-                    "We prioritize healthy, enjoyable meals over fads",
+                    "Plans tailored to tastes, goals and time",
+                    "AI analyzes feedback, chefs refine results",
+                    "Healthy eating that tastes great",
                 ],
             },
         },

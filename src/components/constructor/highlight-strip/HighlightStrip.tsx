@@ -24,7 +24,8 @@ const HighlightStrip: React.FC<HighlightStripProps> = ({ items }) => {
                         <div
                             className={styles.iconBox}
                             style={{
-                                background: item.color || "linear-gradient(135deg, #e0f7e9, #c0f2d1)",
+                                // use warm site palette by default (tertiary -> quaternary)
+                                background: item.color || "linear-gradient(135deg, var(--tertiary-color), var(--quaternary-color))",
                             }}
                         >
                             {item.icon.startsWith("/") ? (

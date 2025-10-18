@@ -1,48 +1,48 @@
 import { StyleSheet } from "@react-pdf/renderer";
 
 export const theme = {
-    primary: "#2563EB",
-    secondary: "#EFF6FF",
-    accent: "#1E3A8A",
-    text: "#111827",
+    primary: "#FF7F50", // coral
+    secondary: "#FFF5E6",
+    accent: "#D2691E", // chocolate
+    text: "#1F2937",
     gray: "#6B7280",
-    light: "#F9FAFB",
+    light: "#FFF9F2",
     white: "#FFFFFF",
 };
 
 // AI стиль (поточний)
 export const pdfStylesAI = StyleSheet.create({
     page: {
-        padding: 40,
+        padding: 36,
         fontSize: 12,
         fontFamily: "Helvetica",
-        backgroundColor: theme.white,
+        backgroundColor: theme.secondary,
         lineHeight: 1.6,
     },
     header: {
         borderBottom: `2pt solid ${theme.primary}`,
-        marginBottom: 25,
-        paddingBottom: 6,
+        marginBottom: 18,
+        paddingBottom: 8,
     },
     title: {
-        fontSize: 22,
+        fontSize: 24,
         fontWeight: "bold",
-        color: theme.primary,
-        marginBottom: 4,
+        color: theme.accent,
+        marginBottom: 6,
     },
     meta: {
         fontSize: 11,
         color: theme.gray,
     },
     sectionTitle: {
-        fontSize: 16,
-        fontWeight: "bold",
-        color: theme.primary,
+        fontSize: 15,
+        fontWeight: "700",
+        color: theme.accent,
         textTransform: "uppercase",
-        marginTop: 18,
-        marginBottom: 10,
-        borderBottom: `1pt solid ${theme.primary}33`,
-        paddingBottom: 4,
+        marginTop: 14,
+        marginBottom: 8,
+        borderBottom: `1pt solid ${theme.accent}22`,
+        paddingBottom: 6,
     },
     paragraph: {
         fontSize: 12,
@@ -51,17 +51,17 @@ export const pdfStylesAI = StyleSheet.create({
         textAlign: "left",
     },
     dayBlock: {
-        backgroundColor: theme.secondary,
-        borderLeft: `4pt solid ${theme.primary}`,
-        borderRadius: 6,
-        padding: 10,
+        backgroundColor: theme.white,
+        borderLeft: `6pt solid ${theme.primary}`,
+        borderRadius: 8,
+        padding: 12,
         marginBottom: 12,
     },
     dayTitle: {
         fontSize: 14,
-        fontWeight: "bold",
+        fontWeight: "700",
         color: theme.accent,
-        marginBottom: 4,
+        marginBottom: 6,
     },
     focus: {
         fontWeight: "bold",
@@ -108,7 +108,7 @@ export const pdfStylesAI = StyleSheet.create({
         color: theme.text,
     },
     extrasPage: {
-        padding: 40,
+        padding: 36,
         backgroundColor: theme.light,
     },
     extrasTitle: {
@@ -152,6 +152,15 @@ export const pdfStylesAI = StyleSheet.create({
         fontSize: 12,
         fontStyle: "italic",
     },
+    footer: {
+        position: "absolute",
+        bottom: 20,
+        left: 36,
+        right: 36,
+        fontSize: 9,
+        color: theme.gray,
+        textAlign: "center",
+    },
 });
 
 // Coach стиль (новий візуал і структура)
@@ -167,10 +176,10 @@ const coach = {
 
 export const pdfStylesCoach = StyleSheet.create({
     page: {
-        padding: 48,
+        padding: 44,
         fontSize: 12,
         fontFamily: "Helvetica",
-        backgroundColor: coach.light,
+        backgroundColor: coach.secondary,
         lineHeight: 1.6,
     },
     header: {
@@ -179,7 +188,7 @@ export const pdfStylesCoach = StyleSheet.create({
         borderWidth: 1,
         borderColor: `${coach.primary}26`,
         padding: 14,
-        marginBottom: 22,
+        marginBottom: 20,
     },
     headerRow: {
         flexDirection: "row",
@@ -188,8 +197,8 @@ export const pdfStylesCoach = StyleSheet.create({
     },
     title: {
         fontSize: 20,
-        fontWeight: "bold",
-        color: coach.primary,
+        fontWeight: "700",
+        color: coach.accent,
     },
     meta: {
         fontSize: 10,
@@ -365,5 +374,14 @@ export const pdfStylesCoach = StyleSheet.create({
         color: coach.white,
         fontSize: 12,
         fontStyle: "italic",
+    },
+    footer: {
+        position: "absolute",
+        bottom: 20,
+        left: 44,
+        right: 44,
+        fontSize: 9,
+        color: coach.gray,
+        textAlign: "center",
     },
 });

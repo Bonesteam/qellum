@@ -78,7 +78,7 @@ export const formSchema = {
 
 export const buildPrompt = (values: Record<string, any>): string => {
     let prompt = `Create a detailed ${values.days || 7}-day meal plan.`;
-    prompt += `\nFormat: Day — Meal (Breakfast/Lunch/Dinner/snacks) with recipe, calories per meal, and portion sizes.`;
+    prompt += `\nFormat strictly as separate Day sections:\nDay 1:\n- Breakfast: ...\n- Lunch: ...\n- Dinner: ...\n- Snacks: ...\nInclude recipe steps, approximate calories per meal, portion sizes, and one-line grocery items (category in parentheses).`;
 
     prompt += `\n\nDietary goal: ${values.goal}`;
     if (values.calorieTarget) prompt += `\nDaily calorie target: ${values.calorieTarget} kcal`;
@@ -88,9 +88,42 @@ export const buildPrompt = (values: Record<string, any>): string => {
     if (values.budget) prompt += `\nBudget preference: ${values.budget}`;
 
     if (values.includeRecipes) prompt += `\nInclude clear step-by-step recipes for each meal.`;
-    if (values.includeShoppingList) prompt += `\nProvide a consolidated shopping list grouped by category (produce, dairy, pantry, etc.).`;
+    if (values.includeShoppingList) prompt += `\nProvide a consolidated shopping list grouped by category (produce, dairy, pantry, etc.). Also provide a JSON object named "groceryListJSON" mapping categories to arrays of items.`;
     if (values.includeSubstitutions) prompt += `\nSuggest ingredient substitutions for common allergens and alternatives for unavailable items.`;
     if (values.includeMealPrep) prompt += `\nInclude meal-prep tips and storage instructions to make weekly preparation easier.`;
+
+    // Extras: prompt the model to output structured sections for extras when requested
+    if (Array.isArray(values.extras) && values.extras.length > 0) {
+        prompt += `\n\nAdditionally, include the following extra sections as separate labeled blocks and (where applicable) provide a JSON object for machine parsing:`;
+        for (const ex of values.extras) {
+            switch (ex) {
+                case "customAllergies":
+                    prompt += `\n- customAllergies: include an array of allergy entries with fields {foodItem, reaction, recommendations} and also a short human-readable paragraph.`;
+                    break;
+                case "groceryListLocalized":
+                case "groceryListLocalized":
+                    prompt += `\n- groceryListLocalized: include a JSON object named groceryListLocalized mapping categories to arrays of item strings AND a human-friendly checklist.`;
+                    break;
+                case "groceryCostEstimates":
+                    prompt += `\n- groceryCostEstimates: provide approximate weekly cost estimates per category and a total estimate. IMPORTANT: output a JSON object named "groceryCostEstimates" with numeric values, for example: { "groceryCostEstimates": { "fruits": 20, "vegetables": 25, "protein": 50, "grains": 15, "dairy": 15, "snacks": 10, "beverages": 10, "condiments": 5, "total": 150 } } . Also include a short human-readable explanation below the JSON.`;
+                    break;
+                case "variationSwaps":
+                    prompt += `\n- variationSwaps: for each main recipe provide 2 quick variations or swaps.`;
+                    break;
+                case "mealTiming":
+                    prompt += `\n- mealTiming: provide suggested meal times and spacing for the day.`;
+                    break;
+                case "hydrationSchedule":
+                    prompt += `\n- hydrationSchedule: give a simple hydration schedule and tips.`;
+                    break;
+                case "ingredientPrepTips":
+                    prompt += `\n- ingredientPrepTips: give prep and storage tips for major ingredients used.`;
+                    break;
+                default:
+                    prompt += `\n- ${ex}: include a short helpful section.`;
+            }
+        }
+    }
 
     prompt += `\n\nAlso provide: a simple daily calorie and macronutrient breakdown summary, and quick notes for picky eaters or budget options.`;
 

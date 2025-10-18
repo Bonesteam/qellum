@@ -48,11 +48,17 @@ const EXTRA_CATEGORIES = {
         { name: "leftoversPlan", label: "Leftovers & reuse plan", cost: 5 },
         { name: "shoppingBudgeting", label: "Budget optimization", cost: 7 },
         { name: "seasonalAdjustments", label: "Seasonal ingredient adjustments", cost: 6 },
+        { name: "groceryCostEstimates", label: "Grocery cost estimates per week", cost: 6 },
+        { name: "variationSwaps", label: "Recipe variations & swaps", cost: 5 },
+        { name: "mealTiming", label: "Meal timing & schedule", cost: 4 },
+        { name: "hydrationSchedule", label: "Hydration schedule & tips", cost: 3 },
+        { name: "ingredientPrepTips", label: "Ingredient prep & storage tips", cost: 4 },
     ],
     expert: [
         { name: "nutritionistReview", label: "Nutritionist review & notes", cost: 30 },
         { name: "1on1Consult", label: "1:1 consultation (30 min)", cost: 50 },
         { name: "followupWeek", label: "Follow-up week plan", cost: 25 },
+        { name: "specialOccasionMenu", label: "Special occasion menu (1-day)", cost: 12 },
     ],
 };
 

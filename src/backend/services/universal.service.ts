@@ -48,19 +48,28 @@ ${languageNote}
             return planType === "reviewed"
                 ? `
 You are a certified nutritionist.
-Create a **detailed daily meal plan** with calories, macros, and hydration.
+Create a highly structured ${fields.days || 7}-day meal plan.
+
+REQUIREMENTS:
+- Output MUST be divided into Day 1:, Day 2:, ... sections.
+- For each day list Breakfast/Lunch/Dinner and Snacks with recipe steps, approximate calories per meal, and portion sizes.
+- Provide a consolidated shopping list as a JSON object named "groceryListLocalized" mapping category -> [items].
+- For requested extras, include clearly labeled blocks (e.g. "customAllergies", "groceryCostEstimates") and when possible emit JSON for machine parsing.
+- Start the document with a short plain-language summary (1-2 lines) and end with a daily macro table per day.
 
 User info:
 ${jsonData}
 
-Include explanations and adaptation tips.
+Include explanations, substitution options, and adaptation tips where relevant.
 ${languageNote}
 `
                 : `
 You are an AI diet assistant.
-Generate a short nutrition overview for:
-${jsonData}
-Include daily focus, example meals, and hydration note.
+Generate a concise but clear ${fields.days || 7}-day meal plan summary.
+
+REQUIREMENTS:
+- Use Day 1:, Day 2:, ... structure with short meal entries (Breakfast/Lunch/Dinner/Snacks).
+- Provide a short shopping list and calorie estimates.
 ${languageNote}
 `;
 
@@ -94,6 +103,20 @@ function buildExtraPrompt(extra: string, category: string, fields: any, language
             return `Write 10 motivational phrases related to this ${category} context.\n${langNote}\n${context}`;
         case "summaryReport":
             return `Write a short summary report showing how the plan achieves goals.\n${langNote}\n${context}`;
+        case "groceryCostEstimates":
+            return `Estimate grocery costs for the week based on the meal plan. Provide per-category estimates and a total. Output a JSON object named groceryCostEstimates with keys for categories and numeric estimates.\n${langNote}\n${context}`;
+        case "variationSwaps":
+            return `For each main recipe in the plan, provide up to 2 quick variations or ingredient swaps. Output as a JSON array named variationSwaps where each entry has {recipe, variations: []}.\n${langNote}\n${context}`;
+        case "mealTiming":
+            return `Suggest meal timing for each day (e.g., Breakfast 08:00, Lunch 13:00, Dinner 19:00) and spacing guidance.\n${langNote}\n${context}`;
+        case "hydrationSchedule":
+            return `Provide a simple hydration schedule and tips, including amounts and timing across the day.\n${langNote}\n${context}`;
+        case "ingredientPrepTips":
+            return `List ingredient prep and storage tips for items used across the plan. Output a JSON object ingredientPrepTips mapping ingredient -> tip.\n${langNote}\n${context}`;
+        case "groceryListLocalized":
+            return `Produce a consolidated grocery list grouped by category, and output a JSON object named groceryListLocalized mapping categories (produce, dairy, pantry, meat, etc.) to arrays of items. Also include a short human-friendly checklist.\n${langNote}\n${context}`;
+        case "tasteProfile":
+            return `Parse the user's taste profile and output a JSON object named tasteProfile with the following fields: fullName (string), goal (string), dietaryPreference (string), flavors: { preferred: string[], disliked: string[] }, cuisines: string[], ingredients: { likes: string[], dislikes: string[] }, mealPreferences: { breakfast: string[], lunch: string[], dinner: string[], snacks: string[] }, cookingStyle: string[], allergies: string[], specialRequests: string. Output only the JSON object (no surrounding text).\n${langNote}\n${context}`;
         default:
             return `Generate a useful ${extra} section.\n${langNote}\n${context}`;
     }

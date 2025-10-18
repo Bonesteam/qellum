@@ -29,87 +29,64 @@ const schema: PageSchema = {
         {
             type: "custom",
             component: "HeroSection",
-            title: "Cook Smarter with Expert Chefs",
-            highlight: "Personal Chef + Smart AI Assistant",
-            description: `Enjoy meals crafted just for you by certified chefs — or let AI instantly generate a complete meal plan.  
-Whether your goal is weight management, muscle gain, or balanced nutrition — your plan is tailored to you.`,
-            primaryCta: {text: "Start with My Chef", link: "/get-started"},
+            title: "Cook Smarter — Chef & AI Meal Plans",
+            highlight: "Fast. Personalized. Delicious.",
+            description: `Pick a plan, tell us your preferences, and get a tailored meal plan with recipes and shopping lists. Choose instant AI plans or a reviewed chef plan.`,
+            primaryCta: {text: "Get Your Meal Plan", link: "/get-started"},
+            secondaryCta: {text: "How It Works", link: "#how-it-works"},
             image: "image1",
-            align: "right",
+            align: "left",
         },
 
         {
             type: "custom",
             component: "HighlightStrip",
             items: [
-                {icon: "👩‍🍳", text: "Personalized Chef Meal Plans"},
-                {icon: "🤖", text: "AI-Generated Recipes"},
-                {icon: "📊", text: "Nutrition & Calorie Tracking"},
-                {icon: "💬", text: "Direct Chef Communication"},
-                {icon: "🔥", text: "Custom Courses Delivered in Hours"},
+                {icon: "👩‍🍳", text: "Chef-crafted Plans"},
+                {icon: "🤖", text: "Instant AI Recipes"},
+                {icon: "🧠", text: "Smart Grocery Lists"},
+                {icon: "🌿", text: "Allergy & Diet Friendly"},
             ],
+        },
+
+        {
+            type: "custom",
+            component: "InfoBlock",
+            title: "How It Works",
+            description: "Create your account, add preferences, choose AI or Chef plan, and receive recipes and a grocery list within hours.",
+            bullets: [
+                "Sign up and fill out dietary preferences",
+                "Choose an AI plan for instant results or Chef plan for reviewed menus",
+                "Get recipes, portions, and a shopping list",
+            ],
+            align: "center",
         },
 
         {
             type: "custom",
             component: "ValuesIcons",
             title: "Why Choose Qellum Chefs?",
-            description: `${COMPANY_NAME} ensures your journey is guided by culinary expertise — AI helps, but real chefs lead.`,
+            description: `${COMPANY_NAME} combines culinary expertise with smart AI to deliver personalized meal experiences.`,
             values: [
                 {
                     icon: "👨‍🍳",
                     title: "Certified Chefs",
-                    text: "All chefs are trained and experienced in personalized cooking and nutrition.",
+                    text: "Experts craft plans tailored to your taste and health needs.",
                 },
                 {
                     icon: "🧠",
-                    title: "AI Assistance",
-                    text: "Our AI helps track preferences, optimize nutrition, and suggest recipe adjustments.",
+                    title: "Smart Assistance",
+                    text: "AI suggests recipes, swaps ingredients, and creates shopping lists.",
                 },
                 {
                     icon: "🍽️",
-                    title: "Fully Personalized",
-                    text: "Plans are created based on dietary needs, preferences, and goals.",
-                },
-                {
-                    icon: "🤝",
-                    title: "Support & Motivation",
-                    text: "Chefs provide guidance and feedback to keep your meal plan enjoyable and sustainable.",
+                    title: "Practical & Tasty",
+                    text: "Recipes are realistic, delicious, and easy to cook at home.",
                 },
             ],
         },
 
-        {
-            type: "custom",
-            component: "Timeline",
-            title: "How It Works",
-            steps: [
-                {
-                    title: "Create Your Account",
-                    description: "Sign up to access your dashboard and meal planning options.",
-                },
-                {
-                    title: "Buy Tokens",
-                    description: "Use tokens to request chef courses, AI plans, or additional services.",
-                },
-                {
-                    title: "Fill Out Your Preferences",
-                    description: "Provide dietary needs, allergies, goals, and cooking style preferences.",
-                },
-                {
-                    title: "Chef Creates Your Meal Plan",
-                    description: "Within 2–3 hours, receive a fully tailored meal plan from your chef.",
-                },
-                {
-                    title: "Add AI Assistant (Optional)",
-                    description: "AI tracks nutrition, calorie intake, and suggests recipe adjustments.",
-                },
-                {
-                    title: "Get Extra Options",
-                    description: "Add extra recipes, snacks, or special dishes using your tokens.",
-                },
-            ],
-        },
+        // Simplified how-it-works section is embedded later as a short InfoBlock and CTA
 
         {
             type: "section",
@@ -200,80 +177,68 @@ So we built a platform where real chefs craft courses with AI support — combin
         },
 
         {
-            type: "grid",
-            columns: 4,
-            gap: "2rem",
+            type: "custom",
+            component: "InfoBlock",
+            title: "Featured Recipes",
+            description: "A few popular recipes from our chefs — quick, nutritious, and delicious.",
+            align: "center",
+        },
+        {
+            type: "custom",
+            component: "CardSlider",
             cards: [
+                { image: "recipe1", title: "Herb Roasted Chicken", description: "Juicy chicken with garlic herb rub and seasonal veg.", buttonText: "View Recipe", buttonLink: "/recipes/herb-roasted-chicken" },
+                { image: "recipe2", title: "Quinoa Buddha Bowl", description: "Balanced bowl with grains, veggies, and tahini dressing.", buttonText: "View Recipe", buttonLink: "/recipes/quinoa-buddha" },
+                { image: "recipe3", title: "Spicy Chickpea Stew", description: "Comforting stew, rich in flavor and protein.", buttonText: "View Recipe", buttonLink: "/recipes/chickpea-stew" },
+            ],
+        },
+
+        {
+            type: "grid",
+            columns: 3,
+            gap: "2rem",
+            items: [
                 {
-                    type: "pricing",
-                    variant: "starter",
-                    title: "AI Plan",
-                    price: "€9",
-                    tokens: 900,
-                    badgeTop: "AI-Generated Plan",
-                    description:
-                        "Instant meal plan generated by AI based on your preferences.",
-                    features: [
-                        "Instant course generation",
-                        "AI meal adjustments",
-                        "Basic tracking",
-                    ],
-                    buttonText: "Try AI Plan",
-                    buttonLink: "/checkout?plan=ai",
+                    block: {
+                        type: "pricing",
+                        variant: "basic",
+                        title: "AI Plan",
+                        price: "€9",
+                        tokens: 900,
+                        badgeTop: "AI-Generated Plan",
+                        description: "Instant meal plan generated by AI based on your preferences.",
+                        features: ["Instant course generation", "AI meal adjustments", "Basic tracking"],
+                        buttonText: "Try AI Plan",
+                        buttonLink: "/checkout?plan=ai",
+                    },
                 },
                 {
-                    type: "pricing",
-                    variant: "pro",
-                    title: "Chef Plan",
-                    price: "€59",
-                    tokens: 5900,
-                    badgeTop: "Most Popular",
-                    description:
-                        "Work directly with a professional chef for a fully customized course.",
-                    features: [
-                        "1-on-1 chef guidance",
-                        "Meal plan review and adjustments",
-                        "Direct chat with chef",
-                        "Priority feedback",
-                    ],
-                    buttonText: "Get Chef Plan",
-                    buttonLink: "/checkout?plan=chef",
+                    block: {
+                        type: "pricing",
+                        variant: "highlight",
+                        title: "Chef Plan",
+                        price: "€59",
+                        tokens: 5900,
+                        badgeTop: "Most Popular",
+                        description: "Work directly with a professional chef for a fully customized course.",
+                        features: ["1-on-1 chef guidance", "Meal plan review and adjustments", "Direct chat with chef", "Priority feedback"],
+                        buttonText: "Get Chef Plan",
+                        buttonLink: "/checkout?plan=chef",
+                    },
                 },
                 {
-                    type: "pricing",
-                    variant: "premium",
-                    title: "Full Cooking Pack",
-                    price: "€99",
-                    tokens: 9900,
-                    badgeTop: "Complete Meal Experience",
-                    description:
-                        "Chef guidance + AI nutrition tracking + meal analytics for best results.",
-                    features: [
-                        "Custom meal plan",
-                        "Personalized nutrition plan",
-                        "Fast feedback in 2–3 hours",
-                        "AI analytics for nutrition",
-                        "Priority support",
-                    ],
-                    buttonText: "Choose Full Pack",
-                    buttonLink: "/checkout?plan=full",
-                },
-                {
-                    type: "pricing",
-                    variant: "custom",
-                    title: "Custom Plan",
-                    price: "dynamic",
-                    tokens: 0,
-                    badgeTop: "Flexible Option",
-                    description:
-                        "Mix and match services — AI, chef, or nutrition as you prefer.",
-                    features: [
-                        "Choose AI or chef focus",
-                        "Flexible token usage",
-                        "Pay for what you need",
-                    ],
-                    buttonText: "Customize Plan",
-                    buttonLink: "/checkout?plan=custom",
+                    block: {
+                        type: "pricing",
+                        variant: "premium",
+                        title: "Full Cooking Pack",
+                        price: "€99",
+                        tokens: 9900,
+                        badgeTop: "Complete Meal Experience",
+                        description: "Chef guidance + AI nutrition tracking + meal analytics for best results.",
+                        features: ["Custom meal plan", "Personalized nutrition plan", "Fast feedback in 2–3 hours", "AI analytics for nutrition", "Priority support"],
+                        buttonText: "Choose Full Pack",
+                        buttonLink: "/checkout?plan=full",
+                    },
                 },
             ],
         },

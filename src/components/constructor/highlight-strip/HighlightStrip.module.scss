@@ -42,6 +42,8 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  /* force warm palette as default and override any inline pale-green styles */
+  background: linear-gradient(135deg, var(--tertiary-color), var(--quaternary-color)) !important;
 }
 
 .iconImg {

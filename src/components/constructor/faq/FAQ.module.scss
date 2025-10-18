@@ -35,7 +35,7 @@
   letter-spacing: 1px;
   padding: 0.4rem 1rem;
   border-radius: 100px;
-  box-shadow: 0 2px 8px rgba(50, 214, 154, 0.2);
+  box-shadow: 0 2px 8px rgba(255, 127, 80, 0.20);
 }
 
 .title {
@@ -67,7 +67,7 @@
   &.active {
     border-color: var(--primary-color);
     background: var(--quaternary-color);
-    box-shadow: 0 6px 18px rgba(50, 214, 154, 0.2);
+  box-shadow: 0 6px 18px rgba(255, 127, 80, 0.20);
   }
 }
 

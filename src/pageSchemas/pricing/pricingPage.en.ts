@@ -4,19 +4,19 @@ import { COMPANY_NAME } from "@/resources/constants";
 const schema: PageSchema = {
     meta: {
         title: `Plans & Pricing — ${COMPANY_NAME}`,
-        description: `Find the perfect training plan for your goals — from AI-generated programs to full 1-on-1 coaching with certified trainers.`,
+        description: `Find the perfect meal plan for your goals — from AI-generated recipes to full chef-prepared courses.`,
         keywords: [
             `${COMPANY_NAME} pricing`,
-            "fitness plans",
-            "personal trainer cost",
-            "AI workout plan",
-            "nutrition coaching pricing",
-            "training subscription",
+            "meal plans",
+            "personal chef cost",
+            "AI meal plan",
+            "nutrition planning",
+            "cooking subscription",
         ],
         canonical: "/pricing",
         ogImage: {
             title: `${COMPANY_NAME} Plans`,
-            description: "Choose your training or nutrition plan — tailored to your goals.",
+            description: "Choose your meal or nutrition plan — tailored to your taste and goals.",
             bg: "#0a2540",
             color: "#ffffff",
         },
@@ -27,10 +27,10 @@ const schema: PageSchema = {
         {
             type: "custom",
             component: "HeroSection",
-            title: "Choose Your Training Plan",
-            highlight: "For Every Goal & Lifestyle",
-            description: `Select between fully guided coaching, AI-assisted programs, or a flexible custom plan.  
-Every option helps you train smarter, stay motivated, and see results faster.`,
+            title: "Choose Your Meal Plan",
+            highlight: "For Every Taste & Lifestyle",
+            description: `Select between AI-generated meal plans, chef-prepared courses, or a flexible custom plan.  
+Every option helps you eat smarter, save time, and enjoy your food.`,
             image: "image1",
             align: "right",
         },
@@ -39,10 +39,10 @@ Every option helps you train smarter, stay motivated, and see results faster.`,
         {
             type: "custom",
             component: "InfoBlock",
-            icon: "💪",
-            title: "Simple, Transparent, and Effective",
-            description: `All ${COMPANY_NAME} plans include access to your personal dashboard, progress tracking tools, and direct chat with your trainer.  
-No hidden fees — just real transformation.`,
+            icon: "🍳",
+            title: "Simple, Transparent, and Delicious",
+            description: `All ${COMPANY_NAME} plans include access to your personal dashboard, meal tracking tools, and direct chat with your chef.  
+No hidden fees — just real culinary experiences.`,
             align: "center",
         },
 
@@ -60,11 +60,11 @@ No hidden fees — just real transformation.`,
                     tokens: 900,
                     badgeTop: "AI-Generated",
                     description:
-                        "Quick, affordable, and fully automated — get your workout instantly based on your fitness profile.",
+                        "Quick, affordable, and fully automated — get your meal plan instantly based on your preferences.",
                     features: [
-                        "Instant AI workout generation",
-                        "Basic progress tracking",
-                        "Weekly adjustment suggestions",
+                        "Instant AI meal plan generation",
+                        "Basic recipe suggestions",
+                        "Weekly adjustment recommendations",
                     ],
                     buttonText: "Try AI Plan",
                     buttonLink: "/checkout?plan=ai",
@@ -72,34 +72,34 @@ No hidden fees — just real transformation.`,
                 {
                     type: "pricing",
                     variant: "pro",
-                    title: "Trainer Plan",
+                    title: "Chef Plan",
                     price: "€59",
                     tokens: 5900,
                     badgeTop: "Most Popular",
                     description:
-                        "Work directly with a certified personal trainer for a truly personalized experience.",
+                        "Work directly with a professional chef for fully customized recipes and meal courses.",
                     features: [
-                        "1-on-1 coaching with real trainer",
-                        "Weekly plan adjustments",
+                        "1-on-1 chef-prepared plans",
+                        "Weekly updates to recipes",
                         "Chat & feedback access",
-                        "24h response from your coach",
+                        "24h response from your chef",
                     ],
-                    buttonText: "Start Coaching",
-                    buttonLink: "/checkout?plan=trainer",
+                    buttonText: "Start Cooking",
+                    buttonLink: "/checkout?plan=chef",
                 },
                 {
                     type: "pricing",
                     variant: "premium",
-                    title: "Full Coaching Pack",
+                    title: "Full Culinary Pack",
                     price: "€99",
                     tokens: 9900,
-                    badgeTop: "Complete Transformation",
+                    badgeTop: "Complete Experience",
                     description:
-                        "Combine training, nutrition, and AI analytics for total lifestyle results.",
+                        "Combine chef-prepared meals, AI plans, and nutrition guidance for total culinary control.",
                     features: [
-                        "Trainer + nutritionist plan",
-                        "Personalized workout & meal schedule",
-                        "Smart AI progress tracking",
+                        "Chef + AI meal planning",
+                        "Personalized recipes & meal schedule",
+                        "Smart nutrition tracking",
                         "Priority support & plan review",
                     ],
                     buttonText: "Choose Full Pack",
@@ -113,10 +113,10 @@ No hidden fees — just real transformation.`,
                     tokens: 0,
                     badgeTop: "Flexible Option",
                     description:
-                        "Build your own combination — choose training, nutrition, or AI assistance as you need.",
+                        "Build your own combination — choose chef services, AI assistance, or nutrition options as needed.",
                     features: [
                         "Flexible token usage",
-                        "Combine training & nutrition freely",
+                        "Combine chef & AI freely",
                         "Pay only for what you need",
                     ],
                     buttonText: "Customize Plan",
@@ -131,20 +131,20 @@ No hidden fees — just real transformation.`,
             left: {
                 type: "custom",
                 component: "InfoBlock",
-                title: "Why Upgrade to a Trainer?",
-                description: `AI gives structure — but real trainers give insight, accountability, and emotional support.  
-Your coach ensures every session, rest, and meal fits your body and your mindset.`,
+                title: "Why Choose a Chef?",
+                description: `AI gives quick structure — but real chefs provide taste, creativity, and attention to detail.  
+Your chef ensures every recipe, ingredient, and portion fits your goals and preferences.`,
                 bullets: [
-                    "Real-time feedback from certified professionals",
-                    "Weekly plan updates based on your progress",
-                    "Personal motivation and support",
+                    "Expert guidance from certified chefs",
+                    "Weekly plan updates based on your feedback",
+                    "Personalized culinary support",
                 ],
             },
             right: {
                 type: "media",
                 mediaType: "image",
                 src: "image1",
-                alt: "Trainer helping client",
+                alt: "Chef preparing meal",
             },
         },
 
@@ -153,8 +153,8 @@ Your coach ensures every session, rest, and meal fits your body and your mindset
             type: "custom",
             component: "MissionBanner",
             title: "Add Personalized Nutrition",
-            description: `Fuel your workouts with meal plans created by certified nutritionists.  
-Integrated calorie goals, daily recipes, and AI-based tracking for sustainable results.`,
+            description: `Enhance your meal plan with nutritionist-approved recipes.  
+Integrated calorie tracking, daily meal suggestions, and AI-based adjustments for optimal health.`,
             image: "nutritionBanner",
         },
 
@@ -163,24 +163,24 @@ Integrated calorie goals, daily recipes, and AI-based tracking for sustainable r
             type: "faq",
             items: [
                 {
-                    question: "What’s the difference between AI and Trainer Plans?",
+                    question: "What’s the difference between AI and Chef Plans?",
                     answer:
-                        "AI creates your program instantly using algorithms. Trainer plans are built by certified professionals who adapt it weekly and provide human feedback.",
+                        "AI generates your meal plan instantly based on your profile. Chef plans are crafted by professionals and updated weekly with personal feedback.",
                 },
                 {
-                    question: "Do plans include nutrition?",
+                    question: "Do plans include nutrition guidance?",
                     answer:
-                        "Only the Full Coaching Pack or a Custom Plan with Nutrition Add-On includes meal guidance. You can add it anytime.",
+                        "Full Culinary Pack or a Custom Plan with Nutrition Add-On includes nutrition guidance. You can add it at any time.",
                 },
                 {
                     question: "Can I switch plans later?",
                     answer:
-                        "Yes, you can upgrade, downgrade, or combine services at any time using your tokens.",
+                        "Yes, you can upgrade, downgrade, or combine AI and chef services at any time using your tokens.",
                 },
                 {
-                    question: "What do I need to start?",
+                    question: "How do I get started?",
                     answer:
-                        "Just create an account, fill out your fitness profile, and select your preferred plan. You’ll receive your program within 24h.",
+                        "Create an account, fill out your taste and dietary profile, and select a plan. Your first AI or chef-prepared plan will arrive within 2–3 hours.",
                 },
             ],
         },
@@ -189,9 +189,9 @@ Integrated calorie goals, daily recipes, and AI-based tracking for sustainable r
         {
             type: "custom",
             component: "MissionBanner",
-            title: "Ready to Transform?",
-            description: `Join ${COMPANY_NAME} today and start your personalized fitness journey.  
-Get your plan, stay consistent, and achieve lasting results.`,
+            title: "Ready to Cook?",
+            description: `Join ${COMPANY_NAME} today and start your personalized culinary journey.  
+Get your meal plan, enjoy your meals, and achieve your health goals.`,
             image: "ctaPricing",
         },
     ],

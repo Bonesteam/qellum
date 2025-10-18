@@ -30,23 +30,14 @@ export const useAllOrders = () => useContext(AllOrdersContext);
 
 export const AllOrdersProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [aiOrders, setAiOrders] = useState<AiOrder[]>([]);
+    // Keep cvOrders in the context for compatibility, but we no longer fetch CV orders for the meal-plans profile.
     const [cvOrders, setCvOrders] = useState<CVOrderType[]>([]);
     const [loading, setLoading] = useState(false);
 
     const fetchOrders = async () => {
         setLoading(true);
         try {
-            // 🔹 Отримуємо CV ордери
-            const resCv = await fetch("/api/cv/get-all-orders", {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
-            });
-            const dataCv = await resCv.json();
-            const normalizedCv = Array.isArray(dataCv) ? dataCv : dataCv.orders;
-            setCvOrders(Array.isArray(normalizedCv) ? normalizedCv : []);
-
-            // 🔹 (опціонально) AI ордери
+            // 🔹 Fetch meal/AI orders (used as Meal Plans)
             const resAi = await fetch("/api/universal/get-orders", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },

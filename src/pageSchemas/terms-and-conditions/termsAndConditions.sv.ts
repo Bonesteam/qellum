@@ -1,242 +1,143 @@
 import { PageSchema } from "@/components/constructor/page-render/types";
+import {
+    COMPANY_NAME,
+    COMPANY_LEGAL_NAME,
+    COMPANY_NUMBER,
+    COMPANY_ADDRESS,
+    COMPANY_EMAIL,
+} from "@/resources/constants";
 
 const termsSchema: PageSchema = {
     meta: {
-        title: "Allmänna villkor – ShipsterAI Sverige",
-        description:
-            "Villkor för användning av ShipsterAI:s logistikplattform i Sverige: tjänster, priser, parternas skyldigheter, dataskydd, ansvar, uppsägning och jurisdiktion.",
+        title: `Villkor – ${COMPANY_NAME}`,
+        description: `Officiella villkor för ${COMPANY_NAME}. Regler för användning av matlagningsservice, köp av tokens, AI-måltidsplaner och personliga kockförfrågningar.`,
         keywords: [
             "villkor",
-            "terms and conditions",
-            "avtal",
-            "shipsterai",
-            "sverige",
-            "logistik",
-            "dataskydd",
-            "ansvar",
-            "uppsägning",
-            "priser"
+            "användarvillkor",
+            "matlagningsservice",
+            "tokens",
+            "måltidsplaner",
+            "återbetalningspolicy",
         ],
         canonical: "/terms",
         ogImage: {
-            title: "ShipsterAI – Villkor",
-            description: "Tydliga villkor. Svensk precision.",
+            title: `${COMPANY_NAME} – Villkor`,
+            description: "Tydliga och transparenta villkor för användning av Qellum matlagningsservice.",
             bg: "#ffffff",
-            color: "#000000"
-        }
+            color: "#000000",
+        },
     },
     blocks: [
         {
             type: "text",
-            title: "Allmänna villkor – Översikt",
-            description:
-                "Dessa villkor reglerar användningen av ShipsterAI-plattformen av avsändare (kunder) och transportörer (carriers) i Sverige och, i tillämpliga delar, inom EU/EES. Genom registrering eller användning av plattformen godkänner du villkoren. Villkoren riktar sig till företag (B2B)."
+            title: "Villkor",
+            description: "Ikraftträdandedatum: 17 oktober 2025",
         },
         {
             type: "text",
-            title: "1. Definitioner",
+            title: "1. Allmänna bestämmelser",
+            description: `1.1. Dessa villkor anger reglerna för användning av ${COMPANY_NAME}, en plattform som erbjuder AI-genererade måltidsplaner och personliga kocktjänster, drivs av ${COMPANY_LEGAL_NAME} (Organisationsnummer ${COMPANY_NUMBER}), registrerad på ${COMPANY_ADDRESS}.\n\n1.2. Genom att använda våra tjänster eller köpa tokens godkänner du dessa villkor. Om du inte godkänner dem, vänligen använd inte plattformen.`,
+        },
+        {
+            type: "text",
+            title: "2. Definitioner",
             bullets: [
-                "”Plattform” – den webb-/mobilapplikation som drivs av ShipsterAI.",
-                "”Avsändare” – företagskund som beställer transporttjänster.",
-                "”Transportör” – transporttjänsteleverantör som erbjuder och utför uppdrag.",
-                "”Användare” – fysisk person som använder ett företagskonto.",
-                "”Uppdrag” – specifikt transportjobb inklusive parametrar och dokument.",
-                "”SLA” – överenskomna servicenivåer (t.ex. svarstid, ETA-kvalitet)."
-            ]
+                "”Tjänster” — AI-måltidsplaner, kocktillagade måltider och relaterade verktyg på Qellum.",
+                "”Personlig kockförfrågan” — en skräddarsydd måltidsplan skapad av en certifierad kock, levererad inom 2–3 timmar.",
+                "”AI-måltidsplan” — en måltidsplan automatiskt genererad baserat på dina kostmål, preferenser och schema.",
+                "”Kund” eller ”Du” — användare av Qellum-tjänster eller köpare av tokens.",
+                "”Tokens” — interna krediter som används för att betala för tjänster (1 GBP = 100 tokens).",
+            ],
         },
         {
             type: "text",
-            title: "2. Tillämpningsområde och avtalets ingående",
-            description:
-                "Villkoren gäller för alla funktioner (disposition, matchning, spårning, kommunikation, fakturastöd). Avtal ingås genom registrering, uttryckligt godkännande av villkoren eller användning av plattformen. Avvikande individuella avtal har företräde; i övrigt kompletterar reglerna varandra."
+            title: "3. Konto-registrering",
+            description: `3.1. Du måste vara minst 18 år för att använda våra tjänster.\n\n3.2. Ange korrekt information vid registrering och håll den uppdaterad.\n\n3.3. Du ansvarar för dina kontouppgifter och alla åtgärder som utförs under ditt konto.`,
         },
         {
             type: "text",
-            title: "3. Konton, roller och aktsamhetskrav",
-            description:
-                "Företag hanterar åtkomst, roller och behörigheter självständigt (least-privilege). Inloggningsuppgifter ska hållas konfidentiella. Kontoinnehavaren ansvarar för handlingar som sker via kontot om inte obehörig användning kan bevisas trots rimliga skyddsåtgärder.",
+            title: "4. Tokens och betalningar",
+            description: `4.1. Tokens köps i GBP eller EUR. Alla omräkningar beräknas från GBP.\n\n4.2. Tokens kan användas för AI-måltidsplaner, personliga kockförfrågningar, premiumrecept eller andra betalda funktioner.\n\n4.3. Det finns 4 tokenpaket: tre fasta belopp och ett anpassat belopp valt av användaren.\n\n4.4. Betalningar måste göras via de metoder som anges på webbplatsen. Tjänster är tillgängliga efter betalningsbekräftelse.`,
+        },
+        {
+            type: "text",
+            title: "5. Leverans av tjänster",
+            description: `5.1. AI-måltidsplaner levereras omedelbart efter token-avdrag.\n\n5.2. Personliga kockförfrågningar levereras inom 2–3 timmar efter inskick.\n\n5.3. Du ansvarar för att granska måltidsplaner vid leverans och rapportera problem omedelbart.`,
+        },
+        {
+            type: "text",
+            title: "6. Avbokningar och återbetalningar",
+            description: `6.1. Tokenköp kan avbokas innan de används; återbetalningar exkluderar betalningsleverantörsavgifter.\n\n6.2. Tokens som används för tjänster återbetalas inte.\n\n6.3. Vid betydande tekniska fel kan kompensation ges enligt vår återbetalningspolicy.`,
+        },
+        {
+            type: "text",
+            title: "7. Immateriella rättigheter",
+            description: `7.1. Alla måltidsplaner, recept och relaterat innehåll som genereras för dig tillhör dig efter leverans.\n\n7.2. Qellum behåller rättigheter till plattformsprogramvara, AI-modeller och systeminnehåll.\n\n7.3. Användare får inte vidarebefordra plattforms-genererat innehåll för kommersiellt bruk utan tillstånd.`,
+        },
+        {
+            type: "text",
+            title: "8. Sekretess och databehandling",
+            description: `8.1. Alla personliga och kostrelaterade uppgifter hanteras enligt vår sekretesspolicy och GDPR.\n\n8.2. Data som laddas upp för tjänstgenerering kan temporärt lagras för teknisk support och raderas därefter om inte lagkrav kräver annan lagring.`,
+        },
+        {
+            type: "text",
+            title: "9. Garantier och ansvarsfriskrivning",
+            description: `9.1. Tjänsterna tillhandahålls med rimlig omsorg.\n\n9.2. Vi garanterar inte specifika resultat i kost, viktförändringar eller hälsa. Rådgör alltid med medicinsk professionell vid behov.`,
+        },
+        {
+            type: "text",
+            title: "10. Ansvarsbegränsning",
+            description: `10.1. Qellum ansvarar inte för indirekta eller följdskador.\n\n10.2. Totalt ansvar är begränsat till det belopp som betalats för det tokenpaket som användes för den specifika tjänsten.`,
+        },
+        {
+            type: "text",
+            title: "11. Skadestånd",
+            description: `Du samtycker till att hålla Qellum skadeslös från eventuella krav eller skador som uppstår från:\n(a) brott mot dessa villkor;\n(b) missbruk av tredjepartsdata;\n(c) missbruk av levererade måltidsplaner eller recept.`,
+        },
+        {
+            type: "text",
+            title: "12. Tredjepartslänkar",
+            description: "Vår plattform kan innehålla länkar till tredjepartswebbplatser. Vi ansvarar inte för deras innehåll eller tillgänglighet.",
+        },
+        {
+            type: "text",
+            title: "13. Avstängning och uppsägning",
+            description: `13.1. Konton kan stängas av eller avslutas vid brott mot villkor, bedräglig aktivitet eller säkerhetsrisker.\n\n13.2. Uppsägning befriar inte från åtaganden som uppstått innan uppsägningen.`,
+        },
+        {
+            type: "text",
+            title: "14. Ändringar av villkor",
+            description: "Vi kan uppdatera dessa villkor. Fortsatt användning efter uppdateringar utgör godkännande.",
+        },
+        {
+            type: "text",
+            title: "15. Meddelanden",
             bullets: [
-                "Rekommenderas: MFA, starka lösenord, regelbundna behörighetsgenomgångar.",
-                "Avsluta omedelbart åtkomst för personal som slutar.",
-                "Anmäl misstänkt missbruk till support@shipster.ai."
-            ]
+                `📧 ${COMPANY_EMAIL}`,
+                `📍 ${COMPANY_ADDRESS}`,
+            ],
         },
         {
             type: "text",
-            title: "4. Tjänstebeskrivning",
-            description:
-                "ShipsterAI tillhandahåller en AI-stödd logistikplattform: intelligent last-/transportörsmatchning, ETA-prognoser, prisindikationer, spårning, dokumentflöde, in-app-chatt samt faktureringsstöd. Om inget annat avtalats tillhandahålls tjänsten som SaaS utan källkodslämnande."
+            title: "16. Tillämplig lag",
+            description: "Dessa villkor styrs av lagarna i England och Wales. Tvister löses i engelska domstolar om inte tvingande konsumentlagar gäller.",
         },
         {
             type: "text",
-            title: "5. Tillgänglighet, underhåll och support",
-            description:
-                "ShipsterAI levererar med rimlig omsorg och eftersträvar hög drifttid. Planerat underhåll och incidenter kommuniceras transparent. Support ges enligt publicerade servicetider; individuella SLA kan avtalas separat."
+            title: "17. Övrigt",
+            description: `17.1. Ogiltiga bestämmelser påverkar inte de återstående villkoren.\n\n17.2. Underlåtenhet att upprätthålla rättigheter är ingen avsägelse.\n\n17.3. Dessa villkor utgör hela avtalet angående användning av plattformen.`,
         },
         {
             type: "text",
-            title: "6. Priser, avgifter och debitering",
-            description:
-                "Gällande prislista eller avtalade priser tillämpas (exkl. moms). Avgifter kan tas per uppdrag eller användningsbaserat. Kampanjer och rabatter gäller endast om de framgår uttryckligen.",
+            title: "Företagsuppgifter",
             bullets: [
-                "Elektronisk faktura (PDF/e-faktura) till angiven adress.",
-                "Betalningsvillkor enligt avtal/offert; om inget annat – 30 dagar netto.",
-                "Vid dröjsmål: lagstadgade dröjsmålsräntor samt eventuella påminnelse-/inkassokostnader."
-            ]
+                `Företag: ${COMPANY_LEGAL_NAME}`,
+                `Organisationsnummer: ${COMPANY_NUMBER}`,
+                `Registrerad adress: ${COMPANY_ADDRESS}`,
+                `E-post: ${COMPANY_EMAIL}`,
+            ],
         },
-        {
-            type: "text",
-            title: "7. Uppdrag mellan avsändare och transportör",
-            description:
-                "Plattformen stödjer ingående av transportavtal mellan avsändare och transportör. Transportavtalet ingås direkt mellan parterna. Skyldigheter (t.ex. lastsäkring, ADR, kylkedja), tider, dokumentation och ansvar följer av uppdraget och tillämplig rätt (t.ex. svensk rätt, CMR)."
-        },
-        {
-            type: "text",
-            title: "8. Tillåten användning",
-            bullets: [
-                "Inga olagliga, vilseledande eller säkerhetsriskerande handlingar eller innehåll.",
-                "Ingen kringgång av säkerhet; inget otillåtet scraping eller reverse engineering.",
-                "Efterlevnad av sanktions-, export-, tull- och branschregler.",
-                "Endast sanningsenliga och verifierbara företags- och uppdragsdata."
-            ]
-        },
-        {
-            type: "text",
-            title: "9. Innehåll, rättigheter och immateriell egendom",
-            description:
-                "Samtliga rättigheter till plattform, varumärken, design och modeller tillhör ShipsterAI eller licensgivare. Användare ges en icke-exklusiv, icke-överlåtbar, uppsägningsbar nyttjanderätt under avtalstiden. Data som tillhandahålls av användaren förblir användarens; ShipsterAI får de nyttjanderätter som krävs för drift/uppfyllelse."
-        },
-        {
-            type: "text",
-            title: "10. Dataskydd (GDPR/Dataskyddslagen)",
-            description:
-                "ShipsterAI behandlar personuppgifter enligt GDPR och svensk dataskyddslag. Principerna om ändamålsbegränsning, uppgiftsminimering och transparens gäller. Se separat integritetspolicy.",
-            bullets: [
-                "Tekniska/organisatoriska åtgärder (kryptering, loggning).",
-                "Datahosting inom EU/EES; personuppgiftsbiträdesavtal vid behov.",
-                "Registrerades rättigheter respekteras enligt lag."
-            ]
-        },
-        {
-            type: "text",
-            title: "11. Säkerhet och regelefterlevnad",
-            bullets: [
-                "Roll-/behörighetsmodell (least-privilege), audit-spår, övervakning.",
-                "Responsible Disclosure: responsible-disclosure@shipster.ai.",
-                "Åtagande om aktsamhet, antikorruption och sund konkurrens."
-            ]
-        },
-        {
-            type: "text",
-            title: "12. Tredjeparter och integrationer",
-            description:
-                "Plattformen kan använda tredjepartstjänster (kartor, telematik, EDI, betalning). Dessa leverantörers tillgänglighet, villkor och dataskydd ansvarar respektive leverantör för. ShipsterAI väljer partners noggrant och strävar efter stabila integrationer men garanterar inte felfrihet."
-        },
-        {
-            type: "text",
-            title: "13. Betalningar och skatter",
-            description:
-                "Betalningar hanteras via angivna leverantörer. Skatter, avgifter och tullar bärs av respektive avtalspart om inte annat avtalats."
-        },
-        {
-            type: "text",
-            title: "14. Ändringar av tjänster och villkor",
-            description:
-                "ShipsterAI kan vidareutveckla, anpassa eller avveckla funktioner vid legitima skäl (säkerhet, juridik, prestanda). Väsentliga ändringar av villkoren aviseras i förväg. Fortsatt användning efter ikraftträdande utgör godkännande."
-        },
-        {
-            type: "text",
-            title: "15. Avtalstid och uppsägning",
-            description:
-                "Avtalet gäller tills vidare om inget annat anges. Ordinarie uppsägning kan göras av båda parter med skälig uppsägningstid. Avtalet kan sägas upp med omedelbar verkan vid väsentligt avtalsbrott, betalningsdröjsmål eller säkerhetsrisk.",
-            bullets: [
-                "Efter avtalsslut: åtkomster stängs; dataexport på begäran.",
-                "Lagstadgade arkiveringstider påverkas inte."
-            ]
-        },
-        {
-            type: "text",
-            title: "16. Garanti",
-            description:
-                "ShipsterAI levererar enligt god sed och teknikens ståndpunkt. Ingen garanti lämnas – i den mån lag tillåter – för viss säljbarhet, lämplighet för särskilt ändamål eller avbrottsfri tillgänglighet. Beta-/förhandsfunktioner kan vara begränsade."
-        },
-        {
-            type: "text",
-            title: "17. Ansvarsbegränsning",
-            description:
-                "ShipsterAI ansvarar obegränsat för uppsåt/grov vårdslöshet samt personskador enligt tvingande lag. Vid enkel vårdslöshet ansvar endast vid åsidosättande av väsentliga avtalsförpliktelser, begränsat till typiskt förutsebar skada. Indirekta skador, utebliven vinst och dataförlust undantas i den mån lagen medger."
-        },
-        {
-            type: "text",
-            title: "18. Skadeslöshet",
-            description:
-                "Användaren håller ShipsterAI skadeslös från tredje parts anspråk som uppkommer ur avtals- eller lagstridig användning av dennes konto (t.ex. otillåtet innehåll, IP-intrång), i den mån användaren bär ansvaret."
-        },
-        {
-            type: "text",
-            title: "19. Force majeure",
-            description:
-                "Ingen part ansvarar för underlåtenhet om orsaken ligger utanför partens kontroll (naturhändelser, krig, strejk, myndighetsåtgärder, omfattande nätavbrott)."
-        },
-        {
-            type: "text",
-            title: "20. Export-, sanktions- och tullregler",
-            description:
-                "Parterna ska följa tillämpliga export-, sanktions-, tull- och handelskontrollagar. ShipsterAI kan vägra eller begränsa tjänster om rättsliga krav så fordrar."
-        },
-        {
-            type: "text",
-            title: "21. Sekretess",
-            description:
-                "Icke-offentlig information (affärs-/driftshemligheter, avtal, tekniska detaljer) ska behandlas konfidentiellt. Lagstadgade upplysningsplikter gäller fortsatt."
-        },
-        {
-            type: "text",
-            title: "22. Överlåtelse och underleverantörer",
-            description:
-                "Rättigheter/skyldigheter får inte överlåtas utan den andra partens samtycke (förutom vid universalsuccession). ShipsterAI får anlita underleverantörer och ansvarar för deras prestation."
-        },
-        {
-            type: "text",
-            title: "23. Separationsklausul",
-            description:
-                "Om någon bestämmelse helt/delvis är ogiltig påverkar det inte övriga bestämmelser. En giltig reglering som ligger närmast syftet ska gälla istället."
-        },
-        {
-            type: "text",
-            title: "24. Tillämplig lag och forum",
-            description:
-                "Materiell svensk rätt tillämpas med undantag för dess internationella privaträtt. Exklusivt forum – i den mån det är tillåtet – är Stockholm, Sverige."
-        },
-        {
-            type: "text",
-            title: "25. Tvistlösning",
-            description:
-                "Parterna ska först söka en godöverenskommelse. Om det misslyckas kan, om avtalat, medling eller skiljeförfarande initieras enligt separat klausul."
-        },
-        {
-            type: "text",
-            title: "26. Kontakt",
-            bullets: [
-                "Allmänt: hello@shipster.ai",
-                "Support: support@shipster.ai",
-                "Sälj/Demo: sales@shipster.ai",
-                "Säkerhet: responsible-disclosure@shipster.ai",
-                "Adress: ShipsterAI AB • Exempelgatan 10 • 111 20 Stockholm • Sverige"
-            ]
-        },
-        {
-            type: "text",
-            title: "Ikraftträdande",
-            description:
-                "Denna version träder i kraft vid publicering och ersätter tidigare versioner. Den version som publiceras på webbplatsen/plattformen är den gällande."
-        },
-        {
-            type: "text",
-            title: "Giltig från",
-            description: "18 augusti 2025"
-        }
-    ]
+    ],
 };
 
 export default termsSchema;

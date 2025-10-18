@@ -1,3 +1,44 @@
+:root {
+    /* Основні */
+    --primary-color: #FF7F50;       /* коралово-помаранчевий — головний акцент */
+    --secondary-color: #D2691E;     /* шоколадно-коричневий для контрасту */
+    --tertiary-color: #FFD580;      /* золотисто-жовтий для м’яких акцентів */
+    --quaternary-color: #FFF5E6;    /* світлий кремовий фон */
+
+    /* Фон та поверхні */
+    --background-light: #FFF5E6;    /* світлий кремовий фон */
+    --background-dark: #D2691E;     /* темний шоколадний для інверсій */
+    --surface-color: #FFFFFF;       /* поверхні (карточки, блоки) */
+    --surface-muted: #FFF0D9;       /* приглушений кремовий фон секцій */
+
+    /* Тексти */
+    --text-primary: #3E2F2F;        /* темний коричневий */
+    --text-secondary: #6B4C3B;      /* середньо-коричневий для підписів */
+    --text-muted: #A67C52;          /* світлий коричневий для підписів */
+    --text-inverse: #FFFFFF;        /* білий текст на темному фоні */
+    --text-accent: #FF7F50;         /* кораловий акцент у тексті */
+
+    /* Статуси */
+    --success-color: #6d4414;       /* м’який зелений */
+    --warning-color: #FFC107;       /* насичений жовтий */
+    --error-color: #E74C3C;         /* червоний */
+    --info-color: #FFD580;          /* золотистий легкий акцент */
+
+    /* Інтерактивні */
+    --button-hover: #FF6633;        /* темніший помаранчевий при наведенні */
+    --link-color: #FF7F50;          /* кораловий для посилань */
+    --link-hover: #E65C33;          /* більш насичений кораловий при ховері */
+
+    /* Система */
+    --border-color: #EADBC8;        /* світло-кремові бордери */
+    --shadow-color: rgba(0, 0, 0, 0.08);
+
+    --font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+
+    --main-padding: 0 50px 0 50px;
+}
+
+/* Базові стилі */
 * {
     box-sizing: border-box;
     padding: 0;
@@ -15,44 +56,4 @@ body {
 a {
     text-decoration: none;
     color: inherit;
-}
-
-:root {
-    /* Основні */
-    --primary-color: #32D69A;       /* м'ятно-зелений — головний акцент */
-    --secondary-color: #045D56;     /* глибокий бірюзовий для контрасту */
-    --tertiary-color: #5EEAD4;      /* світліший відтінок для м’яких акцентів */
-    --quaternary-color: #E6FFFA;    /* світлий фон з відтінком бірюзи */
-
-    /* Фон та поверхні */
-    --background-light: #F7F9FA;    /* чистий світлий фон */
-    --background-dark: #045D56;     /* темний бірюзовий для інверсій */
-    --surface-color: #FFFFFF;       /* поверхні (карточки, блоки) */
-    --surface-muted: #EDF2F7;       /* приглушений фон секцій */
-
-    /* Тексти */
-    --text-primary: #1F2937;        /* глибокий графіт */
-    --text-secondary: #4B5563;      /* темно-сірий */
-    --text-muted: #9CA3AF;          /* сірий для підписів */
-    --text-inverse: #FFFFFF;        /* білий текст на темному фоні */
-    --text-accent: #32D69A;         /* зелений акцент у тексті */
-
-    /* Статуси */
-    --success-color: #22C55E;       /* яскраво-зелений */
-    --warning-color: #FACC15;       /* жовтий (енергія) */
-    --error-color: #EF4444;         /* червоний */
-    --info-color: #5EEAD4;          /* легкий бірюзовий акцент */
-
-    /* Інтерактивні */
-    --button-hover: #28B584;        /* темніший відтінок м’ятного */
-    --link-color: #32D69A;          /* зелений посилання */
-    --link-hover: #1FAE7A;          /* при наведенні стає глибшим */
-
-    /* Система */
-    --border-color: #E5E7EB;        /* світло-сірі бордери */
-    --shadow-color: rgba(0, 0, 0, 0.08);
-
-    --font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-
-    --main-padding: 0 50px 0 50px;
 }

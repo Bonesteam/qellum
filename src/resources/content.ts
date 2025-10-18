@@ -45,14 +45,14 @@ export const footerContent = {
         },
     ],
     contact: {
-        email: "info@cv-makers.co.uk",
-        phone: "+1 234 567 890",
+        email: "info@qellum.co.uk",
+        phone: "+44 7457 423001",
         address: "Academy House, 11 Dunraven Place, Bridgend, Mid Glamorgan, United Kingdom, CF31 1JF",
     },
 
     legal: {
         companyName: "PREMIUM SERVICE PROVIDERS LTD",
-        companyNumber: "15885598",
+        companyNumber: "15799659",
         address: "1 Brook St, Nottingham, United Kingdom, NG1 1AR",
     },
     socials: [],

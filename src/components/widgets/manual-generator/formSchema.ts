@@ -4,109 +4,95 @@ export const formSchema = {
     expectations: [
         {
             name: "goal",
-            label: "Training Goal",
-            description: "Example: weight loss, muscle gain, maintaining fitness.",
+            label: "Dietary Goal",
+            description: "Example: weight loss, muscle gain, maintain weight, healthier eating.",
             type: "textarea",
             required: true,
         },
         {
-            name: "experience",
-            label: "Fitness Level",
-            description: "Beginner, intermediate, or advanced.",
-            type: "textarea",
-            required: true,
+            name: "calorieTarget",
+            label: "Daily Calorie Target (optional)",
+            description: "Optional daily calorie goal in kcal.",
+            type: "text",
         },
         {
-            name: "availableDays",
-            label: "Number of Days per Week",
-            description: "How many days you can realistically train.",
-            type: "textarea",
+            name: "mealsPerDay",
+            label: "Meals per Day",
+            description: "How many meals do you prefer per day (e.g., 3, 4, 5).",
+            type: "text",
             required: true,
-        },
-        {
-            name: "availableTime",
-            label: "Workout Duration",
-            description: "How much time you can spend per session (e.g., 30–60 min).",
-            type: "textarea",
         },
     ],
 
     selectors: [
         {
-            name: "trainingType",
-            label: "Type of Training",
-            description: "Choose the main training style.",
+            name: "dietaryPreference",
+            label: "Dietary Preference",
+            description: "Choose dietary style.",
             type: "select",
-            options: ["Strength", "Cardio", "Mixed", "Functional", "Yoga/Stretching"],
+            options: ["Omnivore", "Vegetarian", "Vegan", "Pescatarian", "Balanced"],
         },
         {
-            name: "equipment",
-            label: "Available Equipment",
-            description: "Select what equipment you have.",
+            name: "allergies",
+            label: "Allergies / Intolerances",
+            description: "Any ingredients to avoid.",
             type: "select",
-            options: ["No equipment", "Dumbbells", "Barbell", "Gym machines", "Full equipment"],
+            options: ["None", "Gluten", "Dairy", "Nuts", "Soy", "Other"],
         },
         {
-            name: "intensity",
-            label: "Intensity",
-            description: "Preferred training intensity.",
+            name: "budget",
+            label: "Budget Preference",
+            description: "Budget level for ingredients.",
             type: "select",
-            options: ["Low", "Moderate", "High"],
-        },
-        {
-            name: "focusArea",
-            label: "Focus Areas",
-            description: "Which muscle groups you want to prioritize.",
-            type: "select",
-            options: ["Upper body", "Lower body", "Full body", "Core/Abs"],
+            options: ["Low", "Medium", "High"],
         },
     ],
 
     advanced: [
         {
-            name: "includeWarmup",
-            label: "Include Warm-up",
-            description: "Add a short warm-up before each workout.",
+            name: "includeRecipes",
+            label: "Include Recipes",
+            description: "Provide detailed recipes for each meal.",
             type: "checkbox",
         },
         {
-            name: "includeCooldown",
-            label: "Include Cooldown/Stretching",
-            description: "Add a short cooldown or stretching after each session.",
+            name: "includeShoppingList",
+            label: "Include Shopping List",
+            description: "Generate a consolidated shopping list.",
             type: "checkbox",
         },
         {
-            name: "includeNutritionTips",
-            label: "Include Nutrition Tips",
-            description: "Add short nutrition recommendations with the plan.",
+            name: "includeSubstitutions",
+            label: "Include Substitutions",
+            description: "Suggest ingredient substitutions for common allergies.",
             type: "checkbox",
         },
         {
-            name: "highlightRestDays",
-            label: "Highlight Rest Days",
-            description: "Clearly mark rest days in the weekly plan.",
+            name: "includeMealPrep",
+            label: "Include Meal Prep Guide",
+            description: "Add meal prep and storage tips.",
             type: "checkbox",
         },
     ],
 };
 
 export const buildPrompt = (values: Record<string, any>): string => {
-    let prompt = `Create a detailed 7-day workout plan. 
-Format: Day — exercises with sets/reps or duration.`;
+    let prompt = `Create a detailed ${values.days || 7}-day meal plan.`;
+    prompt += `\nFormat: Day — Meal (Breakfast/Lunch/Dinner/snacks) with recipe, calories per meal, and portion sizes.`;
 
-    prompt += `\n\nGoal: ${values.goal}`;
-    prompt += `\nFitness level: ${values.experience}`;
-    prompt += `\nAvailable training days: ${values.availableDays}`;
-    if (values.availableTime) prompt += `\nWorkout duration: ${values.availableTime}`;
-    if (values.trainingType) prompt += `\nTraining type: ${values.trainingType}`;
-    if (values.equipment) prompt += `\nAvailable equipment: ${values.equipment}`;
-    if (values.intensity) prompt += `\nIntensity: ${values.intensity}`;
-    if (values.focusArea) prompt += `\nFocus area: ${values.focusArea}`;
+    prompt += `\n\nDietary goal: ${values.goal}`;
+    if (values.calorieTarget) prompt += `\nDaily calorie target: ${values.calorieTarget} kcal`;
+    if (values.mealsPerDay) prompt += `\nMeals per day: ${values.mealsPerDay}`;
+    if (values.dietaryPreference) prompt += `\nDietary preference: ${values.dietaryPreference}`;
+    if (values.allergies) prompt += `\nAllergies/intolerances: ${values.allergies}`;
+    if (values.budget) prompt += `\nBudget preference: ${values.budget}`;
 
-    if (values.includeWarmup) prompt += `\nAdd a warm-up before each workout.`;
-    if (values.includeCooldown) prompt += `\nAdd a cooldown/stretching routine after each session.`;
-    if (values.includeNutritionTips) prompt += `\nInclude short nutrition tips.`;
-    if (values.highlightRestDays) prompt += `\nHighlight the rest days.`;
+    if (values.includeRecipes) prompt += `\nInclude clear step-by-step recipes for each meal.`;
+    if (values.includeShoppingList) prompt += `\nProvide a consolidated shopping list grouped by category (produce, dairy, pantry, etc.).`;
+    if (values.includeSubstitutions) prompt += `\nSuggest ingredient substitutions for common allergens and alternatives for unavailable items.`;
+    if (values.includeMealPrep) prompt += `\nInclude meal-prep tips and storage instructions to make weekly preparation easier.`;
+
+    prompt += `\n\nAlso provide: a simple daily calorie and macronutrient breakdown summary, and quick notes for picky eaters or budget options.`;
 
     return prompt;
 };

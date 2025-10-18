@@ -4,19 +4,19 @@ import {COMPANY_NAME} from "@/resources/constants";
 const schema: PageSchema = {
     meta: {
         title: `About ${COMPANY_NAME} — Our Story & Philosophy`,
-        description: `${COMPANY_NAME} is a modern fitness ecosystem that connects people with real trainers and AI-driven tools for lifelong health. Learn how we began, what drives us, and how we build a smarter, human-first approach to fitness.`,
+        description: `${COMPANY_NAME} is a modern cooking platform that connects people with personal chefs and AI-powered meal planning tools. Learn how we began, what drives us, and how we deliver personalized culinary experiences.`,
         keywords: [
-            "about fitness company",
+            "about cooking company",
             "our story",
-            "trainer philosophy",
-            "AI in fitness",
-            "personal training company",
-            "wellness innovation",
+            "personal chef philosophy",
+            "AI meal planning",
+            "culinary services",
+            "nutrition innovation",
         ],
         canonical: "/about-us",
         ogImage: {
             title: `${COMPANY_NAME}`,
-            description: "Where human strength meets smart innovation.",
+            description: "Where culinary expertise meets smart innovation.",
             bg: "#0a2540",
             color: "#ffffff",
         },
@@ -29,8 +29,8 @@ const schema: PageSchema = {
             component: "HeroSection",
             title: `Who We Are`,
             highlight: `${COMPANY_NAME}`,
-            description: `We are a global community of professional trainers, nutritionists, and developers united by one belief — that health should be personal, intelligent, and sustainable.  
-${COMPANY_NAME} was built to make expert-level fitness accessible to everyone, anywhere, through the perfect balance of human insight and AI technology.`,
+            description: `We are a global community of professional chefs, nutrition experts, and developers united by one belief — that cooking should be personal, intelligent, and enjoyable.  
+${COMPANY_NAME} was created to make expert-level meal planning accessible to everyone, blending human creativity and AI technology for smarter culinary experiences.`,
             image: "image1",
             align: "left",
         },
@@ -38,22 +38,22 @@ ${COMPANY_NAME} was built to make expert-level fitness accessible to everyone, a
         // 🔹 OUR STORY
         {
             type: "section",
-            title: "Our Story — From Gyms to Global Coaching",
-            description: `It started as a small group of personal trainers frustrated by the chaos of the fitness world.  
-Too many people were chasing trends — restrictive diets, random workout apps, unrealistic transformations.  
-We wanted to bring fitness back to its roots: real people helping other people achieve real, lasting results.`,
+            title: "Our Story — From Kitchens to Global Culinary Platform",
+            description: `It started as a small group of chefs frustrated by generic meal apps and one-size-fits-all recipes.  
+Too many people struggled to plan meals that fit their tastes, dietary needs, or schedules.  
+We wanted to bring cooking back to its roots: real chefs creating meals for real people.`,
             left: {
                 type: "custom",
                 component: "InfoBlock",
                 image: "aboutStory",
                 title: `How ${COMPANY_NAME} Came to Life`,
-                description: `When our founders noticed how many people were lost in quick-fix promises, they decided to build a solution that blends technology with empathy.  
-The first version of ${COMPANY_NAME} launched as a platform connecting verified trainers with clients looking for structure, motivation, and accountability.  
-As it evolved, we introduced AI-assisted analytics — not to replace trainers, but to empower them with data and insights that make programs more precise.`,
+                description: `When our founders saw how many people lacked guidance in meal planning, they decided to create a solution combining personal chef expertise with AI.  
+The first version of ${COMPANY_NAME} connected certified chefs with users requesting custom meal plans.  
+Later, AI-assisted planning was added — not to replace chefs, but to enhance convenience and personalization.`,
                 bullets: [
-                    "Launched by trainers for trainers and clients",
-                    "Designed around long-term transformation, not temporary results",
-                    "Rooted in science, empathy, and innovation",
+                    "Launched by chefs for people who love real food",
+                    "Focused on lasting healthy eating habits, not quick fixes",
+                    "Rooted in culinary expertise, empathy, and innovation",
                 ],
             },
             right: {
@@ -69,44 +69,44 @@ As it evolved, we introduced AI-assisted analytics — not to replace trainers, 
             type: "custom",
             component: "MissionBanner",
             title: "Our Mission",
-            description: `${COMPANY_NAME} exists to bridge the gap between technology and human coaching.  
-We empower certified trainers with intelligent tools — allowing them to focus on what matters most: understanding each client, adjusting every detail, and building habits that last.  
-Our mission is simple but ambitious: to make expert coaching scalable without losing its soul.`,
+            description: `${COMPANY_NAME} exists to merge the creativity of chefs with intelligent AI meal planning.  
+We empower chefs to deliver personalized meal plans while AI helps track preferences, adjust recipes, and streamline planning.  
+Our mission is simple: make exceptional culinary experiences accessible to everyone.`,
             image: "missionBanner",
         },
 
-        // 🔹 TRAINERS & PHILOSOPHY
+        // 🔹 CHEFS & PHILOSOPHY
         {
             type: "section",
-            title: `The Trainers Behind ${COMPANY_NAME}`,
-            description: `Every transformation begins with a real human connection.  
-Our trainers are certified professionals from around the world — experts not only in physical performance, but also in motivation, psychology, and sustainable progress.`,
+            title: `The Chefs Behind ${COMPANY_NAME}`,
+            description: `Every great meal starts with a human touch.  
+Our chefs are certified professionals from around the world — experts not only in cooking but also in nutrition, meal prep, and client engagement.`,
             left: {
                 type: "custom",
                 component: "InfoBlock",
                 image: "image1",
-                title: "Who Our Trainers Are",
-                description: `Each coach who joins ${COMPANY_NAME} passes a strict verification process — background checks, certifications, experience proof, and mentoring interviews.  
-We look for people who understand that coaching is more than sets and reps — it’s about empathy, discipline, and consistency.`,
+                title: "Who Our Chefs Are",
+                description: `Each chef on ${COMPANY_NAME} undergoes strict verification — certifications, experience, and interviews.  
+We look for people who understand that cooking is more than recipes — it’s about creativity, taste, and client satisfaction.`,
                 bullets: [
-                    "Certified under NASM, ACE, ISSA, or similar global institutions",
-                    "Experienced in strength, mobility, nutrition, and recovery",
-                    "Skilled in adapting programs to medical conditions or lifestyle constraints",
-                    "Committed to real communication — video feedback, chat, and emotional support",
+                    "Certified culinary professionals",
+                    "Experienced in diverse cuisines, nutrition, and dietary restrictions",
+                    "Skilled in creating personalized meal plans",
+                    "Dedicated to guiding and teaching clients",
                 ],
             },
             right: {
                 type: "custom",
                 component: "InfoBlock",
                 image: "image1",
-                title: "Our Coaching Philosophy",
-                description: `At ${COMPANY_NAME}, coaching is a partnership — not a transaction.  
-Our trainers don’t just send you a PDF; they design evolving plans that grow with your progress, mood, and schedule.  
-With AI insights, they can adjust your training in real-time, but it’s their human understanding that keeps you motivated.`,
+                title: "Our Culinary Philosophy",
+                description: `At ${COMPANY_NAME}, cooking is a partnership.  
+Our chefs design evolving meal plans that grow with your preferences, health goals, and schedule.  
+AI assists by analyzing feedback and optimizing plans, but it’s the chef’s creativity that ensures delicious, satisfying meals.`,
                 bullets: [
-                    "Each plan is uniquely built for your goals, time, and mindset",
-                    "AI helps measure — but trainers help interpret and adapt",
-                    "We prioritize healthy longevity over aesthetic obsession",
+                    "Every plan is tailored to your tastes, goals, and time",
+                    "AI measures and tracks, chefs interpret and refine",
+                    "We prioritize healthy, enjoyable meals over fads",
                 ],
             },
         },
@@ -116,27 +116,27 @@ With AI insights, they can adjust your training in real-time, but it’s their h
             type: "custom",
             component: "ValuesIcons",
             title: "Our Core Values",
-            description: `We believe fitness should improve not only your body, but your mind, discipline, and quality of life.`,
+            description: `We believe cooking should delight, nourish, and educate.`,
             values: [
                 {
-                    icon: "🤝",
+                    icon: "🍳",
                     title: "Human First",
-                    text: "Every feature we create supports real relationships between clients and trainers.",
+                    text: "Every feature supports real interaction between clients and chefs.",
                 },
                 {
                     icon: "📚",
-                    title: "Education Over Perfection",
-                    text: "We teach clients to understand their bodies — because knowledge builds confidence.",
+                    title: "Education Over Convenience",
+                    text: "We help clients understand ingredients, nutrition, and cooking skills.",
                 },
                 {
                     icon: "⚙️",
                     title: "Technology With Purpose",
-                    text: "AI is our tool, not our identity. It enhances human expertise, not replaces it.",
+                    text: "AI enhances personalization and convenience, not creativity.",
                 },
                 {
                     icon: "🔥",
-                    title: "Consistency Beats Intensity",
-                    text: "We focus on long-term progress, not overnight results.",
+                    title: "Consistency Over Shortcuts",
+                    text: "We focus on sustainable meal habits, not one-off trends.",
                 },
             ],
         },
@@ -146,8 +146,7 @@ With AI insights, they can adjust your training in real-time, but it’s their h
             type: "custom",
             component: "VideoDemo",
             title: `Inside ${COMPANY_NAME}`,
-            description: `Watch how our coaches build real plans, analyze progress with AI tools, and support clients across all fitness levels.  
-We believe in transparency — what you see here is exactly how we work.`,
+            description: `Watch how our chefs create custom meals, AI assists with planning, and clients enjoy their personalized culinary experiences.`,
             video: "coachWork",
         },
 
@@ -155,27 +154,26 @@ We believe in transparency — what you see here is exactly how we work.`,
         {
             type: "section",
             title: "Our Vision for the Future",
-            description: `${COMPANY_NAME} isn’t just a company — it’s a movement to redefine modern fitness.  
-We’re building a world where technology empowers personal well-being, not replaces it.  
-Where every trainer can reach more people, and every person can access expert guidance without barriers.`,
+            description: `${COMPANY_NAME} is more than a platform — it’s a movement to redefine how people plan, cook, and enjoy food.  
+We aim to combine technology with human expertise to make personalized culinary experiences accessible everywhere.`,
             left: {
                 type: "custom",
                 component: "InfoBlock",
                 title: "What’s Next for Us",
-                description: `We’re expanding ${COMPANY_NAME} into holistic wellness — integrating recovery, sleep, nutrition, and mindset programs.  
-Soon, every member will have access to a complete ecosystem: a human coach, an AI assistant, and a supportive community — all synchronized toward one goal: your better self.`,
+                description: `We’re expanding into holistic meal support — integrating nutrition tracking, AI optimization, and chef-led guidance.  
+Soon, every member can have a complete system: a personal chef, an AI meal planner, and educational resources — all designed to improve cooking and nutrition.`,
                 bullets: [
-                    "Expanding partnerships with certified coaches worldwide",
-                    "Developing new AI modules for recovery and stress management",
-                    "Launching educational programs for beginner trainers",
-                    "Building sustainable community challenges for members",
+                    "Partnering with certified chefs worldwide",
+                    "Developing AI tools for nutrition tracking and meal optimization",
+                    "Launching culinary education programs for users",
+                    "Building community challenges and interactive cooking events",
                 ],
             },
             right: {
                 type: "media",
                 mediaType: "image",
                 src: "image1",
-                alt: "Future fitness vision",
+                alt: "Future culinary vision",
             },
         },
 
@@ -183,12 +181,13 @@ Soon, every member will have access to a complete ecosystem: a human coach, an A
         {
             type: "custom",
             component: "MissionBanner",
-            title: "We’re Redefining Fitness Together",
-            description: `At ${COMPANY_NAME}, we believe true strength comes from connection — to your trainer, your body, and your purpose.  
-Join us in creating a new fitness culture: intelligent, compassionate, and human.`,
+            title: "We’re Redefining Cooking Together",
+            description: `At ${COMPANY_NAME}, true culinary mastery comes from the combination of human expertise and intelligent assistance.  
+Join us to enjoy delicious, personalized, and sustainable meals every day.`,
             image: "ctaAbout",
         },
     ],
 };
 
 export default schema;
+

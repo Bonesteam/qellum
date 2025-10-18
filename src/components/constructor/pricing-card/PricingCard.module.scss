@@ -1,6 +1,6 @@
 .card {
   --border: rgba(255, 255, 255, 0.15);
-  --glow: rgba(80, 255, 196, 0.25);
+  --glow: rgba(214, 184, 32, 0.25);
 
   position: relative;
   display: flex;
@@ -155,9 +155,9 @@
     border-radius: 12px;
     font-size: 0.8rem;
     font-weight: 600;
-    background: rgba(50, 214, 154, 0.1);
+  background: rgba(255, 127, 80, 0.10);
     color: var(--secondary-color);
-    border: 1px solid rgba(50, 214, 154, 0.25);
+    border: 1px solid rgba(217, 176, 27, 0.25);
   }
 
   button {
@@ -169,13 +169,13 @@
     border: none;
     border-radius: 10px;
     padding: 0.8rem 1.4rem;
-    box-shadow: 0 6px 16px rgba(50, 214, 154, 0.3);
+    box-shadow: 0 6px 16px rgba(217, 176, 27, 0.25);
     transition: all 0.3s ease;
     cursor: pointer;
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 22px rgba(50, 214, 154, 0.4);
+      box-shadow: 0 10px 22px rgba(236, 169, 11, 0.4);
     }
   }
 }
@@ -187,7 +187,7 @@
 
 .pro {
   background: linear-gradient(180deg, #f3fcf7 0%, #ebfdf4 100%);
-  border-color: rgba(50, 214, 154, 0.4);
+  border-color: rgba(255, 127, 80, 0.40);
 }
 
 .premium {

@@ -6,19 +6,17 @@ import styles from "./AllOrders.module.scss";
 import {FaFileDownload, FaRegClock, FaCoins} from "react-icons/fa";
 import ButtonUI from "@/components/ui/button/ButtonUI";
 import Link from "next/link";
-import {downloadCVPDF} from "@/components/features/pdf-extractor/PDFExtractorCV";
 import {downloadUniversalPDF} from "@/pdf-creator/PdfCreator";
-import {CVOrderType} from "@/backend/types/cv.types";
 import {UniversalOrderType} from "@/backend/types/universal.types";
 
 const AllOrders: React.FC = () => {
-    const {cvOrders, aiOrders, loading, refreshOrders} = useAllOrders();
+    const { aiOrders, loading, refreshOrders } = useAllOrders();
 
     // ❇️ Universal orders — переіменовуємо для зручності
     const universalOrders = aiOrders as unknown as UniversalOrderType[];
 
-    const formatDate = (dateStr: string) => {
-        const date = new Date(dateStr);
+    const formatDate = (dateInput: string | Date) => {
+        const date = new Date(dateInput as any);
         return date.toLocaleDateString("en-US", {
             day: "numeric",
             month: "short",
@@ -26,29 +24,14 @@ const AllOrders: React.FC = () => {
         });
     };
 
-    const formatTime = (dateStr: string) => {
-        const date = new Date(dateStr);
+    const formatTime = (dateInput: string | Date) => {
+        const date = new Date(dateInput as any);
         return date.toLocaleTimeString("en-US", {hour: "2-digit", minute: "2-digit"});
     };
 
-    const formatId = (id: string) => id.slice(-6);
+    const formatId = (id: any) => id?.toString().slice(-6);
 
-    const handleDownloadCV = async (order: CVOrderType) => {
-        try {
-            if (order.extrasData && Object.keys(order.extrasData).length > 0) {
-                await downloadCVPDF(order);
-                return;
-            }
-            const res = await fetch(`/api/cv/get-order?id=${order._id}`, {
-                method: "GET",
-                headers: {"Content-Type": "application/json"},
-            });
-            const data = await res.json();
-            if (data?.order) await downloadCVPDF(data.order);
-        } catch (err: any) {
-            console.error("❌ CV Download error:", err.message);
-        }
-    };
+    // CV orders are deprecated for the Meal Plans profile — only meal (universal) orders are shown here.
 
     const handleDownloadUniversal = async (order: UniversalOrderType) => {
         try {
@@ -77,7 +60,7 @@ const AllOrders: React.FC = () => {
 
     if (loading) return <p className={styles.loading}>Loading orders...</p>;
 
-    if (cvOrders.length === 0 && universalOrders.length === 0)
+    if (universalOrders.length === 0)
         return (
             <div className={styles.emptyState}>
                 <span className={styles.emptyIcon}>📭</span>
@@ -100,57 +83,15 @@ const AllOrders: React.FC = () => {
                 </ButtonUI>
             </div>
 
-            {/* ====================== CV ORDERS ====================== */}
-            {cvOrders.length > 0 && (
-                <>
-                    <h4 className={styles.sectionTitle}>CV Orders</h4>
-                    <div className={styles.ordersGrid}>
-                        {cvOrders.map((order) => (
-                            <div key={order._id.toString()} className={styles.card}>
-                                <div className={styles.cardHeader}>
-                                    <div className={styles.idWrapper}>
-                                        <span className={styles.orderId}>#{formatId(order._id.toString())}</span>
-                                        <span
-                                            className={`${styles.badge} ${
-                                                order.reviewType === "manager" ? styles.manager : styles.instant
-                                            }`}
-                                        >
-                      {order.reviewType === "manager" ? "Manager Review" : "Instant"}
-                    </span>
-                                    </div>
-                                    <button
-                                        className={styles.downloadBtn}
-                                        onClick={() => handleDownloadCV(order)}
-                                        aria-label="Download"
-                                    >
-                                        <FaFileDownload/>
-                                    </button>
-                                </div>
-
-                                <div className={styles.cardBody}>
-                                    <p className={styles.email}>{order.email}</p>
-                                    <div className={styles.meta}>
-                    <span className={styles.date}>
-                      <FaRegClock/> {formatDate(order.createdAt)} at {formatTime(order.createdAt)}
-                    </span>
-                                        <span className={styles.tokens}>
-                      <FaCoins/> {order.reviewType === "manager" ? "-60" : "-30"} tokens
-                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </>
-            )}
+            {/* CV Orders removed — profile now focuses on Meal Plans */}
 
             {/* ====================== UNIVERSAL ORDERS ====================== */}
             {universalOrders.length > 0 && (
                 <>
-                    <h4 className={styles.sectionTitle}>Universal Orders</h4>
+                    <h4 className={styles.sectionTitle}>Meal Plans</h4>
                     <div className={styles.ordersGrid}>
                         {universalOrders.map((order) => (
-                            <div key={order._id} className={styles.card}>
+                            <div key={order._id?.toString?.() ?? order._id} className={styles.card}>
                                 <div className={styles.cardHeader}>
                                     <div className={styles.idWrapper}>
                                         <span className={styles.orderId}>#{formatId(order._id)}</span>
@@ -159,7 +100,7 @@ const AllOrders: React.FC = () => {
                                                 order.planType === "reviewed" ? styles.manager : styles.instant
                                             }`}
                                         >
-                      {order.planType === "reviewed" ? "Reviewed" : "Instant"}
+                      {order.planType === "reviewed" ? "Chef Plan" : "AI Plan"}
                     </span>
                                     </div>
                                     <button

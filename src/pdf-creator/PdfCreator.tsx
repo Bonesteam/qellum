@@ -127,7 +127,7 @@ function renderTrainingDaysCoach(text: string, styles: PDFStyles) {
             <View key={i} style={styles.dayCard}>
                 <View style={styles.dayHeader}>
                     <Text style={styles.dayIndex}>Day {dayIndex}</Text>
-                    <Text style={styles.dayTitle}>Training</Text>
+                    <Text style={styles.dayTitle}>Meal</Text>
                 </View>
                 <View style={styles.dayBody}>
                     {focusLines.map((f, idx) => (
@@ -192,6 +192,174 @@ function renderExtrasAI(extras: Record<string, string>, styles: PDFStyles) {
                                         "",
                                     ])}
                                 />
+                            </View>
+                        </Page>
+                    );
+                }
+
+                // === Structured: Custom Allergies ===
+                if (key === "customAllergies" || key.toLowerCase().includes("allerg")) {
+                    let parsed: any = null;
+                    try {
+                        parsed = JSON.parse(cleaned);
+                    } catch (e) {
+                        parsed = null;
+                    }
+
+                    if (parsed && (Array.isArray(parsed.allergies) || Array.isArray(parsed.allergy))) {
+                        const list = parsed.allergies || parsed.allergy;
+                        const rows = list.map((a: any) => [a.foodItem || a.food || "", a.reaction || "", a.recommendations || ""]);
+                        return (
+                            <Page key={key} style={styles.extrasPage}>
+                                <Text style={styles.extrasTitle}>{title}</Text>
+                                <View style={styles.extrasContent}>
+                                    <Table styles={styles} headers={["Food Item", "Reaction", "Recommendations"]} rows={rows} />
+                                </View>
+                            </Page>
+                        );
+                    }
+
+                    const lines = cleaned.split(/\n+/).filter((l) => l.trim());
+                    return (
+                        <Page key={key} style={styles.extrasPage}>
+                            <Text style={styles.extrasTitle}>{title}</Text>
+                            <View style={styles.extrasContent}>
+                                {lines.map((line, i) => (
+                                    <Text key={i} style={styles.extrasParagraph}>{cleanText(line.trim())}</Text>
+                                ))}
+                            </View>
+                        </Page>
+                    );
+                }
+
+                // === Structured: Grocery List Localized ===
+                if (key === "groceryListLocalized" || key.toLowerCase().includes("grocery")) {
+                    let parsed: any = null;
+                    try {
+                        parsed = JSON.parse(cleaned);
+                    } catch (e) {
+                        parsed = null;
+                    }
+
+                    if (parsed && typeof parsed === "object") {
+                        const obj = parsed.groceryListLocalized || parsed;
+                        return (
+                            <Page key={key} style={styles.extrasPage}>
+                                <Text style={styles.extrasTitle}>{title}</Text>
+                                <View style={styles.extrasContent}>
+                                    {Object.entries(obj).map(([cat, items]: any, idx) => (
+                                        <View key={idx} style={styles.extrasSection}>
+                                            <Text style={styles.extrasSubtitle}>{cleanText(cat.charAt(0).toUpperCase() + cat.slice(1))}</Text>
+                                            {Array.isArray(items) ? (
+                                                items.map((it: string, i2: number) => (
+                                                    <Text key={i2} style={styles.extrasParagraph}>• {cleanText(String(it))}</Text>
+                                                ))
+                                            ) : (
+                                                <Text style={styles.extrasParagraph}>{cleanText(String(items))}</Text>
+                                            )}
+                                        </View>
+                                    ))}
+                                </View>
+                            </Page>
+                        );
+                    }
+
+                    const lines = cleaned.split(/\n+/).filter((l) => l.trim());
+                    return (
+                        <Page key={key} style={styles.extrasPage}>
+                            <Text style={styles.extrasTitle}>{title}</Text>
+                            <View style={styles.extrasContent}>
+                                {lines.map((line, i) => (
+                                    <Text key={i} style={styles.extrasParagraph}>{cleanText(line.trim())}</Text>
+                                ))}
+                            </View>
+                        </Page>
+                    );
+                }
+
+                // === Structured: Custom Allergies (JSON or plain text) ===
+                if (key === "customAllergies" || key.toLowerCase().includes("allerg")) {
+                    let parsed: any = null;
+                    try {
+                        parsed = JSON.parse(cleaned);
+                    } catch (e) {
+                        // try to parse if extra wrapper present
+                        try {
+                            const maybe = cleaned.replace(/^[`\s]*json/i, "").trim();
+                            parsed = JSON.parse(maybe);
+                        } catch (_e) {
+                            parsed = null;
+                        }
+                    }
+
+                    // if parsed and has allergies array, render table
+                    if (parsed && (Array.isArray(parsed.allergies) || Array.isArray(parsed.allergy))) {
+                        const list = parsed.allergies || parsed.allergy;
+                        const rows = list.map((a: any) => [a.foodItem || a.food || "", a.reaction || "", a.recommendations || ""]);
+                        return (
+                            <Page key={key} style={styles.extrasPage}>
+                                <Text style={styles.extrasTitle}>{title}</Text>
+                                <View style={styles.extrasContent}>
+                                    <Table styles={styles} headers={["Food Item", "Reaction", "Recommendations"]} rows={rows} />
+                                </View>
+                            </Page>
+                        );
+                    }
+
+                    // fallback: print cleaned lines
+                    const lines = cleaned.split(/\n+/).filter((l) => l.trim());
+                    return (
+                        <Page key={key} style={styles.extrasPage}>
+                            <Text style={styles.extrasTitle}>{title}</Text>
+                            <View style={styles.extrasContent}>
+                                {lines.map((line, i) => (
+                                    <Text key={i} style={styles.extrasParagraph}>{cleanText(line.trim())}</Text>
+                                ))}
+                            </View>
+                        </Page>
+                    );
+                }
+
+                // === Structured: Grocery List Localized ===
+                if (key === "groceryListLocalized" || key.toLowerCase().includes("grocery")) {
+                    let parsed: any = null;
+                    try {
+                        parsed = JSON.parse(cleaned);
+                    } catch (e) {
+                        parsed = null;
+                    }
+
+                    if (parsed && typeof parsed === "object") {
+                        const obj = parsed.groceryListLocalized || parsed;
+                        return (
+                            <Page key={key} style={styles.extrasPage}>
+                                <Text style={styles.extrasTitle}>{title}</Text>
+                                <View style={styles.extrasContent}>
+                                    {Object.entries(obj).map(([cat, items]: any, idx) => (
+                                        <View key={idx} style={styles.extrasSection}>
+                                            <Text style={styles.extrasSubtitle}>{cleanText(cat.charAt(0).toUpperCase() + cat.slice(1))}</Text>
+                                            {Array.isArray(items) ? (
+                                                items.map((it: string, i2: number) => (
+                                                    <Text key={i2} style={styles.extrasParagraph}>• {cleanText(String(it))}</Text>
+                                                ))
+                                            ) : (
+                                                <Text style={styles.extrasParagraph}>{cleanText(String(items))}</Text>
+                                            )}
+                                        </View>
+                                    ))}
+                                </View>
+                            </Page>
+                        );
+                    }
+                    // fallback
+                    const lines = cleaned.split(/\n+/).filter((l) => l.trim());
+                    return (
+                        <Page key={key} style={styles.extrasPage}>
+                            <Text style={styles.extrasTitle}>{title}</Text>
+                            <View style={styles.extrasContent}>
+                                {lines.map((line, i) => (
+                                    <Text key={i} style={styles.extrasParagraph}>{cleanText(line.trim())}</Text>
+                                ))}
                             </View>
                         </Page>
                     );
@@ -341,7 +509,7 @@ export async function downloadTrainingPDF(order: UniversalOrderType) {
                 {isCoach ? (
                     <View style={styles.header}>
                         <View style={styles.headerRow}>
-                            <Text style={styles.title}>Training Plan — {fullName}</Text>
+                            <Text style={styles.title}>Meal Plan — {fullName}</Text>
                         </View>
                         <Text style={styles.meta}>
                             Goal: {goal} | Level: {fitnessLevel} | Duration: {days} days
@@ -349,7 +517,7 @@ export async function downloadTrainingPDF(order: UniversalOrderType) {
                     </View>
                 ) : (
                     <View style={styles.header}>
-                        <Text style={styles.title}>Training Plan — {fullName}</Text>
+                        <Text style={styles.title}>Meal Plan — {fullName}</Text>
                         <Text style={styles.meta}>
                             Goal: {goal} | Level: {fitnessLevel} | Duration: {days} days
                         </Text>
@@ -379,7 +547,7 @@ export async function downloadTrainingPDF(order: UniversalOrderType) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `training-plan-${fullName}.pdf`;
+    a.download = `meal-plan-${fullName}.pdf`;
     a.click();
     URL.revokeObjectURL(url);
 }

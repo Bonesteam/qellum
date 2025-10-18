@@ -11,7 +11,14 @@ import styles from "./ManualGenerator.module.scss";
 import { useAlert } from "@/context/AlertContext";
 import { useUser } from "@/context/UserContext";
 
-const BASE_COST = 30;
+const PACKAGE_TIERS = [
+    { id: "basic", label: "Basic", base: 20, description: "Simple 1-week plan, minimal details" },
+    { id: "standard", label: "Standard", base: 35, description: "1–2 weeks with recipes and shopping list" },
+    { id: "premium", label: "Premium", base: 60, description: "3–4 weeks, recipes, shopping list, calorie breakdown" },
+    { id: "pro", label: "Pro", base: 100, description: "Nutrition expert review + extended materials" },
+];
+
+const BASE_COST = 20; // fallback base cost
 
 const LANGUAGES = [
     { value: "English", label: "English (default)", cost: 0 },
@@ -21,51 +28,55 @@ const LANGUAGES = [
 ];
 
 const EXTRA_CATEGORIES = {
-    training: [
-        { name: "adaptation", label: "Home / Gym Adaptation", cost: 10 },
-        { name: "tracking", label: "Progress Tracking", cost: 10 },
-        { name: "recovery", label: "Recovery Guide", cost: 8 },
-        { name: "warmupPlan", label: "Warm-up Routine", cost: 5 },
-        { name: "cooldownPlan", label: "Cool-down & Stretching", cost: 5 },
-        { name: "injuryPrevention", label: "Injury Prevention Guide", cost: 7 },
-        { name: "equipmentAlternatives", label: "No-Equipment Alternatives", cost: 6 },
-        { name: "weeklyAdjustments", label: "Weekly Adjustment Tips", cost: 10 },
-        { name: "progressReport", label: "Progress Report Template", cost: 10 },
+    core: [
+        { name: "weeklyMenu", label: "Weekly Menu (structured)", cost: 15 },
+        { name: "recipes", label: "Detailed Recipes (step-by-step)", cost: 12 },
+        { name: "shoppingList", label: "Shopping List (grouped)", cost: 10 },
+        { name: "calorieBreakdown", label: "Calorie & Macro Breakdown", cost: 12 },
+        { name: "mealPrepGuide", label: "Meal Prep Guide & Schedule", cost: 10 },
+        { name: "snackPlans", label: "Healthy snacks & alternatives", cost: 6 },
     ],
-    nutrition: [
-        { name: "nutrition", label: "Nutrition Plan", cost: 15 },
-        { name: "mealSchedule", label: "Meal Timing Schedule", cost: 12 },
-        { name: "hydrationPlan", label: "Hydration Plan", cost: 6 },
-        { name: "supplementGuide", label: "Supplement Recommendations", cost: 10 },
+    personalization: [
+        { name: "customAllergies", label: "Allergy-safe customization", cost: 8 },
+        { name: "portionSizing", label: "Custom portion sizing", cost: 6 },
+        { name: "tasteProfile", label: "Taste preferences tuning", cost: 6 },
+        { name: "familyFriendly", label: "Family-friendly variations", cost: 7 },
+        { name: "kidFriendly", label: "Kid-friendly recipes", cost: 6 },
     ],
-    mindset: [
-        { name: "motivation", label: "Motivation Plan", cost: 5 },
-        { name: "goalBreakdown", label: "Goal Breakdown Strategy", cost: 8 },
-        { name: "disciplineTracker", label: "Discipline & Habit Tracker", cost: 8 },
-        { name: "mindsetTips", label: "Mindset Tips Collection", cost: 5 },
+    services: [
+        { name: "groceryListLocalized", label: "Localized grocery list (store mapping)", cost: 8 },
+        { name: "leftoversPlan", label: "Leftovers & reuse plan", cost: 5 },
+        { name: "shoppingBudgeting", label: "Budget optimization", cost: 7 },
+        { name: "seasonalAdjustments", label: "Seasonal ingredient adjustments", cost: 6 },
+    ],
+    expert: [
+        { name: "nutritionistReview", label: "Nutritionist review & notes", cost: 30 },
+        { name: "1on1Consult", label: "1:1 consultation (30 min)", cost: 50 },
+        { name: "followupWeek", label: "Follow-up week plan", cost: 25 },
     ],
 };
 
 const schema = Yup.object().shape({
     fullName: Yup.string().required("Required"),
     goal: Yup.string().required("Required"),
-    fitnessLevel: Yup.string().required("Required"),
+    dietaryPreference: Yup.string().required("Required"),
     days: Yup.number().min(1).required("Required"),
     planType: Yup.string().oneOf(["coach", "ai"]).required("Required"),
     language: Yup.string().oneOf(LANGUAGES.map((l) => l.value)),
 });
 
-interface FormValues {
+export interface FormValues {
     fullName: string;
-    goal: string;
-    fitnessLevel: string;
+    goal: string; // dietary goal, e.g., weight loss, muscle gain, maintain
+    dietaryPreference: string;
+    packageId?: string;
     days: number;
     planType: "coach" | "ai";
     language: string;
     extras: string[];
 }
 
-const ManualWorkoutForm = () => {
+const MealPlannerForm = () => {
     const { showAlert } = useAlert();
     const user = useUser();
     const [loading, setLoading] = useState(false);
@@ -73,7 +84,8 @@ const ManualWorkoutForm = () => {
     const initialValues: FormValues = {
         fullName: "",
         goal: "",
-        fitnessLevel: "Beginner",
+        dietaryPreference: "Omnivore",
+        packageId: "standard",
         days: 7,
         planType: "coach",
         language: "English",
@@ -82,13 +94,14 @@ const ManualWorkoutForm = () => {
 
     // 🧩 Mock data for testing
     const mockData: FormValues = {
-        fullName: "John Doe",
-        goal: "Build lean muscle and improve endurance",
-        fitnessLevel: "Intermediate",
-        days: 21,
+        fullName: "Olena Kovalenko",
+        goal: "Lose 5 kg in a healthy way with focus on sustainable habits",
+        dietaryPreference: "Balanced",
+        packageId: "premium",
+        days: 7,
         planType: "ai",
         language: "English",
-        extras: ["tracking", "nutrition", "motivation"],
+        extras: ["weeklyMenu", "recipes", "shoppingList"],
     };
 
     return (
@@ -104,21 +117,25 @@ const ManualWorkoutForm = () => {
                         return sum + (opt?.cost || 0);
                     }, 0);
 
+                    const packageObj = PACKAGE_TIERS.find((p) => p.id === values.packageId);
+                    const packageBase = packageObj ? packageObj.base : BASE_COST;
                     const durationCost = Math.floor(values.days / 7) * 10;
                     const languageCost = values.language && values.language !== "English" ? 5 : 0;
-                    const totalTokens = BASE_COST + extraCost + durationCost + languageCost;
+                    const totalTokens = packageBase + extraCost + durationCost + languageCost;
 
                     const payload = {
-                        category: "training",
+                        category: "nutrition",
                         planType: values.planType === "coach" ? "reviewed" : "instant",
                         language: values.language || "English",
                         extras: values.extras,
+                        packageId: values.packageId,
                         totalTokens,
                         email: user?.email,
                         fields: {
                             fullName: values.fullName,
                             goal: values.goal,
-                            fitnessLevel: values.fitnessLevel,
+                            dietaryPreference: values.dietaryPreference,
+                            packageId: values.packageId,
                             days: values.days,
                             language: values.language || "English",
                         },
@@ -136,8 +153,8 @@ const ManualWorkoutForm = () => {
                         showAlert(
                             "Success",
                             values.planType === "coach"
-                                ? "Your plan will be reviewed by a coach and delivered in PDF within 24 hours."
-                                : "Your instant training plan is ready in PDF format.",
+                                ? "Your meal plan will be reviewed by a nutrition expert and delivered in PDF within 24 hours."
+                                : "Your instant meal plan is ready in PDF format.",
                             "success"
                         );
                     } else {
@@ -164,17 +181,17 @@ const ManualWorkoutForm = () => {
                 return (
                     <Form className={styles.form}>
                         <header className={styles.header}>
-                            <h2>Training Plan Configuration</h2>
+                            <h2>Meal Plan Configuration</h2>
                             <p>
-                                Choose your training type, define fitness parameters, and customize modules.
-                                You can also fill with demo data to test the flow.
+                                Configure your dietary goals, preferences and custom modules for a complete meal
+                                plan (recipes, shopping list, calorie breakdown). Use demo data to test the flow.
                             </p>
                         </header>
 
                         <div className={styles.actionsInline}>
                             <ButtonUI
                                 type="button"
-                                variant="outline"
+                                variant="outlined"
                                 color="secondary"
                                 onClick={() => setValues(mockData)}
                             >
@@ -191,22 +208,24 @@ const ManualWorkoutForm = () => {
                                     <Field name="fullName" as={Input} placeholder="Enter your name" />
                                 </div>
                                 <div className={styles.inputGroup}>
-                                    <label>Goal</label>
+                                    <label>Dietary Goal</label>
                                     <Field
                                         name="goal"
                                         as={Input}
-                                        placeholder="e.g. Muscle gain, weight loss, endurance"
+                                        placeholder="e.g. Weight loss, muscle gain, maintain weight"
                                     />
                                 </div>
                                 <div className={styles.inputGroup}>
-                                    <label>Fitness Level</label>
+                                    <label>Dietary Preference</label>
                                     <Select
-                                        value={values.fitnessLevel}
-                                        onChange={(_, v) => setFieldValue("fitnessLevel", v)}
+                                        value={values.dietaryPreference}
+                                        onChange={(_, v) => setFieldValue("dietaryPreference", v)}
                                     >
-                                        <Option value="Beginner">Beginner</Option>
-                                        <Option value="Intermediate">Intermediate</Option>
-                                        <Option value="Advanced">Advanced</Option>
+                                        <Option value="Omnivore">Omnivore</Option>
+                                        <Option value="Vegetarian">Vegetarian</Option>
+                                        <Option value="Vegan">Vegan</Option>
+                                        <Option value="Pescatarian">Pescatarian</Option>
+                                        <Option value="Balanced">Balanced / Flexible</Option>
                                     </Select>
                                 </div>
                                 <div className={styles.inputGroup}>
@@ -225,10 +244,23 @@ const ManualWorkoutForm = () => {
                     English is free, other languages cost +5 tokens
                   </span>
                                 </div>
+                                <div className={styles.inputGroup}>
+                                    <label>Package</label>
+                                    <Select
+                                        value={values.packageId}
+                                        onChange={(_, v) => setFieldValue("packageId", v)}
+                                    >
+                                        {PACKAGE_TIERS.map((p) => (
+                                            <Option key={p.id} value={p.id}>
+                                                {p.label} — {p.description} (+{p.base} tokens)
+                                            </Option>
+                                        ))}
+                                    </Select>
+                                </div>
                             </div>
 
                             <div className={styles.block}>
-                                <h3>Plan Details</h3>
+                                        <h3>Plan Details</h3>
                                 <div className={styles.radioGroup}>
                                     <label
                                         className={`${styles.radioCard} ${
@@ -243,8 +275,8 @@ const ManualWorkoutForm = () => {
                                             onChange={() => setFieldValue("planType", "coach")}
                                         />
                                         <div>
-                                            <strong>Coach Plan</strong>
-                                            <p>Delivered in 24h with expert verification</p>
+                                            <strong>Сhef Plan</strong>
+                                            <p>Personal chef will review and deliver personalized meal plan within 2–3 hours</p>
                                         </div>
                                     </label>
 
@@ -267,7 +299,7 @@ const ManualWorkoutForm = () => {
                                     </label>
                                 </div>
 
-                                <div className={styles.inputGroup}>
+                                    <div className={styles.inputGroup}>
                                     <label>Duration</label>
                                     <Select
                                         value={values.days}
@@ -317,9 +349,9 @@ const ManualWorkoutForm = () => {
                         </div>
 
                         <div className={styles.summary}>
-                            <div className={styles.summaryContent}>
+                                <div className={styles.summaryContent}>
                                 <div>
-                                    <p>Base: 30 tokens</p>
+                                    <p>Package base: {PACKAGE_TIERS.find(p => p.id === values.packageId)?.base ?? BASE_COST} tokens</p>
                                     <p>Extras: +{extraCost}</p>
                                     <p>Duration: +{durationCost}</p>
                                     <p>Language: +{languageCost}</p>
@@ -339,7 +371,7 @@ const ManualWorkoutForm = () => {
                                 hoverEffect="glow"
                                 loading={loading}
                             >
-                                Generate Training Plan
+                                Generate Meal Plan
                             </ButtonUI>
                         </div>
                     </Form>
@@ -349,4 +381,4 @@ const ManualWorkoutForm = () => {
     );
 };
 
-export default ManualWorkoutForm;
+export default MealPlannerForm;

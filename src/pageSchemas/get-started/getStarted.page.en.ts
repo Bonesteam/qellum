@@ -4,19 +4,19 @@ import { COMPANY_NAME } from "@/resources/constants";
 const schema: PageSchema = {
     meta: {
         title: `Get Started — ${COMPANY_NAME}`,
-        description: `Learn how to begin your personalized fitness journey with ${COMPANY_NAME}. Connect with certified trainers, set your goals, and start your transformation today.`,
+        description: `Learn how to begin your personalized culinary journey with ${COMPANY_NAME}. Connect with chefs, set your meal preferences, and start enjoying your custom meal plan today.`,
         keywords: [
             `${COMPANY_NAME} get started`,
-            "personal trainer onboarding",
-            "AI fitness setup",
-            "create training plan",
+            "personal chef onboarding",
+            "AI meal setup",
+            "create meal plan",
             "nutrition setup",
-            "fitness journey start",
+            "cooking journey start",
         ],
         canonical: "/get-started",
         ogImage: {
             title: `Get Started with ${COMPANY_NAME}`,
-            description: "Personal trainer + AI assistant — your journey starts here.",
+            description: "Personal chef + AI assistant — start cooking smartly today.",
             bg: "#0a2540",
             color: "#ffffff",
         },
@@ -28,9 +28,9 @@ const schema: PageSchema = {
             type: "custom",
             component: "HeroSection",
             title: `Get Started with ${COMPANY_NAME}`,
-            highlight: "Your Personalized Fitness Journey Begins Here",
-            description: `In just a few steps, you’ll connect with your certified trainer, define your goals, and receive a custom plan that adapts as you progress.  
-Whether you train at home, in a gym, or outdoors — ${COMPANY_NAME} builds your roadmap to long-term health and performance.`,
+            highlight: "Your Personalized Culinary Journey Begins Here",
+            description: `In just a few steps, you’ll connect with a chef, define your taste preferences, and receive a custom meal plan delivered in 2–3 hours.  
+Whether you want daily AI-generated recipes or chef-prepared courses — ${COMPANY_NAME} makes cooking simple and enjoyable.`,
             image: "image1",
             align: "right",
         },
@@ -40,11 +40,11 @@ Whether you train at home, in a gym, or outdoors — ${COMPANY_NAME} builds your
             type: "custom",
             component: "HighlightStrip",
             items: [
-                { icon: "💪", text: "Fully Personalized Training Plans" },
-                { icon: "🥗", text: "Optional Nutrition Coaching" },
-                { icon: "🤖", text: "AI-Assisted Progress Tracking" },
+                { icon: "🍳", text: "Personalized Meal Plans" },
+                { icon: "🥗", text: "Optional Nutrition Guidance" },
+                { icon: "🤖", text: "AI-Assisted Recipe Suggestions" },
                 { icon: "📱", text: "Access Anytime, Anywhere" },
-                { icon: "🎯", text: "Visible Results Within Weeks" },
+                { icon: "🎯", text: "Delicious Results Quickly" },
             ],
         },
 
@@ -58,37 +58,37 @@ Whether you train at home, in a gym, or outdoors — ${COMPANY_NAME} builds your
                     image: "image1",
                     title: "1. Create Your Account",
                     description:
-                        "Sign up to access your personal dashboard and connect with a trainer who fits your goals.",
+                        "Sign up to access your dashboard and connect with a chef or AI meal planner.",
                 },
                 {
                     image: "image1",
-                    title: "2. Complete Your Fitness Profile",
+                    title: "2. Share Your Preferences",
                     description:
-                        "Share your lifestyle, equipment, and experience level. The more we know, the better your plan.",
+                        "Tell us about your dietary restrictions, taste preferences, and cooking goals.",
                 },
                 {
                     image: "image1",
-                    title: "3. Match With a Trainer",
+                    title: "3. Choose Your Plan",
                     description:
-                        "We pair you with a certified coach who specializes in your training style — from strength to rehabilitation.",
+                        "Select AI-generated recipes, a chef-prepared plan, or a combination of both.",
                 },
                 {
                     image: "image1",
-                    title: "4. Receive Your Plan",
+                    title: "4. Receive Your Meals",
                     description:
-                        "Your trainer builds a structured program with exercises, sets, and progressions tailored to your body.",
+                        "Chef-prepared meals arrive in 2–3 hours, or AI plans are ready instantly in your dashboard.",
                 },
                 {
                     image: "image1",
-                    title: "5. Add Nutrition (Optional)",
+                    title: "5. Add Nutrition Guidance",
                     description:
-                        "Combine training with a personalized meal plan designed by a professional nutritionist.",
+                        "Enhance your plan with nutritionist-approved meal suggestions if desired.",
                 },
                 {
                     image: "image1",
-                    title: "6. Track & Improve",
+                    title: "6. Track & Adjust",
                     description:
-                        "Use our AI tools to log workouts, analyze trends, and stay connected with your trainer for adjustments.",
+                        "Use AI tools to log your meals, analyze nutrition, and communicate with your chef for updates.",
                 },
             ],
         },
@@ -99,26 +99,26 @@ Whether you train at home, in a gym, or outdoors — ${COMPANY_NAME} builds your
             left: {
                 type: "custom",
                 component: "InfoBlock",
-                title: "Built Around You",
-                description: `${COMPANY_NAME} adapts to your pace, goals, and schedule.  
-No generic templates — every plan is handcrafted by a real trainer and evolves with smart AI insights.`,
+                title: "Built Around Your Taste",
+                description: `${COMPANY_NAME} adapts to your culinary preferences and schedule.  
+No generic meal plans — every menu is crafted by a chef or AI recommendations that evolve with your feedback.`,
                 bullets: [
-                    "Custom intensity, rest, and progression",
-                    "Instant chat with your trainer for feedback",
-                    "Automatic performance tracking",
+                    "Customized recipes for your goals",
+                    "Direct chat with your chef for suggestions",
+                    "Smart AI meal tracking and adjustments",
                 ],
                 image: "trainerSupport",
             },
             right: {
                 type: "custom",
                 component: "InfoBlock",
-                title: "Backed by Real Experts",
-                description: `All trainers on ${COMPANY_NAME} are certified and experienced in strength, mobility, and nutrition coaching.  
-Our internal review team ensures that every client receives expert-level attention and safe, effective plans.`,
+                title: "Backed by Culinary Experts",
+                description: `All chefs on ${COMPANY_NAME} are certified professionals with expertise in nutrition and culinary arts.  
+Our internal review ensures safe, delicious, and balanced meal plans.`,
                 bullets: [
-                    "Verified professional certifications (NASM, ACE, ISSA)",
-                    "Experience across fitness levels and goals",
-                    "Continuous education in modern training science",
+                    "Verified professional certifications",
+                    "Experience across dietary needs and cuisines",
+                    "Continuous updates on nutrition science",
                 ],
                 image: "expertTrainers",
             },
@@ -129,22 +129,22 @@ Our internal review team ensures that every client receives expert-level attenti
             type: "custom",
             component: "ValuesIcons",
             title: `Why ${COMPANY_NAME} Works`,
-            description: "A smarter system built on three simple principles.",
+            description: "A smarter cooking system built on three simple principles.",
             values: [
                 {
                     icon: "🧠",
-                    title: "Human + AI Synergy",
-                    text: "We blend the precision of analytics with the intuition of real trainers.",
+                    title: "Chef + AI Synergy",
+                    text: "We combine expert culinary knowledge with AI efficiency for the perfect plan.",
                 },
                 {
                     icon: "🤝",
-                    title: "Accountability & Motivation",
-                    text: "Stay on track with weekly feedback, progress calls, and real-time support.",
+                    title: "Accountability & Feedback",
+                    text: "Stay on track with chef guidance, weekly adjustments, and AI insights.",
                 },
                 {
                     icon: "📈",
-                    title: "Adaptive Progression",
-                    text: "Your plan evolves automatically as your body and performance improve.",
+                    title: "Adaptive Meal Plans",
+                    text: "Your menu evolves automatically based on your feedback and preferences.",
                 },
             ],
         },
@@ -153,9 +153,9 @@ Our internal review team ensures that every client receives expert-level attenti
         {
             type: "custom",
             component: "VideoDemo",
-            title: "See How Easy It Is to Start",
+            title: "See How Easy It Is to Get Started",
             description:
-                "Watch how clients connect with trainers, set up their goals, and start training — all within minutes.",
+                "Watch how users connect with chefs, set up their meal preferences, and start enjoying meals — all within minutes.",
             video: "fitPlannerDemo",
         },
 
@@ -165,9 +165,9 @@ Our internal review team ensures that every client receives expert-level attenti
             align: "center",
             left: {
                 type: "text",
-                title: "Begin Your Transformation Today",
-                description: `Create your free account, meet your trainer, and start your personalized plan within 24 hours.  
-Choose between AI guidance or full coaching — the path is yours.`,
+                title: "Start Your Culinary Journey Today",
+                description: `Create your free account, pick a chef or AI plan, and receive your first meal plan in just hours.  
+Flexible plans let you choose the level of personal guidance you want.`,
                 centerTitle: true,
                 centerDescription: true,
             },
@@ -178,24 +178,24 @@ Choose between AI guidance or full coaching — the path is yours.`,
             type: "faq",
             items: [
                 {
-                    question: "Do I need equipment to start?",
+                    question: "Do I need to cook anything myself?",
                     answer:
-                        "No. Your trainer will design the plan around your available equipment — from bodyweight to full gym setups.",
+                        "No. You can opt for AI meal suggestions, chef-prepared meals, or a mix of both according to your preference.",
                 },
                 {
-                    question: "Can I change my trainer later?",
+                    question: "Can I change my chef or AI plan later?",
                     answer:
-                        "Yes. You can switch trainers anytime based on preferences or new goals.",
+                        "Yes. Plans are flexible — switch chefs, AI guidance, or combine options anytime using your tokens.",
                 },
                 {
-                    question: "How fast will I get my plan?",
+                    question: "How fast will I receive my meal plan?",
                     answer:
-                        "Within 24 hours after completing your fitness profile, your trainer prepares your personalized program.",
+                        "Chef-prepared plans are delivered within 2–3 hours. AI-generated plans are ready instantly in your dashboard.",
                 },
                 {
-                    question: "What if I only want AI guidance?",
+                    question: "What if I only want AI meal planning?",
                     answer:
-                        "You can start with the AI plan and upgrade to a human coach whenever you’re ready for personalized attention.",
+                        "You can start with AI plans and upgrade to chef-prepared meals anytime for a fully personalized experience.",
                 },
             ],
         },

@@ -20,7 +20,7 @@ export const googleFonts: GoogleFont[] = [
     { name: "Open Sans", css: "'Open Sans', sans-serif", url: "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap" },
 ];
 
-export const currentFontIndex = 1;
+export const currentFontIndex = 4;
 export const currentFont = googleFonts[currentFontIndex];
 
 // Кольори для кнопок
@@ -50,19 +50,19 @@ export const buttonColors: Record<ButtonColor, string> = {
 
 // Header
 export const headerStyles = {
-    type: "sticky" as HeaderType,
+    type: "default" as HeaderType,
     sideBarDirection: "top" as SideBarDirection,
     linkColor: "var(--text-primary)",
     linkHoverColor: "var(--link-hover)",
-    scrollMode: "blur" as HeaderScrollMode,
+    scrollMode: "solid" as HeaderScrollMode,
     scrollBackground: "var(--quaternary-color)",
     scrollBlur: "50px",
 };
 
 // Drawer
 export const drawerConfig = {
-    anchor: "bottom" as SideBarDirection,
-    width: "100%",
+    anchor: "left" as SideBarDirection,
+    width: "50%",
     padding: "20px",
     logoWidth: 150,
     logoHeight: 50,
@@ -106,7 +106,7 @@ export const footerStyles = {
 
 // Hover effects
 export const hoverEffects: Record<HoverEffect, { transform: string; shadow: string }> = {
-    none: { transform: "none", shadow: "none" },
+    none: { transform: "shadow", shadow: "shadow" },
     shadow: { transform: "translateY(-6px)", shadow: "0 12px 28px rgba(0,0,0,0.18)" },
     lift: { transform: "translateY(-12px)", shadow: "0 16px 32px rgba(0,0,0,0.22)" },
     glow: { transform: "scale(1.03)", shadow: "0 0 25px rgba(74,144,226,0.7), 0 0 40px rgba(74,144,226,0.4)" },

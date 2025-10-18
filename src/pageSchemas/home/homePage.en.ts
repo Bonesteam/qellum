@@ -3,22 +3,23 @@ import {COMPANY_NAME} from "@/resources/constants";
 
 const schema: PageSchema = {
     meta: {
-        title: `${COMPANY_NAME} — Personalized Training with Real Coaches & Smart AI`,
-        description: `${COMPANY_NAME} connects you with certified trainers who design fully personalized fitness and nutrition programs — supported by AI for fast insights and progress tracking.`,
+        title: `${COMPANY_NAME} — Personalized Meal Plans with Real Chefs & Smart AI`,
+        description: `${COMPANY_NAME} connects you with professional chefs who create fully personalized meal courses — supported by AI for smart suggestions and nutrition tracking.`,
         keywords: [
-            "personal trainer",
-            "custom fitness plan",
+            "personal chef",
+            "custom meal plan",
             "nutrition coach",
-            "AI fitness assistant",
-            "workout plan",
-            "meal plan",
-            "body transformation",
-            "training with experts",
+            "AI meal planner",
+            "recipes",
+            "cooking plan",
+            "diet transformation",
+            "meal delivery",
+            "cooking with experts",
         ],
         canonical: "/",
         ogImage: {
             title: COMPANY_NAME,
-            description: `Get your personal trainer & AI-powered workout plan today.`,
+            description: `Get your personal chef & AI-powered meal plan today.`,
             bg: "#0a2540",
             color: "#ffffff",
         },
@@ -28,59 +29,56 @@ const schema: PageSchema = {
         {
             type: "custom",
             component: "HeroSection",
-            title: "Train Smarter with Expert Coaches",
-            highlight: "Personal Trainer + Smart AI Assistant",
-            description: `Achieve real results with programs tailored by certified trainers — supported by AI for smart adjustments and progress analysis.  
-Whether your goal is to lose weight, build muscle, or regain balance — your trainer designs a plan built entirely around you.`,
-            primaryCta: {text: "Start with My Trainer", link: "/get-started"},
+            title: "Cook Smarter with Expert Chefs",
+            highlight: "Personal Chef + Smart AI Assistant",
+            description: `Enjoy meals crafted just for you by certified chefs — or let AI instantly generate a complete meal plan.  
+Whether your goal is weight management, muscle gain, or balanced nutrition — your plan is tailored to you.`,
+            primaryCta: {text: "Start with My Chef", link: "/get-started"},
             image: "image1",
             align: "right",
         },
 
-        // 🟢 MOTIVATIONAL MARQUEE
         {
             type: "custom",
             component: "HighlightStrip",
             items: [
-                {icon: "🏋️‍♀️", text: "1-on-1 Personalized Training"},
-                {icon: "🥗", text: "Tailored Nutrition Plans"},
-                {icon: "📈", text: "AI-Assisted Progress Tracking"},
-                {icon: "💬", text: "Constant Coach Support"},
-                {icon: "🔥", text: "Visible Results in Weeks"},
+                {icon: "👩‍🍳", text: "Personalized Chef Meal Plans"},
+                {icon: "🤖", text: "AI-Generated Recipes"},
+                {icon: "📊", text: "Nutrition & Calorie Tracking"},
+                {icon: "💬", text: "Direct Chef Communication"},
+                {icon: "🔥", text: "Custom Courses Delivered in Hours"},
             ],
         },
 
-        // 🟢 WHY CHOOSE TRAINERS
         {
             type: "custom",
             component: "ValuesIcons",
-            title: "Why Work With Our Trainers?",
-            description: `${COMPANY_NAME} empowers your journey with human expertise — AI is here to assist, but real coaches guide you.`,
+            title: "Why Choose Qellum Chefs?",
+            description: `${COMPANY_NAME} ensures your journey is guided by culinary expertise — AI helps, but real chefs lead.`,
             values: [
                 {
-                    icon: "👨‍🏫",
-                    title: "Certified Professionals",
-                    text: "All our coaches are qualified and specialized in strength, mobility, and nutrition science.",
+                    icon: "👨‍🍳",
+                    title: "Certified Chefs",
+                    text: "All chefs are trained and experienced in personalized cooking and nutrition.",
                 },
                 {
                     icon: "🧠",
-                    title: "AI-Supported Insights",
-                    text: "Our system tracks your progress and recommends when to adjust load or rest days.",
+                    title: "AI Assistance",
+                    text: "Our AI helps track preferences, optimize nutrition, and suggest recipe adjustments.",
                 },
                 {
-                    icon: "💪",
-                    title: "Completely Personalized",
-                    text: "No templates. Every plan is made for your goals, injuries, and available equipment.",
+                    icon: "🍽️",
+                    title: "Fully Personalized",
+                    text: "Plans are created based on dietary needs, preferences, and goals.",
                 },
                 {
                     icon: "🤝",
-                    title: "Motivation & Accountability",
-                    text: "You’re never alone — your trainer checks in, adapts your plan, and keeps you on track.",
+                    title: "Support & Motivation",
+                    text: "Chefs provide guidance and feedback to keep your meal plan enjoyable and sustainable.",
                 },
             ],
         },
 
-        // 🟢 HOW IT WORKS
         {
             type: "custom",
             component: "Timeline",
@@ -88,54 +86,48 @@ Whether your goal is to lose weight, build muscle, or regain balance — your tr
             steps: [
                 {
                     title: "Create Your Account",
-                    description: "Register to access your dashboard and connect with a trainer.",
+                    description: "Sign up to access your dashboard and meal planning options.",
                 },
                 {
                     title: "Buy Tokens",
-                    description:
-                        "Use tokens to book a plan, nutrition add-on, or follow-up consultation.",
+                    description: "Use tokens to request chef courses, AI plans, or additional services.",
                 },
                 {
-                    title: "Fill Out Your Fitness Profile",
-                    description:
-                        "Share your goals, schedule, medical conditions, and preferences.",
+                    title: "Fill Out Your Preferences",
+                    description: "Provide dietary needs, allergies, goals, and cooking style preferences.",
                 },
                 {
-                    title: "Trainer Creates Your Plan",
-                    description:
-                        "Within 24h you receive a fully tailored workout designed by your coach.",
+                    title: "Chef Creates Your Meal Plan",
+                    description: "Within 2–3 hours, receive a fully tailored meal plan from your chef.",
                 },
                 {
                     title: "Add AI Assistant (Optional)",
-                    description:
-                        "AI helps track your performance and dynamically adjust sets, reps, and rest times.",
+                    description: "AI tracks nutrition, calorie intake, and suggests recipe adjustments.",
                 },
                 {
-                    title: "Get Optional Nutrition Plan",
-                    description:
-                        "Your coach can add a meal plan synced to your training goals and dietary style.",
+                    title: "Get Extra Options",
+                    description: "Add extra recipes, snacks, or special dishes using your tokens.",
                 },
             ],
         },
 
-        // 🟢 TRAINER STORY / COMPANY MISSION
         {
             type: "section",
-            title: "Our Mission — Human Expertise First",
-            description: `We believe real transformation starts with connection — between you and a coach who understands your body, mindset, and rhythm.`,
+            title: "Our Mission — Culinary Expertise First",
+            description: `We believe real transformation starts with human expertise — connecting you to chefs who understand your taste, goals, and nutrition needs.`,
             left: {
                 type: "custom",
                 component: "InfoBlock",
                 title: `How ${COMPANY_NAME} Started`,
                 image: "image2",
-                description: `${COMPANY_NAME} began as a small community of trainers passionate about science-based coaching.  
-We saw how many people were overwhelmed by misinformation, random online workouts, and diets that didn’t last.  
-So we built a platform where real coaches design programs with AI support — merging human experience and technology.`,
+                description: `${COMPANY_NAME} began as a small network of chefs passionate about healthy, personalized cooking.  
+We noticed people struggled with diets, inconsistent recipes, and generic meal plans.  
+So we built a platform where real chefs craft courses with AI support — combining experience and technology.`,
                 bullets: [
-                    "Over 150 certified trainers and nutritionists",
-                    "Science-based programs for all levels",
-                    "AI analytics for progress tracking",
-                    "Thousands of transformations achieved worldwide",
+                    "Over 100 certified chefs and nutritionists",
+                    "Science-based personalized recipes",
+                    "AI analytics for nutrition tracking",
+                    "Thousands of satisfied clients worldwide",
                 ],
             },
             right: {
@@ -143,24 +135,24 @@ So we built a platform where real coaches design programs with AI support — me
                 component: "StoryTimeline",
                 steps: [
                     {
-                        year: "2019",
-                        title: "Idea Born",
-                        description: "A group of trainers builds an online hub for clients."
-                    },
-                    {
                         year: "2020",
-                        title: "Trainer Network",
-                        description: "Certified coaches join from across the globe."
+                        title: "Idea Born",
+                        description: "Chefs wanted to offer personalized courses online."
                     },
                     {
-                        year: "2022",
+                        year: "2021",
+                        title: "Chef Network",
+                        description: "Certified chefs from multiple countries joined the platform."
+                    },
+                    {
+                        year: "2023",
                         title: "AI Integration",
-                        description: "Smart assistant introduced to help analyze results."
+                        description: "Smart AI assistant introduced to enhance planning."
                     },
                     {
-                        year: "2024",
-                        title: "Full Lifestyle Coaching",
-                        description: "Training, nutrition, mindset — all in one system."
+                        year: "2025",
+                        title: "Full Meal Coaching",
+                        description: "Chef guidance + AI nutrition analytics for complete support."
                     },
                 ],
             },
@@ -168,9 +160,9 @@ So we built a platform where real coaches design programs with AI support — me
 
         {
             type: "section",
-            title: "Meet Our Trainers",
+            title: "Meet Our Chefs",
             description:
-                "Our team combines science, motivation, and care. Every trainer is certified, verified, and passionate about your success.",
+                "Our chefs combine skill, nutrition knowledge, and passion. Every plan is handcrafted and verified.",
             left: {
                 type: "slider",
                 images: ["coach1", "coach2", "coach3", "coach4"],
@@ -180,37 +172,33 @@ So we built a platform where real coaches design programs with AI support — me
                 component: "InfoBlock",
                 title: "Only Certified Professionals",
                 description:
-                    "Each trainer is carefully selected for their experience, empathy, and results. You’ll be matched with the right expert based on your goals, lifestyle, and fitness level.",
+                    "All chefs are trained, certified, and experienced. You’ll be matched with the best expert for your dietary style.",
                 bullets: [
-                    "NASM, ACE, ISSA certified professionals",
-                    "Specializations: fat loss, muscle gain, rehabilitation, endurance",
-                    "Live feedback and plan adjustment",
+                    "Certified culinary and nutrition experts",
+                    "Specializations: weight loss, muscle gain, healthy cooking",
+                    
                 ],
             },
         },
 
-
-        // 🟢 NUTRITION INTEGRATION
         {
             type: "custom",
             component: "MissionBanner",
-            title: "Fuel Your Body the Right Way",
+            title: "Healthy Meals Made Easy",
             description:
-                "Pair your workout with a personalized meal plan designed by a certified nutritionist. Get daily recipes, calorie goals, and grocery lists tailored to your preferences.",
+                "Pair your preferences with a personalized plan from a chef or AI. Get recipes, shopping lists, and portion guides tailored to you.",
             image: "nutritionBanner",
         },
 
-        // 🟢 VIDEO DEMO
         {
             type: "custom",
             component: "VideoDemo",
-            title: "See How Coaching Works",
+            title: "See How Meal Planning Works",
             description:
-                "Watch how our trainers create personalized programs, monitor your form, and help you progress using AI insights.",
+                "Watch chefs create personalized courses, review nutritional data, and see AI suggestions in action.",
             video: "coachWork",
         },
 
-        // 🟢 PRICING PLANS
         {
             type: "grid",
             columns: 4,
@@ -224,11 +212,11 @@ So we built a platform where real coaches design programs with AI support — me
                     tokens: 900,
                     badgeTop: "AI-Generated Plan",
                     description:
-                        "Instant training program generated by AI based on your answers — great for self-starters.",
+                        "Instant meal plan generated by AI based on your preferences.",
                     features: [
-                        "Instant workout plan",
-                        "AI adjustments",
-                        "Basic progress tracking",
+                        "Instant course generation",
+                        "AI meal adjustments",
+                        "Basic tracking",
                     ],
                     buttonText: "Try AI Plan",
                     buttonLink: "/checkout?plan=ai",
@@ -236,35 +224,35 @@ So we built a platform where real coaches design programs with AI support — me
                 {
                     type: "pricing",
                     variant: "pro",
-                    title: "Trainer Plan",
+                    title: "Chef Plan",
                     price: "€59",
                     tokens: 5900,
                     badgeTop: "Most Popular",
                     description:
-                        "Work directly with a certified trainer. Get personalized plan, feedback, and continuous motivation.",
+                        "Work directly with a professional chef for a fully customized course.",
                     features: [
-                        "1-on-1 coaching by a professional",
-                        "Weekly check-ins and modifications",
-                        "Access to chat with your trainer",
-                        "Priority feedback within 24h",
+                        "1-on-1 chef guidance",
+                        "Meal plan review and adjustments",
+                        "Direct chat with chef",
+                        "Priority feedback",
                     ],
-                    buttonText: "Get Trainer Plan",
-                    buttonLink: "/checkout?plan=trainer",
+                    buttonText: "Get Chef Plan",
+                    buttonLink: "/checkout?plan=chef",
                 },
                 {
                     type: "pricing",
                     variant: "premium",
-                    title: "Full Coaching Pack",
+                    title: "Full Cooking Pack",
                     price: "€99",
                     tokens: 9900,
-                    badgeTop: "Complete Transformation",
+                    badgeTop: "Complete Meal Experience",
                     description:
-                        "Personal training + nutrition coaching + AI analytics for maximum results.",
+                        "Chef guidance + AI nutrition tracking + meal analytics for best results.",
                     features: [
-                        "Trainer-designed training plan",
+                        "Custom meal plan",
                         "Personalized nutrition plan",
-                        "24h delivery and feedback",
-                        "Smart progress tracking",
+                        "Fast feedback in 2–3 hours",
+                        "AI analytics for nutrition",
                         "Priority support",
                     ],
                     buttonText: "Choose Full Pack",
@@ -278,11 +266,11 @@ So we built a platform where real coaches design programs with AI support — me
                     tokens: 0,
                     badgeTop: "Flexible Option",
                     description:
-                        "Mix and match services — training, nutrition, or AI assistance as you prefer.",
+                        "Mix and match services — AI, chef, or nutrition as you prefer.",
                     features: [
-                        "Choose training or nutrition focus",
+                        "Choose AI or chef focus",
                         "Flexible token usage",
-                        "Pay only for what you need",
+                        "Pay for what you need",
                     ],
                     buttonText: "Customize Plan",
                     buttonLink: "/checkout?plan=custom",
@@ -290,126 +278,121 @@ So we built a platform where real coaches design programs with AI support — me
             ],
         },
 
-        // 🟢 COMMUNITY / TRACKER
         {
             type: "section",
             title: `Join the ${COMPANY_NAME} Community`,
             description:
-                "Share progress, ask questions, and celebrate achievements with thousands of members transforming together.",
+                "Share your cooking journey, get tips, and celebrate results with thousands of members.",
             left: {
                 type: "custom",
                 component: "InfoBlock",
-                title: "Progress Tracker & Social Support",
+                title: "Meal Tracker & Social Support",
                 image: "image3",
                 description:
-                    "Our built-in tracker monitors your workouts, nutrition, and progress photos. Stay motivated through daily challenges and trainer feedback.",
+                    "Track your courses, nutrition, and recipe progress. Stay motivated through feedback and community challenges.",
                 bullets: [
-                    "Visual progress tracking dashboard",
-                    "Monthly challenges with prizes",
-                    "Private support chat with your coach",
-                    "AI insights for recovery and sleep",
+                    "Visual dashboard for meals & calories",
+                    "Monthly cooking challenges",
+                    "Private chef chat",
+                    "AI suggestions for ingredients and portions",
                 ],
             },
             right: {
                 type: "card",
                 image: "image4",
-                title: "Track Every Rep & Meal",
+                title: "Track Every Recipe",
                 description:
-                    "Monitor progress with beautiful analytics — powered by AI, guided by your trainer.",
+                    "Monitor your meals and nutrition easily — powered by AI, guided by chefs.",
                 buttonText: "Start Tracking",
                 buttonLink: "/profile",
             },
         },
 
-        // 🟢 TESTIMONIALS
         {
             type: "custom",
             component: "TestimonialsSlider",
-            title: "Real People. Real Results.",
+            title: "Real Users. Real Results.",
             description:
-                "See how our members achieved their goals with dedicated trainers and science-based plans.",
+                "See how our members improved their nutrition and cooking with chefs and AI support.",
             testimonials: [
                 {
                     name: "Anna Rossi",
                     role: "Entrepreneur",
                     image: "review1",
-                    text: "My trainer helped me get back in shape after years of struggle. Weekly calls kept me motivated!",
+                    text: "My chef created a perfect plan in hours. AI tracking keeps me on target daily!",
                     rating: 5,
                 },
                 {
                     name: "Liam Carter",
                     role: "Student",
                     image: "review2",
-                    text: "AI plan was a great start, but adding a trainer made all the difference — real human feedback matters.",
+                    text: "AI plan was great, but having a chef review it made it perfect.",
                     rating: 5,
                 },
                 {
                     name: "Sophia Nguyen",
                     role: "Designer",
                     image: "review3",
-                    text: "The full pack with nutrition changed my habits completely — finally feel healthy and strong.",
+                    text: "Full cooking pack improved my habits completely — now I feel healthier.",
                     rating: 5,
                 },
                 {
                     name: "Mark Evans",
                     role: "Engineer",
                     image: "review4",
-                    text: "Best decision I made. My trainer adapted the plan to my injuries and I’ve gained strength safely.",
+                    text: "Chef adapted the plan to my dietary needs. I've never felt better.",
                     rating: 5,
                 },
             ],
         },
 
-        // 🟢 FAQ
         {
             type: "faq",
             image: "image5",
             items: [
                 {
-                    question: "Why choose a trainer instead of AI?",
+                    question: "Why choose a chef instead of AI?",
                     answer:
-                        "AI helps automate and analyze — but only a human coach can truly understand your needs, emotions, and physical limitations. Trainers adapt your plan in real time for maximum results.",
+                        "AI assists automatically, but a chef understands your preferences, allergies, and taste. They adapt courses in real time.",
                 },
                 {
-                    question: "Can I contact my trainer directly?",
+                    question: "Can I contact my chef directly?",
                     answer:
-                        "Yes! You’ll have a private chat with your trainer for feedback, form checks, and motivation.",
+                        "Yes! Chat directly with your chef for advice, recipe modifications, or guidance.",
                 },
                 {
                     question: "How often will my plan be updated?",
                     answer:
-                        "Your trainer reviews and adjusts your plan weekly or as needed depending on your progress.",
+                        "Your chef reviews your courses in 2–3 hours and updates plans as needed.",
                 },
                 {
-                    question: "Can I combine training and nutrition later?",
+                    question: "Can I combine AI and chef plans later?",
                     answer:
-                        "Absolutely. You can add a personalized meal plan anytime using your tokens.",
+                        "Absolutely. You can add AI or chef plans anytime using your tokens.",
                 },
                 {
                     question: "Are there beginner-friendly options?",
                     answer:
-                        "Yes, our coaches work with all levels — from absolute beginners to athletes returning from injury.",
+                        "Yes, we cater to all levels — from beginners to experienced cooks.",
                 },
             ],
         },
 
-        // 🟢 FINAL CTA
         {
             type: "custom",
             component: "MissionBanner",
-            title: "Your Transformation Starts Now",
+            title: "Start Your Culinary Journey Today",
             description:
-                `Join thousands transforming their bodies and mindset with ${COMPANY_NAME}. Choose your trainer, get your plan, and begin the journey today.`,
+                `Join thousands improving their meals and nutrition with ${COMPANY_NAME}. Choose your chef or AI plan and begin now.`,
             image: "ctaBanner",
         },
 
-        // 🟢 CONTACT
         {
             type: "custom",
             component: "ContactForm",
-            title: "Need Help Choosing a Trainer?",
+            title: "Need Help Choosing a Plan?",
             description:
-                "Our support team will help you find the best coach or explain how tokens and plans work.",
+                "Our support team can guide you to the best plan, explain tokens, or answer any questions.",
         },
     ],
 };

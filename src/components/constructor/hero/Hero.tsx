@@ -42,6 +42,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
     return (
         <section className={`${styles.hero} ${orientationClass}`}>
+            {/* Декоративні елементи */}
+            <div className={styles.hero__decoration}></div>
+            <div className={styles.hero__decoration}></div>
+            
             <div className={styles.hero__inner}>
                 <motion.div
                     className={styles.hero__content}

@@ -90,7 +90,7 @@ const schema: PageSchema = {
             left: {
                 type: "custom",
                 component: "InfoBlock",
-                image: "image1",
+                image: "coach2",
                 title: "Who Our Chefs Are",
                 description: `Chefs on ${COMPANY_NAME} pass verification checks for skill and client care. They design meal plans that are both tasty and practical.`,
                 bullets: [
@@ -102,7 +102,7 @@ const schema: PageSchema = {
             right: {
                 type: "custom",
                 component: "InfoBlock",
-                image: "image1",
+                image: "image11",
                 title: "Our Culinary Philosophy",
                 description: `We treat meal planning as a collaboration: chefs craft, AI recommends, and clients enjoy. The result is sustainable, flavorful, and personalized food.`,
                 bullets: [

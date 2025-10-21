@@ -51,9 +51,9 @@ export const footerContent = {
     },
 
     legal: {
-        companyName: "PREMIUM SERVICE PROVIDERS LTD",
+        companyName: "RISEWYNN LIMITED",
         companyNumber: "15799659",
-        address: "1 Brook St, Nottingham, United Kingdom, NG1 1AR",
+        address: "Academy House, 11 Dunraven Place, Bridgend, Mid Glamorgan, United Kingdom, CF31 1JF",
     },
     socials: [],
 };

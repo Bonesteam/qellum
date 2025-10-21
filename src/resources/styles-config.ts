@@ -50,11 +50,11 @@ export const buttonColors: Record<ButtonColor, string> = {
 
 // Header
 export const headerStyles = {
-    type: "default" as HeaderType,
-    sideBarDirection: "top" as SideBarDirection,
+    type: "sticky-rounded" as HeaderType,
+    sideBarDirection: "bottom" as SideBarDirection,
     linkColor: "var(--text-primary)",
     linkHoverColor: "var(--link-hover)",
-    scrollMode: "solid" as HeaderScrollMode,
+    scrollMode: "blur" as HeaderScrollMode,
     scrollBackground: "var(--quaternary-color)",
     scrollBlur: "50px",
 };

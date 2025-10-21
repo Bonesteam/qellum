@@ -59,6 +59,12 @@ export const AllOrdersProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
     useEffect(() => {
         fetchOrders();
+
+        // Set up interval to refresh orders every 30 seconds
+        const intervalId = setInterval(fetchOrders, 30000);
+
+        // Cleanup interval on unmount
+        return () => clearInterval(intervalId);
     }, []);
 
     return (

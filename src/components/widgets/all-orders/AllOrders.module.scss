@@ -31,19 +31,20 @@
 
 /* 🟢 Картка */
 .card {
-  background: linear-gradient(145deg, var(--surface-color), var(--surface-muted));
-  border: 1px solid var(--border-color);
+  /* Unified single-color card design */
+  background: var(--surface-muted);
+  border: 1px solid rgba(0,0,0,0.04);
   border-radius: 16px;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+  transition: all 0.28s ease;
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   }
 }
 
@@ -77,13 +78,14 @@
 }
 
 .manager {
-  background: rgba(255, 196, 0, 0.15);
-  color: #eab308;
+  /* Chef plans retain a subtle accent but cards themselves are unified */
+  background: rgba(0,0,0,0.04);
+  color: var(--text-secondary);
 }
 
 .instant {
-  background: rgba(34, 197, 94, 0.15);
-  color: #22c55e;
+  background: rgba(0,0,0,0.04);
+  color: var(--text-secondary);
 }
 
 /* 🟢 Тіло картки */

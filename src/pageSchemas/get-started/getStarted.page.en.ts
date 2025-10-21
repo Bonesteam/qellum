@@ -51,17 +51,17 @@ Whether you want daily AI-generated recipes or chef-prepared courses — ${COMPA
         // 🔹 HOW IT WORKS (Grid)
         {
             type: "grid",
-            columns: 3,
+            columns: 2,
             gap: "2rem",
             cards: [
                 {
-                    image: "image1",
+                    image: "team2",
                     title: "1. Create Your Account",
                     description:
                         "Sign up to access your dashboard and connect with a chef or AI meal planner.",
                 },
                 {
-                    image: "image1",
+                    image: "image10",
                     title: "2. Share Your Preferences",
                     description:
                         "Tell us about your dietary restrictions, taste preferences, and cooking goals.",
@@ -73,19 +73,19 @@ Whether you want daily AI-generated recipes or chef-prepared courses — ${COMPA
                         "Select AI-generated recipes, a chef-prepared plan, or a combination of both.",
                 },
                 {
-                    image: "image1",
+                    image: "coach3",
                     title: "4. Receive Your Meals",
                     description:
                         "Chef-prepared meals arrive in 2–3 hours, or AI plans are ready instantly in your dashboard.",
                 },
                 {
-                    image: "image1",
+                    image: "image8",
                     title: "5. Add Nutrition Guidance",
                     description:
                         "Enhance your plan with nutritionist-approved meal suggestions if desired.",
                 },
                 {
-                    image: "image1",
+                    image: "image6",
                     title: "6. Track & Adjust",
                     description:
                         "Use AI tools to log your meals, analyze nutrition, and communicate with your chef for updates.",

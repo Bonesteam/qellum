@@ -10,6 +10,7 @@ import ButtonUI from "@/components/ui/button/ButtonUI";
 import styles from "./ManualGenerator.module.scss";
 import { useAlert } from "@/context/AlertContext";
 import { useUser } from "@/context/UserContext";
+import { useAllOrders } from "@/context/AllOrdersContext";
 
 const PACKAGE_TIERS = [
     { id: "basic", label: "Basic", base: 20, description: "Simple 1-week plan, minimal details" },
@@ -85,6 +86,7 @@ export interface FormValues {
 const MealPlannerForm = () => {
     const { showAlert } = useAlert();
     const user = useUser();
+    const { refreshOrders } = useAllOrders();
     const [loading, setLoading] = useState(false);
 
     const initialValues: FormValues = {
@@ -163,6 +165,8 @@ const MealPlannerForm = () => {
                                 : "Your instant meal plan is ready in PDF format.",
                             "success"
                         );
+                        // Refresh orders list after successful creation
+                        await refreshOrders();
                     } else {
                         showAlert("Error", data.message || "Failed to create plan", "error");
                     }

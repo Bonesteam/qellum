@@ -31,6 +31,38 @@ const AllOrders: React.FC = () => {
 
     const formatId = (id: any) => id?.toString().slice(-6);
 
+    // Map raw category keys to site-themed, human-friendly labels
+    const categoryLabel = (key?: string) => {
+        if (!key) return "General";
+        const normalized = key.toLowerCase().trim();
+
+        const map: Record<string, string> = {
+            training: "Training",
+            weight_loss: "Weight loss",
+            weightloss: "Weight loss",
+            maintenance: "Maintenance",
+            muscle_gain: "Muscle gain",
+            bulking: "Muscle gain",
+            vegan: "Vegan",
+            vegetarian: "Vegetarian",
+            keto: "Keto",
+            paleo: "Paleo",
+            low_carb: "Low-carb",
+            lowcarb: "Low-carb",
+            diabetes: "Diabetes-friendly",
+            pregnancy: "Pregnancy",
+            family: "Family plan",
+            general: "General",
+        };
+
+        // replace underscores/dashes with spaces for lookup
+        const keyNormalized = normalized.replace(/[_-]/g, "_");
+
+        return map[keyNormalized] ??
+            // fallback: capitalise first letter
+            (normalized.charAt(0).toUpperCase() + normalized.slice(1));
+    };
+
     // CV orders are deprecated for the Meal Plans profile — only meal (universal) orders are shown here.
 
     const handleDownloadUniversal = async (order: UniversalOrderType) => {
@@ -123,8 +155,7 @@ const AllOrders: React.FC = () => {
                     </span>
                                     </div>
                                     <p className={styles.extraInfo}>
-                                        Category: <strong>{order.category}</strong> | Language:{" "}
-                                        {order.language || "English"}
+                                        Category: <strong>{categoryLabel(order.category)}</strong> | Language: {order.language || "English"}
                                     </p>
                                 </div>
                             </div>

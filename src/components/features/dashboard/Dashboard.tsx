@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import AllOrders from "@/components/widgets/all-orders/AllOrders";
 import TransactionHistory from "@/components/widgets/all-transactions/AllTransactions";
+import { FaListUl, FaExchangeAlt } from "react-icons/fa";
 import styles from "./Dashboard.module.scss";
 
 export default function Dashboard() {
@@ -18,7 +19,7 @@ export default function Dashboard() {
                     }`}
                     onClick={() => setActiveTab("orders")}
                 >
-                    Orders
+                    <FaListUl /> Orders
                 </button>
                 <button
                     className={`${styles.toggleButton} ${
@@ -26,7 +27,7 @@ export default function Dashboard() {
                     }`}
                     onClick={() => setActiveTab("transactions")}
                 >
-                    Transactions
+                    <FaExchangeAlt /> Transactions
                 </button>
             </div>
 

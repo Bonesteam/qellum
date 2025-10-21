@@ -15,7 +15,7 @@ const AuthButtons: React.FC = () => {
 
                 <Link href="/dashboard" className={styles.dashboardButton}>
                     <ButtonUI
-                        text="Start Training"
+                        text="Create Meal"
                         shape="default"
                         hoverColor="linkHover"
                         hoverEffect="scale"

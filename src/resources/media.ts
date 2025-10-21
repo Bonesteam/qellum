@@ -11,6 +11,7 @@ import image8 from "@/assets/images/image8.jpg";
 import image9 from "@/assets/images/image9.jpg";
 import image10 from "@/assets/images/image10.jpg";
 import image11 from "@/assets/images/image11.jpg";
+import image12 from "@/assets/images/image12.jpg";
 import review1 from "@/assets/images/review1.png";
 import review2 from "@/assets/images/review2.png";
 import review3 from "@/assets/images/review3.png";

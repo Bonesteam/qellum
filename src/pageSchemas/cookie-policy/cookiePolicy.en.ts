@@ -34,21 +34,30 @@ const cookiePolicyEn: PageSchema = {
             type: "text",
             title: "Cookies Policy",
             description: "Effective date: 10 September 2025",
+            centerTitle: true,
+            centerDescription: true,
         },
         {
             type: "text",
             title: "1. Overview",
-            description: `This Cookies Policy explains how ${COMPANY_NAME}, operated by ${COMPANY_LEGAL_NAME} (Company No. ${COMPANY_NUMBER}, registered office: ${COMPANY_ADDRESS}), uses cookies and similar technologies (localStorage, sessionStorage, pixels, and identifiers) across our platform, including AI-generated meal plans, personal chef services, and token management. This Policy complements our Privacy Policy. By continuing to use the platform or interacting with the cookie banner, you consent to or manage non-essential cookies as described below.`
+            description: `This Cookies Policy explains how ${COMPANY_NAME}, operated by ${COMPANY_LEGAL_NAME} (Company No. ${COMPANY_NUMBER}, registered office: ${COMPANY_ADDRESS}), uses cookies and similar technologies (localStorage, sessionStorage, pixels, and identifiers) across our platform, including AI-generated meal plans, personal chef services, and token management. This Policy complements our Privacy Policy. By continuing to use the platform or interacting with the cookie banner, you consent to or manage non-essential cookies as described below.`,
+            centerTitle: true,
+            centerDescription: true
         },
         {
             type: "text",
             title: "2. What Are Cookies?",
-            description: "Cookies are small text files or browser entries stored on your device. They help us manage login sessions, remember your meal preferences, track token usage, measure AI/chef service performance, and — with consent — enable analytics and marketing features."
+            description: "Cookies are small text files or browser entries stored on your device. They help us manage login sessions, remember your meal preferences, track token usage, measure AI/chef service performance, and — with consent — enable analytics and marketing features.",
+            centerTitle: true,
+            centerDescription: true
         },
         {
             type: "text",
             title: "3. Categories of Cookies We Use",
             description: "We use cookies for clearly defined purposes related to our cooking services:",
+            centerTitle: true,
+            centerDescription: true,
+            centerBullets: true,
             bullets: [
                 "Essential / Necessary — required for core platform features (login, security, token balance, dashboard). No consent needed.",
                 "Functional — store user settings like preferred language, meal preferences, or dashboard layout.",
@@ -61,6 +70,9 @@ const cookiePolicyEn: PageSchema = {
             type: "text",
             title: "4. Examples of Typical Cookies",
             description: "Cookie names, lifetime, and providers may vary. Current details are always available in your cookie settings panel. Examples:",
+            centerTitle: true,
+            centerDescription: true,
+            centerBullets: true,
             bullets: [
                 "session_id — Keeps you logged in and manages dashboard session • Essential • Lifetime: Session",
                 "csrf_token — Security for transactions and AI/chef requests • Essential • Lifetime: Session",
@@ -73,6 +85,8 @@ const cookiePolicyEn: PageSchema = {
         {
             type: "text",
             title: "5. Consent and Lawful Basis",
+            centerTitle: true,
+            centerBullets: true,
             bullets: [
                 "Essential cookies are required for the platform to function and are used without consent.",
                 "Non-essential cookies (functional, analytics, marketing) are activated only after you consent via the cookie banner or settings panel.",
@@ -82,16 +96,22 @@ const cookiePolicyEn: PageSchema = {
         {
             type: "text",
             title: "6. Recording and Retaining Consent",
-            description: "When you provide cookie consent, we log the banner version, timestamp, IP address, and browser/device details. Consent records are kept for at least 24 months, and up to 6 years if needed for disputes, accounting, or enterprise purposes."
+            description: "When you provide cookie consent, we log the banner version, timestamp, IP address, and browser/device details. Consent records are kept for at least 24 months, and up to 6 years if needed for disputes, accounting, or enterprise purposes.",
+            centerTitle: true,
+            centerDescription: true
         },
         {
             type: "text",
             title: "7. Third Parties and International Transfers",
-            description: `We work with third-party providers (payment processors, hosting/cloud platforms, analytics, marketing, customer support) that may place cookies. Some are outside the UK/EEA. In such cases, we rely on safeguards like UK adequacy regulations or Standard Contractual Clauses. Active providers are listed in your cookie settings panel.`
+            description: `We work with third-party providers (payment processors, hosting/cloud platforms, analytics, marketing, customer support) that may place cookies. Some are outside the UK/EEA. In such cases, we rely on safeguards like UK adequacy regulations or Standard Contractual Clauses. Active providers are listed in your cookie settings panel.`,
+            centerTitle: true,
+            centerDescription: true
         },
         {
             type: "text",
             title: "8. Managing or Withdrawing Consent",
+            centerTitle: true,
+            centerBullets: true,
             bullets: [
                 "Use the cookie banner or settings panel to accept, decline, or customize non-essential cookies.",
                 "You may withdraw or change consent at any time via the cookie settings link in the footer.",
@@ -102,11 +122,15 @@ const cookiePolicyEn: PageSchema = {
         {
             type: "text",
             title: "9. Updates to this Policy",
-            description: "We may update this Cookies Policy if new tools, services, or technologies are added. Significant changes will be communicated via website notice or email. The effective date will always be updated."
+            description: "We may update this Cookies Policy if new tools, services, or technologies are added. Significant changes will be communicated via website notice or email. The effective date will always be updated.",
+            centerTitle: true,
+            centerDescription: true
         },
         {
             type: "text",
             title: "10. Contact",
+            centerTitle: true,
+            centerBullets: true,
             bullets: [
                 `📧 ${COMPANY_EMAIL}`,
                 `🏢 ${COMPANY_LEGAL_NAME}`,

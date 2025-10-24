@@ -32,26 +32,25 @@ const privacyPolicySchema: PageSchema = {
         {
             type: "text",
             title: "Privacy Policy",
-            description: "Effective date: 10 September 2025"
+            description: "Effective date: 10 September 2025",
+            centerTitle: true,
+            centerDescription: true,
+            centerBullets: true
         },
         {
             type: "text",
             title: "1. Introduction",
-            description: `At ${COMPANY_NAME}, we value your trust and privacy. This Privacy Policy explains how we handle personal and dietary data when you use our cooking platform — including chef-created meal plans, AI-generated nutrition programs, and token-based services. ${COMPANY_NAME} is operated by ${COMPANY_LEGAL_NAME} (Company No. ${COMPANY_NUMBER}), registered at ${COMPANY_ADDRESS}.\n\nIf you have any questions or data requests, please contact us at: ${COMPANY_EMAIL}.`
+            description: `At ${COMPANY_NAME}, we value your trust and privacy. This Privacy Policy explains how we handle personal and dietary data when you use our cooking platform — including chef-created meal plans, AI-generated nutrition programs, and token-based services. ${COMPANY_NAME} is operated by ${COMPANY_LEGAL_NAME} (Company No. ${COMPANY_NUMBER}), registered at ${COMPANY_ADDRESS}.\n\nIf you have any questions or data requests, please contact us at: ${COMPANY_EMAIL}.`,
+            centerTitle: true,
+            centerDescription: true,
+            centerBullets: true
         },
         {
             type: "text",
             title: "2. What Personal Data We Collect",
-            description: "We only collect information necessary to deliver and improve our services:",
-            bullets: [
-                "Identity & contact details: name, email, phone number, and billing address.",
-                "Account data: login credentials, language preferences, currency settings (GBP/EUR).",
-                "Dietary & health data: allergies, ingredients, calorie targets, and food preferences.",
-                "Transaction & token data: top-ups, package purchases, and usage history.",
-                "Technical information: IP address, browser type, device ID, and activity logs.",
-                "Chef or AI interactions: messages, recipe feedback, uploaded photos, or plan notes.",
-                "Support communications: requests, attachments, and correspondence with our team."
-            ]
+            description: `We only collect information necessary to deliver and improve our services:\n\n• Identity & contact details: name, email, phone number, and billing address.\n• Account data: login credentials, language preferences, currency settings (GBP/EUR).\n• Dietary & health data: allergies, ingredients, calorie targets, and food preferences.\n• Transaction & token data: top-ups, package purchases, and usage history.\n• Technical information: IP address, browser type, device ID, and activity logs.\n• Chef or AI interactions: messages, recipe feedback, uploaded photos, or plan notes.\n• Support communications: requests, attachments, and correspondence with our team.`,
+            centerTitle: true,
+            centerDescription: true
         },
         {
             type: "text",
@@ -100,15 +99,9 @@ const privacyPolicySchema: PageSchema = {
         {
             type: "text",
             title: "7. Your Rights",
-            description: "Under UK GDPR and applicable data laws, you have the right to:",
-            bullets: [
-                "Access and obtain a copy of your personal data.",
-                "Request correction, deletion, or restriction of processing.",
-                "Withdraw consent at any time (for marketing or AI profiling).",
-                "Request portability of your data in a structured format.",
-                "Object to processing where based on legitimate interests."
-            ],
-            description2: `To exercise your rights, contact ${COMPANY_EMAIL}. Verification may be required. We respond within statutory timeframes.`
+            description: `Under UK GDPR and applicable data laws, you have the right to:\n\n• Access and obtain a copy of your personal data.\n• Request correction, deletion, or restriction of processing.\n• Withdraw consent at any time (for marketing or AI profiling).\n• Request portability of your data in a structured format.\n• Object to processing where based on legitimate interests.\n\nTo exercise your rights, contact ${COMPANY_EMAIL}. Verification may be required. We respond within statutory timeframes.`,
+            centerTitle: true,
+            centerDescription: true
         },
         {
             type: "text",

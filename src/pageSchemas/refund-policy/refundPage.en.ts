@@ -31,7 +31,9 @@ const refundPolicySchema: PageSchema = {
         {
             type: "text",
             title: "Refund & Cancellation Policy",
-            description: "Effective date: 10 September 2025"
+            description: "Effective date: 10 September 2025",
+            centerTitle: true,
+            centerDescription: true
         },
         {
             type: "text",

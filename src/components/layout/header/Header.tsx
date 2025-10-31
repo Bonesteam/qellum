@@ -10,7 +10,7 @@ import Image from "next/image";
 import AuthButtons from "@/components/widgets/auth-buttons/AuthButtons";
 import { headerStyles } from "@/resources/styles-config";
 import DrawerMenu from "@/components/ui/drawer/Drawer";
-import { useCurrency } from "@/context/CurrencyContext";
+import { useCurrency, Currency } from "@/context/CurrencyContext";
 import { motion } from "framer-motion";
 
 const Header: React.FC = () => {
@@ -77,14 +77,15 @@ const Header: React.FC = () => {
                     <div className={styles.actionsNav}>
                         <AuthButtons />
                         <div className={styles.currencySwitch}>
-                            <div
-                                className={`${styles.toggle} ${currency === "EUR" ? styles.active : ""}`}
-                                onClick={() => setCurrency(currency === "GBP" ? "EUR" : "GBP")}
+                            <select
+                                value={currency}
+                                onChange={(e) => setCurrency(e.target.value as Currency)}
+                                className={styles.currencySelect}
                             >
-                                <span className={styles.labelLeft}>GBP</span>
-                                <span className={styles.labelRight}>EUR</span>
-                                <div className={styles.thumb} />
-                            </div>
+                                <option value="GBP">£ GBP</option>
+                                <option value="EUR">€ EUR</option>
+                                <option value="USD">$ USD</option>
+                            </select>
                         </div>
                     </div>
 

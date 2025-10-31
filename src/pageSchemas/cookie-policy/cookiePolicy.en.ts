@@ -10,13 +10,12 @@ import {
 const cookiePolicyEn: PageSchema = {
     meta: {
         title: `Cookies Policy – ${COMPANY_NAME}`,
-        description: `Cookies Policy of ${COMPANY_NAME}: how we use cookies for AI chef, personal meal plans, token tracking, analytics, marketing, and user consent.`,
+        description: `Cookies Policy of ${COMPANY_NAME}: how we use cookies and similar technologies for AI chef, personal meal plans, token tracking, analytics, marketing, and user consent.`,
         keywords: [
             "cookies policy",
-            "cooking platform",
-            "tokens",
             "AI chef",
             "meal plan",
+            "tokens",
             "GDPR",
             "consent",
             "tracking",
@@ -33,111 +32,149 @@ const cookiePolicyEn: PageSchema = {
         {
             type: "text",
             title: "Cookies Policy",
-            description: "Effective date: 10 September 2025",
+            description: "Effective date: 17 October 2025",
             centerTitle: true,
             centerDescription: true,
         },
         {
             type: "text",
             title: "1. Overview",
-            description: `This Cookies Policy explains how ${COMPANY_NAME}, operated by ${COMPANY_LEGAL_NAME} (Company No. ${COMPANY_NUMBER}, registered office: ${COMPANY_ADDRESS}), uses cookies and similar technologies (localStorage, sessionStorage, pixels, and identifiers) across our platform, including AI-generated meal plans, personal chef services, and token management. This Policy complements our Privacy Policy. By continuing to use the platform or interacting with the cookie banner, you consent to or manage non-essential cookies as described below.`,
-            centerTitle: true,
-            centerDescription: true
-        },
-        {
-            type: "text",
-            title: "2. What Are Cookies?",
-            description: "Cookies are small text files or browser entries stored on your device. They help us manage login sessions, remember your meal preferences, track token usage, measure AI/chef service performance, and — with consent — enable analytics and marketing features.",
-            centerTitle: true,
-            centerDescription: true
-        },
-        {
-            type: "text",
-            title: "3. Categories of Cookies We Use",
-            description: "We use cookies for clearly defined purposes related to our cooking services:",
-            centerTitle: true,
-            centerDescription: true,
-            centerBullets: true,
             bullets: [
-                "Essential / Necessary — required for core platform features (login, security, token balance, dashboard). No consent needed.",
-                "Functional — store user settings like preferred language, meal preferences, or dashboard layout.",
-                "Performance / Analytics — measure usage of AI meal plans, chef requests, order history, and general platform performance. May rely on legitimate interests or consent.",
-                "Marketing / Advertising — with consent, track promotional campaigns, remarketing, and personalized offers for recipes, meal plans, or token packages.",
-                "Security / Anti-abuse — detect fraud, abuse, bots, or unauthorized token usage."
-            ]
+                `This Cookies Policy explains how ${COMPANY_NAME} (“we”, “us”, “our”), operated by ${COMPANY_LEGAL_NAME} (Company No. ${COMPANY_NUMBER}, ${COMPANY_ADDRESS}), uses cookies and similar technologies (including localStorage, sessionStorage, pixels, and SDKs) on qellum.co.uk and related services.`,
+                "It complements our Privacy Policy.",
+                "By interacting with our cookie banner or preferences center, you can manage consent to non-essential cookies as described below."
+            ],
+            centerTitle: true,
+            centerBullets: true,
         },
         {
             type: "text",
-            title: "4. Examples of Typical Cookies",
-            description: "Cookie names, lifetime, and providers may vary. Current details are always available in your cookie settings panel. Examples:",
-            centerTitle: true,
-            centerDescription: true,
-            centerBullets: true,
+            title: "Controller & Contact",
             bullets: [
-                "session_id — Keeps you logged in and manages dashboard session • Essential • Lifetime: Session",
-                "csrf_token — Security for transactions and AI/chef requests • Essential • Lifetime: Session",
-                "cookie_consent — Saves your cookie preferences • Functional • Lifetime: 6–12 months",
-                "ui_prefs — Saves language, dashboard layout, and meal plan filters • Functional • Lifetime: ~6 months",
-                "_ga, _gid — Analytics for platform usage and AI/chef performance • Performance/Analytics • Lifetime: 1–24 months",
-                "promo_tracking — Tracks token promotions and marketing campaigns • Marketing • Lifetime: 30–90 days"
-            ]
+                `Controller: ${COMPANY_LEGAL_NAME} (Company No. ${COMPANY_NUMBER}), ${COMPANY_ADDRESS}`,
+                `Email: ${COMPANY_EMAIL}`
+            ],
+            centerTitle: true,
+            centerBullets: true,
+        },
+        {
+            type: "text",
+            title: "2. What Are Cookies (and Similar Technologies)?",
+            bullets: [
+                "Cookies are small files placed on your device by a website.",
+                "They help the site to run essential functions (login, security), remember preferences, measure performance, and — where you consent — enable analytics and marketing.",
+                "Similar technologies include localStorage/sessionStorage keys, SDK identifiers, tracking pixels, and device/browser identifiers."
+            ],
+            centerTitle: true,
+            centerBullets: true,
+        },
+        {
+            type: "text",
+            title: "3. Categories We Use",
+            bullets: [
+                "Necessary / Essential — required for core functionality (authentication, security, session management, consent logging). No consent needed.",
+                "Functional — remember your choices (language, UI layout, generator inputs).",
+                "Performance / Analytics — measure usage, errors, and page speed to improve reliability; may rely on consent or legitimate interests.",
+                "Marketing / Advertising — set only with consent; for campaign attribution, remarketing, and effectiveness measurement.",
+                "Security / Anti-abuse — detect unusual activity, mitigate fraud and bot traffic."
+            ],
+            centerTitle: true,
+            centerBullets: true,
+        },
+        {
+            type: "text",
+            title: "4. Typical Cookies & Storage Keys (Examples)",
+            bullets: [
+                "session_id — Maintains authenticated session • Necessary • Lifetime: Session",
+                "csrf_token — CSRF protection • Necessary • Lifetime: Session",
+                "consent_state — Stores banner/settings choices • Necessary/Functional • Lifetime: 6–12 months",
+                "ui_prefs — Language, theme, layout • Functional • Lifetime: ~6 months",
+                "perf_metrics — Page performance & errors • Analytics • Lifetime: 1–3 months",
+                "campaign_src — UTM/campaign attribution • Marketing • Lifetime: 1–3 months",
+                "ql_token_hint (localStorage) — Remembers last token pack view • Functional • Until cleared",
+                "ql_generator_prefs (localStorage) — Saves generator form preferences • Functional • Until cleared"
+            ],
+            centerTitle: true,
+            centerBullets: true,
         },
         {
             type: "text",
             title: "5. Consent and Lawful Basis",
+            bullets: [
+                "Essential cookies are strictly necessary and do not require consent.",
+                "Non-essential cookies are set only after consent via the banner or preferences center, unless analytics rely on legitimate interests.",
+                "Lawful bases include performance of contract, consent, and legitimate interests (service improvement, fraud prevention)."
+            ],
             centerTitle: true,
             centerBullets: true,
-            bullets: [
-                "Essential cookies are required for the platform to function and are used without consent.",
-                "Non-essential cookies (functional, analytics, marketing) are activated only after you consent via the cookie banner or settings panel.",
-                "Legal bases include contract performance (delivery of services), consent, and legitimate interests (security, fraud prevention, service improvements)."
-            ]
         },
         {
             type: "text",
-            title: "6. Recording and Retaining Consent",
-            description: "When you provide cookie consent, we log the banner version, timestamp, IP address, and browser/device details. Consent records are kept for at least 24 months, and up to 6 years if needed for disputes, accounting, or enterprise purposes.",
+            title: "6. How We Record and Retain Consent",
+            bullets: [
+                "We record consent categories selected, policy/version reference, timestamp, IP, and user-agent.",
+                "Records are retained for at least 24 months, up to 6 years for disputes, accounting, or enterprise needs, in line with our Privacy Policy."
+            ],
             centerTitle: true,
-            centerDescription: true
+            centerBullets: true,
         },
         {
             type: "text",
             title: "7. Third Parties and International Transfers",
-            description: `We work with third-party providers (payment processors, hosting/cloud platforms, analytics, marketing, customer support) that may place cookies. Some are outside the UK/EEA. In such cases, we rely on safeguards like UK adequacy regulations or Standard Contractual Clauses. Active providers are listed in your cookie settings panel.`,
+            bullets: [
+                "We may use third-party providers (payment processors, analytics, hosting/CDN, email delivery, marketing) that set/read cookies.",
+                "Some are outside the UK/EEA.",
+                "We apply safeguards like UK adequacy regulations or Standard Contractual Clauses.",
+                "The full list is available in your cookie settings panel."
+            ],
             centerTitle: true,
-            centerDescription: true
+            centerBullets: true,
         },
         {
             type: "text",
             title: "8. Managing or Withdrawing Consent",
-            centerTitle: true,
-            centerBullets: true,
             bullets: [
                 "Use the cookie banner or settings panel to accept, decline, or customize non-essential cookies.",
-                "You may withdraw or change consent at any time via the cookie settings link in the footer.",
-                "Cookies can also be managed via your browser or private/incognito mode.",
-                "Disabling certain cookies may reduce functionality (automatic login, saved preferences, AI/chef tracking, or dashboard history)."
-            ]
-        },
-        {
-            type: "text",
-            title: "9. Updates to this Policy",
-            description: "We may update this Cookies Policy if new tools, services, or technologies are added. Significant changes will be communicated via website notice or email. The effective date will always be updated.",
-            centerTitle: true,
-            centerDescription: true
-        },
-        {
-            type: "text",
-            title: "10. Contact",
+                "Withdraw consent anytime via the Cookie Settings link.",
+                "Cookies can also be cleared via browser settings or private/incognito mode.",
+                "Disabling certain cookies may limit functionality (login, preferences, AI tracking, dashboard)."
+            ],
             centerTitle: true,
             centerBullets: true,
+        },
+        {
+            type: "text",
+            title: "9. Do Not Track / Global Privacy Controls",
+            bullets: [
+                "If your browser sends Global Privacy Control (GPC) or similar signals, we treat them as an opt-out from non-essential cookies where feasible and lawful."
+            ],
+            centerTitle: true,
+            centerBullets: true,
+        },
+        {
+            type: "text",
+            title: "10. Changes to this Policy",
+            bullets: [
+                "This Policy may be updated when new tools, services, or integrations are added.",
+                "Significant changes will be notified via website notice or email.",
+                "The effective date always reflects the latest version."
+            ],
+            centerTitle: true,
+            centerBullets: true,
+        },
+        {
+            type: "text",
+            title: "11. Contact",
             bullets: [
                 `📧 ${COMPANY_EMAIL}`,
                 `🏢 ${COMPANY_LEGAL_NAME}`,
                 COMPANY_ADDRESS ?? "Address not specified"
-            ]
+            ],
+            centerTitle: true,
+            centerBullets: true,
         }
     ]
 };
 
 export default cookiePolicyEn;
+

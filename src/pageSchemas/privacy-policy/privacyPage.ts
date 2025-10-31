@@ -40,22 +40,33 @@ const privacyPolicySchema: PageSchema = {
         {
             type: "text",
             title: "1. Introduction",
-            description: `At ${COMPANY_NAME}, we value your trust and privacy. This Privacy Policy explains how we handle personal and dietary data when you use our cooking platform — including chef-created meal plans, AI-generated nutrition programs, and token-based services. ${COMPANY_NAME} is operated by ${COMPANY_LEGAL_NAME} (Company No. ${COMPANY_NUMBER}), registered at ${COMPANY_ADDRESS}.\n\nIf you have any questions or data requests, please contact us at: ${COMPANY_EMAIL}.`,
+            bullets: [
+                `At ${COMPANY_NAME}, we value your trust and privacy.`,
+                `This Privacy Policy explains how we handle personal and dietary data when you use our cooking platform — including chef-created meal plans, AI-generated nutrition programs, and token-based services.`,
+                `${COMPANY_NAME} is operated by ${COMPANY_LEGAL_NAME} (Company No. ${COMPANY_NUMBER}), registered at ${COMPANY_ADDRESS}.`,
+                `For any questions or data requests, contact us at ${COMPANY_EMAIL}.`
+            ],
             centerTitle: true,
-            centerDescription: true,
             centerBullets: true
         },
         {
             type: "text",
             title: "2. What Personal Data We Collect",
-            description: `We only collect information necessary to deliver and improve our services:\n\n• Identity & contact details: name, email, phone number, and billing address.\n• Account data: login credentials, language preferences, currency settings (GBP/EUR).\n• Dietary & health data: allergies, ingredients, calorie targets, and food preferences.\n• Transaction & token data: top-ups, package purchases, and usage history.\n• Technical information: IP address, browser type, device ID, and activity logs.\n• Chef or AI interactions: messages, recipe feedback, uploaded photos, or plan notes.\n• Support communications: requests, attachments, and correspondence with our team.`,
+            bullets: [
+                "Identity & contact details: name, email, phone number, and billing address.",
+                "Account data: login credentials, language preferences, currency settings (GBP/EUR).",
+                "Dietary & health data: allergies, ingredients, calorie targets, and food preferences.",
+                "Transaction & token data: top-ups, package purchases, and usage history.",
+                "Technical information: IP address, browser type, device ID, and activity logs.",
+                "Chef or AI interactions: messages, recipe feedback, uploaded photos, or plan notes.",
+                "Support communications: requests, attachments, and correspondence with our team."
+            ],
             centerTitle: true,
-            centerDescription: true
+            centerBullets: true
         },
         {
             type: "text",
             title: "3. Why We Process Your Data and Legal Bases",
-            description: "We process your data to provide personalized and secure cooking experiences:",
             bullets: [
                 "Service delivery (contract performance): to generate meal plans, recipes, and dashboards.",
                 "Chef services: to match you with a chef, deliver personalized plans, and manage updates.",
@@ -63,12 +74,13 @@ const privacyPolicySchema: PageSchema = {
                 "Payment & token transactions (legal obligation / legitimate interests): to process orders and comply with financial laws.",
                 "Marketing (consent): newsletters or recipe tips, only if you opt-in.",
                 "Analytics & improvements (legitimate interests): to enhance platform performance and usability."
-            ]
+            ],
+            centerTitle: true,
+            centerBullets: true
         },
         {
             type: "text",
             title: "4. Sharing and International Transfers",
-            description: "We may share limited data with trusted third parties to operate the platform:",
             bullets: [
                 "Payment processors and banking providers.",
                 "Hosting and cloud storage services for account and recipe data.",
@@ -76,17 +88,24 @@ const privacyPolicySchema: PageSchema = {
                 "Professional advisers (legal, compliance, or finance).",
                 "Law enforcement or regulators, where legally required.",
                 "Some partners may be located outside the UK/EEA; we use UK adequacy decisions or SCCs to ensure protection equivalent to UK GDPR."
-            ]
+            ],
+            centerTitle: true,
+            centerBullets: true
         },
         {
             type: "text",
             title: "5. Cookies and Similar Technologies",
-            description: "Qellum uses cookies for functionality, analytics, and security. Essential cookies are required to log in and use the dashboard. You can manage non-essential cookies in your browser settings or via our Cookie Policy."
+            bullets: [
+                "Qellum uses cookies for functionality, analytics, and security.",
+                "Essential cookies are required to log in and use the dashboard.",
+                "You can manage non-essential cookies in your browser settings or via our Cookie Policy."
+            ],
+            centerTitle: true,
+            centerBullets: true
         },
         {
             type: "text",
             title: "6. Data Retention",
-            description: "We store your data only for as long as it is necessary for service delivery and compliance:",
             bullets: [
                 "Order & token history: up to 6 years (for accounting and dispute purposes).",
                 "Meal plans and recipes: stored during active use or until manually deleted.",
@@ -94,34 +113,65 @@ const privacyPolicySchema: PageSchema = {
                 "AI data & preferences: anonymized after 12 months of inactivity.",
                 "Marketing data: removed upon withdrawal of consent.",
                 "Once no longer needed, all data is securely erased or anonymized."
-            ]
+            ],
+            centerTitle: true,
+            centerBullets: true
         },
         {
             type: "text",
             title: "7. Your Rights",
-            description: `Under UK GDPR and applicable data laws, you have the right to:\n\n• Access and obtain a copy of your personal data.\n• Request correction, deletion, or restriction of processing.\n• Withdraw consent at any time (for marketing or AI profiling).\n• Request portability of your data in a structured format.\n• Object to processing where based on legitimate interests.\n\nTo exercise your rights, contact ${COMPANY_EMAIL}. Verification may be required. We respond within statutory timeframes.`,
+            bullets: [
+                "Access and obtain a copy of your personal data.",
+                "Request correction, deletion, or restriction of processing.",
+                "Withdraw consent at any time (for marketing or AI profiling).",
+                "Request portability of your data in a structured format.",
+                "Object to processing where based on legitimate interests.",
+                `To exercise your rights, contact ${COMPANY_EMAIL}. Verification may be required. We respond within statutory timeframes.`
+            ],
             centerTitle: true,
-            centerDescription: true
+            centerBullets: true
         },
         {
             type: "text",
             title: "8. Security Measures",
-            description: "We apply encryption, secure access control, monitoring, and staff training to protect your information. While no online system is completely secure, Qellum promptly investigates and reports any data breaches in line with legal obligations."
+            bullets: [
+                "We apply encryption, secure access control, monitoring, and staff training to protect your information.",
+                "While no online system is completely secure, Qellum promptly investigates and reports any data breaches in line with legal obligations."
+            ],
+            centerTitle: true,
+            centerBullets: true
         },
         {
             type: "text",
             title: "9. Automated Decision-Making and AI",
-            description: "Qellum uses limited AI automation to generate meal suggestions and optimize plans. These processes do not have legal or significant effects on you. You may request details or opt-out of AI personalization at any time."
+            bullets: [
+                "Qellum uses limited AI automation to generate meal suggestions and optimize plans.",
+                "These processes do not have legal or significant effects on you.",
+                "You may request details or opt-out of AI personalization at any time."
+            ],
+            centerTitle: true,
+            centerBullets: true
         },
         {
             type: "text",
             title: "10. Policy Updates",
-            description: "We may update this Privacy Policy periodically. Major changes will be communicated via email or in-app notifications. The effective date will always reflect the latest version."
+            bullets: [
+                "We may update this Privacy Policy periodically.",
+                "Major changes will be communicated via email or in-app notifications.",
+                "The effective date will always reflect the latest version."
+            ],
+            centerTitle: true,
+            centerBullets: true
         },
         {
             type: "text",
             title: "11. Contact & Complaints",
-            description: `For privacy-related questions or complaints, contact us at ${COMPANY_EMAIL}.\n\nIf you are unsatisfied with our response, you have the right to lodge a complaint with the UK Information Commissioner’s Office (ICO).`
+            bullets: [
+                `For privacy-related questions or complaints, contact us at ${COMPANY_EMAIL}.`,
+                "If you are unsatisfied with our response, you have the right to lodge a complaint with the UK Information Commissioner’s Office (ICO)."
+            ],
+            centerTitle: true,
+            centerBullets: true
         },
         {
             type: "text",
@@ -131,7 +181,9 @@ const privacyPolicySchema: PageSchema = {
                 `Company number: ${COMPANY_NUMBER}`,
                 `Registered office: ${COMPANY_ADDRESS}`,
                 `Email: ${COMPANY_EMAIL}`
-            ]
+            ],
+            centerTitle: true,
+            centerBullets: true
         }
     ]
 };

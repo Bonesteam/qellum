@@ -30,98 +30,125 @@ const refundPolicySchema: PageSchema = {
     blocks: [
         {
             type: "text",
-            title: "Refund & Cancellation Policy",
-            description: "Effective date: 10 September 2025",
+            title: "Refund / Return Policy",
+            description: "Effective date: 17 October 2025",
             centerTitle: true,
             centerDescription: true
         },
         {
             type: "text",
-            title: "1. Overview",
+            title: "1. Summary (customer-facing)",
             bullets: [
-                `Refunds and cancellations within ${COMPANY_NAME} follow this Policy and applicable UK consumer law.`,
-                "Refund requests are processed within 5–10 business days after approval; actual posting time depends on your bank or payment provider.",
-                "Refunds cannot exceed the original payment amount, minus any non-refundable processing fees.",
-                "Tokens already used for Services (AI plan generation, chef session, recipe unlock, or course delivery) are non-refundable.",
-                "Unused token packages can be refunded if not activated or used in any transaction.",
-                "Promotional or bonus tokens are not refundable unless required by law.",
-                `To request a refund, please contact us via email at ${COMPANY_EMAIL} with full order details.`,
-                "By requesting immediate access to Services (e.g., receiving a chef-created plan or AI menu), you acknowledge the waiver of your statutory cancellation right."
-            ]
+                "Refunds are assessed under this Policy and applicable consumer law.",
+                "Typical processing time: 5–10 business days after approval (payment-provider timelines may vary).",
+                "Refunds will not exceed the amount originally paid for the relevant Token top-up or transaction.",
+                "Spent (redeemed) Tokens are non-refundable, except as set out in §4.2.",
+                "Tokens are account-bound, non-transferable, and cannot be exchanged for real currency.",
+                "Promotional/bonus Tokens are non-refundable in all circumstances.",
+                `Submit requests to ${COMPANY_EMAIL} with your order reference and details.`,
+                "This Policy may be updated; material changes will be notified as described in §8.",
+                "If you consented to immediate supply and opened/downloaded the digital content, your statutory right to cancel may be lost (see §4.7).",
+                "Accepted currencies: GBP (£), EUR (€), USD ($). All conversions are calculated from GBP. Payment methods: Visa, Mastercard."
+            ],
+            centerTitle: true,
+            centerBullets: true
         },
         {
             type: "text",
-            title: "2. Scope and Legal Note",
-            description: `This Policy applies to all purchases of token packages, AI-based nutrition plans, personal chef courses, and related services provided by ${COMPANY_LEGAL_NAME}. It does not affect your statutory consumer rights under UK law (including the Consumer Rights Act 2015).`
+            title: "2. Scope and legal note",
+            description: `This Policy governs refunds for Tokens (internal credits) and digital Meal Plans/Services supplied by ${COMPANY_LEGAL_NAME} via qellum.co.uk. Nothing in this Policy overrides statutory consumer rights under UK law, including the Consumer Contracts Regulations 2013 and the Consumer Rights Act 2015.`,
+            centerTitle: true,
+            centerDescription: true
         },
         {
             type: "text",
             title: "3. Definitions",
             bullets: [
-                "Order — a confirmed purchase of tokens or service.",
-                "Token Package — prepaid balance used to unlock or purchase services within the platform.",
-                "Used Tokens — tokens spent on AI or chef-created plans, recipes, or digital content.",
-                "Unused Tokens — tokens that remain in your account and were not used for any service.",
-                "Promotional Credits — free or bonus tokens granted during offers or campaigns."
-            ]
+                "Tokens / Credits — internal prepaid credits used on the Service.",
+                "Unused Tokens — Tokens credited to your Account but not yet redeemed.",
+                "Redeemed / Spent Tokens — Tokens already used to access or generate a Meal Plan/Service.",
+                "Promotional / Bonus Tokens — Tokens issued as part of a promotion, bonus, or incentive and marked as such."
+            ],
+            centerTitle: true,
+            centerBullets: true
         },
         {
             type: "text",
-            title: "4. Refund Conditions",
-            description:
-                "4.1 Refund limit. Refunds will not exceed the amount paid, minus transaction fees, and are issued in the original payment currency (GBP or EUR).\n\n" +
-                "4.2 Used tokens. Once tokens are used for AI-generated or chef-prepared plans, they become non-refundable unless the service is proven defective or incomplete.\n\n" +
-                "4.3 Unused tokens. If no tokens were used, you may request a full refund within 14 days of purchase.\n\n" +
-                "4.4 Defective or failed service. If a meal plan or recipe delivery fails due to a technical issue, we will first attempt to correct it. If unresolved, a partial or full refund may be issued.\n\n" +
-                "4.5 Promotions. Promotional tokens and bonus credits cannot be exchanged or refunded.\n\n" +
-                "4.6 Custom chef services. Once a personal chef has begun preparing your plan or course, the refund option is no longer available unless agreed in writing.\n\n" +
-                "4.7 Immediate access. If you confirm immediate access to a plan or recipe, your cancellation rights under the cooling-off period may not apply."
-        },
-        {
-            type: "text",
-            title: "5. How to Request a Refund",
-            description: `To request a refund, email ${COMPANY_EMAIL} and include:`,
+            title: "4. Refund principles (binding rules)",
             bullets: [
-                "Your order or transaction ID.",
-                "Account email associated with the purchase.",
-                "Reason for the request (unused tokens, cancellation, defective service, etc.).",
-                "If related to AI/chef output — short description and evidence (screenshots, timestamps).",
-                "Preferred refund method (usually the same payment method).",
-                "You will receive acknowledgment within 5 business days. Investigation and processing typically take 5–10 business days."
-            ]
+                "4.1 Refund amount cap — Any refund will not exceed the original amount paid for the relevant Token top-up or transaction, net of any non-refundable processor fees.",
+                "4.2 No refund for spent Tokens (exceptions) — Redeemed Tokens are non-refundable, except where: (a) the Meal Plan or Service is defective or not as described; (b) Qellum fails to supply the Service as contracted; or (c) a refund is otherwise required by law.",
+                "4.3 Unused Tokens — Generally refundable at the original purchase price if requested before any redemption. Non-recoverable payment processing fees may be deducted.",
+                "4.4 Account-bound — Tokens are tied to your Account and cannot be transferred.",
+                "4.5 No cash-out — Tokens cannot be exchanged for cash or other currencies unless required by law.",
+                "4.6 Promotional Tokens — Bonus/promotional Tokens are non-refundable under all circumstances.",
+                "4.7 Immediate supply of digital content — If you consent to immediate delivery and then open/download the content (e.g., a generated PDF), your statutory right to cancel may not apply.",
+                "4.8 Bespoke/custom work — Custom Meal Plans are non-refundable once substantial preparation has begun, unless otherwise agreed in writing.",
+                "4.9 Standard plan & add-ons — A standard Meal Plan generation costs 60 Tokens. Optional add-ons carry separate Token prices shown before confirmation. Once redeemed, add-ons follow the same rules as above."
+            ],
+            centerTitle: true,
+            centerBullets: true
         },
         {
             type: "text",
-            title: "6. Verification & Processing",
-            description:
-                "6.1 We review your account activity, payment logs, and token usage records.\n\n" +
-                "6.2 If approved, refunds will be processed to the same payment method; if unavailable, alternative arrangements may be offered.\n\n" +
-                "6.3 If declined, we will explain the decision and available next steps."
-        },
-        {
-            type: "text",
-            title: "7. Chargebacks and Abuse",
-            description: "Chargebacks filed without first contacting support may delay or void refund eligibility. Fraudulent or repeated refund abuse can result in account suspension and loss of tokens. We provide full transaction evidence to payment providers in disputed cases."
-        },
-        {
-            type: "text",
-            title: "8. Policy Updates",
-            description: "This Policy may be amended periodically. Material updates will be announced via email or in your Qellum dashboard. Changes apply only to future purchases and do not affect completed transactions."
-        },
-        {
-            type: "text",
-            title: "9. Data & Record Retention",
-            description: "Order and payment data (including token usage history) is retained for up to 6 years for accounting and legal purposes, consistent with our Privacy Policy."
-        },
-        {
-            type: "text",
-            title: "10. Examples",
+            title: "5. How to request a refund (procedure)",
             bullets: [
-                "Example 1: You bought £10 (1000 tokens), used 100 → refund possible for 900 tokens.",
-                "Example 2: You requested an AI plan and received it → tokens used and non-refundable.",
-                "Example 3: Bonus tokens from a promo → non-refundable.",
-                "Example 4: Chef-created plan was delayed and not delivered → eligible for full or partial refund."
-            ]
+                "Order reference number",
+                "Account email used for purchase",
+                "Whether the request concerns Unused Tokens or a Redeemed item",
+                "For redeemed items: description of the issue and supporting evidence (screenshots, file details, error messages)",
+                "Preferred refund method (original payment method is standard)",
+                "Acknowledgment within 5 business days, investigation, and refund processing typically 5–10 business days"
+            ],
+            centerTitle: true,
+            centerBullets: true
+        },
+        {
+            type: "text",
+            title: "6. Investigation, evidence and decisions",
+            bullets: [
+                "We may review token transaction logs, checkout confirmations, delivery logs, and customer evidence for claims involving redeemed content.",
+                "Refunds are normally processed to the original payment method. If not possible, a reasonable alternative may be offered.",
+                "If a claim is rejected, reasons will be provided along with options to escalate or pursue legal remedies."
+            ],
+            centerTitle: true,
+            centerBullets: true
+        },
+        {
+            type: "text",
+            title: "7. Chargebacks, fraud and abuse",
+            description: "If a chargeback is initiated while a refund request is pending, it is treated as a dispute. Refunds may be refused and accounts suspended/closed in cases of suspected fraud or abuse.",
+            centerTitle: true,
+            centerDescription: true
+        },
+        {
+            type: "text",
+            title: "8. Changes to this Policy",
+            description: "We may update this Policy at any time. Material changes will be notified to registered users by email and/or prominent in-product notice. Changes apply prospectively and do not affect previously completed transactions, unless the law requires otherwise.",
+            centerTitle: true,
+            centerDescription: true
+        },
+        {
+            type: "text",
+            title: "9. Record keeping and retention",
+            description: "Records relevant to refund requests and disputes are retained for at least 24 months, and up to 6 years for enterprise or disputed transactions, consistent with our Privacy Policy and applicable law.",
+            centerTitle: true,
+            centerDescription: true
+        },
+        {
+            type: "text",
+            title: "10. Examples (practical, illustrative)",
+            bullets: [
+                "Unused Tokens (GBP): Purchase 2,000 Tokens; spend 300; unused 1,700 → refund equals pro-rata original GBP amount.",
+                "Unused Tokens (EUR): Same as above, refunded in EUR at original purchase price.",
+                "Unused Tokens (USD): Same as above, refunded in USD at original purchase price.",
+                "Opened Meal Plan: Refunds apply only if defective or not as described (§4.2).",
+                "Promotional Tokens: 100 bonus Tokens awarded in a promotion → non-refundable.",
+                "Add-ons: Base 60 Tokens + add-on Tokens; once redeemed, non-refundable except under §4.2 or law.",
+                "Technical failure: Generation error with no usable delivery → Tokens restored or refunded."
+            ],
+            centerTitle: true,
+            centerBullets: true
         },
         {
             type: "text",
@@ -130,9 +157,12 @@ const refundPolicySchema: PageSchema = {
                 `📧 ${COMPANY_EMAIL}`,
                 `🏢 ${COMPANY_LEGAL_NAME}`,
                 COMPANY_ADDRESS ?? "Address not specified"
-            ]
+            ],
+            centerTitle: true,
+            centerBullets: true
         }
     ]
 };
 
 export default refundPolicySchema;
+

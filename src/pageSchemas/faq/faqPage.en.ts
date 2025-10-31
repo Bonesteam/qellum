@@ -53,7 +53,7 @@ const faqSchema: PageSchema = {
             },
             {
                 question: "Which currencies are supported?",
-                answer: "Our main currency is GBP, but we also support EUR. All conversions are calculated from GBP, so you always know the exact value of your tokens.",
+                answer: "Our main currency is GBP, but we also support EUR and USD. All conversions are calculated from GBP, so you always know the exact value of your tokens.",
             },
             {
                 question: "What can I spend my tokens on?",

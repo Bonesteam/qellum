@@ -119,86 +119,39 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 1rem;
 
-  .toggle {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 110px;
+  .currencySelect {
     height: 42px;
+    padding: 0 12px;
     border-radius: 12px;
     background: #f8f9fa;
-    cursor: pointer;
-    padding: 4px;
     border: 2px solid #e9ecef;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    cursor: pointer;
     transition: all 0.3s ease;
+    min-width: 120px;
 
     &:hover {
       border-color: var(--primary-color);
       background: #fff;
       transform: translateY(-1px);
     }
-  }
 
-  .labelLeft,
-  .labelRight {
-    flex: 1;
-    text-align: center;
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: #adb5bd;
-    z-index: 2;
-    user-select: none;
-    transition: all 0.3s ease;
-    padding: 6px 8px;
-    border-radius: 8px;
-    
-    &:hover {
-      color: var(--primary-color);
-    }
-  }
-
-  .thumb {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 50px;
-    height: 30px;
-    border-radius: 8px;
-    background: var(--primary-color);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .active {
-    .thumb {
-      left: calc(100% - 54px);
-      background: var(--primary-color);
+    &:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
     }
 
-    .labelLeft {
-      color: #adb5bd;
-    }
-
-    .labelRight {
-      color: #fff;
-    }
-  }
-
-  &:not(.active) {
-    .labelLeft {
-      color: #fff;
-    }
-
-    .labelRight {
-      color: #adb5bd;
+    option {
+      padding: 8px;
+      font-weight: 500;
     }
   }
 }
-
-
-
 
 
 .menuButton {

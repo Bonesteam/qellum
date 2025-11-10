@@ -12,150 +12,165 @@ import { useCurrency } from "@/context/CurrencyContext";
 const TOKENS_PER_GBP = 100;
 
 interface PricingCardProps {
-    variant?: "starter" | "pro" | "premium" | "custom";
-    title: string;
-    price: string;
-    tokens: number;
-    description: string;
-    features: string[];
-    buttonText: string;
-    buttonLink?: string;
-    badgeTop?: string;
-    badgeBottom?: string;
-    index?: number;
+  variant?: "starter" | "pro" | "premium" | "custom";
+  title: string;
+  price: string;
+  tokens: number;
+  description: string;
+  features: string[];
+  buttonText: string;
+  buttonLink?: string;
+  badgeTop?: string;
+  badgeBottom?: string;
+  index?: number;
 }
 
 const PricingCard: React.FC<PricingCardProps> = ({
-                                                     variant = "starter",
-                                                     title,
-                                                     price,
-                                                     tokens,
-                                                     description,
-                                                     features,
-                                                     buttonText,
-                                                     badgeTop,
-                                                     badgeBottom,
-                                                     index = 0,
-                                                 }) => {
-    const { showAlert } = useAlert();
-    const user = useUser();
-    const { currency, sign, convertFromGBP, convertToGBP } = useCurrency();
+  variant = "starter",
+  title,
+  price,
+  tokens,
+  description,
+  features,
+  buttonText,
+  buttonLink,
+  badgeTop,
+  badgeBottom,
+  index = 0,
+}) => {
+  const { showAlert } = useAlert();
+  const user = useUser();
+  const { currency, setCurrency, sign, convertFromGBP, convertToGBP } = useCurrency();
+  // allow user to enter desired tokens for custom top-up
+  const [customTokens, setCustomTokens] = useState<number>(100);
 
-    // 🔹 Початкове значення — 0.01
-    const [customAmount, setCustomAmount] = useState<number>(0.01);
-    const isCustom = price === "dynamic";
+  const isCustom = price === "dynamic";
+  const basePriceGBP = useMemo(
+    () => (isCustom ? 0 : parseFloat(price.replace(/[^0-9.]/g, ""))),
+    [price, isCustom]
+  );
+  const convertedPrice = useMemo(
+    () => (isCustom ? 0 : convertFromGBP(basePriceGBP)),
+    [basePriceGBP, convertFromGBP, isCustom]
+  );
 
-    const basePriceGBP = useMemo(
-        () => (isCustom ? 0 : parseFloat(price.replace(/[^0-9.]/g, ""))),
-        [price, isCustom]
-    );
+  const handleBuy = async () => {
+    if (!user) {
+      showAlert("Please sign up", "You need to be signed in to purchase", "info");
+      setTimeout(() => (window.location.href = "/sign-up"), 1200);
+      return;
+    }
 
-    const convertedPrice = useMemo(
-        () => (isCustom ? 0 : convertFromGBP(basePriceGBP)),
-        [basePriceGBP, convertFromGBP, isCustom]
-    );
+    try {
+      // Prepare checkout payload and redirect to /checkout where payment flow runs
+      let checkoutData: any = {};
 
-    const handleBuy = async () => {
-        if (!user) {
-            showAlert("Please sign up", "You need to be signed in to purchase", "info");
-            setTimeout(() => (window.location.href = "/sign-up"), 1200);
-            return;
-        }
+      if (isCustom) {
+        // User specified tokens to buy
+        const tokensToBuy = Math.max(1, Math.floor(customTokens));
+        const gbpEquivalent = tokensToBuy / TOKENS_PER_GBP; // tokens -> GBP
+        const amountInCurrency = convertFromGBP(gbpEquivalent);
 
-        try {
-            let body: any;
-            if (isCustom) {
-                const gbpEquivalent = convertToGBP(customAmount);
-                if (gbpEquivalent < 0.01) {
-                    showAlert("Minimum is 0.01", "Enter at least 0.01 GBP equivalent", "warning");
-                    return;
-                }
-                body = { currency, amount: customAmount };
-            } else {
-                body = { amount: tokens };
-            }
+        checkoutData = {
+          amount: Number(amountInCurrency.toFixed(2)),
+          currency,
+          tokens: tokensToBuy,
+          description: `${tokensToBuy} tokens (custom top-up)`,
+          email: user?.email ?? "",
+          planId: undefined,
+        };
+      } else {
+        // Standard plan — tokens are provided by the plan
+        const amountInCurrency = convertedPrice; // already converted from GBP
 
-            const res = await fetch("/api/user/buy-tokens", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
-                body: JSON.stringify(body),
-            });
+        checkoutData = {
+          amount: Number(amountInCurrency.toFixed(2)),
+          currency,
+          tokens: tokens,
+          description: title,
+          email: user?.email ?? "",
+          planId: buttonLink ?? undefined,
+        };
+      }
 
-            if (!res.ok) throw new Error(await res.text());
-            const data = await res.json();
+      // Store to localStorage and navigate to checkout page
+      try {
+        localStorage.setItem("checkoutData", JSON.stringify(checkoutData));
+      } catch (e) {
+        console.warn("Unable to persist checkoutData to localStorage", e);
+      }
 
-            showAlert(
-                "Success!",
-                isCustom
-                    ? `You paid ${sign}${customAmount.toFixed(2)} ${currency} (≈ ${Math.floor(
-                        convertToGBP(customAmount) * TOKENS_PER_GBP
-                    )} tokens)`
-                    : `You purchased ${tokens} tokens.`,
-                "success"
-            );
-            console.log("Updated user:", data.user);
-        } catch (err: any) {
-            showAlert("Error", err.message || "Something went wrong", "error");
-        }
-    };
+      // Redirect to checkout
+      window.location.href = "/checkout";
+    } catch (err: any) {
+      showAlert("Error", err.message || "Something went wrong", "error");
+    }
+  };
 
-    return (
-        <motion.div
-            className={`${styles.card} ${styles[variant]}`}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.15 }}
-        >
-            {badgeTop && <span className={styles.badgeTop}>{badgeTop}</span>}
-            <h3 className={styles.title}>{title}</h3>
+  return (
+    <motion.div
+      className={`${styles.card} ${styles[variant]}`}
+      initial={{ opacity: 0, y: 30, scale: 0.97 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true }}
+      whileHover={{ scale: 1.015, y: -3 }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: index * 0.08 }}
+    >
+      {badgeTop && <span className={styles.badgeTop}>{badgeTop}</span>}
 
-            {isCustom ? (
-                <>
-                    <div className={styles.inputWrapper}>
-                        <Input
-                            type="number"
-                            value={customAmount}
-                            min={0.01}
-                            step={0.01}
-                            onChange={(e) =>
-                                setCustomAmount(
-                                    e.target.value === "" ? 0.01 : Math.max(0.01, Number(e.target.value))
-                                )
-                            }
-                            placeholder="Enter amount"
-                            size="md"
-                            startDecorator={sign}
-                        />
-                    </div>
-                    <p className={styles.dynamicPrice}>
-                        {sign}
-                        {customAmount.toFixed(2)} ≈{" "}
-                        {Math.floor(convertToGBP(customAmount) * TOKENS_PER_GBP)} tokens
-                    </p>
-                </>
-            ) : (
-                <p className={styles.price}>
-                    {sign}
-                    {convertedPrice.toFixed(2)}{" "}
-                    <span className={styles.tokens}>/ {tokens} tokens</span>
-                </p>
-            )}
+      <h3 className={styles.title}>{title}</h3>
 
-            <p className={styles.description}>{description}</p>
-            <ul className={styles.features}>
-                {features.map((f, i) => (
-                    <li key={i}>{f}</li>
-                ))}
-            </ul>
+      {isCustom ? (
+        <>
+          <div className={styles.customInput}>
+            <Input
+              type="number"
+              value={customTokens}
+              onChange={(e) => setCustomTokens(Number(e.target.value))}
+              slotProps={{ input: { min: 1, step: 1 } }}
+              placeholder="Enter tokens"
+              size="md"
+            />
+            
+          </div>
+          <p className={styles.dynamicPrice}>
+            {sign}
+            {(() => {
+              const gbp = customTokens / TOKENS_PER_GBP;
+              return convertFromGBP(gbp).toFixed(2);
+            })()} ≈ {Math.floor(customTokens)} tokens
+          </p>
+        </>
+      ) : (
+        <p className={styles.price}>
+          {sign}
+          {convertedPrice.toFixed(2)}{" "}
+          <span className={styles.tokens}>/ {tokens} tokens</span>
+        </p>
+      )}
 
-            <ButtonUI fullWidth onClick={handleBuy}>
-                {user ? buttonText : "Sign Up to Buy"}
-            </ButtonUI>
-            {badgeBottom && <span className={styles.badgeBottom}>{badgeBottom}</span>}
-        </motion.div>
-    );
+      <p className={styles.description}>{description}</p>
+
+      <ul className={styles.features}>
+        {features.map((f, i) => (
+          <motion.li
+            key={i}
+            initial={{ opacity: 0, x: -8 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.25, delay: i * 0.04 }}
+          >
+            {f}
+          </motion.li>
+        ))}
+      </ul>
+
+      <ButtonUI fullWidth onClick={handleBuy}>
+        {user ? buttonText : "Sign Up to Buy"}
+      </ButtonUI>
+
+      {badgeBottom && <span className={styles.badgeBottom}>{badgeBottom}</span>}
+    </motion.div>
+  );
 };
 
 export default PricingCard;

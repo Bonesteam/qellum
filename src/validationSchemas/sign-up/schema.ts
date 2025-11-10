@@ -1,12 +1,13 @@
 import {AlertColor} from "@mui/material/Alert";
 
-export const signUpInitialValues = { name: "", email: "", password: "" };
+export const signUpInitialValues = { name: "", email: "", password: "", acceptedTerms: false };
 
 export const signUpValidation = (values: typeof signUpInitialValues) => {
-    const errors: Partial<typeof signUpInitialValues> = {};
+    const errors: Partial<Record<string, string>> = {};
     if (!values.name) errors.name = "Required";
     if (!values.email) errors.email = "Required";
     if (!values.password) errors.password = "Required";
+    if (!values.acceptedTerms) errors.acceptedTerms = "Please accept Terms & Conditions";
     return errors;
 };
 

@@ -109,97 +109,95 @@ export default function CheckoutPage() {
   };
 
   const form = (
-    <div>
-      <h2 className="text-xl font-semibold mb-4 text-slate-800">Payment Details</h2>
+  <div>
+    <Formik
+      initialValues={{
+        cardNumber: "",
+        expiry: "",
+        cvv: "",
+        name: "",
+        address: "",
+        city: "",
+        postalCode: "",
+      }}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ values, setFieldValue, isSubmitting }) => (
+        <Form className="space-y-4">
+          <div>
+            <Field
+              name="cardNumber"
+              placeholder="Card number"
+              value={values.cardNumber}
+              onChange={(e: any) =>
+                setFieldValue("cardNumber", handleCardNumberFormat(e.target.value))
+              }
+              className="border border-slate-300 p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500"
+            />
+            <ErrorMessage name="cardNumber" component="div" className="text-red-500 text-xs mt-1" />
+          </div>
 
-      <Formik
-        initialValues={{
-          cardNumber: "",
-          expiry: "",
-          cvv: "",
-          name: "",
-          address: "",
-          city: "",
-          postalCode: "",
-        }}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ values, setFieldValue, isSubmitting }) => (
-          <Form className="space-y-4">
-            <div>
+          <div className="flex gap-3">
+            <div className="w-1/2">
               <Field
-                name="cardNumber"
-                placeholder="Card number"
-                value={values.cardNumber}
-                onChange={(e: any) =>
-                  setFieldValue("cardNumber", handleCardNumberFormat(e.target.value))
-                }
+                name="expiry"
+                placeholder="MM/YY"
+                value={values.expiry}
+                onChange={(e: any) => setFieldValue("expiry", handleExpiryFormat(e.target.value))}
                 className="border border-slate-300 p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500"
               />
-              <ErrorMessage name="cardNumber" component="div" className="text-red-500 text-xs mt-1" />
+              <ErrorMessage name="expiry" component="div" className="text-red-500 text-xs mt-1" />
             </div>
-
-            <div className="flex gap-3">
-              <div className="w-1/2">
-                <Field
-                  name="expiry"
-                  placeholder="MM/YY"
-                  value={values.expiry}
-                  onChange={(e: any) => setFieldValue("expiry", handleExpiryFormat(e.target.value))}
-                  className="border border-slate-300 p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500"
-                />
-                <ErrorMessage name="expiry" component="div" className="text-red-500 text-xs mt-1" />
-              </div>
-              <div className="w-1/2">
-                <Field
-                  name="cvv"
-                  placeholder="CVV"
-                  value={values.cvv}
-                  onChange={(e: any) => setFieldValue("cvv", e.target.value.replace(/\D/g, "").slice(0, 3))}
-                  className="border border-slate-300 p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500"
-                />
-                <ErrorMessage name="cvv" component="div" className="text-red-500 text-xs mt-1" />
-              </div>
+            <div className="w-1/2">
+              <Field
+                name="cvv"
+                placeholder="CVV"
+                value={values.cvv}
+                onChange={(e: any) => setFieldValue("cvv", e.target.value.replace(/\D/g, "").slice(0, 3))}
+                className="border border-slate-300 p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500"
+              />
+              <ErrorMessage name="cvv" component="div" className="text-red-500 text-xs mt-1" />
             </div>
+          </div>
 
-            <Field name="name" placeholder="Cardholder name" className="border border-slate-300 p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500" />
-            <ErrorMessage name="name" component="div" className="text-red-500 text-xs mt-1" />
+          <Field name="name" placeholder="Cardholder name" className="border border-slate-300 p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500" />
+          <ErrorMessage name="name" component="div" className="text-red-500 text-xs mt-1" />
 
-            <Field name="address" placeholder="Billing address" className="border border-slate-300 p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500" />
-            <ErrorMessage name="address" component="div" className="text-red-500 text-xs mt-1" />
+          <Field name="address" placeholder="Billing address" className="border border-slate-300 p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500" />
+          <ErrorMessage name="address" component="div" className="text-red-500 text-xs mt-1" />
 
-            <div className="flex gap-3">
-              <div className="w-2/3">
-                <Field name="city" placeholder="City" className="border border-slate-300 p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500" />
-                <ErrorMessage name="city" component="div" className="text-red-500 text-xs mt-1" />
-              </div>
-              <div className="w-1/3">
-                <Field name="postalCode" placeholder="Postal code" className="border border-slate-300 p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500" />
-                <ErrorMessage name="postalCode" component="div" className="text-red-500 text-xs mt-1" />
-              </div>
+          <div className="flex gap-3">
+            <div className="w-2/3">
+              <Field name="city" placeholder="City" className="border border-slate-300 p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500" />
+              <ErrorMessage name="city" component="div" className="text-red-500 text-xs mt-1" />
             </div>
+            <div className="w-1/3">
+              <Field name="postalCode" placeholder="Postal code" className="border border-slate-300 p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500" />
+              <ErrorMessage name="postalCode" component="div" className="text-red-500 text-xs mt-1" />
+            </div>
+          </div>
 
-            <Button
-              size="lg"
-              type="submit"
-              disabled={isSubmitting}
-              fullWidth
-              sx={{ mt: "1.5rem", display: "flex", alignItems: "center", justifyContent: "center", gap: 1 }}
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="h-5 w-5 animate-spin" /> Processing...
-                </>
-              ) : (
-                <>Pay {total.toFixed(2)} {checkout.currency}</>
-              )}
-            </Button>
-          </Form>
-        )}
-      </Formik>
-    </div>
-  );
+          <Button
+            size="lg"
+            type="submit"
+            disabled={isSubmitting}
+            fullWidth
+            sx={{ mt: "1.5rem", display: "flex", alignItems: "center", justifyContent: "center", gap: 1 }}
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="h-5 w-5 animate-spin" /> Processing...
+              </>
+            ) : (
+              <>Pay {total.toFixed(2)} {checkout.currency}</>
+            )}
+          </Button>
+        </Form>
+      )}
+    </Formik>
+  </div>
+);
 
   return <CheckoutLayout checkout={checkout} success={success} subtotal={subtotal} vatAmount={vatAmount} total={total} form={form} />;
 }

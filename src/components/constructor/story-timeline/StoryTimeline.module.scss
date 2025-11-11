@@ -9,7 +9,8 @@
   align-items: center;
   border-radius: 32px;
   overflow: visible;
-  background: linear-gradient(180deg, #fff6f2 0%, #fff9f5 100%);
+  background: linear-gradient(180deg, #fffaf5 0%, #fff3ea 100%);
+  box-shadow: inset 0 0 25px rgba(255, 230, 210, 0.3);
 
   &::before {
     content: "";
@@ -17,64 +18,57 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 2px;
+    width: 3px;
     height: 100%;
-    background: rgba(236,115,49,0.2);
-    border-radius: 1px;
-  }
-
-  @keyframes flow {
-    0% {
-      background-position: 0% 0%;
-    }
-    100% {
-      background-position: 0% 200%;
-    }
+    background: linear-gradient(180deg, rgba(240,150,90,0.25) 0%, rgba(236,115,49,0.15) 100%);
+    border-radius: 2px;
   }
 }
 
 .step {
   position: relative;
-  background: #ffffff;
-  border: none;
-  border-radius: 24px;
-  box-shadow: 0 12px 40px rgba(236,115,49,0.08);
-  padding: 2rem;
-  margin: 2.5rem 0;
-  width: 44%;
+  background: #fffdfa;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(236, 115, 49, 0.08);
+  padding: 1.5rem 1.75rem;
+  margin: 1.75rem 0;
+  width: 38%;
   z-index: 2;
-  transition: all 0.3s ease-out;
+  border-left: 4px solid rgba(236, 115, 49, 0.25);
+  transition: all 0.25s ease-out;
 
   &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 45px rgba(236,115,49,0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(236, 115, 49, 0.12);
+    background: #fff8f3;
   }
 }
 
 /* === розташування === */
 .left {
   align-self: flex-start;
-  margin-right: 52%;
+  margin-right: 54%;
 }
 
 .right {
   align-self: flex-end;
-  margin-left: 52%;
+  margin-left: 54%;
 }
 
 /* === точка === */
 .dot {
   position: absolute;
-  top: 2.5rem;
+  top: 1.75rem;
   left: 100%;
   transform: translateX(-50%);
-  width: 12px;
-  height: 12px;
-  background: rgba(236,115,49,1);
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle at center, #ec7331 0%, #e85f1c 90%);
   border-radius: 50%;
-  border: 3px solid #fff;
-  box-shadow: 0 0 0 3px rgba(236,115,49,0.15);
+  border: 2px solid #fffdfa;
+  box-shadow: 0 0 0 3px rgba(236, 115, 49, 0.15);
   z-index: 3;
+  animation: bubble 2.5s ease-in-out infinite alternate;
 }
 
 .right .dot {
@@ -82,26 +76,25 @@
   transform: translateX(-50%);
 }
 
-/* === контент === */
+/* === текст === */
 .year {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: rgba(236,115,49,1);
-  margin-bottom: 0.75rem;
-  letter-spacing: 0.5px;
+  color: #ec7331;
+  margin-bottom: 0.5rem;
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #2c2c2c;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .text {
-  font-size: 1rem;
-  color: #666;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  color: #5b554f;
+  line-height: 1.5;
   white-space: pre-line;
 }
 
@@ -111,8 +104,9 @@
   .left,
   .right {
     width: 95%;
-    margin: 1.5rem auto;
+    margin: 1.25rem auto;
     align-self: center;
+    border-left: 4px solid rgba(236, 115, 49, 0.3);
   }
 
   .dot {

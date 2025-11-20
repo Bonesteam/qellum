@@ -1,6 +1,6 @@
 .root {
   font-family: var(--font-family, Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial);
-  background: #f1f5f9;
+  background: #fff7ed; // ніжний оранжевий фон
   padding: 3rem 1rem;
   min-height: 100vh;
   display: flex;
@@ -13,8 +13,9 @@
   width: 100%;
   background: #fff;
   border-radius: 1rem;
-  box-shadow: 0 8px 30px rgba(2,6,23,0.08);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
   overflow: hidden;
+  border: 1px solid #fed7aa;
 }
 
 .header {
@@ -22,7 +23,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.25rem 2rem;
-  background: linear-gradient(90deg, #4f46e5 0%, #2563eb 100%);
+  background: #fb923c; // чистий оранжевий
   color: white;
 }
 
@@ -33,7 +34,7 @@
 
 .smallText {
   font-size: 0.95rem;
-  color: #f1f5f9;
+  color: #fff3e0;
 }
 
 .content {
@@ -51,8 +52,8 @@
 }
 
 .summary {
-  background: #f8fafc;
-  border: 1px solid #e6eef8;
+  background: #fff3e0;
+  border: 1px solid #fed7aa;
   border-radius: 0.75rem;
   padding: 1.25rem;
   display: flex;
@@ -63,7 +64,7 @@
 .summaryTitle {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #0f172a;
+  color: #b45309; // темно-оранжевий
   margin-bottom: 1rem;
 }
 
@@ -75,12 +76,12 @@
 
 .divider {
   height: 1px;
-  background: #e6eef8;
+  background: #fed7aa;
   margin: 0.75rem 0;
 }
 
 .muted {
-  color: #64748b;
+  color: #b45309;
   font-size: 0.95rem;
 }
 
@@ -90,8 +91,8 @@
   gap: 1.5rem;
 
   .formContainer {
-    background: #f8fafc;
-    border: 1px solid #e6eef8;
+    background: #fff3e0;
+    border: 1px solid #fed7aa;
     border-radius: 0.75rem;
     padding: 1.5rem;
   }
@@ -99,14 +100,14 @@
   .formTitle {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #0f172a;
+    color: #b45309;
     margin-bottom: 1rem;
   }
 
   input {
     width: 100%;
     padding: 0.65rem 0.75rem;
-    border: 1px solid #cbd5e1;
+    border: 1px solid #fcd9b6;
     border-radius: 0.5rem;
     font-size: 0.95rem;
     outline: none;
@@ -115,8 +116,8 @@
   }
 
   input:focus {
-    border-color: #4f46e5;
-    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+    border-color: #fb923c;
+    box-shadow: 0 0 0 2px rgba(251,146,60,0.2);
   }
 
   .formRow {
@@ -135,7 +136,7 @@
   }
 
   .button {
-    background: #4f46e5;
+    background: #fb923c;
     color: white;
     padding: 0.75rem 1.25rem;
     font-size: 0.95rem;
@@ -151,7 +152,7 @@
   }
 
   .button:hover {
-    background: #3730a3;
+    background: #f97316; // більш насичений оранжевий
   }
 }
 
@@ -163,11 +164,11 @@
 .h2 {
   font-size: 1.125rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #b45309;
 }
 
 .smallTextSuccess {
-  color: #475569;
+  color: #92400e;
   font-size: 0.95rem;
   max-width: 36rem;
   margin: 0 auto;

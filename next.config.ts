@@ -46,9 +46,7 @@ const nextConfig: NextConfig = {
         ignoreBuildErrors: true,
     },
 
-    turbo: {
-        enabled: true,
-    },
+    // removed unrecognized `turbo` key to avoid Next.js config warnings
 };
 
 export default nextConfig;

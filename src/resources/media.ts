@@ -10,7 +10,7 @@ import image7 from "@/assets/images/image7.jpg";
 import image8 from "@/assets/images/image8.jpg";
 import image9 from "@/assets/images/image9.jpg";
 import image10 from "@/assets/images/image10.jpg";
-// image11 will be served from /public/images to ensure availability on Vercel
+import image11 from "@/assets/images/image11.jpg";
 import image12 from "@/assets/images/image12.jpg";
 import review1 from "@/assets/images/review1.png";
 import review2 from "@/assets/images/review2.png";
@@ -40,8 +40,8 @@ export const media = {
     image8: image8,
     image9: image9,
     image10: image10,
-    image11: '/images/image11.jpg',
-
+    
+    image11: image11,
     review1: review1,
     review2: review2,
     review3: review3,

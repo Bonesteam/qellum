@@ -19,7 +19,16 @@ export async function sendEmail(
       html: html || defaultTemplate(subject, text),
     };
 
-    if (attachments && attachments.length > 0) payload.attachments = attachments;
+    if (attachments && attachments.length > 0) {
+      // Resend expects each attachment to have either `content` (base64) or `path`.
+      payload.attachments = attachments.map((a) => {
+        const raw = a.data || "";
+        const content = String(raw).replace(/^data:.*;base64,/, "");
+        const out: any = { filename: a.filename, content };
+        if (a.type) out.type = a.type;
+        return out;
+      });
+    }
 
     const response = await resend.emails.send(payload);
 

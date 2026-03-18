@@ -18,7 +18,7 @@ const ProfileHead = () => {
 
             <div className={styles.hero__text}>
                 <h1 className={styles.hero__title}>
-                    Welcome back, <span>{user?.name || "Chef"}</span> 🍽️
+                    Welcome back, <span>{user?.firstName || user?.name || "Chef"}</span> 🍽️
                 </h1>
                 <p className={styles.hero__subtitle}>
                     Your culinary dashboard — manage tokens, view your meal plans, and

@@ -4,26 +4,31 @@ import { ENV } from "@/backend/config/env";
 const resend = new Resend(ENV.RESEND_API);
 
 export async function sendEmail(
-    to: string,
-    subject: string,
-    text: string,
-    html?: string
+  to: string,
+  subject: string,
+  text: string,
+  html?: string,
+  attachments?: Array<{ filename: string; type?: string; data: string }>
 ) {
-    try {
-        const response = await resend.emails.send({
-            from: ENV.EMAIL_FROM,
-            to,
-            subject,
-            text: text || "",
-            html: html || defaultTemplate(subject, text),
-        });
+  try {
+    const payload: any = {
+      from: ENV.EMAIL_FROM,
+      to,
+      subject,
+      text: text || "",
+      html: html || defaultTemplate(subject, text),
+    };
 
-        console.log("✅ Email sent via Resend:", response);
-        return response;
-    } catch (error) {
-        console.error("❌ Resend email failed:", error);
-        throw error;
-    }
+    if (attachments && attachments.length > 0) payload.attachments = attachments;
+
+    const response = await resend.emails.send(payload);
+
+    console.log("✅ Email sent via Resend:", response);
+    return response;
+  } catch (error) {
+    console.error("❌ Resend email failed:", error);
+    throw error;
+  }
 }
 
 function defaultTemplate(title: string, message: string) {

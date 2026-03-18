@@ -19,17 +19,25 @@ function parseDurationToSec(input: string): number {
 const REFRESH_TTL_SEC = parseDurationToSec(ENV.REFRESH_TOKEN_EXPIRES);
 
 export const authService = {
-    async register(data: { name: string; email: string; password: string }) {
+    async register(data: { firstName: string; lastName: string; email: string; password: string; phone: string; address: { street: string; city: string; country: string; postalCode: string }; dateOfBirth: string }) {
         const existing = await User.findOne({ email: data.email.toLowerCase() });
         if (existing) throw new Error("Email already registered");
 
         const hashed = await bcrypt.hash(data.password, 12);
-        const user = await User.create({ ...data, email: data.email.toLowerCase(), password: hashed });
+        const user = await User.create({
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email.toLowerCase(),
+            password: hashed,
+            phone: data.phone,
+            address: data.address,
+            dateOfBirth: new Date(data.dateOfBirth),
+        });
         const result = await this.issueTokensAndSession(user._id, user.email, user.role, undefined, undefined);
         await sendEmail(
             user.email,
             "Welcome to CVMaker 🎉",
-            `Hi ${user.name}, thanks for registering at CVMaker.`
+            `Hi ${user.firstName}, thanks for registering at CVMaker.`
         );
 
         return { user, ...result };

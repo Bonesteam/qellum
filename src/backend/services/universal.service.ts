@@ -2,6 +2,8 @@ import { connectDB } from "../config/db";
 import { UniversalOrder, UniversalOrderDocument } from "../models/universalOrder.model";
 import { User } from "../models/user.model";
 import { transactionService } from "../services/transaction.service";
+import { sendEmail } from "@/backend/utils/sendEmail";
+import generateInvoicePDF from "@/backend/utils/generateInvoice";
 import OpenAI from "openai";
 import { ENV } from "../config/env";
 import mongoose from "mongoose";
@@ -146,13 +148,18 @@ export const universalService = {
         const totalCost = Number(body.totalTokens) + languageCost;
         console.log(`💰 [Token check] user has ${user.tokens}, required ${totalCost}`);
 
-        if (user.tokens < totalCost)
-            throw new Error(`Insufficient tokens (have ${user.tokens}, need ${totalCost})`);
+        if ((user.tokens || 0) < totalCost)
+            throw new Error(`Insufficient tokens (have ${user.tokens || 0}, need ${totalCost})`);
 
-        // 💳 Знімаємо токени
-        user.tokens -= totalCost;
-        await user.save();
-        await transactionService.record(user._id, email, totalCost, "spend", user.tokens);
+        // 💳 Use atomic DB update to decrement tokens and avoid full document validation
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            { $inc: { tokens: -totalCost } },
+            { new: true, runValidators: false }
+        );
+        if (!updatedUser) throw new Error("User not found");
+
+        await transactionService.record(updatedUser._id, email, totalCost, "spend", updatedUser.tokens);
         console.log("🧾 Transaction recorded successfully");
 
         // 🧠 Генерація основного контенту
@@ -220,8 +227,32 @@ export const universalService = {
 
         const order = await UniversalOrder.create(orderDoc);
         console.log("✅ Order saved successfully:", order._id);
+        const orderObj = order.toObject({ flattenMaps: true });
 
-        return order.toObject({ flattenMaps: true });
+        // Try sending invoice email with PDF attachment (best-effort)
+        (async () => {
+            try {
+                const pdfBase64 = await generateInvoicePDF(orderObj);
+                await sendEmail(
+                    orderObj.email,
+                    `Your invoice — ${orderObj._id}`,
+                    `Thank you for your order. Please find the invoice attached.`,
+                    undefined,
+                    [
+                        {
+                            filename: `invoice-${orderObj._id}.pdf`,
+                            type: "application/pdf",
+                            data: pdfBase64,
+                        },
+                    ]
+                );
+                console.log("📧 Invoice email sent for order", orderObj._id);
+            } catch (err) {
+                console.error("❌ Failed to send invoice email:", err);
+            }
+        })();
+
+        return orderObj;
     },
 
     /** 🧩 Отримання всіх замовлень користувача */

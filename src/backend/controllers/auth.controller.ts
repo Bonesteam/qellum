@@ -6,7 +6,7 @@ import { UserType } from "@/backend/types/user.types";
 import { signAccessToken } from "../utils/jwt";
 
 export const authController = {
-    async register(body: { name: string; email: string; password: string }) {
+    async register(body: { firstName: string; lastName: string; email: string; password: string; phone: string; address: { street: string; city: string; country: string; postalCode: string }; dateOfBirth: string }) {
         await connectDB();
         const { user, accessToken, refreshToken } = await authService.register(body);
         return { user: toUser(user), tokens: { accessToken, refreshToken } };
@@ -46,10 +46,12 @@ export const authController = {
 function toUser(u: any): UserType {
     return {
         _id: u._id.toString(),
-        name: u.name,
+        firstName: u.firstName,
+        lastName: u.lastName,
         email: u.email,
         role: u.role,
         tokens: u.tokens,
+        // keep created/updated mapping
         createdAt: u.createdAt,
         updatedAt: u.updatedAt,
     };

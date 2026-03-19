@@ -5,9 +5,9 @@
   "scripts": {
     "predev": "rm -rf .next-dev",
     "dev": "node ./scripts/copy-images.js && NEXT_DIST_DIR=.next-dev next dev",
-    "prebuild": "rm -rf .next-prod",
-    "build": "node ./scripts/copy-images.js && NEXT_DIST_DIR=.next-prod next build",
-    "start": "NEXT_DIST_DIR=.next-prod next start",
+    "prebuild": "rm -rf .next",
+    "build": "node ./scripts/copy-images.js && next build",
+    "start": "next start",
     "lint": "eslint",
     "postinstall": "node ./scripts/copy-images.js"
   },

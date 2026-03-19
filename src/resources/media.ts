@@ -26,6 +26,9 @@ import coach1 from "@/assets/images/coach1.jpg";
 import coach2 from "@/assets/images/coach2.jpg";
 import coach3 from "@/assets/images/coach3.jpg";
 import coach4 from "@/assets/images/coach4.jpg";
+import visaLogo from "@/assets/icons/visa-logo.svg";
+import mastercardLogo from "@/assets/icons/mastercard-logo.svg";
+import pciDssLogo from "@/assets/icons/pci-dss-compliant-logo-vector.svg";
 
 export const media = {
     logo: logo,
@@ -51,6 +54,9 @@ export const media = {
     coach2: coach2,
     coach3: coach3,
     coach4: coach4,
+    visaLogo: visaLogo,
+    mastercardLogo: mastercardLogo,
+    pciDssLogo: pciDssLogo,
 
     team1: team1,
     team2: team2,
@@ -65,4 +71,3 @@ export const media = {
     fitPlannerDemo: '/videos/fit-planner-demo.mp4',
 
 }
-

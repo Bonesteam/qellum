@@ -10,6 +10,7 @@ import Input from "@mui/joy/Input";
 import { useCurrency } from "@/context/CurrencyContext";
 
 const TOKENS_PER_GBP = 100;
+const MIN_TOKENS = 1000;
 
 interface PricingCardProps {
   variant?: "starter" | "pro" | "premium" | "custom";
@@ -42,7 +43,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
   const user = useUser();
   const { currency, setCurrency, sign, convertFromGBP, convertToGBP } = useCurrency();
   // allow user to enter desired tokens for custom top-up
-  const [customTokens, setCustomTokens] = useState<number>(100);
+  const [customTokens, setCustomTokens] = useState<number>(MIN_TOKENS);
 
   const isCustom = price === "dynamic";
   const basePriceGBP = useMemo(
@@ -54,6 +55,23 @@ const PricingCard: React.FC<PricingCardProps> = ({
     [basePriceGBP, convertFromGBP, isCustom]
   );
 
+  const submitRedirectForm = (url: string, params: Record<string, string>) => {
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = url;
+
+    Object.entries(params).forEach(([key, value]) => {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = key;
+      input.value = String(value);
+      form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+  };
+
   const handleBuy = async () => {
     if (!user) {
       showAlert("Please sign up", "You need to be signed in to purchase", "info");
@@ -62,46 +80,44 @@ const PricingCard: React.FC<PricingCardProps> = ({
     }
 
     try {
-      // Prepare checkout payload and redirect to /checkout where payment flow runs
-      let checkoutData: any = {};
+      let payload: { currency: "GBP" | "EUR" | "USD"; tokens: number };
 
       if (isCustom) {
-        // User specified tokens to buy
-        const tokensToBuy = Math.max(1, Math.floor(customTokens));
-        const gbpEquivalent = tokensToBuy / TOKENS_PER_GBP; // tokens -> GBP
-        const amountInCurrency = convertFromGBP(gbpEquivalent);
-
-        checkoutData = {
-          amount: Number(amountInCurrency.toFixed(2)),
+        const tokensToBuy = Math.max(MIN_TOKENS, Math.floor(customTokens));
+        payload = {
           currency,
           tokens: tokensToBuy,
-          description: `${tokensToBuy} tokens (custom top-up)`,
-          email: user?.email ?? "",
-          planId: undefined,
         };
       } else {
-        // Standard plan — tokens are provided by the plan
-        const amountInCurrency = convertedPrice; // already converted from GBP
-
-        checkoutData = {
-          amount: Number(amountInCurrency.toFixed(2)),
+        payload = {
           currency,
           tokens: tokens,
-          description: title,
-          email: user?.email ?? "",
-          planId: buttonLink ?? undefined,
         };
       }
 
-      // Store to localStorage and navigate to checkout page
-      try {
-        localStorage.setItem("checkoutData", JSON.stringify(checkoutData));
-      } catch (e) {
-        console.warn("Unable to persist checkoutData to localStorage", e);
+      const response = await fetch("/api/spoynt/create-invoice", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.details || data.message || "Payment creation failed");
       }
 
-      // Redirect to checkout
-      window.location.href = "/checkout";
+      if (data.redirectMethod === "POST") {
+        submitRedirectForm(data.redirectUrl, data.redirectParams || {});
+        return;
+      }
+
+      if (data.redirectUrl) {
+        window.location.href = data.redirectUrl;
+        return;
+      }
+
+      throw new Error("Spoynt redirect URL was not returned");
     } catch (err: any) {
       showAlert("Error", err.message || "Something went wrong", "error");
     }
@@ -127,19 +143,20 @@ const PricingCard: React.FC<PricingCardProps> = ({
               type="number"
               value={customTokens}
               onChange={(e) => setCustomTokens(Number(e.target.value))}
-              slotProps={{ input: { min: 1, step: 1 } }}
+              slotProps={{ input: { min: MIN_TOKENS, step: 100 } }}
               placeholder="Enter tokens"
               size="md"
             />
-            
           </div>
           <p className={styles.dynamicPrice}>
             {sign}
             {(() => {
-              const gbp = customTokens / TOKENS_PER_GBP;
+              const safeTokens = Math.max(MIN_TOKENS, Math.floor(customTokens || 0));
+              const gbp = safeTokens / TOKENS_PER_GBP;
               return convertFromGBP(gbp).toFixed(2);
-            })()} ≈ {Math.floor(customTokens)} tokens
+            })()} ≈ {Math.max(MIN_TOKENS, Math.floor(customTokens || 0))} tokens
           </p>
+          <p className={styles.description}>Minimum purchase: {MIN_TOKENS} tokens.</p>
         </>
       ) : (
         <p className={styles.price}>

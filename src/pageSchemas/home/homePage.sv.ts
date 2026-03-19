@@ -207,9 +207,9 @@ Så vi byggde en plattform där riktiga kockar skapar kurser med AI-stöd — ko
                 {
                     type: "pricing",
                     variant: "starter",
-                    title: "AI-plan",
-                    price: "€9",
-                    tokens: 900,
+                    title: "AI Starter Plan",
+                    price: "£10",
+                    tokens: 1000,
                     badgeTop: "AI-genererad Plan",
                     description:
                         "Omedelbar måltidsplan genererad av AI baserat på dina preferenser.",
@@ -242,7 +242,7 @@ Så vi byggde en plattform där riktiga kockar skapar kurser med AI-stöd — ko
                 {
                     type: "pricing",
                     variant: "premium",
-                    title: "Full Matlagningspaket",
+                    title: "Full Culinary Pack",
                     price: "€99",
                     tokens: 9900,
                     badgeTop: "Komplett Matupplevelse",

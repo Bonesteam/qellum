@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node ./scripts/copy-images.js && next dev --turbopack",
-    "build": "node ./scripts/copy-images.js && next build --turbopack",
-    "start": "next start",
+    "predev": "rm -rf .next-dev",
+    "dev": "node ./scripts/copy-images.js && NEXT_DIST_DIR=.next-dev next dev",
+    "prebuild": "rm -rf .next-prod",
+    "build": "node ./scripts/copy-images.js && NEXT_DIST_DIR=.next-prod next build",
+    "start": "NEXT_DIST_DIR=.next-prod next start",
     "lint": "eslint",
     "postinstall": "node ./scripts/copy-images.js"
   },

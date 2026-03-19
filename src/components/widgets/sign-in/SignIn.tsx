@@ -27,13 +27,24 @@ export default function SignInPage() {
             {({ isSubmitting }) => (
                 <FormUI
                     title="Sign In"
-                    description="Welcome back! Please enter your details."
+                    description="Welcome back. Sign in to access your dashboard, token balance and recent payments."
                     isSubmitting={isSubmitting}
+                    accentLabel="Welcome back"
+                    heroTitle="Pick up your meal planning right where you left it."
+                    heroText="Manage tokens, review payment receipts and keep your Qellum profile ready for the next order."
+                    heroBullets={[
+                        "Instant access to your balance and dashboard",
+                        "Track payments and token top-ups",
+                        "Continue with AI, chef and nutrition services",
+                    ]}
                     fields={[
                         { name: "email", type: "email", placeholder: "Email" },
                         { name: "password", type: "password", placeholder: "Password" }
                     ]}
                     submitLabel="Sign In"
+                    switchText="Need an account?"
+                    switchHref="/sign-up"
+                    switchLabel="Create one"
                 />
             )}
         </Formik>

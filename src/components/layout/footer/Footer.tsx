@@ -8,8 +8,8 @@ import styles from "./Footer.module.scss";
 import { footerContent } from "@/resources/content";
 import { footerStyles } from "@/resources/styles-config";
 import {SmartLinkProps} from "@/types/smart-link";
-import {media} from "@/resources/media";
-import {FaApplePay, FaCcAmex, FaCcMastercard, FaCcVisa, FaFacebookF, FaGooglePay, FaInstagram, FaLinkedinIn, FaTwitter} from "react-icons/fa";
+import {FaInstagram, FaPinterestP} from "react-icons/fa";
+import { media } from "@/resources/media";
 
 const SmartLink: React.FC<SmartLinkProps> = ({
                                                  href,
@@ -43,14 +43,24 @@ const SmartLink: React.FC<SmartLinkProps> = ({
 };
 
 const Footer: React.FC = () => {
-    const { logo, columns, contact, socials, legal } = footerContent;
+    const { logo, columns, contact, legal } = footerContent;
+    const socialLinks = [
+        {
+            href: "https://www.instagram.com/qellum/",
+            label: "Instagram",
+            icon: <FaInstagram />,
+        },
+        {
+            href: "https://www.pinterest.com/qellum/",
+            label: "Pinterest",
+            icon: <FaPinterestP />,
+        },
+    ];
 
     const LegalAddress = () =>
-        Array.isArray(legal?.addressLines) && legal.addressLines.length ? (
+        legal?.address ? (
             <address className={styles["footer__legal-address"]}>
-                {legal.addressLines.map((line: string) => (
-                    <div key={line}>{line}</div>
-                ))}
+                <div>{legal.address}</div>
             </address>
         ) : null;
 
@@ -58,8 +68,15 @@ const Footer: React.FC = () => {
         <div className={styles["footer__payments"]}>
             <div className={styles["footer__column-title"]}>Payment Methods</div>
             <div className={styles.paymentsContent}>
-                <FaCcVisa className={styles.paymentIcon} />
-                <FaCcMastercard className={styles.paymentIcon} />
+                <Image src={media.visaLogo} alt="Visa" width={96} height={32} className={styles.paymentLogo} />
+                <Image
+                    src={media.mastercardLogo}
+                    alt="Mastercard"
+                    width={96}
+                    height={32}
+                    className={styles.paymentLogo}
+                />
+                <Image src={media.pciDssLogo} alt="PCI DSS" width={112} height={32} className={styles.paymentLogo} />
             </div>
         </div>
     );
@@ -175,48 +192,6 @@ const Footer: React.FC = () => {
                             </div>
                         )}
                         <PaymentMethods />
-                        {/* 🔹 Колонка соцмереж з React Icons */}
-                        <div className={styles["footer__column"]}>
-                            <div className={styles["footer__column-title"]}>Follow Us</div>
-                            <div className={styles["footer__socials"]}>
-                                <a
-                                    href="https://facebook.com"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Facebook"
-                                    className={styles["footer__social-link"]}
-                                >
-                                    <FaFacebookF />
-                                </a>
-                                <a
-                                    href="https://instagram.com"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Instagram"
-                                    className={styles["footer__social-link"]}
-                                >
-                                    <FaInstagram />
-                                </a>
-                                <a
-                                    href="https://linkedin.com"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="LinkedIn"
-                                    className={styles["footer__social-link"]}
-                                >
-                                    <FaLinkedinIn />
-                                </a>
-                                <a
-                                    href="https://twitter.com"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Twitter"
-                                    className={styles["footer__social-link"]}
-                                >
-                                    <FaTwitter />
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             )}
@@ -325,13 +300,7 @@ const Footer: React.FC = () => {
                         {/* Payments */}
                         <div className={styles["footer__corporate-col"]}>
                             <div className={styles["footer__column-title"]}>Accepted Payments</div>
-                            <div className={styles.paymentsContent}>
-                                <FaCcVisa className={styles.paymentIcon} />
-                                <FaCcMastercard className={styles.paymentIcon} />
-                                <FaCcAmex className={styles.paymentIcon} />
-                                <FaGooglePay className={styles.paymentIcon} />
-                                <FaApplePay className={styles.paymentIcon} />
-                            </div>
+                            <PaymentMethods />
                         </div>
                     </div>
 
@@ -349,10 +318,25 @@ const Footer: React.FC = () => {
             )}
 
 
-
-
-            <div className={styles["footer__rights"]}>
-                © {new Date().getFullYear()} All rights reserved.
+            <div className={styles["footer__bottom"]}>
+                <div className={styles["footer__rights"]}>
+                    © {new Date().getFullYear()} All rights reserved.
+                </div>
+                <div className={styles["footer__socials-bottom"]}>
+                    {socialLinks.map((social) => (
+                        <a
+                            key={social.label}
+                            href={social.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={social.label}
+                            className={styles["footer__social-pill"]}
+                        >
+                            {social.icon}
+                            <span>{social.label}</span>
+                        </a>
+                    ))}
+                </div>
             </div>
         </footer>
     );

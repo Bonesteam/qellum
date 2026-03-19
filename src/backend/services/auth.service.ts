@@ -6,6 +6,7 @@ import { signAccessToken, signRefreshToken } from "../utils/jwt";
 import { ENV } from "../config/env";
 import { Types } from "mongoose";
 import {sendEmail} from "@/backend/utils/sendEmail";
+import { buildWelcomeEmail } from "@/backend/utils/emailTemplates";
 
 function parseDurationToSec(input: string): number {
     const m = input.match(/^(\d+)([smhd])?$/i);
@@ -34,11 +35,8 @@ export const authService = {
             dateOfBirth: new Date(data.dateOfBirth),
         });
         const result = await this.issueTokensAndSession(user._id, user.email, user.role, undefined, undefined);
-        await sendEmail(
-            user.email,
-            "Welcome to CVMaker 🎉",
-            `Hi ${user.firstName}, thanks for registering at CVMaker.`
-        );
+        const welcomeEmail = buildWelcomeEmail(user.firstName);
+        await sendEmail(user.email, welcomeEmail.subject, welcomeEmail.text, welcomeEmail.html);
 
         return { user, ...result };
     },

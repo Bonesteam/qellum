@@ -87,7 +87,7 @@ export default function CheckoutLayout({ checkout, success, subtotal, vatAmount,
                   </div>
 
                   <div className={styles.summaryRow}>
-                    <span className={styles.muted}>VAT (20%)</span>
+                    <span className={styles.muted}>VAT</span>
                     <span style={{ fontWeight: 600 }}>
                       {vatAmount.toFixed(2)} {checkout.currency}
                     </span>

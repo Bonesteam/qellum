@@ -39,8 +39,16 @@ export default function SignUpPage() {
             {({ isSubmitting }) => (
                 <FormUI
                     title="Sign Up"
-                    description="Create your account"
+                    description="Create your account to purchase tokens, receive receipts and manage everything from one place."
                     isSubmitting={isSubmitting}
+                    accentLabel="Create account"
+                    heroTitle="Join Qellum and keep every order in one elegant workspace."
+                    heroText="Set up your profile once and use it for token purchases, payment receipts, chef services and AI meal planning."
+                    heroBullets={[
+                        "Welcome email sent after registration",
+                        "Purchase receipts with PDF invoices",
+                        "Secure account for all Qellum services",
+                    ]}
                     fields={[
                         { name: "firstName", type: "text", placeholder: "First name" },
                         { name: "lastName", type: "text", placeholder: "Last name" },
@@ -53,11 +61,26 @@ export default function SignUpPage() {
                         { name: "dateOfBirth", type: "date", placeholder: "Date of birth" },
                     ]}
                     submitLabel="Sign Up"
+                    switchText="Already registered?"
+                    switchHref="/sign-in"
+                    switchLabel="Sign in"
                 >
                     {/* Country select */}
-                    <div style={{ margin: "8px 0" }}>
-                        <label style={{ display: "block", marginBottom: 6 }}>Country</label>
-                        <Field name="country" as="select" style={{ width: "100%", padding: 10, borderRadius: 6 }}>
+                    <div style={{ margin: "6px 0 2px" }}>
+                        <label style={{ display: "block", marginBottom: 8, color: "#7d6558", fontSize: 14, fontWeight: 600 }}>Country</label>
+                        <Field
+                            name="country"
+                            as="select"
+                            style={{
+                                width: "100%",
+                                padding: "16px 18px",
+                                borderRadius: 16,
+                                border: "1px solid rgba(210, 105, 30, 0.18)",
+                                background: "#fff9f3",
+                                color: "#4b342c",
+                                outline: "none",
+                            }}
+                        >
                             <option value="">Select country</option>
                             <option value="Ukraine">Ukraine</option>
                             <option value="United Kingdom">United Kingdom</option>
@@ -77,7 +100,7 @@ export default function SignUpPage() {
                     </div>
 
                     {/* Terms checkbox */}
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, margin: "8px 0" }}>
+                    <div style={{ display: "flex", alignItems: "flex-start", gap: 10, margin: "6px 0 2px", color: "#6f584c" }}>
                         <Field type="checkbox" name="acceptedTerms" />
                         <label style={{ fontSize: 14 }}>
                             I agree to the <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>

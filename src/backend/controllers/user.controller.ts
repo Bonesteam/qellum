@@ -3,21 +3,62 @@ import { userService } from "../services/user.service";
 import { UserType } from "@/backend/types/user.types";
 import { sendEmail } from "@/backend/utils/sendEmail";
 import { transactionService } from "@/backend/services/transaction.service";
+import { buildTokenPurchaseEmail } from "@/backend/utils/emailTemplates";
+import { generateTokenInvoicePDF } from "@/backend/utils/generateTokenInvoice";
 
 export const userController = {
-    async buyTokens(userId: string, amount: number): Promise<UserType> {
+    async buyTokens(
+        userId: string,
+        amount: number,
+        paymentDetails?: {
+            chargedAmount?: number | null;
+            chargedCurrency?: string | null;
+            referenceId?: string | null;
+        }
+    ): Promise<UserType> {
         await connectDB();
 
         const user = await userService.addTokens(userId, amount);
 
         console.log("💳 Adding tokens for user:", userId);
-        await transactionService.record(user._id, user.email, amount, "add", user.tokens);
+        const transaction = await transactionService.record(user._id, user.email, amount, "add", user.tokens);
         console.log("✅ Transaction created successfully");
 
-        sendEmail(
+        const invoiceNumber = `QEL-${String(transaction._id).slice(-8).toUpperCase()}`;
+        const pdf = await generateTokenInvoicePDF({
+            invoiceNumber,
+            createdAt: new Date(transaction.createdAt),
+            customerName: `${user.firstName} ${user.lastName}`.trim(),
+            customerEmail: user.email,
+            tokens: amount,
+            chargedAmount: paymentDetails?.chargedAmount ?? null,
+            chargedCurrency: paymentDetails?.chargedCurrency ?? null,
+            balanceAfter: user.tokens,
+            referenceId: paymentDetails?.referenceId ?? null,
+        });
+
+        const purchaseEmail = buildTokenPurchaseEmail({
+            firstName: user.firstName,
+            tokens: amount,
+            balanceAfter: user.tokens,
+            chargedAmount: paymentDetails?.chargedAmount ?? null,
+            chargedCurrency: paymentDetails?.chargedCurrency ?? null,
+            referenceId: paymentDetails?.referenceId ?? null,
+            invoiceNumber,
+        });
+
+        await sendEmail(
             user.email,
-            "Tokens Purchased",
-            `You have successfully purchased ${amount} tokens. Your new balance is ${user.tokens} tokens.`
+            purchaseEmail.subject,
+            purchaseEmail.text,
+            purchaseEmail.html,
+            [
+                {
+                    filename: `${invoiceNumber}.pdf`,
+                    type: "application/pdf",
+                    data: pdf,
+                },
+            ]
         );
 
         return formatUser(user);

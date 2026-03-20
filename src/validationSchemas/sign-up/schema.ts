@@ -1,4 +1,5 @@
-import {AlertColor} from "@mui/material/Alert";
+import { AlertColor } from "@mui/material/Alert";
+import { isAllowedCountry } from "@/constants/countries";
 
 export const signUpInitialValues = {
     firstName: "",
@@ -14,8 +15,6 @@ export const signUpInitialValues = {
     acceptedTerms: false,
 };
 
-const excludedCountries = ["Russia", "Belarus", "Iran", "North Korea"];
-
 export const signUpValidation = (values: typeof signUpInitialValues) => {
     const errors: Partial<Record<string, string>> = {};
     if (!values.firstName) errors.firstName = "Required";
@@ -26,7 +25,9 @@ export const signUpValidation = (values: typeof signUpInitialValues) => {
     if (!values.street) errors.street = "Required";
     if (!values.city) errors.city = "Required";
     if (!values.country) errors.country = "Required";
-    if (excludedCountries.includes(values.country)) errors.country = "Selected country is not allowed";
+    if (values.country && !isAllowedCountry(values.country)) {
+        errors.country = "Only supported European countries are allowed";
+    }
     if (!values.postalCode) errors.postalCode = "Required";
     if (!values.dateOfBirth) errors.dateOfBirth = "Required";
     if (!values.acceptedTerms) errors.acceptedTerms = "Please accept Terms & Conditions";
@@ -40,7 +41,6 @@ export const signUpOnSubmit = async (
     router: { replace: (url: string) => void; refresh: () => void }
 ) => {
     try {
-        // 🔥 FIX: Proper data structure for backend (address as nested object)
         const requestBody = {
             firstName: values.firstName,
             lastName: values.lastName,
@@ -55,8 +55,6 @@ export const signUpOnSubmit = async (
             },
             dateOfBirth: values.dateOfBirth
         };
-
-        console.log("Sending data:", requestBody); // For debugging
 
         const res = await fetch("/api/auth/register", {
             method: "POST",
@@ -74,7 +72,6 @@ export const signUpOnSubmit = async (
             showAlert(data?.message || "Registration failed", "", "error");
         }
     } catch (e: any) {
-        console.error("Network error:", e);
         showAlert(e?.message || "Network error", "", "error");
     } finally {
         setSubmitting(false);

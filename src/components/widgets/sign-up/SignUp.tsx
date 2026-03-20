@@ -9,6 +9,7 @@ import {
     signUpOnSubmit
 } from "@/validationSchemas/sign-up/schema";
 import FormUI from "@/components/ui/form/FormUI";
+import { EUROPEAN_COUNTRIES } from "@/constants/countries";
 
 export type SignUpValues = {
     firstName: string;
@@ -82,17 +83,11 @@ export default function SignUpPage() {
                             }}
                         >
                             <option value="">Select country</option>
-                            <option value="Ukraine">Ukraine</option>
-                            <option value="United Kingdom">United Kingdom</option>
-                            <option value="United States">United States</option>
-                            <option value="Canada">Canada</option>
-                            <option value="Germany">Germany</option>
-                            <option value="France">France</option>
-                            <option value="Spain">Spain</option>
-                            <option value="Italy">Italy</option>
-                            <option value="Australia">Australia</option>
-                            <option value="India">India</option>
-                            <option value="Poland">Poland</option>
+                            {EUROPEAN_COUNTRIES.map((country) => (
+                                <option key={country.code} value={country.name}>
+                                    {country.name}
+                                </option>
+                            ))}
                         </Field>
                         <ErrorMessage name="country">
                             {(msg) => <div style={{ color: "red", fontSize: 12 }}>{msg}</div>}

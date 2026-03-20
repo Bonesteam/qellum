@@ -26,12 +26,17 @@ type CreditedResult = {
     tokens: number;
     balanceAfter: number | null;
     alreadyCredited: boolean;
+    providerStatus: string;
+    providerResolution: string | null;
 };
 
 type PendingOrFailedResult = {
     state: "pending" | "failed";
     status: string;
     resolution: string | null;
+    alreadyCredited?: boolean;
+    providerStatus: string;
+    providerResolution: string | null;
 };
 
 type InvalidResult = {
@@ -40,8 +45,8 @@ type InvalidResult = {
 };
 
 function normalizeOutcome(status: string, resolution: string | null) {
-    const normalizedStatus = status.trim().toLowerCase();
-    const normalizedResolution = resolution?.trim().toLowerCase() ?? null;
+    const normalizedStatus = status.trim().toLowerCase().replace(/[\s-]+/g, "_");
+    const normalizedResolution = resolution?.trim().toLowerCase().replace(/[\s-]+/g, "_") ?? null;
 
     const successStatuses = new Set([
         "processed",
@@ -50,31 +55,68 @@ function normalizeOutcome(status: string, resolution: string | null) {
         "completed",
         "success",
         "successful",
+        "settled",
     ]);
-    const successResolutions = new Set(["ok", "success", "successful", "completed", "approved"]);
+    const failedStatuses = new Set([
+        "failed",
+        "declined",
+        "rejected",
+        "cancelled",
+        "canceled",
+        "expired",
+        "error",
+        "process_failed",
+        "chargeback",
+        "refunded",
+        "voided",
+    ]);
     const pendingStatuses = new Set([
         "created",
         "invoked",
         "pending",
         "processing",
+        "process_pending",
         "authorized",
         "authorizing",
         "verification",
+        "review",
+        "awaiting_customer",
+        "awaiting_redirect_result",
+    ]);
+    const successResolutions = new Set(["success", "successful", "completed", "approved"]);
+    const failedResolutions = new Set([
+        "fail",
+        "failed",
+        "declined",
+        "rejected",
+        "cancelled",
+        "canceled",
+        "expired",
+        "error",
     ]);
     const pendingResolutions = new Set(["pending", "in_progress", "processing", "review"]);
 
-    if (
-        successStatuses.has(normalizedStatus) ||
-        (normalizedResolution !== null && successResolutions.has(normalizedResolution))
-    ) {
+    if (failedStatuses.has(normalizedStatus)) {
+        return "failed";
+    }
+
+    if (successStatuses.has(normalizedStatus)) {
         return "credited";
     }
 
-    if (
-        pendingStatuses.has(normalizedStatus) ||
-        normalizedResolution === null ||
-        pendingResolutions.has(normalizedResolution)
-    ) {
+    if (pendingStatuses.has(normalizedStatus)) {
+        return "pending";
+    }
+
+    if (normalizedResolution !== null && failedResolutions.has(normalizedResolution)) {
+        return "failed";
+    }
+
+    if (normalizedResolution !== null && successResolutions.has(normalizedResolution)) {
+        return "credited";
+    }
+
+    if (normalizedResolution === null || pendingResolutions.has(normalizedResolution)) {
         return "pending";
     }
 
@@ -166,31 +208,47 @@ export const spoyntService = {
 
         const outcome = normalizeOutcome(input.status, input.resolution);
 
-        if (payment.creditStatus === "credited") {
+        if (payment.creditStatus === "credited" && outcome === "credited") {
             return {
                 state: "credited",
                 tokens: payment.tokens,
                 balanceAfter: payment.balanceAfter,
                 alreadyCredited: true,
+                providerStatus: input.status,
+                providerResolution: input.resolution,
             };
         }
 
         if (outcome === "pending") {
-            if (payment.creditStatus !== "pending") {
+            if (payment.creditStatus !== "pending" && payment.creditStatus !== "credited") {
                 payment.creditStatus = "pending";
                 await payment.save();
             }
 
-            return { state: "pending", status: input.status, resolution: input.resolution };
+            return {
+                state: "pending",
+                status: input.status,
+                resolution: input.resolution,
+                alreadyCredited: payment.creditStatus === "credited",
+                providerStatus: input.status,
+                providerResolution: input.resolution,
+            };
         }
 
         if (outcome === "failed") {
-            if (payment.creditStatus !== "failed") {
+            if (payment.creditStatus !== "failed" && payment.creditStatus !== "credited") {
                 payment.creditStatus = "failed";
                 await payment.save();
             }
 
-            return { state: "failed", status: input.status, resolution: input.resolution };
+            return {
+                state: "failed",
+                status: input.status,
+                resolution: input.resolution,
+                alreadyCredited: payment.creditStatus === "credited",
+                providerStatus: input.status,
+                providerResolution: input.resolution,
+            };
         }
 
         const reserved = await SpoyntPayment.findOneAndUpdate(
@@ -218,10 +276,18 @@ export const spoyntService = {
                     tokens: fresh.tokens,
                     balanceAfter: fresh.balanceAfter,
                     alreadyCredited: true,
+                    providerStatus: input.status,
+                    providerResolution: input.resolution,
                 };
             }
 
-            return { state: "pending", status: input.status, resolution: input.resolution };
+            return {
+                state: "pending",
+                status: input.status,
+                resolution: input.resolution,
+                providerStatus: input.status,
+                providerResolution: input.resolution,
+            };
         }
 
         try {
@@ -251,6 +317,8 @@ export const spoyntService = {
                 tokens: input.tokens,
                 balanceAfter: creditedUser.tokens ?? null,
                 alreadyCredited: false,
+                providerStatus: input.status,
+                providerResolution: input.resolution,
             };
         } catch (error) {
             const message = error instanceof Error ? error.message : "Unable to credit tokens";

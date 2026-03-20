@@ -14,6 +14,9 @@ type PaymentState =
           tokens?: number;
           balanceAfter?: number | null;
           message?: string;
+          providerStatus?: string;
+          providerResolution?: string | null;
+          alreadyCredited?: boolean;
       };
 
 type Tone = "emerald" | "amber" | "rose";
@@ -55,6 +58,9 @@ export default function PaymentStatusPage() {
                         status: "credited",
                         tokens: data.tokens,
                         balanceAfter: data.balanceAfter,
+                        providerStatus: data.providerStatus,
+                        providerResolution: data.providerResolution,
+                        alreadyCredited: data.alreadyCredited,
                     });
                     return;
                 }
@@ -65,6 +71,9 @@ export default function PaymentStatusPage() {
                         loading: attempts < 10,
                         status: "pending",
                         message: "Payment is still being processed.",
+                        providerStatus: data.providerStatus,
+                        providerResolution: data.providerResolution,
+                        alreadyCredited: data.alreadyCredited,
                     });
 
                     if (attempts < 10) {
@@ -77,6 +86,9 @@ export default function PaymentStatusPage() {
                     loading: false,
                     status: "failed",
                     message: "Payment was not confirmed.",
+                    providerStatus: data.providerStatus,
+                    providerResolution: data.providerResolution,
+                    alreadyCredited: data.alreadyCredited,
                 });
             } catch (error) {
                 if (cancelled) return;
@@ -193,12 +205,16 @@ export default function PaymentStatusPage() {
                                 <p className={styles.metricValue}>{reference}</p>
                             </div>
                             <div className={styles.metricCard}>
-                                <p className={styles.metricLabel}>Provider result</p>
-                                <p className={styles.metricValue}>{result || "processing"}</p>
+                                <p className={styles.metricLabel}>Verified invoice status</p>
+                                <p className={styles.metricValue}>
+                                    {state.loading ? "Checking..." : state.providerStatus || "Unknown"}
+                                </p>
                             </div>
                             <div className={styles.metricCard}>
-                                <p className={styles.metricLabel}>Product</p>
-                                <p className={styles.metricValue}>Qellum token top-up</p>
+                                <p className={styles.metricLabel}>Verified resolution</p>
+                                <p className={styles.metricValue}>
+                                    {state.loading ? "Checking..." : state.providerResolution || result || "Unknown"}
+                                </p>
                             </div>
                         </div>
 
@@ -212,7 +228,7 @@ export default function PaymentStatusPage() {
                                         <div>
                                             <p className={styles.stepTitle}>Status verification</p>
                                             <p className={styles.stepText}>
-                                                We validate the provider response and match it with your account before updating token balance.
+                                                We rely on the live invoice status from Spoynt and only match it with your account after that verification step.
                                             </p>
                                         </div>
                                     </div>
@@ -282,6 +298,15 @@ export default function PaymentStatusPage() {
                                     </p>
                                 </div>
                             </>
+                        )}
+
+                        {!state.loading && state.alreadyCredited && state.status !== "credited" && (
+                            <div className={styles.noteCard}>
+                                <p className={styles.noteTitle}>Status mismatch detected</p>
+                                <p className={styles.noteText}>
+                                    This payment was already credited earlier, but the current provider response does not report a final success state. Please review this transaction manually.
+                                </p>
+                            </div>
                         )}
 
                         {state.loading && (

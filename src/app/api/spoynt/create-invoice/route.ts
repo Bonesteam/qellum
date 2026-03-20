@@ -5,6 +5,7 @@ import { connectDB } from "@/backend/config/db";
 import { User } from "@/backend/models/user.model";
 import { spoyntService } from "@/backend/services/spoynt.service";
 import { ENV } from "@/backend/config/env";
+import { normalizeAllowedCountry } from "@/constants/countries";
 
 const TOKENS_PER_GBP = 100;
 const RATES_TO_GBP = {
@@ -28,40 +29,6 @@ function basicAuthHeader(username: string, password: string) {
 
 function round2(value: number) {
     return Math.round(value * 100) / 100;
-}
-
-function normalizeCountry(value: unknown) {
-    if (typeof value !== "string") return undefined;
-
-    const trimmed = value.trim();
-    if (!trimmed) return undefined;
-
-    if (/^[A-Z]{2}$/.test(trimmed)) {
-        return trimmed;
-    }
-
-    const known: Record<string, string> = {
-        uk: "GB",
-        gb: "GB",
-        "great britain": "GB",
-        "united kingdom": "GB",
-        england: "GB",
-        scotland: "GB",
-        wales: "GB",
-        "northern ireland": "GB",
-        ireland: "IE",
-        ukraine: "UA",
-        usa: "US",
-        us: "US",
-        "united states": "US",
-        germany: "DE",
-        france: "FR",
-        spain: "ES",
-        italy: "IT",
-        poland: "PL",
-    };
-
-    return known[trimmed.toLowerCase()];
 }
 
 function compactObject<T extends Record<string, unknown>>(value: T) {
@@ -154,11 +121,12 @@ export async function POST(req: NextRequest) {
 
         await connectDB();
         const user = await User.findById(auth.sub).lean();
+        const normalizedCountry = normalizeAllowedCountry(user?.address?.country);
 
         const address = compactObject({
             street: user?.address?.street || undefined,
             city: user?.address?.city || undefined,
-            country: normalizeCountry(user?.address?.country),
+            country: normalizedCountry?.code,
             post_code: user?.address?.postalCode || undefined,
         });
 

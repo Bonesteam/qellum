@@ -11,6 +11,7 @@ import { useCurrency } from "@/context/CurrencyContext";
 
 const TOKENS_PER_GBP = 100;
 const MIN_TOKENS = 1000;
+const PURCHASE_CURRENCY = "EUR";
 
 interface PricingCardProps {
   variant?: "starter" | "pro" | "premium" | "custom";
@@ -41,7 +42,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
 }) => {
   const { showAlert } = useAlert();
   const user = useUser();
-  const { currency, setCurrency, sign, convertFromGBP, convertToGBP } = useCurrency();
+  const { sign, convertFromGBP } = useCurrency();
   // allow user to enter desired tokens for custom top-up
   const [customTokens, setCustomTokens] = useState<number>(MIN_TOKENS);
 
@@ -80,17 +81,17 @@ const PricingCard: React.FC<PricingCardProps> = ({
     }
 
     try {
-      let payload: { currency: "GBP" | "EUR" | "USD"; tokens: number };
+      let payload: { currency: "EUR"; tokens: number };
 
       if (isCustom) {
         const tokensToBuy = Math.max(MIN_TOKENS, Math.floor(customTokens));
         payload = {
-          currency,
+          currency: PURCHASE_CURRENCY,
           tokens: tokensToBuy,
         };
       } else {
         payload = {
-          currency,
+          currency: PURCHASE_CURRENCY,
           tokens: tokens,
         };
       }

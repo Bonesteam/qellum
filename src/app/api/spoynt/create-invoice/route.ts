@@ -9,13 +9,11 @@ import { normalizeAllowedCountry } from "@/constants/countries";
 
 const TOKENS_PER_GBP = 100;
 const RATES_TO_GBP = {
-    GBP: 1,
     EUR: 1.17,
-    USD: 1.22,
 } as const;
 const MIN_TOKENS = 1000;
 
-type SupportedCurrency = keyof typeof RATES_TO_GBP;
+type SupportedCurrency = "EUR";
 
 function assertEnv(name: string) {
     const value = process.env[name]?.trim();
@@ -95,8 +93,8 @@ export async function POST(req: NextRequest) {
         const body = await req.json().catch(() => ({}));
 
         const requestedCurrency = String(body.currency || "").toUpperCase() as SupportedCurrency;
-        if (!Object.keys(RATES_TO_GBP).includes(requestedCurrency)) {
-            return NextResponse.json({ message: "Unsupported currency" }, { status: 400 });
+        if (requestedCurrency !== "EUR") {
+            return NextResponse.json({ message: "Only EUR is supported" }, { status: 400 });
         }
 
         const requestedTokens = Number(body.tokens);

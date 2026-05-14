@@ -99,6 +99,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
       const response = await fetch("/api/spoynt/create-invoice", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(payload),
       });
 

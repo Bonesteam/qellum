@@ -78,6 +78,7 @@ const AllOrders: React.FC = () => {
             const res = await fetch(`/api/universal/get-order?id=${order._id}`, {
                 method: "GET",
                 headers: {"Content-Type": "application/json"},
+                credentials: "include",
             });
             const data = await res.json();
 

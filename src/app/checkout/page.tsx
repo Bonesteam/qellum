@@ -47,6 +47,7 @@ export default function CheckoutPage() {
       const res = await fetch("/api/spoynt/create-invoice", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           currency: checkout.currency,
           tokens: checkout.tokens,

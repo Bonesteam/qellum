@@ -59,6 +59,7 @@ export const signUpOnSubmit = async (
         const res = await fetch("/api/auth/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            credentials: "include",
             body: JSON.stringify(requestBody),
         });
         

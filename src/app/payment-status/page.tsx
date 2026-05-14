@@ -42,7 +42,7 @@ export default function PaymentStatusPage() {
 
         const loadStatus = async () => {
             try {
-                const response = await fetch(`/api/spoynt/status/${reference}`, { cache: "no-store" });
+                const response = await fetch(`/api/spoynt/status/${reference}`, { cache: "no-store", credentials: "include" });
                 const data = await response.json();
 
                 if (!response.ok) {

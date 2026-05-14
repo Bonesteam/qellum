@@ -208,28 +208,12 @@ export const spoyntService = {
 
         const outcome = normalizeOutcome(input.status, input.resolution);
 
-        if (payment.creditStatus === "credited" && outcome === "credited") {
+        if (payment.creditStatus === "credited") {
             return {
                 state: "credited",
                 tokens: payment.tokens,
                 balanceAfter: payment.balanceAfter,
                 alreadyCredited: true,
-                providerStatus: input.status,
-                providerResolution: input.resolution,
-            };
-        }
-
-        if (outcome === "pending") {
-            if (payment.creditStatus !== "pending" && payment.creditStatus !== "credited") {
-                payment.creditStatus = "pending";
-                await payment.save();
-            }
-
-            return {
-                state: "pending",
-                status: input.status,
-                resolution: input.resolution,
-                alreadyCredited: payment.creditStatus === "credited",
                 providerStatus: input.status,
                 providerResolution: input.resolution,
             };
@@ -245,7 +229,7 @@ export const spoyntService = {
                 state: "failed",
                 status: input.status,
                 resolution: input.resolution,
-                alreadyCredited: payment.creditStatus === "credited",
+                alreadyCredited: false,
                 providerStatus: input.status,
                 providerResolution: input.resolution,
             };

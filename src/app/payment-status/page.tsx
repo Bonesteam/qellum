@@ -51,7 +51,7 @@ export default function PaymentStatusPage() {
 
                 if (cancelled) return;
 
-                if (data.status === "credited") {
+                if (data.state === "credited") {
                     localStorage.removeItem("checkoutData");
                     setState({
                         loading: false,
@@ -65,7 +65,7 @@ export default function PaymentStatusPage() {
                     return;
                 }
 
-                if (data.status === "pending") {
+                if (data.state === "pending") {
                     attempts += 1;
                     setState({
                         loading: attempts < 10,

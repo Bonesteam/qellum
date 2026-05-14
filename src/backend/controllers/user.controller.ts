@@ -1,5 +1,6 @@
 import { connectDB } from "../config/db";
 import { userService } from "../services/user.service";
+import { User } from "@/backend/models/user.model";
 import { UserType } from "@/backend/types/user.types";
 import { sendEmail } from "@/backend/utils/sendEmail";
 import { transactionService } from "@/backend/services/transaction.service";
@@ -75,8 +76,8 @@ export const userController = {
         if (!user) throw new Error("User not found");
         if ((user.tokens || 0) < amount) throw new Error("Not enough tokens");
 
+        await User.updateOne({ _id: userId }, { $inc: { tokens: -amount } });
         user.tokens -= amount;
-        await user.save();
 
         await transactionService.record(user._id, user.email, amount, "spend", user.tokens);
 

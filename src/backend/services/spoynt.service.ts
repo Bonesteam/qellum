@@ -56,6 +56,7 @@ function normalizeOutcome(status: string, resolution: string | null) {
         "success",
         "successful",
         "settled",
+        "process_pending",
     ]);
     const failedStatuses = new Set([
         "failed",
@@ -75,7 +76,6 @@ function normalizeOutcome(status: string, resolution: string | null) {
         "invoked",
         "pending",
         "processing",
-        "process_pending",
         "authorized",
         "authorizing",
         "verification",
@@ -208,12 +208,28 @@ export const spoyntService = {
 
         const outcome = normalizeOutcome(input.status, input.resolution);
 
-        if (payment.creditStatus === "credited") {
+        if (payment.creditStatus === "credited" && outcome === "credited") {
             return {
                 state: "credited",
                 tokens: payment.tokens,
                 balanceAfter: payment.balanceAfter,
                 alreadyCredited: true,
+                providerStatus: input.status,
+                providerResolution: input.resolution,
+            };
+        }
+
+        if (outcome === "pending") {
+            if (payment.creditStatus !== "pending" && payment.creditStatus !== "credited") {
+                payment.creditStatus = "pending";
+                await payment.save();
+            }
+
+            return {
+                state: "pending",
+                status: input.status,
+                resolution: input.resolution,
+                alreadyCredited: payment.creditStatus === "credited",
                 providerStatus: input.status,
                 providerResolution: input.resolution,
             };
@@ -229,7 +245,7 @@ export const spoyntService = {
                 state: "failed",
                 status: input.status,
                 resolution: input.resolution,
-                alreadyCredited: false,
+                alreadyCredited: payment.creditStatus === "credited",
                 providerStatus: input.status,
                 providerResolution: input.resolution,
             };

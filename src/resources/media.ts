@@ -66,7 +66,7 @@ export const media = {
     template2: template2,
     template3: template3,
 
-    CVMakerDemo: '/videos/cv-maker-demo.mp4',
+    qellumDemo: '/videos/qellum-demo.mp4',
     coachWork: '/videos/coach-work.mp4',
     fitPlannerDemo: '/videos/fit-planner-demo.mp4',
 

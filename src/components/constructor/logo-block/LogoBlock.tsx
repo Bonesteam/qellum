@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { COMPANY_NAME } from "@/resources/constants";
 import { media } from "@/resources/media";
 import styles from "./LogoBlock.module.scss";
 
@@ -13,7 +14,7 @@ interface LogoBlockProps {
 const LogoBlock: React.FC<LogoBlockProps> = ({
                                                  width = 180,
                                                  height = 60,
-                                                 alt = "CVMaker Logo",
+                                                 alt = COMPANY_NAME || "Qellum Logo",
                                              }) => {
     return (
         <div className={styles.logoWrapper}>

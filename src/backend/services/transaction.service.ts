@@ -8,7 +8,8 @@ export const transactionService = {
         email: string,
         amount: number,
         type: "add" | "spend",
-        balanceAfter: number
+        balanceAfter: number,
+        paymentReferenceId?: string | null
     ) {
         await connectDB();
         const tx = await Transaction.create({
@@ -17,8 +18,14 @@ export const transactionService = {
             amount,
             type,
             balanceAfter,
+            paymentReferenceId: paymentReferenceId || undefined,
         });
         console.log("🧾 Transaction saved:", tx);
         return tx;
+    },
+
+    async findByPaymentReference(paymentReferenceId: string) {
+        await connectDB();
+        return Transaction.findOne({ paymentReferenceId }).lean();
     },
 };

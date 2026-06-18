@@ -5,14 +5,15 @@ import Link from "next/link";
 import styles from "./AuthButtons.module.scss";
 import {FaUser} from "react-icons/fa";
 import {GrMoney} from "react-icons/gr";
+import { useWalletBalance } from "@/hooks/useWalletBalance";
 
 const AuthButtons: React.FC = () => {
     const user = useUser();
+    const { formatted } = useWalletBalance();
 
     if (user) {
         return (
             <div className={styles.userContainer}>
-
                 <Link href="/dashboard" className={styles.dashboardButton}>
                     <ButtonUI
                         text="Create Meal"
@@ -27,18 +28,16 @@ const AuthButtons: React.FC = () => {
                 <Link href="/profile" className={styles.userCard}>
                     <div className={styles.userBalance}>
                         <GrMoney className={styles.tokenIcon}/>
-                        <span className={styles.balanceText}>{user?.tokens ?? 0} Tokens</span>
+                        <span className={styles.balanceText}>{formatted}</span>
                     </div>
                     <div className={styles.userIconWrapper}>
                         <FaUser className={styles.userIcon}/>
                     </div>
                 </Link>
-
             </div>
         );
     }
 
-    // 🔹 Якщо неавторизований
     return (
         <div className={styles.nonAuthedButtons}>
             <Link href="/sign-in">

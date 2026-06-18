@@ -40,6 +40,7 @@ import TestimonialsSlider from "@/components/constructor/testimonials-slider/Tes
 import VideoDemo from "@/components/constructor/video-demo/VideoDemo";
 import StoryTimeline from "@/components/constructor/story-timeline/StoryTimeline";
 import InfoBlock from "@/components/constructor/Info-block/InfoBlock";
+import CalorieCalculator from "@/components/widgets/calorie-calculator/CalorieCalculator";
 
 // ------------------- helpers -------------------
 
@@ -77,6 +78,9 @@ function RenderCustom(b: CustomBlock) {
 
         case "ContactForm":
             return <ContactUsForm />;
+
+        case "CalorieCalculator":
+            return <CalorieCalculator />;
 
         case "LogoBlock":
             return <LogoBlock width={b.width} height={b.height} />;
@@ -213,7 +217,7 @@ function RenderPricingCard(b: PricingBlock) {
             buttonText={b.buttonText}
             buttonLink={b.buttonLink}
             badgeTop={b.badgeTop}
-            badgeBottom={b.badgeBottom}е
+            badgeBottom={b.badgeBottom}
         />
     );
 }

@@ -34,8 +34,7 @@ const privacyPolicySchema: PageSchema = {
             title: "Privacy Policy",
             description: "Effective date: 10 September 2025",
             centerTitle: true,
-            centerDescription: true,
-            centerBullets: true
+            centerDescription: true
         },
         {
             type: "text",
@@ -46,8 +45,7 @@ const privacyPolicySchema: PageSchema = {
                 `${COMPANY_NAME} is operated by ${COMPANY_LEGAL_NAME} (Company No. ${COMPANY_NUMBER}), registered at ${COMPANY_ADDRESS}.`,
                 `For any questions or data requests, contact us at ${COMPANY_EMAIL}.`
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -61,8 +59,7 @@ const privacyPolicySchema: PageSchema = {
                 "Chef or AI interactions: messages, recipe feedback, uploaded photos, or plan notes.",
                 "Support communications: requests, attachments, and correspondence with our team."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -75,8 +72,7 @@ const privacyPolicySchema: PageSchema = {
                 "Marketing (consent): newsletters or recipe tips, only if you opt-in.",
                 "Analytics & improvements (legitimate interests): to enhance platform performance and usability."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -89,8 +85,7 @@ const privacyPolicySchema: PageSchema = {
                 "Law enforcement or regulators, where legally required.",
                 "Some partners may be located outside the UK/EEA; we use UK adequacy decisions or SCCs to ensure protection equivalent to UK GDPR."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -100,8 +95,7 @@ const privacyPolicySchema: PageSchema = {
                 "Essential cookies are required to log in and use the dashboard.",
                 "You can manage non-essential cookies in your browser settings or via our Cookie Policy."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -114,8 +108,7 @@ const privacyPolicySchema: PageSchema = {
                 "Marketing data: removed upon withdrawal of consent.",
                 "Once no longer needed, all data is securely erased or anonymized."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -128,8 +121,7 @@ const privacyPolicySchema: PageSchema = {
                 "Object to processing where based on legitimate interests.",
                 `To exercise your rights, contact ${COMPANY_EMAIL}. Verification may be required. We respond within statutory timeframes.`
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -138,8 +130,7 @@ const privacyPolicySchema: PageSchema = {
                 "We apply encryption, secure access control, monitoring, and staff training to protect your information.",
                 "While no online system is completely secure, Qellum promptly investigates and reports any data breaches in line with legal obligations."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -149,8 +140,7 @@ const privacyPolicySchema: PageSchema = {
                 "These processes do not have legal or significant effects on you.",
                 "You may request details or opt-out of AI personalization at any time."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -160,8 +150,7 @@ const privacyPolicySchema: PageSchema = {
                 "Major changes will be communicated via email or in-app notifications.",
                 "The effective date will always reflect the latest version."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -170,8 +159,7 @@ const privacyPolicySchema: PageSchema = {
                 `For privacy-related questions or complaints, contact us at ${COMPANY_EMAIL}.`,
                 "If you are unsatisfied with our response, you have the right to lodge a complaint with the UK Information Commissioner’s Office (ICO)."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -182,8 +170,7 @@ const privacyPolicySchema: PageSchema = {
                 `Registered office: ${COMPANY_ADDRESS}`,
                 `Email: ${COMPANY_EMAIL}`
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         }
     ]
 };

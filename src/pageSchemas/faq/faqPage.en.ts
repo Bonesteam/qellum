@@ -81,7 +81,7 @@ const faqSchema: PageSchema = {
             },
             {
                 question: "How can I contact support?",
-                answer: "Our support team is always here to help. You can reach us at support@qellum.com or through the contact form on our website.",
+                answer: "Our support team is always here to help. You can reach us at info@qellum.co.uk or through the contact form on our website.",
             },
         ],
     },

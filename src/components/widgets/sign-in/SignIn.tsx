@@ -39,12 +39,13 @@ export default function SignInPage() {
                     ]}
                     fields={[
                         { name: "email", type: "email", placeholder: "Email" },
-                        { name: "password", type: "password", placeholder: "Password" }
+                        { name: "password", type: "password", placeholder: "Password" },
                     ]}
                     submitLabel="Sign In"
                     switchText="Need an account?"
                     switchHref="/sign-up"
                     switchLabel="Create one"
+                    extraLink={{ href: "/forgot-password", label: "Forgot password?" }}
                 />
             )}
         </Formik>

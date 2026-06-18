@@ -1,0 +1,349 @@
+.tracker {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 8px;
+  font-family: var(--font-family);
+  color: var(--text-primary);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 4px 0 0;
+}
+
+.weekBadge {
+  background: var(--surface-muted);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* === Day Selector === */
+.dayRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.dayBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: var(--surface-muted);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 10px 6px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  min-height: 90px;
+  justify-content: flex-end;
+}
+
+.dayBtn:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.dayBtnActive {
+  border-color: var(--primary-color) !important;
+  background: rgba(45, 90, 39, 0.06) !important;
+  box-shadow: 0 4px 12px rgba(45, 90, 39, 0.15);
+}
+
+.dayLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  z-index: 1;
+  position: relative;
+}
+
+.dayCalories {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  z-index: 1;
+  position: relative;
+}
+
+.dayBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: height 0.4s ease;
+  border-radius: 0 0 10px 10px;
+}
+
+/* === Stats Grid === */
+.statsGrid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* === Calorie Ring Card === */
+.calorieCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+  min-width: 220px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.calorieRing {
+  position: relative;
+  width: 130px;
+  height: 130px;
+}
+
+.ringChart {
+  width: 100%;
+  height: 100%;
+}
+
+.ringCenter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ringValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.ringLabel {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.calorieInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.calorieStat {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+
+  span {
+    color: var(--text-muted);
+  }
+
+  strong {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+}
+
+/* === Macro Cards === */
+.macroCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.macroCard {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.macroTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.macroName {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.macroValue {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+
+  small {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+}
+
+.macroTrack {
+  height: 6px;
+  background: var(--surface-muted);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.macroFill {
+  height: 100%;
+  border-radius: 3px;
+}
+
+.macroPct {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+/* === Weekly Summary === */
+.summarySection {
+  background: var(--surface-muted);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid var(--border-color);
+}
+
+.summaryTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 16px;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.summaryCard {
+  background: var(--surface-color);
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+}
+
+.summaryValue {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.summaryLabel {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* === Note === */
+.trackerNote {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: rgba(184, 134, 11, 0.06);
+  border: 1px solid rgba(184, 134, 11, 0.2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+
+  p {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  a {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}
+
+/* === Responsive === */
+@media (max-width: 900px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .calorieCard {
+    flex-direction: row;
+    min-width: auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .dayRow {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+  }
+
+  .dayBtn {
+    padding: 8px 4px;
+    min-height: 70px;
+  }
+
+  .dayCalories {
+    font-size: 0.65rem;
+  }
+
+  .macroCards {
+    grid-template-columns: 1fr;
+  }
+
+  .summaryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calorieCard {
+    flex-direction: column;
+  }
+}

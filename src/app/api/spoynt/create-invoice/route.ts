@@ -5,14 +5,15 @@ import { connectDB } from "@/backend/config/db";
 import { User } from "@/backend/models/user.model";
 import { spoyntService } from "@/backend/services/spoynt.service";
 import { ENV } from "@/backend/config/env";
+import { userController } from "@/backend/controllers/user.controller";
+import { isTestMode } from "@/backend/config/features";
+import { displayToGbp, minTopUpForCurrency, round2, syncLegacyTokens, TOKENS_PER_GBP } from "@/utils/wallet";
 
-const TOKENS_PER_GBP = 100;
 const RATES_TO_GBP = {
     GBP: 1,
     EUR: 1.17,
     USD: 1.22,
 } as const;
-const MIN_TOKENS = 1000;
 
 type SupportedCurrency = keyof typeof RATES_TO_GBP;
 
@@ -132,21 +133,75 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ message: "Unsupported currency" }, { status: 400 });
         }
 
-        const requestedTokens = Number(body.tokens);
-        if (!Number.isFinite(requestedTokens) || requestedTokens < MIN_TOKENS) {
-            return NextResponse.json(
-                { message: `Minimum purchase is ${MIN_TOKENS} tokens` },
-                { status: 400 }
-            );
+        const minTopUp = minTopUpForCurrency(requestedCurrency);
+        let amount: number;
+        let tokens: number;
+
+        if (body.amount != null && body.amount !== "") {
+            amount = round2(Number(body.amount));
+            if (!Number.isFinite(amount) || amount < minTopUp) {
+                return NextResponse.json(
+                    { message: `Minimum top-up is ${minTopUp.toFixed(2)} ${requestedCurrency}` },
+                    { status: 400 }
+                );
+            }
+            const gbpEquivalent = displayToGbp(amount, requestedCurrency);
+            tokens = syncLegacyTokens(gbpEquivalent);
+        } else {
+            const requestedTokens = Number(body.tokens);
+            if (!Number.isFinite(requestedTokens) || requestedTokens < syncLegacyTokens(10)) {
+                return NextResponse.json(
+                    { message: `Minimum top-up is ${minTopUp.toFixed(2)} ${requestedCurrency}` },
+                    { status: 400 }
+                );
+            }
+            tokens = Math.floor(requestedTokens);
+            amount = round2((tokens / TOKENS_PER_GBP) * RATES_TO_GBP[requestedCurrency]);
         }
 
-        const tokens = Math.floor(requestedTokens);
-        const amount = round2((tokens / TOKENS_PER_GBP) * RATES_TO_GBP[requestedCurrency]);
         if (!Number.isFinite(amount) || amount <= 0) {
             return NextResponse.json({ message: "Invalid amount" }, { status: 400 });
         }
 
         const referenceId = crypto.randomUUID();
+        const gbpAmount = displayToGbp(amount, requestedCurrency);
+
+        if (isTestMode()) {
+            await connectDB();
+            await spoyntService.upsertCreatedInvoice({
+                cpi: `test-${referenceId}`,
+                referenceId,
+                userId: auth.sub,
+                tokens,
+                requestedCurrency,
+                requestedAmount: amount,
+                chargedCurrency: requestedCurrency,
+                chargedAmount: amount,
+                status: "processed",
+                resolution: "ok",
+                providerUpdatedAt: Date.now(),
+            });
+
+            await userController.topUpWallet(auth.sub, gbpAmount, {
+                chargedAmount: amount,
+                chargedCurrency: requestedCurrency,
+                referenceId,
+            });
+
+            const testReturnUrl = `${ENV.APP_URL}/payment-status?reference=${referenceId}&result=success`;
+            return NextResponse.json({
+                cpi: `test-${referenceId}`,
+                referenceId,
+                amount,
+                currency: requestedCurrency,
+                amountGBP: gbpAmount,
+                redirectUrl: testReturnUrl,
+                redirectMethod: "GET",
+                redirectParams: {},
+                testMode: true,
+            });
+        }
+
         const SPOYNT_BASE_URL = assertEnv("SPOYNT_BASE_URL");
         const SPOYNT_ACCOUNT_ID = assertEnv("SPOYNT_ACCOUNT_ID");
         const SPOYNT_API_KEY = assertEnv("SPOYNT_API_KEY");
@@ -192,6 +247,7 @@ export async function POST(req: NextRequest) {
             metadata: {
                 user_id: auth.sub,
                 tokens: String(tokens),
+                top_up_gbp: String(gbpAmount),
                 ui_currency: requestedCurrency,
                 ui_amount: String(amount),
             },

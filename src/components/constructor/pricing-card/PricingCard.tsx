@@ -8,9 +8,7 @@ import { useAlert } from "@/context/AlertContext";
 import { useUser } from "@/context/UserContext";
 import Input from "@mui/joy/Input";
 import { useCurrency } from "@/context/CurrencyContext";
-
-const TOKENS_PER_GBP = 100;
-const MIN_TOKENS = 1000;
+import { minTopUpForCurrency } from "@/utils/wallet";
 
 interface PricingCardProps {
   variant?: "starter" | "pro" | "premium" | "custom";
@@ -30,20 +28,19 @@ const PricingCard: React.FC<PricingCardProps> = ({
   variant = "starter",
   title,
   price,
-  tokens,
   description,
   features,
   buttonText,
-  buttonLink,
   badgeTop,
   badgeBottom,
   index = 0,
 }) => {
   const { showAlert } = useAlert();
   const user = useUser();
-  const { currency, setCurrency, sign, convertFromGBP, convertToGBP } = useCurrency();
-  // allow user to enter desired tokens for custom top-up
-  const [customTokens, setCustomTokens] = useState<number>(MIN_TOKENS);
+  const { currency, sign, convertFromGBP } = useCurrency();
+  const minTopUp = minTopUpForCurrency(currency);
+  const [customAmount, setCustomAmount] = useState<number>(minTopUp);
+  const [isBuying, setIsBuying] = useState(false);
 
   const isCustom = price === "dynamic";
   const basePriceGBP = useMemo(
@@ -73,32 +70,29 @@ const PricingCard: React.FC<PricingCardProps> = ({
   };
 
   const handleBuy = async () => {
+    if (isBuying) return;
+
     if (!user) {
-      showAlert("Please sign up", "You need to be signed in to purchase", "info");
+      showAlert("Please sign up", "You need to be signed in to top up your wallet", "info");
       setTimeout(() => (window.location.href = "/sign-up"), 1200);
       return;
     }
 
-    try {
-      let payload: { currency: "GBP" | "EUR" | "USD"; tokens: number };
+    setIsBuying(true);
 
-      if (isCustom) {
-        const tokensToBuy = Math.max(MIN_TOKENS, Math.floor(customTokens));
-        payload = {
-          currency,
-          tokens: tokensToBuy,
-        };
-      } else {
-        payload = {
-          currency,
-          tokens: tokens,
-        };
+    try {
+      const amount = isCustom
+        ? Math.max(minTopUp, Number(customAmount) || minTopUp)
+        : convertedPrice;
+
+      if (amount < minTopUp) {
+        throw new Error(`Minimum top-up is ${sign}${minTopUp.toFixed(2)}`);
       }
 
       const response = await fetch("/api/spoynt/create-invoice", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ currency, amount }),
       });
 
       const data = await response.json();
@@ -117,9 +111,10 @@ const PricingCard: React.FC<PricingCardProps> = ({
         return;
       }
 
-      throw new Error("Spoynt redirect URL was not returned");
-    } catch (err: any) {
-      showAlert("Error", err.message || "Something went wrong", "error");
+      throw new Error("Payment redirect URL was not returned");
+    } catch (err: unknown) {
+      setIsBuying(false);
+      showAlert("Error", err instanceof Error ? err.message : "Something went wrong", "error");
     }
   };
 
@@ -141,28 +136,26 @@ const PricingCard: React.FC<PricingCardProps> = ({
           <div className={styles.customInput}>
             <Input
               type="number"
-              value={customTokens}
-              onChange={(e) => setCustomTokens(Number(e.target.value))}
-              slotProps={{ input: { min: MIN_TOKENS, step: 100 } }}
-              placeholder="Enter tokens"
+              value={customAmount}
+              onChange={(e) => setCustomAmount(Number(e.target.value))}
+              slotProps={{ input: { min: minTopUp, step: 1 } }}
+              placeholder={`Amount in ${currency}`}
               size="md"
             />
           </div>
           <p className={styles.dynamicPrice}>
             {sign}
-            {(() => {
-              const safeTokens = Math.max(MIN_TOKENS, Math.floor(customTokens || 0));
-              const gbp = safeTokens / TOKENS_PER_GBP;
-              return convertFromGBP(gbp).toFixed(2);
-            })()} ≈ {Math.max(MIN_TOKENS, Math.floor(customTokens || 0))} tokens
+            {Math.max(minTopUp, Number(customAmount) || minTopUp).toFixed(2)}
           </p>
-          <p className={styles.description}>Minimum purchase: {MIN_TOKENS} tokens.</p>
+          <p className={styles.description}>
+            Minimum top-up: {sign}
+            {minTopUp.toFixed(2)}. No upper limit.
+          </p>
         </>
       ) : (
         <p className={styles.price}>
           {sign}
-          {convertedPrice.toFixed(2)}{" "}
-          <span className={styles.tokens}>/ {tokens} tokens</span>
+          {convertedPrice.toFixed(2)}
         </p>
       )}
 
@@ -181,8 +174,8 @@ const PricingCard: React.FC<PricingCardProps> = ({
         ))}
       </ul>
 
-      <ButtonUI fullWidth onClick={handleBuy}>
-        {user ? buttonText : "Sign Up to Buy"}
+      <ButtonUI fullWidth onClick={handleBuy} disabled={isBuying}>
+        {isBuying ? "Processing..." : user ? buttonText : "Sign Up to Top Up"}
       </ButtonUI>
 
       {badgeBottom && <span className={styles.badgeBottom}>{badgeBottom}</span>}

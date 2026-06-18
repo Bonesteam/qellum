@@ -3,43 +3,51 @@
 import React, { useState } from "react";
 import AllOrders from "@/components/widgets/all-orders/AllOrders";
 import TransactionHistory from "@/components/widgets/all-transactions/AllTransactions";
-import { FaListUl, FaExchangeAlt } from "react-icons/fa";
+import { FaListUl, FaExchangeAlt, FaHeartbeat, FaChartPie } from "react-icons/fa";
 import styles from "./Dashboard.module.scss";
+import MealTracker from "./MealTracker";
+
+type Tab = "orders" | "transactions" | "tracker";
 
 export default function Dashboard() {
-    const [activeTab, setActiveTab] = useState<"orders" | "transactions">("orders");
+    const [activeTab, setActiveTab] = useState<Tab>("orders");
+
+    const tabs: { id: Tab; label: string; icon: React.ReactNode }[] = [
+        { id: "orders", label: "Orders", icon: <FaListUl /> },
+        { id: "transactions", label: "Transactions", icon: <FaExchangeAlt /> },
+        { id: "tracker", label: "Meal Tracker", icon: <FaHeartbeat /> },
+    ];
 
     return (
         <div className={styles.dashboard}>
-            {/* 🔹 Панель перемикача */}
+            {/* 🔹 Tab Navigation */}
             <div className={styles.toggleBar}>
-                <button
-                    className={`${styles.toggleButton} ${
-                        activeTab === "orders" ? styles.active : ""
-                    }`}
-                    onClick={() => setActiveTab("orders")}
-                >
-                    <FaListUl /> Orders
-                </button>
-                <button
-                    className={`${styles.toggleButton} ${
-                        activeTab === "transactions" ? styles.active : ""
-                    }`}
-                    onClick={() => setActiveTab("transactions")}
-                >
-                    <FaExchangeAlt /> Transactions
-                </button>
+                {tabs.map((tab) => (
+                    <button
+                        key={tab.id}
+                        className={`${styles.toggleButton} ${activeTab === tab.id ? styles.active : ""}`}
+                        onClick={() => setActiveTab(tab.id)}
+                    >
+                        {tab.icon} {tab.label}
+                    </button>
+                ))}
             </div>
 
-            {/* 🔹 Контент */}
+            {/* 🔹 Content */}
             <div className={styles.content}>
-                {activeTab === "orders" ? (
+                {activeTab === "orders" && (
                     <div key="orders" className={styles.fadeIn}>
                         <AllOrders />
                     </div>
-                ) : (
+                )}
+                {activeTab === "transactions" && (
                     <div key="transactions" className={styles.fadeIn}>
                         <TransactionHistory />
+                    </div>
+                )}
+                {activeTab === "tracker" && (
+                    <div key="tracker" className={styles.fadeIn}>
+                        <MealTracker />
                     </div>
                 )}
             </div>

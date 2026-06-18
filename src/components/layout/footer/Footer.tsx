@@ -64,22 +64,7 @@ const Footer: React.FC = () => {
             </address>
         ) : null;
 
-    const PaymentMethods = () => (
-        <div className={styles["footer__payments"]}>
-            <div className={styles["footer__column-title"]}>Payment Methods</div>
-            <div className={styles.paymentsContent}>
-                <Image src={media.visaLogo} alt="Visa" width={96} height={32} className={styles.paymentLogo} />
-                <Image
-                    src={media.mastercardLogo}
-                    alt="Mastercard"
-                    width={96}
-                    height={32}
-                    className={styles.paymentLogo}
-                />
-                <Image src={media.pciDssLogo} alt="PCI DSS" width={112} height={32} className={styles.paymentLogo} />
-            </div>
-        </div>
-    );
+    const PaymentMethods = () => null; // Relocated to top bar and footer copyright bar
 
     const LegalBlock = () =>
         legal ? (
@@ -94,7 +79,23 @@ const Footer: React.FC = () => {
                         <span>{legal.companyNumber}</span>
                     </div>
                 )}
+                {"vatNumber" in legal && legal.vatNumber && (
+                    <div className={styles["footer__legal-line"]}>
+                        <span className={styles["footer__legal-label"]}>VAT:</span>{" "}
+                        <span>{legal.vatNumber}</span>
+                    </div>
+                )}
                 <LegalAddress />
+                {"email" in legal && legal.email && (
+                    <div className={styles["footer__legal-line"]}>
+                        <a href={`mailto:${legal.email}`}>{legal.email}</a>
+                    </div>
+                )}
+                {"phone" in legal && legal.phone && (
+                    <div className={styles["footer__legal-line"]}>
+                        <a href={`tel:${legal.phone}`}>{legal.phone}</a>
+                    </div>
+                )}
             </div>
         ) : null;
 
@@ -163,16 +164,32 @@ const Footer: React.FC = () => {
         >
             {footerStyles.type === "columns" && (
                 <div className={styles["footer__inner"]}>
-                    <SmartLink href={logo.href} className={styles["footer__logo"]} ariaLabel="Logo">
-                        <Image
-                            src={logo.src}
-                            alt={logo.alt}
-                            width={0}
-                            height={0}
-                            sizes="120px"
-                            style={{ width: "var(--footer-logo-w)", height: "var(--footer-logo-h)" }}
-                        />
-                    </SmartLink>
+                    <div className={styles.logoAndSocials}>
+                        <SmartLink href={logo.href} className={styles["footer__logo"]} ariaLabel="Logo">
+                            <Image
+                                src={logo.src}
+                                alt={logo.alt}
+                                width={0}
+                                height={0}
+                                sizes="120px"
+                                style={{ width: "var(--footer-logo-w)", height: "var(--footer-logo-h)" }}
+                            />
+                        </SmartLink>
+                        <div className={styles.footer__socials}>
+                            {socialLinks.map((social) => (
+                                <a
+                                    key={social.label}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={social.label}
+                                    className={styles["footer__social-link"]}
+                                >
+                                    {social.icon}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
 
                     <div className={styles["footer__columns"]}>
                         {columns.map((col) => (
@@ -188,6 +205,7 @@ const Footer: React.FC = () => {
 
                         {legal && (
                             <div className={styles["footer__column"]}>
+                                <div className={styles["footer__column-title"]}>Company</div>
                                 <LegalBlock />
                             </div>
                         )}
@@ -209,6 +227,20 @@ const Footer: React.FC = () => {
                             style={{ width: "var(--footer-logo-w)", height: "var(--footer-logo-h)" }}
                         />
                     </SmartLink>
+                    <div className={styles.footer__socials}>
+                        {socialLinks.map((social) => (
+                            <a
+                                key={social.label}
+                                href={social.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={social.label}
+                                className={styles["footer__social-link"]}
+                            >
+                                {social.icon}
+                            </a>
+                        ))}
+                    </div>
                     <nav className={styles["footer__center-links"]}>
                         {columns.flatMap((c) => c.links).map((link) => (
                             <SmartLink href={link.href} className={styles["footer__center-link"]} key={link.label}>
@@ -241,6 +273,20 @@ const Footer: React.FC = () => {
                                 style={{ width: "var(--footer-logo-w)", height: "var(--footer-logo-h)" }}
                             />
                         </SmartLink>
+                        <div className={styles.footer__socials}>
+                            {socialLinks.map((social) => (
+                                <a
+                                    key={social.label}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={social.label}
+                                    className={styles["footer__social-link"]}
+                                >
+                                    {social.icon}
+                                </a>
+                            ))}
+                        </div>
                     </div>
                     <div className={styles["footer__mega-grid"]}>
                         {columns.map((col) => (
@@ -270,7 +316,7 @@ const Footer: React.FC = () => {
                 <div className={clsx(styles["footer__inner"], styles["footer__inner--corporate"])}>
                     {/* Верхній рядок: лого + 3 колонки */}
                     <div className={styles["footer__corporate-grid"]}>
-                        <div className={styles["footer__corporate-logo"]}>
+                        <div className={styles["footer__corporate-logo"]} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '10px' }}>
                             <SmartLink href={logo.href} className={styles["footer__logo"]} ariaLabel="Logo">
                                 <Image
                                     src={logo.src}
@@ -281,6 +327,20 @@ const Footer: React.FC = () => {
                                     style={{ width: "var(--footer-logo-w)", height: "var(--footer-logo-h)" }}
                                 />
                             </SmartLink>
+                            <div className={styles.footer__socials}>
+                                {socialLinks.map((social) => (
+                                    <a
+                                        key={social.label}
+                                        href={social.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={social.label}
+                                        className={styles["footer__social-link"]}
+                                    >
+                                        {social.icon}
+                                    </a>
+                                ))}
+                            </div>
                         </div>
 
                         {/* Company info */}
@@ -322,20 +382,10 @@ const Footer: React.FC = () => {
                 <div className={styles["footer__rights"]}>
                     © {new Date().getFullYear()} All rights reserved.
                 </div>
-                <div className={styles["footer__socials-bottom"]}>
-                    {socialLinks.map((social) => (
-                        <a
-                            key={social.label}
-                            href={social.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={social.label}
-                            className={styles["footer__social-pill"]}
-                        >
-                            {social.icon}
-                            <span>{social.label}</span>
-                        </a>
-                    ))}
+                <div className={styles.footerBottomPayments} style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                    <Image src={media.visaLogo} alt="Visa" width={48} height={16} style={{ filter: 'brightness(0) invert(1)', opacity: 0.8 }} />
+                    <Image src={media.mastercardLogo} alt="Mastercard" width={32} height={20} style={{ filter: 'brightness(0) invert(1)', opacity: 0.8 }} />
+                    <Image src={media.pciDssLogo} alt="PCI DSS" width={48} height={14} style={{ filter: 'brightness(0) invert(1)', opacity: 0.8 }} />
                 </div>
             </div>
         </footer>

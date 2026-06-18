@@ -36,11 +36,11 @@ export function buildWelcomeEmail(firstName: string) {
         text: `Hi ${safeName}, welcome to ${COMPANY_NAME}. Your account is active and you can now sign in and start using your dashboard.`,
         html: baseTemplate(
             `Welcome to ${COMPANY_NAME}`,
-            "Your account is ready. You can now sign in, manage your profile and start using tokens.",
+            "Your account is ready. You can now sign in, manage your profile and top up your wallet.",
             `
             <p style="margin:0 0 16px;font-size:16px;line-height:1.8;">Hi ${safeName},</p>
             <p style="margin:0 0 16px;font-size:16px;line-height:1.8;">
-              Your account has been created successfully. You can now access your dashboard, manage your profile and purchase tokens when needed.
+              Your account has been created successfully. You can now access your dashboard, manage your profile and top up your wallet when needed.
             </p>
             <p style="margin:0;font-size:16px;line-height:1.8;">
               If you did not create this account, please reply to this email immediately.
@@ -50,6 +50,77 @@ export function buildWelcomeEmail(firstName: string) {
     };
 }
 
+export function buildPasswordResetEmail(firstName: string, resetUrl: string) {
+    const safeName = firstName || "there";
+
+    return {
+        subject: `${COMPANY_NAME} password reset`,
+        text: `Hi ${safeName}, reset your password using this link (valid for 1 hour): ${resetUrl}`,
+        html: baseTemplate(
+            "Reset your password",
+            "Use the button below to choose a new password. This link expires in 1 hour.",
+            `
+            <p style="margin:0 0 16px;font-size:16px;line-height:1.8;">Hi ${safeName},</p>
+            <p style="margin:0 0 16px;font-size:16px;line-height:1.8;">
+              We received a request to reset your password. If you did not request this, you can ignore this email.
+            </p>
+            <a href="${resetUrl}" style="display:inline-block;padding:14px 22px;background:#ec7331;color:#ffffff;text-decoration:none;border-radius:999px;font-weight:700;">Reset password</a>
+          `
+        ),
+    };
+}
+
+export function buildWalletTopUpEmail(input: {
+    firstName: string;
+    amountGBP: number;
+    balanceAfterGBP: number;
+    chargedAmount?: number | null;
+    chargedCurrency?: string | null;
+    referenceId?: string | null;
+    invoiceNumber: string;
+}) {
+    const safeName = input.firstName || "there";
+    const amountLine =
+        typeof input.chargedAmount === "number" && input.chargedCurrency
+            ? `${input.chargedAmount.toFixed(2)} ${input.chargedCurrency}`
+            : `${input.amountGBP.toFixed(2)} GBP`;
+
+    return {
+        subject: `${COMPANY_NAME} wallet top-up receipt`,
+        text: `Hi ${safeName}, your wallet top-up was confirmed. Amount: ${amountLine}. Balance: £${input.balanceAfterGBP.toFixed(2)}. Invoice: ${input.invoiceNumber}.`,
+        html: baseTemplate(
+            "Wallet top-up confirmed",
+            "Your wallet has been credited successfully. The invoice PDF is attached to this email.",
+            `
+            <p style="margin:0 0 16px;font-size:16px;line-height:1.8;">Hi ${safeName},</p>
+            <p style="margin:0 0 16px;font-size:16px;line-height:1.8;">
+              We have confirmed your payment and credited your wallet.
+            </p>
+            <table style="width:100%;border-collapse:collapse;margin-top:20px;">
+              <tr>
+                <td style="padding:12px;border:1px solid #f1dfcf;color:#8b6c5d;">Invoice</td>
+                <td style="padding:12px;border:1px solid #f1dfcf;color:#4b342c;font-weight:700;">${input.invoiceNumber}</td>
+              </tr>
+              <tr>
+                <td style="padding:12px;border:1px solid #f1dfcf;color:#8b6c5d;">Charged</td>
+                <td style="padding:12px;border:1px solid #f1dfcf;color:#4b342c;font-weight:700;">${amountLine}</td>
+              </tr>
+              <tr>
+                <td style="padding:12px;border:1px solid #f1dfcf;color:#8b6c5d;">Balance after top-up</td>
+                <td style="padding:12px;border:1px solid #f1dfcf;color:#4b342c;font-weight:700;">£${input.balanceAfterGBP.toFixed(2)}</td>
+              </tr>
+              ${input.referenceId ? `
+              <tr>
+                <td style="padding:12px;border:1px solid #f1dfcf;color:#8b6c5d;">Reference</td>
+                <td style="padding:12px;border:1px solid #f1dfcf;color:#4b342c;font-weight:700;">${input.referenceId}</td>
+              </tr>` : ""}
+            </table>
+          `
+        ),
+    };
+}
+
+/** @deprecated Use buildWalletTopUpEmail */
 export function buildTokenPurchaseEmail(input: {
     firstName: string;
     tokens: number;

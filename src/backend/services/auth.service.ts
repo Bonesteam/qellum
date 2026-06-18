@@ -5,8 +5,11 @@ import { sha256, randomToken } from "../utils/crypto";
 import { signAccessToken, signRefreshToken } from "../utils/jwt";
 import { ENV } from "../config/env";
 import { Types } from "mongoose";
-import {sendEmail} from "@/backend/utils/sendEmail";
-import { buildWelcomeEmail } from "@/backend/utils/emailTemplates";
+import { sendEmail } from "@/backend/utils/sendEmail";
+import { buildWelcomeEmail, buildPasswordResetEmail } from "@/backend/utils/emailTemplates";
+import { getTestAccountBalanceGBP, getTestAccountEmail, isTestMode } from "../config/features";
+import { syncLegacyTokens } from "@/utils/wallet";
+import { PasswordReset } from "../models/passwordReset.model";
 
 function parseDurationToSec(input: string): number {
     const m = input.match(/^(\d+)([smhd])?$/i);
@@ -33,7 +36,16 @@ export const authService = {
             phone: data.phone,
             address: data.address,
             dateOfBirth: new Date(data.dateOfBirth),
+            balanceGBP: 0,
+            tokens: 0,
         });
+
+        if (isTestMode() && user.email === getTestAccountEmail()) {
+            const balance = getTestAccountBalanceGBP();
+            user.balanceGBP = balance;
+            user.tokens = syncLegacyTokens(balance);
+            await user.save();
+        }
         const result = await this.issueTokensAndSession(user._id, user.email, user.role, undefined, undefined);
         const welcomeEmail = buildWelcomeEmail(user.firstName);
         await sendEmail(user.email, welcomeEmail.subject, welcomeEmail.text, welcomeEmail.html);
@@ -134,5 +146,39 @@ export const authService = {
 
     async logoutAll(userId: string) {
         await RefreshSession.updateMany({ userId }, { $set: { revokedAt: new Date() } });
+    },
+
+    async requestPasswordReset(email: string) {
+        const user = await User.findOne({ email: email.toLowerCase() });
+        if (!user) return;
+
+        const rawToken = randomToken(48);
+        const tokenHash = sha256(rawToken);
+        const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
+
+        await PasswordReset.deleteMany({ userId: user._id, usedAt: null });
+        await PasswordReset.create({ userId: user._id, tokenHash, expiresAt });
+
+        const resetUrl = `${ENV.APP_URL}/reset-password?token=${rawToken}`;
+        const emailContent = buildPasswordResetEmail(user.firstName, resetUrl);
+        await sendEmail(user.email, emailContent.subject, emailContent.text, emailContent.html);
+    },
+
+    async resetPassword(rawToken: string, newPassword: string) {
+        const tokenHash = sha256(rawToken);
+        const record = await PasswordReset.findOne({ tokenHash, usedAt: null });
+        if (!record || record.expiresAt.getTime() < Date.now()) {
+            throw new Error("Invalid or expired reset link");
+        }
+
+        const user = await User.findById(record.userId);
+        if (!user) throw new Error("UserNotFound");
+
+        user.password = await bcrypt.hash(newPassword, 12);
+        await user.save();
+
+        record.usedAt = new Date();
+        await record.save();
+        await RefreshSession.updateMany({ userId: user._id }, { $set: { revokedAt: new Date() } });
     },
 };

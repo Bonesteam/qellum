@@ -41,22 +41,23 @@ export async function sendEmail(
 }
 
 function defaultTemplate(title: string, message: string) {
+    const company = process.env.NEXT_PUBLIC_COMPANY_NAME || "Qellum";
     return `
-    <div style="font-family: Arial, sans-serif; background:#f4faff; padding:20px; color:#333;">
+    <div style="font-family: Arial, sans-serif; background:#f4f9f4; padding:20px; color:#1e2b1a;">
       <div style="max-width:600px; margin:auto; background:#fff; border-radius:8px; padding:30px; box-shadow:0 4px 10px rgba(0,0,0,0.05);">
-        <h2 style="color:#007BFF; text-align:center;">${title}</h2>
-        <p style="font-size:16px; line-height:1.6; color:#333;">
+        <h2 style="color:#2D5A27; text-align:center;">${title}</h2>
+        <p style="font-size:16px; line-height:1.6; color:#1e2b1a;">
           ${message}
         </p>
         <div style="text-align:center; margin:30px 0;">
           <a href="${ENV.APP_URL}/dashboard" 
-             style="background:#007BFF; color:#fff; text-decoration:none; padding:12px 24px; border-radius:6px; font-weight:bold;">
+             style="background:#2D5A27; color:#fff; text-decoration:none; padding:12px 24px; border-radius:6px; font-weight:bold;">
              Go to Dashboard
           </a>
         </div>
         <hr style="margin:20px 0; border:none; border-top:1px solid #eee;" />
         <p style="font-size:14px; color:#777; text-align:center;">
-          © ${new Date().getFullYear()} CVMaker – All rights reserved.
+          © ${new Date().getFullYear()} ${company} – All rights reserved.
         </p>
       </div>
     </div>

@@ -2,6 +2,7 @@ import { connectDB } from "@/backend/config/db";
 import { SpoyntPayment } from "@/backend/models/spoyntPayment.model";
 import { userController } from "@/backend/controllers/user.controller";
 import { userService } from "@/backend/services/user.service";
+import { transactionService } from "@/backend/services/transaction.service";
 
 type SupportedCurrency = "GBP" | "EUR" | "USD";
 
@@ -225,11 +226,15 @@ export const spoyntService = {
         }
 
         try {
-            const creditedUser = await userController.buyTokens(input.userId, input.tokens, {
-                chargedAmount: input.chargedAmount,
-                chargedCurrency: input.chargedCurrency,
-                referenceId: input.referenceId,
-            });
+            const creditedUser = await userController.topUpWallet(
+                input.userId,
+                input.tokens / 100,
+                {
+                    chargedAmount: input.chargedAmount,
+                    chargedCurrency: input.chargedCurrency,
+                    referenceId: input.referenceId,
+                }
+            );
 
             await SpoyntPayment.updateOne(
                 { _id: reserved._id },
@@ -254,6 +259,33 @@ export const spoyntService = {
             };
         } catch (error) {
             const message = error instanceof Error ? error.message : "Unable to credit tokens";
+
+            if (input.referenceId) {
+                const existingTx = await transactionService.findByPaymentReference(input.referenceId);
+                if (existingTx) {
+                    await SpoyntPayment.updateOne(
+                        { _id: reserved._id },
+                        {
+                            $set: {
+                                creditStatus: "credited",
+                                creditedAt: new Date(),
+                                balanceAfter: existingTx.balanceAfter,
+                                status: input.status,
+                                resolution: input.resolution,
+                                providerUpdatedAt: input.providerUpdatedAt,
+                                lastError: null,
+                            },
+                        }
+                    );
+
+                    return {
+                        state: "credited",
+                        tokens: input.tokens,
+                        balanceAfter: existingTx.balanceAfter,
+                        alreadyCredited: true,
+                    };
+                }
+            }
 
             await SpoyntPayment.updateOne(
                 { _id: reserved._id },

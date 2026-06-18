@@ -4,6 +4,7 @@ import { User } from "../models/user.model";
 import { AuthResponse, AuthError, LogoutResponse } from "@/backend/types/auth.types";
 import { UserType } from "@/backend/types/user.types";
 import { signAccessToken } from "../utils/jwt";
+import { resolveBalanceGBP, syncLegacyTokens } from "@/utils/wallet";
 
 export const authController = {
     async register(body: { firstName: string; lastName: string; email: string; password: string; phone: string; address: { street: string; city: string; country: string; postalCode: string }; dateOfBirth: string }) {
@@ -41,17 +42,28 @@ export const authController = {
         await authService.logoutAll(userId);
         return { message: "All sessions revoked" };
     },
+
+    async requestPasswordReset(email: string) {
+        await connectDB();
+        await authService.requestPasswordReset(email);
+    },
+
+    async resetPassword(token: string, password: string) {
+        await connectDB();
+        await authService.resetPassword(token, password);
+    },
 };
 
 function toUser(u: any): UserType {
+    const balanceGBP = resolveBalanceGBP(u);
     return {
         _id: u._id.toString(),
         firstName: u.firstName,
         lastName: u.lastName,
         email: u.email,
         role: u.role,
-        tokens: u.tokens,
-        // keep created/updated mapping
+        balanceGBP,
+        tokens: syncLegacyTokens(balanceGBP),
         createdAt: u.createdAt,
         updatedAt: u.updatedAt,
     };

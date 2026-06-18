@@ -44,8 +44,7 @@ const cookiePolicyEn: PageSchema = {
                 "It complements our Privacy Policy.",
                 "By interacting with our cookie banner or preferences center, you can manage consent to non-essential cookies as described below."
             ],
-            centerTitle: true,
-            centerBullets: true,
+            centerTitle: true
         },
         {
             type: "text",
@@ -54,8 +53,7 @@ const cookiePolicyEn: PageSchema = {
                 `Controller: ${COMPANY_LEGAL_NAME} (Company No. ${COMPANY_NUMBER}), ${COMPANY_ADDRESS}`,
                 `Email: ${COMPANY_EMAIL}`
             ],
-            centerTitle: true,
-            centerBullets: true,
+            centerTitle: true
         },
         {
             type: "text",
@@ -65,8 +63,7 @@ const cookiePolicyEn: PageSchema = {
                 "They help the site to run essential functions (login, security), remember preferences, measure performance, and — where you consent — enable analytics and marketing.",
                 "Similar technologies include localStorage/sessionStorage keys, SDK identifiers, tracking pixels, and device/browser identifiers."
             ],
-            centerTitle: true,
-            centerBullets: true,
+            centerTitle: true
         },
         {
             type: "text",
@@ -78,8 +75,7 @@ const cookiePolicyEn: PageSchema = {
                 "Marketing / Advertising — set only with consent; for campaign attribution, remarketing, and effectiveness measurement.",
                 "Security / Anti-abuse — detect unusual activity, mitigate fraud and bot traffic."
             ],
-            centerTitle: true,
-            centerBullets: true,
+            centerTitle: true
         },
         {
             type: "text",
@@ -94,8 +90,7 @@ const cookiePolicyEn: PageSchema = {
                 "ql_token_hint (localStorage) — Remembers last token pack view • Functional • Until cleared",
                 "ql_generator_prefs (localStorage) — Saves generator form preferences • Functional • Until cleared"
             ],
-            centerTitle: true,
-            centerBullets: true,
+            centerTitle: true
         },
         {
             type: "text",
@@ -105,8 +100,7 @@ const cookiePolicyEn: PageSchema = {
                 "Non-essential cookies are set only after consent via the banner or preferences center, unless analytics rely on legitimate interests.",
                 "Lawful bases include performance of contract, consent, and legitimate interests (service improvement, fraud prevention)."
             ],
-            centerTitle: true,
-            centerBullets: true,
+            centerTitle: true
         },
         {
             type: "text",
@@ -115,8 +109,7 @@ const cookiePolicyEn: PageSchema = {
                 "We record consent categories selected, policy/version reference, timestamp, IP, and user-agent.",
                 "Records are retained for at least 24 months, up to 6 years for disputes, accounting, or enterprise needs, in line with our Privacy Policy."
             ],
-            centerTitle: true,
-            centerBullets: true,
+            centerTitle: true
         },
         {
             type: "text",
@@ -127,8 +120,7 @@ const cookiePolicyEn: PageSchema = {
                 "We apply safeguards like UK adequacy regulations or Standard Contractual Clauses.",
                 "The full list is available in your cookie settings panel."
             ],
-            centerTitle: true,
-            centerBullets: true,
+            centerTitle: true
         },
         {
             type: "text",
@@ -139,8 +131,7 @@ const cookiePolicyEn: PageSchema = {
                 "Cookies can also be cleared via browser settings or private/incognito mode.",
                 "Disabling certain cookies may limit functionality (login, preferences, AI tracking, dashboard)."
             ],
-            centerTitle: true,
-            centerBullets: true,
+            centerTitle: true
         },
         {
             type: "text",
@@ -148,8 +139,7 @@ const cookiePolicyEn: PageSchema = {
             bullets: [
                 "If your browser sends Global Privacy Control (GPC) or similar signals, we treat them as an opt-out from non-essential cookies where feasible and lawful."
             ],
-            centerTitle: true,
-            centerBullets: true,
+            centerTitle: true
         },
         {
             type: "text",
@@ -159,8 +149,7 @@ const cookiePolicyEn: PageSchema = {
                 "Significant changes will be notified via website notice or email.",
                 "The effective date always reflects the latest version."
             ],
-            centerTitle: true,
-            centerBullets: true,
+            centerTitle: true
         },
         {
             type: "text",
@@ -170,8 +159,7 @@ const cookiePolicyEn: PageSchema = {
                 `🏢 ${COMPANY_LEGAL_NAME}`,
                 COMPANY_ADDRESS ?? "Address not specified"
             ],
-            centerTitle: true,
-            centerBullets: true,
+            centerTitle: true
         }
     ]
 };

@@ -3,13 +3,14 @@ import { userService } from "../services/user.service";
 import { UserType } from "@/backend/types/user.types";
 import { sendEmail } from "@/backend/utils/sendEmail";
 import { transactionService } from "@/backend/services/transaction.service";
-import { buildTokenPurchaseEmail } from "@/backend/utils/emailTemplates";
+import { buildWalletTopUpEmail } from "@/backend/utils/emailTemplates";
 import { generateTokenInvoicePDF } from "@/backend/utils/generateTokenInvoice";
+import { resolveBalanceGBP, round2, syncLegacyTokens } from "@/utils/wallet";
 
 export const userController = {
-    async buyTokens(
+    async topUpWallet(
         userId: string,
-        amount: number,
+        amountGBP: number,
         paymentDetails?: {
             chargedAmount?: number | null;
             chargedCurrency?: string | null;
@@ -18,11 +19,47 @@ export const userController = {
     ): Promise<UserType> {
         await connectDB();
 
-        const user = await userService.addTokens(userId, amount);
+        const referenceId = paymentDetails?.referenceId?.trim() || null;
+        const gbpAmount = round2(amountGBP);
 
-        console.log("💳 Adding tokens for user:", userId);
-        const transaction = await transactionService.record(user._id, user.email, amount, "add", user.tokens);
-        console.log("✅ Transaction created successfully");
+        if (referenceId) {
+            const existingTx = await transactionService.findByPaymentReference(referenceId);
+            if (existingTx) {
+                const user = await userService.getUserById(userId);
+                if (!user) throw new Error("User not found");
+                return formatUser(user);
+            }
+        }
+
+        const user = await userService.addBalanceGBP(userId, gbpAmount);
+        const balanceGBP = resolveBalanceGBP(user);
+
+        let transaction;
+        try {
+            transaction = await transactionService.record(
+                user._id,
+                user.email,
+                syncLegacyTokens(gbpAmount),
+                "add",
+                syncLegacyTokens(balanceGBP),
+                referenceId
+            );
+        } catch (error) {
+            const isDuplicateReference =
+                referenceId &&
+                error &&
+                typeof error === "object" &&
+                "code" in error &&
+                (error as { code?: number }).code === 11000;
+
+            if (isDuplicateReference) {
+                const existingUser = await userService.getUserById(userId);
+                if (!existingUser) throw new Error("User not found");
+                return formatUser(existingUser);
+            }
+
+            throw error;
+        }
 
         const invoiceNumber = `QEL-${String(transaction._id).slice(-8).toUpperCase()}`;
         const pdf = await generateTokenInvoicePDF({
@@ -30,17 +67,17 @@ export const userController = {
             createdAt: new Date(transaction.createdAt),
             customerName: `${user.firstName} ${user.lastName}`.trim(),
             customerEmail: user.email,
-            tokens: amount,
+            tokens: syncLegacyTokens(gbpAmount),
             chargedAmount: paymentDetails?.chargedAmount ?? null,
             chargedCurrency: paymentDetails?.chargedCurrency ?? null,
-            balanceAfter: user.tokens,
+            balanceAfter: syncLegacyTokens(balanceGBP),
             referenceId: paymentDetails?.referenceId ?? null,
         });
 
-        const purchaseEmail = buildTokenPurchaseEmail({
+        const purchaseEmail = buildWalletTopUpEmail({
             firstName: user.firstName,
-            tokens: amount,
-            balanceAfter: user.tokens,
+            amountGBP: gbpAmount,
+            balanceAfterGBP: balanceGBP,
             chargedAmount: paymentDetails?.chargedAmount ?? null,
             chargedCurrency: paymentDetails?.chargedCurrency ?? null,
             referenceId: paymentDetails?.referenceId ?? null,
@@ -64,36 +101,58 @@ export const userController = {
         return formatUser(user);
     },
 
-    async spendTokens(userId: string, amount: number, reason?: string): Promise<UserType> {
+    /** @deprecated Use topUpWallet */
+    async buyTokens(
+        userId: string,
+        amount: number,
+        paymentDetails?: {
+            chargedAmount?: number | null;
+            chargedCurrency?: string | null;
+            referenceId?: string | null;
+        }
+    ): Promise<UserType> {
+        return userController.topUpWallet(userId, round2(amount / 100), paymentDetails);
+    },
+
+    async spendFromWallet(userId: string, amountGBP: number, reason?: string): Promise<UserType> {
         await connectDB();
 
-        const user = await userService.getUserById(userId);
-        if (!user) throw new Error("User not found");
-        if ((user.tokens || 0) < amount) throw new Error("Not enough tokens");
+        const user = await userService.spendBalanceGBP(userId, round2(amountGBP));
+        const balanceGBP = resolveBalanceGBP(user);
 
-        user.tokens -= amount;
-        await user.save();
-
-        await transactionService.record(user._id, user.email, amount, "spend", user.tokens);
+        await transactionService.record(
+            user._id,
+            user.email,
+            syncLegacyTokens(amountGBP),
+            "spend",
+            syncLegacyTokens(balanceGBP)
+        );
 
         sendEmail(
             user.email,
-            "Tokens Spent",
-            `You have spent ${amount} tokens${reason ? ` for ${reason}` : ""}. Your new balance is ${user.tokens} tokens.`
+            "Wallet debit",
+            `£${amountGBP.toFixed(2)} was debited from your wallet${reason ? ` for ${reason}` : ""}. Your balance is now £${balanceGBP.toFixed(2)}.`
         );
 
         return formatUser(user);
     },
+
+    /** @deprecated Use spendFromWallet — amount in legacy tokens. */
+    async spendTokens(userId: string, amount: number, reason?: string): Promise<UserType> {
+        return userController.spendFromWallet(userId, round2(amount / 100), reason);
+    },
 };
 
 function formatUser(user: any): UserType {
+    const balanceGBP = resolveBalanceGBP(user);
     return {
         _id: user._id.toString(),
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
         role: user.role,
-        tokens: user.tokens,
+        balanceGBP,
+        tokens: syncLegacyTokens(balanceGBP),
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
     };

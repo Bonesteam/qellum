@@ -200,6 +200,11 @@ Så vi byggde en plattform där riktiga kockar skapar kurser med AI-stöd — ko
         },
 
         {
+            type: "custom",
+            component: "CalorieCalculator",
+        },
+
+        {
             type: "grid",
             columns: 4,
             gap: "2rem",

@@ -41,6 +41,8 @@ export const footerContent = {
                 {label: "Cookie Policy", href: "/cookie-policy"},
                 {label: "Refund Policy", href: "/refund-policy"},
                 {label: "Privacy Policy", href: "/privacy-policy"},
+                {label: "Allergy & Dietary Safety", href: "/allergy-policy"},
+                {label: "Token Usage Policy", href: "/token-usage-policy"},
             ],
         },
     ],
@@ -53,7 +55,10 @@ export const footerContent = {
     legal: {
         companyName: "RISEWYNN LIMITED",
         companyNumber: "15799659",
+        vatNumber: process.env.NEXT_PUBLIC_COMPANY_VAT || null,
         address: "Academy House, 11 Dunraven Place, Bridgend, Mid Glamorgan, United Kingdom, CF31 1JF",
+        email: "info@qellum.co.uk",
+        phone: "+44 7457 423001",
     },
     socials: [],
 };

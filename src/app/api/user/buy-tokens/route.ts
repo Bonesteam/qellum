@@ -1,42 +1,46 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAuth } from "@/backend/middlewares/auth.middleware";
 import { userController } from "@/backend/controllers/user.controller";
+import { isTestMode } from "@/backend/config/features";
+import { displayToGbp, round2 } from "@/utils/wallet";
 
-const TOKENS_PER_GBP = 100;
-const RATES_TO_GBP = { GBP: 1, EUR: 1.17, USD: 1.22 };
+const RATES_TO_GBP = { GBP: 1, EUR: 1.17, USD: 1.22 } as const;
 
 export async function POST(req: NextRequest) {
+    if (!isTestMode()) {
+        return NextResponse.json({ message: "Direct top-up is only available in TEST_MODE" }, { status: 403 });
+    }
+
     try {
         const payload = await requireAuth(req);
         const body = await req.json();
 
         if (body.currency && body.amount) {
-            const { currency, amount } = body;
-            if (!["GBP", "EUR", "USD"].includes(currency)) {
+            const currency = String(body.currency).toUpperCase() as keyof typeof RATES_TO_GBP;
+            if (!RATES_TO_GBP[currency]) {
                 return NextResponse.json({ message: "Unsupported currency" }, { status: 400 });
             }
 
-            const gbpEquivalent = amount / RATES_TO_GBP[currency as "GBP" | "EUR"];
-            if (gbpEquivalent < 0.01) {
-                return NextResponse.json({ message: "Minimum is 0.01" }, { status: 400 });
-            }
+            const gbpAmount = displayToGbp(Number(body.amount), currency);
+            const user = await userController.topUpWallet(payload.sub, gbpAmount, {
+                chargedAmount: Number(body.amount),
+                chargedCurrency: currency,
+            });
 
-            const tokens = Math.floor(gbpEquivalent * TOKENS_PER_GBP);
-
-            // 🧾 запис транзакції вже всередині userController.buyTokens()
-            const user = await userController.buyTokens(payload.sub, tokens);
-
-            return NextResponse.json({ user, info: `Converted ${amount} ${currency} → ${tokens} tokens` });
+            return NextResponse.json({ user, info: `Credited £${gbpAmount.toFixed(2)}` });
         }
 
         const { amount } = body;
         if (!amount || amount <= 0) {
-            return NextResponse.json({ message: "Invalid token amount" }, { status: 400 });
+            return NextResponse.json({ message: "Invalid amount" }, { status: 400 });
         }
 
-        const user = await userController.buyTokens(payload.sub, amount);
+        const user = await userController.topUpWallet(payload.sub, round2(amount / 100));
         return NextResponse.json({ user });
-    } catch (err: any) {
-        return NextResponse.json({ message: err.message }, { status: 400 });
+    } catch (err: unknown) {
+        return NextResponse.json(
+            { message: err instanceof Error ? err.message : "Top-up failed" },
+            { status: 400 }
+        );
     }
 }

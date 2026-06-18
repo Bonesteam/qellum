@@ -26,8 +26,10 @@ const Text: React.FC<TextProps> = ({
                                    }) => {
     const headingTag = `h${titleLevel}` as keyof JSX.IntrinsicElements;
 
+    const isCentered = centerTitle || centerDescription;
+
     return (
-        <div className={styles.textBlock}>
+        <div className={clsx(styles.textBlock, isCentered && styles.center)}>
             {title &&
                 React.createElement(
                     headingTag,
@@ -44,7 +46,7 @@ const Text: React.FC<TextProps> = ({
             )}
 
             {Array.isArray(bullets) && bullets.length > 0 && (
-                <ul className={clsx(styles.bulletList, centerBullets && styles.center)}>
+                <ul className={styles.bulletList}>
                     {bullets.map((item, idx) => (
                         <li key={idx}>{item}</li>
                     ))}
@@ -54,7 +56,7 @@ const Text: React.FC<TextProps> = ({
             {Array.isArray(descriptionWithBullets) && descriptionWithBullets.length > 0 && (
                 <div className={styles.descriptionWithBullets}>
                     <p className={clsx(styles.description, centerDescription && styles.center)}>Опис:</p>
-                    <ul className={clsx(styles.bulletList, centerBullets && styles.center)}>
+                    <ul className={styles.bulletList}>
                         {descriptionWithBullets.map((item, idx) => (
                             <li key={idx}>{item}</li>
                         ))}

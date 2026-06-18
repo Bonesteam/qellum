@@ -174,3 +174,31 @@
     display: block;
   }
 }
+
+.headerSocials {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 12px;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  padding-right: 16px;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(45, 90, 39, 0.08);
+  color: var(--primary-color);
+  transition: all 0.25s ease;
+  font-size: 1.1rem;
+
+  &:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+}

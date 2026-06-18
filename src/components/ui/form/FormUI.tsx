@@ -28,6 +28,7 @@ interface FormUIProps {
     switchText?: string;
     switchHref?: string;
     switchLabel?: string;
+    extraLink?: { href: string; label: string };
 }
 
 const defaultFields: FieldConfig[] = [
@@ -53,6 +54,7 @@ const FormUI: React.FC<FormUIProps> = ({
                                            switchText,
                                            switchHref,
                                            switchLabel,
+                                           extraLink,
                                        }) => (
     <div className={styles.wrapper}>
         <div className={styles.shell}>
@@ -108,6 +110,11 @@ const FormUI: React.FC<FormUIProps> = ({
                         />
                     ))}
                     {children}
+                    {extraLink && (
+                        <div className={styles.switchRow}>
+                            <Link href={extraLink.href}>{extraLink.label}</Link>
+                        </div>
+                    )}
                     <ButtonUI
                         type="submit"
                         text={submitLabel}

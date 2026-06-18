@@ -4,13 +4,14 @@ import React, { useEffect, useState } from "react";
 import { headerContent } from "@/resources/content";
 import styles from "./Header.module.scss";
 import { IconButton } from "@mui/material";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaInstagram, FaPinterestP } from "react-icons/fa";
 import { useUser } from "@/context/UserContext";
 import Image from "next/image";
 import AuthButtons from "@/components/widgets/auth-buttons/AuthButtons";
 import { headerStyles } from "@/resources/styles-config";
 import DrawerMenu from "@/components/ui/drawer/Drawer";
 import { useCurrency, Currency } from "@/context/CurrencyContext";
+import { useI18n, LangCode } from "@/context/i18nContext";
 import { motion } from "framer-motion";
 
 const Header: React.FC = () => {
@@ -18,6 +19,7 @@ const Header: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const user = useUser();
     const { currency, setCurrency } = useCurrency();
+    const { lang, setLang } = useI18n();
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -75,12 +77,32 @@ const Header: React.FC = () => {
 
                     {/* Права частина — кнопки */}
                     <div className={styles.actionsNav}>
+                        <div className={styles.headerSocials}>
+                            <a href="https://www.instagram.com/qellum/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Instagram">
+                                <FaInstagram />
+                            </a>
+                            <a href="https://www.pinterest.com/qellum/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Pinterest">
+                                <FaPinterestP />
+                            </a>
+                        </div>
                         <AuthButtons />
+                        <div className={styles.currencySwitch}>
+                            <select
+                                value={lang}
+                                onChange={(e) => setLang(e.target.value as LangCode)}
+                                className={styles.currencySelect}
+                                aria-label="Language"
+                            >
+                                <option value="en">EN</option>
+                                <option value="sv">SV</option>
+                            </select>
+                        </div>
                         <div className={styles.currencySwitch}>
                             <select
                                 value={currency}
                                 onChange={(e) => setCurrency(e.target.value as Currency)}
                                 className={styles.currencySelect}
+                                aria-label="Currency"
                             >
                                 <option value="GBP">£ GBP</option>
                                 <option value="EUR">€ EUR</option>

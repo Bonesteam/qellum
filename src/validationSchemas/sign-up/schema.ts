@@ -1,4 +1,5 @@
-import {AlertColor} from "@mui/material/Alert";
+import { AlertColor } from "@mui/material/Alert";
+import { isCountryAllowed } from "@/resources/countries";
 
 export const signUpInitialValues = {
     firstName: "",
@@ -14,8 +15,6 @@ export const signUpInitialValues = {
     acceptedTerms: false,
 };
 
-const excludedCountries = ["Russia", "Belarus", "Iran", "North Korea"];
-
 export const signUpValidation = (values: typeof signUpInitialValues) => {
     const errors: Partial<Record<string, string>> = {};
     if (!values.firstName) errors.firstName = "Required";
@@ -26,10 +25,14 @@ export const signUpValidation = (values: typeof signUpInitialValues) => {
     if (!values.street) errors.street = "Required";
     if (!values.city) errors.city = "Required";
     if (!values.country) errors.country = "Required";
-    if (excludedCountries.includes(values.country)) errors.country = "Selected country is not allowed";
+    if (values.country && !isCountryAllowed(values.country)) {
+        errors.country = "Selected country is not allowed";
+    }
     if (!values.postalCode) errors.postalCode = "Required";
     if (!values.dateOfBirth) errors.dateOfBirth = "Required";
-    if (!values.acceptedTerms) errors.acceptedTerms = "Please accept Terms & Conditions";
+    if (!values.acceptedTerms) {
+        errors.acceptedTerms = "Please accept the Terms & Conditions and Privacy Policy";
+    }
     return errors;
 };
 
@@ -40,7 +43,6 @@ export const signUpOnSubmit = async (
     router: { replace: (url: string) => void; refresh: () => void }
 ) => {
     try {
-        // 🔥 FIX: Proper data structure for backend (address as nested object)
         const requestBody = {
             firstName: values.firstName,
             lastName: values.lastName,
@@ -51,31 +53,28 @@ export const signUpOnSubmit = async (
                 street: values.street,
                 city: values.city,
                 country: values.country,
-                postalCode: values.postalCode
+                postalCode: values.postalCode,
             },
-            dateOfBirth: values.dateOfBirth
+            dateOfBirth: values.dateOfBirth,
         };
-
-        console.log("Sending data:", requestBody); // For debugging
 
         const res = await fetch("/api/auth/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(requestBody),
         });
-        
+
         const data = await res.json();
-        
+
         if (res.ok && data?.user) {
-            showAlert("Registration successful!", "", "success");
+            showAlert("Registration successful!", "A confirmation email has been sent to your inbox.", "success");
             router.replace("/");
             router.refresh();
         } else {
             showAlert(data?.message || "Registration failed", "", "error");
         }
-    } catch (e: any) {
-        console.error("Network error:", e);
-        showAlert(e?.message || "Network error", "", "error");
+    } catch (e: unknown) {
+        showAlert(e instanceof Error ? e.message : "Network error", "", "error");
     } finally {
         setSubmitting(false);
     }

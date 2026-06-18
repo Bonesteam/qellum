@@ -162,8 +162,7 @@ const servicesSchema: PageSchema = {
                     "All-in-one solution: chef + AI + nutrition",
                 ],
                 centerTitle: true,
-                centerDescription: true,
-                centerBullets: true,
+                centerDescription: true
             },
         },
         {

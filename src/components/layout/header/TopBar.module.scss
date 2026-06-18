@@ -1,0 +1,63 @@
+.topBar {
+  background-color: var(--background-dark);
+  color: var(--text-inverse);
+  font-family: var(--font-family);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+  position: relative;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.payments {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.label {
+  opacity: 0.8;
+  font-size: 12px;
+}
+
+.logos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.logo {
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* make logos white to match dark background */
+  opacity: 0.95;
+}
+
+@media (max-width: 768px) {
+  .container {
+    justify-content: center;
+    text-align: center;
+  }
+  .payments {
+    display: none; /* Hide logos on mobile to save vertical space */
+  }
+}

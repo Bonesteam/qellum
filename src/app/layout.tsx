@@ -3,6 +3,7 @@ import {authWrapper} from "@/utils/authWrapper";
 import {AlertProvider} from "@/context/AlertContext";
 import PageWrapper from "@/components/layout/page-wrapper/PageWrapper";
 import Header from "@/components/layout/header/Header";
+import TopBar from "@/components/layout/header/TopBar";
 import Footer from "@/components/layout/footer/Footer";
 import ProtectedRoute from "@/components/features/protected-route/ProtectedRoute";
 import {currentFont} from "@/resources/styles-config";
@@ -25,6 +26,7 @@ function Layout({children}: { children: React.ReactNode }) {
                 <AllOrdersProvider>
                     <ProtectedRoute>
                         <CurrencyProvider>
+                            <TopBar/>
                             <Header/>
                             <PageWrapper>
                                 {children}

@@ -7,6 +7,7 @@ export interface IUser {
     lastName?: string;
     email: string;
     role: UserRole;
+    balanceGBP: number;
     tokens: number | null;
     createdAt: string;
     updatedAt: string;

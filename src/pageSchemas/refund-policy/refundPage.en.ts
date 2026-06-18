@@ -50,8 +50,7 @@ const refundPolicySchema: PageSchema = {
                 "If you consented to immediate supply and opened/downloaded the digital content, your statutory right to cancel may be lost (see §4.7).",
                 "Accepted currencies: GBP (£), EUR (€), USD ($). All conversions are calculated from GBP. Payment methods: Visa, Mastercard."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -69,8 +68,7 @@ const refundPolicySchema: PageSchema = {
                 "Redeemed / Spent Tokens — Tokens already used to access or generate a Meal Plan/Service.",
                 "Promotional / Bonus Tokens — Tokens issued as part of a promotion, bonus, or incentive and marked as such."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -86,8 +84,7 @@ const refundPolicySchema: PageSchema = {
                 "4.8 Bespoke/custom work — Custom Meal Plans are non-refundable once substantial preparation has begun, unless otherwise agreed in writing.",
                 "4.9 Standard plan & add-ons — A standard Meal Plan generation costs 60 Tokens. Optional add-ons carry separate Token prices shown before confirmation. Once redeemed, add-ons follow the same rules as above."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -100,8 +97,7 @@ const refundPolicySchema: PageSchema = {
                 "Preferred refund method (original payment method is standard)",
                 "Acknowledgment within 5 business days, investigation, and refund processing typically 5–10 business days"
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -111,8 +107,7 @@ const refundPolicySchema: PageSchema = {
                 "Refunds are normally processed to the original payment method. If not possible, a reasonable alternative may be offered.",
                 "If a claim is rejected, reasons will be provided along with options to escalate or pursue legal remedies."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -147,8 +142,7 @@ const refundPolicySchema: PageSchema = {
                 "Add-ons: Base 60 Tokens + add-on Tokens; once redeemed, non-refundable except under §4.2 or law.",
                 "Technical failure: Generation error with no usable delivery → Tokens restored or refunded."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -158,8 +152,7 @@ const refundPolicySchema: PageSchema = {
                 `🏢 ${COMPANY_LEGAL_NAME}`,
                 COMPANY_ADDRESS ?? "Address not specified"
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         }
     ]
 };

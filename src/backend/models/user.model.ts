@@ -16,7 +16,11 @@ const UserSchema: Schema<IUserSchema> = new Schema(
         },
         dateOfBirth: { type: Date, required: true },
         role: { type: String, enum: ["user", "admin"], default: "user" },
-        tokens: { type: Number, default: 10 }
+        /** Canonical wallet balance stored in GBP. */
+        balanceGBP: { type: Number, default: 0 },
+        /** @deprecated Legacy token field — kept in sync for internal service costs. */
+        tokens: { type: Number, default: 0 },
+        preferredCurrency: { type: String, enum: ["GBP", "EUR", "USD"], default: "GBP" },
     },
     { timestamps: true }
 );

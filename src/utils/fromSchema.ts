@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import type { MetaSchema } from "@/components/constructor/page-render/types";
 
+import { COMPANY_NAME } from "@/resources/constants";
+
 async function absoluteUrl(path: string): Promise<string> {
     const envBase = process.env.NEXT_PUBLIC_FRONTEND_URL;
     if (envBase) return path.startsWith("http") ? path : `${envBase}${path}`;
@@ -42,7 +44,7 @@ export async function metadataFromSchema(meta: MetaSchema): Promise<Metadata> {
             title,
             description,
             url: canonicalAbs,
-            siteName: "CVMaker",
+            siteName: COMPANY_NAME || "Qellum",
             type: "website",
             locale: "uk_UA",
             images: [

@@ -194,6 +194,11 @@ So we built a platform where real chefs craft courses with AI support — combin
         },
 
         {
+            type: "custom",
+            component: "CalorieCalculator",
+        },
+
+        {
     type: "grid",
     columns: 4,
     gap: "2rem",

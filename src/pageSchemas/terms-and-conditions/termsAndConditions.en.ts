@@ -43,8 +43,7 @@ const termsSchema: PageSchema = {
                 "1.2. By creating an account, purchasing tokens, or generating any meal plan or PDF through the Service, you agree to be bound by these Terms. If you do not agree, do not use the Service.",
                 "1.3. If you are using the Service on behalf of a company or organisation, you represent and warrant that you have authority to bind that entity, and “you” shall include that entity."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -57,8 +56,7 @@ const termsSchema: PageSchema = {
                 "• Services – the Qellum platform and features including intake forms, chef-assisted and AI-assisted plan generation, PDF creation, and delivery of digital content.",
                 "• Checkout Currency – GBP (£), EUR (€), or USD ($), as selected at checkout."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -68,8 +66,7 @@ const termsSchema: PageSchema = {
                 "3.2. You must provide accurate, current information and keep your credentials secure. You are responsible for all activity under your Account.",
                 "3.3. Notify us immediately of any suspected unauthorised access or security incident at info@qellum.co.uk."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -92,8 +89,7 @@ const termsSchema: PageSchema = {
                 "   d) Price display: The total Token cost (base + selected add-ons) is displayed before you confirm redemption.",
                 "   e) Price changes: We may update Token prices from time to time. The applicable price is the one shown at confirmation."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -105,8 +101,7 @@ const termsSchema: PageSchema = {
                 "5.3. Currencies, VAT & Taxes: Prices may be shown in GBP/EUR/USD. You may choose your Checkout Currency where available. If your card is billed in another currency, your bank may apply its FX rate and fees. VAT/consumption taxes may apply depending on your billing country; where applicable, we collect/remit taxes and display them at checkout. Invoices/receipts are issued in the Checkout Currency.",
                 "5.4. Delivery of Digital Content: Meal Plans and PDFs are delivered electronically (download link and/or email). Generation time may vary depending on inputs, queue, and system load."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -118,8 +113,7 @@ const termsSchema: PageSchema = {
                 "6.4. Defective or Misdescribed Content: If a delivered Plan is corrupted, incomplete, or clearly not as described (e.g., a PDF fails to open), contact info@qellum.co.uk within 14 days with your Order ID. We may repair, replace, re-generate, or refund Tokens/amounts as appropriate under applicable law.",
                 "6.5. Chargebacks & Abuse: Filing an unwarranted chargeback may lead to suspension while we investigate. If funds are reversed, we may remove the equivalent Tokens and any generated content from your Account and may request reimbursement of processor fees."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -130,8 +124,7 @@ const termsSchema: PageSchema = {
                 "7.3. You are responsible for verifying ingredients, allergens, and suitability for your circumstances. While we attempt to surface your stated allergens/exclusions, we cannot guarantee that outputs will be free from allergens or errors.",
                 "7.4. Ingredient availability, brands, and nutritional values may vary by region and supplier; any nutrition figures are estimates only."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -141,8 +134,7 @@ const termsSchema: PageSchema = {
                 "8.2. You must not misuse the Service (including scraping, reverse-engineering, interfering with security, attempting to bypass rate limits, or automating access contrary to our technical controls).",
                 "8.3. We may apply rate limits, usage caps, or other security measures to maintain platform integrity and fair use."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -153,8 +145,7 @@ const termsSchema: PageSchema = {
                 "9.3. Your Inputs & Feedback: You retain rights in your inputs. You grant us a worldwide, royalty-free licence to use your inputs and non-identifying usage data to operate, secure, and improve the Service. Where we rely on consent for model improvement using your content, we will ask for it and you may withdraw it at any time in your settings.",
                 "9.4. Third-Party Content: Any third-party marks or content remain the property of their respective owners."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -164,8 +155,7 @@ const termsSchema: PageSchema = {
                 "10.2. Except as expressly stated, the Service and outputs are provided “as is” and “as available,” without warranties of accuracy, fitness for a particular purpose, merchantability, or uninterrupted availability.",
                 "10.3. We do not guarantee any specific dietary, health, or fitness outcome."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -175,8 +165,7 @@ const termsSchema: PageSchema = {
                 "11.2. Subject to 11.1, our total aggregate liability arising out of or in connection with the Service in any 12-month period shall not exceed the total amounts you paid to us for Tokens/Services in that period.",
                 "11.3. We shall not be liable for indirect or consequential losses, including loss of profits, business, goodwill, or data, to the maximum extent permitted by law."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -184,8 +173,7 @@ const termsSchema: PageSchema = {
             bullets: [
                 "You agree to indemnify and hold harmless Qellum and our officers, employees, and contractors from claims, damages, costs, and expenses arising from your unlawful use of the Service, breach of these Terms, or infringement of third-party rights."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -194,8 +182,7 @@ const termsSchema: PageSchema = {
                 "13.1. We process personal data as a controller in line with the UK GDPR and the Data Protection Act 2018, as set out in our Privacy Policy.",
                 "13.2. By using the Service, you acknowledge our privacy practices, including—where applicable—international transfers and your rights to access, erase, restrict, or object."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -203,8 +190,7 @@ const termsSchema: PageSchema = {
             bullets: [
                 "The Service may include links to third-party sites or integrate third-party tools (e.g., payment processors, analytics). We are not responsible for their content or practices. Your use of such services is governed by their terms."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -213,8 +199,7 @@ const termsSchema: PageSchema = {
                 "15.1. We may suspend or terminate access if you breach these Terms, create security/fraud risks, or if required by law.",
                 "15.2. On termination, your licence to use the Service and outputs ceases. We may retain minimal records as required by law (e.g., tax, accounting, fraud prevention)."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -223,8 +208,7 @@ const termsSchema: PageSchema = {
                 "16.1. We may update the Service and these Terms to reflect legal, technical, or business changes.",
                 "16.2. We will notify you by email and/or an in-product notice for material changes. Continued use after the effective date constitutes acceptance."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -232,8 +216,7 @@ const termsSchema: PageSchema = {
             bullets: [
                 "Formal notices to us: info@qellum.co.uk or postal mail to the registered office. We may provide notices to you via email, in-product messages, or via your Account."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -242,8 +225,7 @@ const termsSchema: PageSchema = {
                 "18.1. These Terms are governed by the laws of England and Wales.",
                 "18.2. The courts of England and Wales have exclusive jurisdiction, except that consumers resident in Scotland, Northern Ireland, or an EU Member State may bring proceedings in their local courts."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -254,8 +236,7 @@ const termsSchema: PageSchema = {
                 "19.3. You may not assign or transfer your rights without our prior written consent. We may assign to an affiliate or in connection with a merger, acquisition, or asset transfer.",
                 "19.4. These Terms (together with policies referenced herein) form the entire agreement between you and Qellum regarding the Service."
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         },
         {
             type: "text",
@@ -266,8 +247,7 @@ const termsSchema: PageSchema = {
                 `Registered office: ${COMPANY_ADDRESS}`,
                 `Email: ${COMPANY_EMAIL}`
             ],
-            centerTitle: true,
-            centerBullets: true
+            centerTitle: true
         }
     ]
 };

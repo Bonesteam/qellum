@@ -1,25 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { useUser } from "@/context/UserContext";
 import { LogoutButton } from "@/components/ui/logout-button/LogoutButton";
 import styles from "./BalanceCard.module.scss";
 import { GiTwoCoins } from "react-icons/gi";
-import {FaSignOutAlt} from "react-icons/fa";
 import ButtonUI from "@/components/ui/button/ButtonUI";
 import React from "react";
+import { useWalletBalance } from "@/hooks/useWalletBalance";
+import { useTranslation } from "@/i18n/useTranslation";
 
 export default function BalanceCard() {
-    const user = useUser();
+    const { formatted } = useWalletBalance();
+    const { t } = useTranslation();
 
     return (
         <section className={styles.balanceCard}>
             <div className={styles.left}>
-                <h3>Your Token Balance</h3>
+                <h3>{t.wallet.yourBalance}</h3>
                 <p className={styles.amount}>
                     <GiTwoCoins />
-                    {user?.tokens ?? 0}
-                    <span> tokens</span>
+                    {formatted}
                 </p>
             </div>
 
@@ -34,7 +34,7 @@ export default function BalanceCard() {
                         hoverColor="primary"
                         hoverTextColor="text"
                     >
-                        Top-Up Tokens
+                        {t.wallet.topUpWallet}
                     </ButtonUI>
                 </Link>
                 <LogoutButton />

@@ -6,7 +6,9 @@ export interface IUserSchema extends Document {
     lastName: string;
     email: string;
     password: string;
+    balanceGBP: number;
     tokens: number;
+    preferredCurrency?: "GBP" | "EUR" | "USD";
     role: "user" | "admin";
     phone: string;
     address: {
@@ -25,6 +27,7 @@ export interface UserType {
     firstName: string;
     lastName: string;
     email: string;
+    balanceGBP: number;
     tokens: number;
     role: "user" | "admin";
     createdAt: Date;

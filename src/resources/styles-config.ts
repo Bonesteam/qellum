@@ -17,7 +17,7 @@ export const googleFonts: GoogleFont[] = [
     { name: "Inter", css: "'Inter', sans-serif", url: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" },
     { name: "Montserrat", css: "'Montserrat', sans-serif", url: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" },
     { name: "Poppins", css: "'Poppins', sans-serif", url: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" },
-    { name: "Open Sans", css: "'Open Sans', sans-serif", url: "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap" },
+    { name: "Outfit", css: "'Outfit', sans-serif", url: "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" },
 ];
 
 export const currentFontIndex = 4;
@@ -83,15 +83,15 @@ export const footerStyles = {
     logo: { width: 240, height: 100, align: "center" as FooterLogoAlign },
     colors: {
         bg: "var(--primary-color)",
-        title: "var(--text-secondary)",
-        text: "var(--secondary-color)",
-        muted: "var(--text-inverse)",
-        border: "var(--border-color)",
-        link: "var(--text-inverse)",
-        linkHover: "var(--text-gray)",
-        contactLabel: "var(--background-dark)",
-        contactHover: "var(--background-dark)",
-        socialHover: "var(--background-dark)",
+        title: "var(--text-inverse)",
+        text: "var(--quaternary-color)",
+        muted: "var(--tertiary-color)",
+        border: "rgba(255, 255, 255, 0.15)",
+        link: "var(--quaternary-color)",
+        linkHover: "var(--tertiary-color)",
+        contactLabel: "var(--tertiary-color)",
+        contactHover: "var(--surface-color)",
+        socialHover: "var(--surface-color)",
     },
     grid: { colsXL: 1, colsLG: 2, colsMD: 2, colsSM: 1 },
     font: { size: 18, legalSize: 24 },
@@ -109,7 +109,7 @@ export const hoverEffects: Record<HoverEffect, { transform: string; shadow: stri
     none: { transform: "shadow", shadow: "shadow" },
     shadow: { transform: "translateY(-6px)", shadow: "0 12px 28px rgba(0,0,0,0.18)" },
     lift: { transform: "translateY(-12px)", shadow: "0 16px 32px rgba(0,0,0,0.22)" },
-    glow: { transform: "scale(1.03)", shadow: "0 0 25px rgba(74,144,226,0.7), 0 0 40px rgba(74,144,226,0.4)" },
+    glow: { transform: "scale(1.03)", shadow: "0 0 25px rgba(45,90,39,0.7), 0 0 40px rgba(45,90,39,0.4)" },
     tilt: { transform: "rotate3d(1,1,0,6deg) scale(1.02)", shadow: "0 18px 30px var(--primary-color)" },
 };
 
@@ -121,27 +121,27 @@ export const cardVariants: Record<CardVariant, {
     label?: CardLabel;
 }> = {
     basic: {
-        border: "1px solid rgba(255,255,255,0.2)",
-        background: "linear-gradient(145deg, #f9fafb, #ffffff)",
+        border: "1px solid var(--border-color)",
+        background: "linear-gradient(145deg, #fbfbfa, #ffffff)",
         hover: "shadow",
     },
     highlight: {
         border: "2px solid var(--primary-color)",
-        background: "linear-gradient(145deg, #f0f9ff, #e0f2fe)",
+        background: "linear-gradient(145deg, #f1f6f0, #e6efe4)",
         hover: "shadow",
         label: {
             text: "Most Popular",
-            bg: "linear-gradient(135deg, var(--primary-color), #6366f1)",
+            bg: "linear-gradient(135deg, var(--primary-color), #558b2f)",
             color: "#fff",
         },
     },
     premium: {
-        border: "2px solid transparent",
-        background: "linear-gradient(145deg, #fff7ed, #fffbeb)",
+        border: "2px solid var(--secondary-color)",
+        background: "linear-gradient(145deg, #fbf7ec, #f4ecd2)",
         hover: "shadow",
         label: {
             text: "Premium",
-            bg: "linear-gradient(135deg, #f59e0b, #ef4444)",
+            bg: "linear-gradient(135deg, var(--secondary-color), #daa520)",
             color: "#fff",
         },
     },

@@ -132,17 +132,18 @@
 .footer__legal,
 .footer__legal-line,
 .footer__legal-address {
-  color: var(--legal);
+  color: var(--link);
   font-size: var(--footer-link-fs);
   font-weight: 500;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 8px;
 }
 
 .footer__legal-label {
   letter-spacing: .02em;
-  color: var(--contact-label);
+  color: var(--link);
+  opacity: 0.85;
   font-weight: 600;
   font-size: var(--footer-link-fs);
 }
@@ -174,7 +175,8 @@
 .footer__rights {
   text-align: center;
   padding: 18px 0 8px 0;
-  color: var(--muted);
+  color: var(--link);
+  opacity: 0.9;
 }
 
 /* ====== Center type ====== */

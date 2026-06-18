@@ -29,16 +29,6 @@ export async function GET(
             return NextResponse.json({ message: "Forbidden" }, { status: 403 });
         }
 
-        if (payment.creditStatus === "credited") {
-            return NextResponse.json({
-                reference,
-                status: "credited",
-                tokens: payment.tokens,
-                balanceAfter: payment.balanceAfter,
-                alreadyCredited: true,
-            });
-        }
-
         const response = await fetch(
             `${assertEnv("SPOYNT_BASE_URL")}/payment-invoices/${encodeURIComponent(payment.cpi)}`,
             {

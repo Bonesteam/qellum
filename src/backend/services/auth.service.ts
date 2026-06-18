@@ -10,6 +10,7 @@ import { buildWelcomeEmail, buildPasswordResetEmail } from "@/backend/utils/emai
 import { getTestAccountBalanceGBP, getTestAccountEmail, isTestMode } from "../config/features";
 import { syncLegacyTokens } from "@/utils/wallet";
 import { PasswordReset } from "../models/passwordReset.model";
+import { normalizeAllowedCountry } from "@/constants/countries";
 
 function parseDurationToSec(input: string): number {
     const m = input.match(/^(\d+)([smhd])?$/i);
@@ -27,6 +28,11 @@ export const authService = {
         const existing = await User.findOne({ email: data.email.toLowerCase() });
         if (existing) throw new Error("Email already registered");
 
+        const country = normalizeAllowedCountry(data.address.country);
+        if (!country) {
+            throw new Error("Only supported European countries are allowed");
+        }
+
         const hashed = await bcrypt.hash(data.password, 12);
         const user = await User.create({
             firstName: data.firstName,
@@ -34,7 +40,10 @@ export const authService = {
             email: data.email.toLowerCase(),
             password: hashed,
             phone: data.phone,
-            address: data.address,
+            address: {
+                ...data.address,
+                country: country.name,
+            },
             dateOfBirth: new Date(data.dateOfBirth),
             balanceGBP: 0,
             tokens: 0,

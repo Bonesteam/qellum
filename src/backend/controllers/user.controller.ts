@@ -1,5 +1,6 @@
 import { connectDB } from "../config/db";
 import { userService } from "../services/user.service";
+import { User } from "@/backend/models/user.model";
 import { UserType } from "@/backend/types/user.types";
 import { sendEmail } from "@/backend/utils/sendEmail";
 import { transactionService } from "@/backend/services/transaction.service";
@@ -84,19 +85,22 @@ export const userController = {
             invoiceNumber,
         });
 
-        await sendEmail(
-            user.email,
-            purchaseEmail.subject,
-            purchaseEmail.text,
-            purchaseEmail.html,
-            [
-                {
-                    filename: `${invoiceNumber}.pdf`,
-                    type: "application/pdf",
-                    data: pdf,
-                },
-            ]
-        );
+            await sendEmail(
+                user.email,
+                purchaseEmail.subject,
+                purchaseEmail.text,
+                purchaseEmail.html,
+                [
+                    {
+                        filename: `${invoiceNumber}.pdf`,
+                        type: "application/pdf",
+                        data: pdf,
+                    },
+                ]
+            );
+        } catch (err) {
+            console.error("⚠️ Token crediting succeeded but confirmation email failed for user:", userId, err);
+        }
 
         return formatUser(user);
     },

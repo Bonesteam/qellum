@@ -8,14 +8,13 @@ import { ENV } from "@/backend/config/env";
 import { userController } from "@/backend/controllers/user.controller";
 import { isTestMode } from "@/backend/config/features";
 import { displayToGbp, minTopUpForCurrency, round2, syncLegacyTokens, TOKENS_PER_GBP } from "@/utils/wallet";
+import { normalizeAllowedCountry } from "@/constants/countries";
 
 const RATES_TO_GBP = {
-    GBP: 1,
     EUR: 1.17,
-    USD: 1.22,
 } as const;
 
-type SupportedCurrency = keyof typeof RATES_TO_GBP;
+type SupportedCurrency = "EUR";
 
 function assertEnv(name: string) {
     const value = process.env[name]?.trim();
@@ -29,40 +28,6 @@ function basicAuthHeader(username: string, password: string) {
 
 function round2(value: number) {
     return Math.round(value * 100) / 100;
-}
-
-function normalizeCountry(value: unknown) {
-    if (typeof value !== "string") return undefined;
-
-    const trimmed = value.trim();
-    if (!trimmed) return undefined;
-
-    if (/^[A-Z]{2}$/.test(trimmed)) {
-        return trimmed;
-    }
-
-    const known: Record<string, string> = {
-        uk: "GB",
-        gb: "GB",
-        "great britain": "GB",
-        "united kingdom": "GB",
-        england: "GB",
-        scotland: "GB",
-        wales: "GB",
-        "northern ireland": "GB",
-        ireland: "IE",
-        ukraine: "UA",
-        usa: "US",
-        us: "US",
-        "united states": "US",
-        germany: "DE",
-        france: "FR",
-        spain: "ES",
-        italy: "IT",
-        poland: "PL",
-    };
-
-    return known[trimmed.toLowerCase()];
 }
 
 function compactObject<T extends Record<string, unknown>>(value: T) {
@@ -129,8 +94,8 @@ export async function POST(req: NextRequest) {
         const body = await req.json().catch(() => ({}));
 
         const requestedCurrency = String(body.currency || "").toUpperCase() as SupportedCurrency;
-        if (!Object.keys(RATES_TO_GBP).includes(requestedCurrency)) {
-            return NextResponse.json({ message: "Unsupported currency" }, { status: 400 });
+        if (requestedCurrency !== "EUR") {
+            return NextResponse.json({ message: "Only EUR is supported" }, { status: 400 });
         }
 
         const minTopUp = minTopUpForCurrency(requestedCurrency);
@@ -209,11 +174,12 @@ export async function POST(req: NextRequest) {
 
         await connectDB();
         const user = await User.findById(auth.sub).lean();
+        const normalizedCountry = normalizeAllowedCountry(user?.address?.country);
 
         const address = compactObject({
             street: user?.address?.street || undefined,
             city: user?.address?.city || undefined,
-            country: normalizeCountry(user?.address?.country),
+            country: normalizedCountry?.code,
             post_code: user?.address?.postalCode || undefined,
         });
 

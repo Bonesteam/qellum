@@ -41,6 +41,8 @@ import VideoDemo from "@/components/constructor/video-demo/VideoDemo";
 import StoryTimeline from "@/components/constructor/story-timeline/StoryTimeline";
 import InfoBlock from "@/components/constructor/Info-block/InfoBlock";
 import CalorieCalculator from "@/components/widgets/calorie-calculator/CalorieCalculator";
+import ChefMatchQuiz from "@/components/constructor/chef-match-quiz/ChefMatchQuiz";
+import NutritionFactsTicker from "@/components/constructor/nutrition-ticker/NutritionFactsTicker";
 
 // ------------------- helpers -------------------
 
@@ -67,7 +69,7 @@ function RenderCustom(b: CustomBlock) {
             );
 
         case "HighlightStrip":
-            return <HighlightStrip items={b.items ?? []} />;
+            return <HighlightStrip items={b.items} messages={b.messages} />;
 
         case "Marquee":
             return <Marquee items={b.items ?? []} />;
@@ -81,6 +83,12 @@ function RenderCustom(b: CustomBlock) {
 
         case "CalorieCalculator":
             return <CalorieCalculator />;
+
+        case "ChefMatchQuiz":
+            return <ChefMatchQuiz />;
+
+        case "NutritionFactsTicker":
+            return <NutritionFactsTicker />;
 
         case "LogoBlock":
             return <LogoBlock width={b.width} height={b.height} />;

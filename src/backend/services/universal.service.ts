@@ -4,6 +4,7 @@ import { User } from "../models/user.model";
 import { transactionService } from "../services/transaction.service";
 import { sendEmail } from "@/backend/utils/sendEmail";
 import generateInvoicePDF from "@/backend/utils/generateInvoice";
+import { buildOrderConfirmationEmail } from "@/backend/utils/emailTemplates";
 import OpenAI from "openai";
 import { ENV } from "../config/env";
 import mongoose from "mongoose";
@@ -233,11 +234,15 @@ export const universalService = {
         (async () => {
             try {
                 const pdfBase64 = await generateInvoicePDF(orderObj);
+                const planName = `${orderObj.planType === "reviewed" ? "Chef Reviewed" : "AI Instant"} ${orderObj.category.charAt(0).toUpperCase() + orderObj.category.slice(1)} Plan`;
+                const amount = `${orderObj.totalTokens} Tokens`;
+                const emailContent = buildOrderConfirmationEmail(user?.firstName || "Customer", planName, amount, orderObj._id.toString());
+
                 await sendEmail(
                     orderObj.email,
-                    `Your invoice — ${orderObj._id}`,
-                    `Thank you for your order. Please find the invoice attached.`,
-                    undefined,
+                    emailContent.subject,
+                    emailContent.text,
+                    emailContent.html,
                     [
                         {
                             filename: `invoice-${orderObj._id}.pdf`,

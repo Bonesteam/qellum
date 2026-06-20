@@ -81,6 +81,11 @@ Oavsett om målet är viktkontroll, muskeluppbyggnad eller balanserad näring �
 
         {
             type: "custom",
+            component: "ChefMatchQuiz",
+        },
+
+        {
+            type: "custom",
             component: "Timeline",
             title: "Hur Det Fungerar",
             steps: [
@@ -282,6 +287,55 @@ Så vi byggde en plattform där riktiga kockar skapar kurser med AI-stöd — ko
                 },
             ],
         },
+        {
+            type: "section",
+            title: "Qellum VIP Elite-retentionsplaner",
+            description: "För klienter som söker den ultimata nivån av kulinarisk vägledning, individuell kockcoachning och certifierad medicinsk näringsgranskning.",
+            align: "center",
+        },
+        {
+            type: "grid",
+            columns: 2,
+            gap: "2.5rem",
+            cards: [
+                {
+                    type: "pricing",
+                    variant: "premium",
+                    title: "VIP Kock-retainer (3 månader)",
+                    price: "€499",
+                    tokens: 49900,
+                    badgeTop: "VIP Elite",
+                    description: "Din egen dedikerade professionella kock på retainer för 1-till-1 kostcoachning och anpassning av signaturrecept.",
+                    features: [
+                        "Dedikerad kock på retainer i 3 månader",
+                        "Veckovisa 60-minuters Zoom matlagnings- och kostkonsultationer",
+                        "Obegränsade personliga receptbyten och modifieringar",
+                        "Kök- och utrustningsgranskning med din kock",
+                        "Utskrivbara premium-signerade VIP-PDF-filer",
+                    ],
+                    buttonText: "Gå med i VIP (3 mån)",
+                    buttonLink: "/checkout?plan=vip3",
+                },
+                {
+                    type: "pricing",
+                    variant: "custom",
+                    title: "Ultimat kulinarisk svit (6 månader)",
+                    price: "€999",
+                    tokens: 99000,
+                    badgeTop: "Ultimat VIP",
+                    description: "Den kompletta 6-månaders elittransformationen med direkt kockstöd och certifierad näringsexpertsövervakning.",
+                    features: [
+                        "Direkt WhatsApp-kontakt med din tilldelade kökschef",
+                        "Kontinuerliga ingrediens- och receptjusteringar i realtid",
+                        "Månatlig dietgranskning av senior näringsfysiolog",
+                        "Personliga anpassade videoguider för recept",
+                        "Certifierad kulinarisk nämnds signaturstämpel på planer",
+                    ],
+                    buttonText: "Gå med i Ultimate (6 mån)",
+                    buttonLink: "/checkout?plan=vip6",
+                },
+            ]
+        },
 
         {
             type: "section",
@@ -311,6 +365,11 @@ Så vi byggde en plattform där riktiga kockar skapar kurser med AI-stöd — ko
                 buttonText: "Börja Spåra",
                 buttonLink: "/profile",
             },
+        },
+
+        {
+            type: "custom",
+            component: "NutritionFactsTicker",
         },
 
         {

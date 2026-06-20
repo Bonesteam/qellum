@@ -21,6 +21,11 @@ function Layout({children}: { children: React.ReactNode }) {
             <style>{`:root { --font-family: ${currentFont.css}; }`}</style>
         </head>
         <body>
+        <div className="aurora-container">
+            <div className="aurora-blob aurora-blob--green" />
+            <div className="aurora-blob aurora-blob--gold" />
+            <div className="aurora-blob aurora-blob--warm" />
+        </div>
         <I18nProvider>
             <AlertProvider>
                 <AllOrdersProvider>

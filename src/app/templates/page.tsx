@@ -23,10 +23,8 @@ const Page = () => {
         <>
             {/* Intro */}
             <Text
-                title="Examples of CV"
-                description={`Check out our CV templates. Each example can be viewed directly on the website 
-                in PDF format with test data or download them for yourself. Use them as 
-                inspiration for your own CV.`}
+                title="Example Meal Plans"
+                description={`Explore sample menus and recipe schedules crafted by our professional chefs and smart AI engine. Download them to see how Qellum structures targets, recipes, and shopping lists.`}
                 titleLevel={1}
                 centerTitle
                 centerDescription
@@ -35,9 +33,9 @@ const Page = () => {
             {/* Highlight Strip */}
             <HighlightStrip
                 messages={[
-                    "ATS-friendly CVs 🚀",
-                    "Polished by HR experts 👩‍💼",
-                    "Templates for every industry 📑",
+                    "Chef-Approved Recipes 🍳",
+                    "Calorie & Macro Breakdown 📊",
+                    "Grouped Shopping Lists 🛒",
                 ]}
             />
 
@@ -46,12 +44,12 @@ const Page = () => {
 
             {/* InfoBlock */}
             <InfoBlock
-                title="Why Use Our CV Templates?"
-                description="Our CV examples are designed by HR experts to help you stand out. Each template is fully optimized for applicant tracking systems (ATS) and tailored to different industries."
+                title="Why Choose Qellum Meal Plans?"
+                description="Our meal plan examples demonstrate the rigorous balance between professional chef experience and advanced AI calculation. Every plan is tailored to fit individual calorie targets and dietary needs."
                 bullets={[
-                    "Professional, recruiter-approved layouts",
-                    "100% ATS-optimized formatting",
-                    "Easy to edit and customize",
+                    "Designed by certified culinary & nutrition experts",
+                    "Detailed macro & calorie breakdowns per meal",
+                    "Automated shopping lists organized by grocery category",
                 ]}
                 align="center"
                 image={resolveMedia("image2")}
@@ -59,38 +57,38 @@ const Page = () => {
 
             {/* 🆕 Extras Section */}
             <ValuesIcons
-                title="Optional Extras for a Complete Job Application"
-                description="Boost your application with additional professionally written materials you can generate along with your CV:"
+                title="Optional Extras for a Comprehensive Diet Plan"
+                description="Enhance your culinary journey with these specialized modules that can be generated alongside your core menu:"
                 values={[
                     {
-                        icon: "✉️",
-                        title: "Cover Letter",
-                        text: "A personalized letter written specifically for the job and company.",
+                        icon: "🛒",
+                        title: "Grouped Shopping List",
+                        text: "A categorized shopping list that maps to sections of your grocery store.",
                     },
                     {
-                        icon: "💼",
-                        title: "LinkedIn Summary",
-                        text: "An optimized 'About' section to impress recruiters online.",
+                        icon: "📅",
+                        title: "Meal Prep Guide",
+                        text: "A step-by-step storage and prep schedule to save cooking time.",
                     },
                     {
-                        icon: "🔍",
-                        title: "Keyword Optimization",
-                        text: "Ensures your CV matches ATS systems and job descriptions.",
+                        icon: "🍉",
+                        title: "Healthy Snack Options",
+                        text: "Calculated alternative snacks to keep cravings at bay without breaking macros.",
                     },
                     {
-                        icon: "🧩",
-                        title: "ATS Compatibility Report",
-                        text: "Instant feedback on how your CV performs in applicant systems.",
+                        icon: "🥛",
+                        title: "Hydration Tracker & Tips",
+                        text: "Customized daily water target guidelines to optimize digestion and energy.",
                     },
                     {
-                        icon: "🏆",
-                        title: "Achievements Boost",
-                        text: "Rewriting of achievements with quantifiable impact and clarity.",
+                        icon: "🌱",
+                        title: "Ingredient Swaps",
+                        text: "Allergy-friendly and seasonal alternative suggestions for key recipes.",
                     },
                     {
-                        icon: "🧠",
-                        title: "Skills Gap Report",
-                        text: "An intelligent analysis that highlights missing or desired skills.",
+                        icon: "👨‍🍳",
+                        title: "Nutritionist Review",
+                        text: "A comprehensive audit of your goals and menu by a certified nutrition advisor.",
                     },
                 ]}
             />
@@ -98,11 +96,11 @@ const Page = () => {
             {/* Values Icons */}
             <ValuesIcons
                 title="Key Benefits"
-                description="When using our CV templates you get:"
+                description="When using our meal plans you get:"
                 values={[
-                    { icon: "⚡", title: "Speed", text: "Generate your CV in minutes" },
-                    { icon: "📑", title: "ATS Safe", text: "Pass recruiter filters easily" },
-                    { icon: "🎨", title: "Designs", text: "Modern layouts for all industries" },
+                    { icon: "⚡", title: "Speed", text: "Get instant AI meal plans in minutes" },
+                    { icon: "🥗", title: "Health First", text: "Perfect balance of nutrients tailored to you" },
+                    { icon: "🎨", title: "Variety", text: "Exciting, varied recipes that prevent diet fatigue" },
                 ]}
             />
 
@@ -110,21 +108,21 @@ const Page = () => {
             <FAQ
                 items={[
                     {
-                        question: "Can I download the CV examples?",
-                        answer: "Yes, each template is available as a PDF with sample data.",
+                        question: "Can I download the sample meal plans?",
+                        answer: "Yes, each example plan can be downloaded as a PDF with sample recipe schedules.",
                     },
                     {
-                        question: "Are the CVs ATS-friendly?",
-                        answer: "Absolutely. All our templates are designed to pass applicant tracking systems.",
+                        question: "Who designs the meal plans?",
+                        answer: "Our plans are a combination of advanced nutritional AI and reviews by certified culinary chefs.",
                     },
                     {
-                        question: "Can I customize the CV?",
-                        answer: "Of course! You can edit text, layout, and design to match your profile.",
+                        question: "Can I customize the recipes?",
+                        answer: "Yes! Using the plan generator on your dashboard, you can adjust tastes, allergens, and day count.",
                     },
                     {
                         question: "What are 'Extras'?",
                         answer:
-                            "Extras are optional add-ons like Cover Letter, LinkedIn Summary, or ATS report that help you strengthen your overall application.",
+                            "Extras are optional modules like detailed recipes, categorized shopping lists, hydration plans, and nutritionist notes to augment your experience.",
                     },
                 ]}
             />

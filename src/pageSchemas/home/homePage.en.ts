@@ -51,15 +51,24 @@ const schema: PageSchema = {
 
         {
             type: "custom",
+            component: "CalorieCalculator",
+        },
+
+        {
+            type: "custom",
             component: "InfoBlock",
-            title: "How It Works",
-            description: "Create your account, add preferences, choose AI or Chef plan, and receive recipes and a grocery list within hours.",
-            bullets: [
-                "Sign up and fill out dietary preferences",
-                "Choose an AI plan for instant results or Chef plan for reviewed menus",
-                "Get recipes, portions, and a shopping list",
-            ],
+            title: "Featured Recipes",
+            description: "A few popular recipes from our chefs — quick, nutritious, and delicious.",
             align: "center",
+        },
+        {
+            type: "custom",
+            component: "CardSlider",
+            cards: [
+                { image: "recipe1", title: "Herb Roasted Chicken", description: "Juicy chicken with garlic herb rub and seasonal veg.", buttonText: "View Recipe", buttonLink: "/recipes/herb-roasted-chicken" },
+                { image: "recipe2", title: "Quinoa Buddha Bowl", description: "Balanced bowl with grains, veggies, and tahini dressing.", buttonText: "View Recipe", buttonLink: "/recipes/quinoa-buddha" },
+                { image: "recipe3", title: "Spicy Chickpea Stew", description: "Comforting stew, rich in flavor and protein.", buttonText: "View Recipe", buttonLink: "/recipes/chickpea-stew" },
+            ],
         },
 
         {
@@ -86,7 +95,174 @@ const schema: PageSchema = {
             ],
         },
 
-        // Simplified how-it-works section is embedded later as a short InfoBlock and CTA
+        {
+            type: "custom",
+            component: "ChefMatchQuiz",
+        },
+
+        {
+            type: "custom",
+            component: "InfoBlock",
+            title: "How It Works",
+            description: "Create your account, add preferences, choose AI or Chef plan, and receive recipes and a grocery list within hours.",
+            bullets: [
+                "Sign up and fill out dietary preferences",
+                "Choose an AI plan for instant results or Chef plan for reviewed menus",
+                "Get recipes, portions, and a shopping list",
+            ],
+            align: "center",
+        },
+
+        {
+            type: "section",
+            title: "Meet Our Chefs",
+            description:
+                "Our chefs combine skill, nutrition knowledge, and passion. Every plan is handcrafted and verified.",
+            left: {
+                type: "slider",
+                images: ["coach1", "coach2", "coach3", "coach4"],
+            },
+            right: {
+                type: "custom",
+                component: "InfoBlock",
+                title: "Only Certified Professionals",
+                description:
+                    "All chefs are trained, certified, and experienced. You’ll be matched with the best expert for your dietary style.",
+                bullets: [
+                    "Certified culinary and nutrition experts",
+                    "Specializations: weight loss, muscle gain, healthy cooking",
+                ],
+            },
+        },
+
+        {
+            type: "section",
+            title: "Qellum VIP Elite Retention Plans",
+            description: "For clients seeking the ultimate level of culinary guidance, individual chef coaching, and certified medical nutrition review.",
+            align: "center",
+        },
+        {
+            type: "grid",
+            columns: 2,
+            gap: "2.5rem",
+            cards: [
+                {
+                    type: "pricing",
+                    variant: "premium",
+                    title: "VIP Chef Retainer (3 Months)",
+                    price: "€499",
+                    tokens: 49900,
+                    badgeTop: "VIP Elite",
+                    description: "Your own dedicated professional chef on retainer for 1-on-1 diet coaching and signature recipe customization.",
+                    features: [
+                        "Dedicated Chef on retainer for 3 months",
+                        "Weekly 60-minute Zoom cooking & diet consultations",
+                        "Unlimited personalized recipe swaps and modifications",
+                        "Kitchen & equipment audit with your chef",
+                        "Printable Premium Signed VIP PDFs",
+                    ],
+                    buttonText: "Enroll in VIP (3 Mo)",
+                    buttonLink: "/checkout?plan=vip3",
+                },
+                {
+                    type: "pricing",
+                    variant: "custom",
+                    title: "Ultimate Culinary Suite (6 Months)",
+                    price: "€999",
+                    tokens: 99000,
+                    badgeTop: "Ultimate VIP",
+                    description: "The complete 6-month elite transformation with direct chef support and board-certified nutritionist supervision.",
+                    features: [
+                        "Direct WhatsApp check-ins with your assigned executive chef",
+                        "Continuous real-time ingredient and recipe adjustments",
+                        "Monthly senior nutritionist laboratory/diet review",
+                        "Personalized custom video guides for recipes",
+                        "Certified culinary board signature stamp on plans",
+                    ],
+                    buttonText: "Enroll in Ultimate (6 Mo)",
+                    buttonLink: "/checkout?plan=vip6",
+                },
+            ]
+        },
+
+        {
+            type: "grid",
+            columns: 4,
+            gap: "2rem",
+            cards: [
+                {
+                    type: "pricing",
+                    variant: "starter",
+                    title: "AI Starter Plan",
+                    price: "£10",
+                    tokens: 1000,
+                    badgeTop: "AI-Generated Plan",
+                    description:
+                        "Instant meal plan generated by AI based on your preferences.",
+                    features: [
+                        "Instant course generation",
+                        "AI cooking adjustments",
+                        "Basic tracking",
+                    ],
+                    buttonText: "Try AI Plan",
+                    buttonLink: "/checkout?plan=ai",
+                },
+                {
+                    type: "pricing",
+                    variant: "pro",
+                    title: "Chef Plan",
+                    price: "€59",
+                    tokens: 5900,
+                    badgeTop: "Most Popular",
+                    description:
+                        "Work directly with a professional chef for a fully customized plan.",
+                    features: [
+                        "1-on-1 chef guidance",
+                        "Plan review and adjustment",
+                        "Direct chat with chef",
+                        "Priority feedback",
+                    ],
+                    buttonText: "Get Chef Plan",
+                    buttonLink: "/checkout?plan=chef",
+                },
+                {
+                    type: "pricing",
+                    variant: "premium",
+                    title: "Full Culinary Pack",
+                    price: "€99",
+                    tokens: 9900,
+                    badgeTop: "Complete Culinary Experience",
+                    description:
+                        "Chef guidance + AI nutrition tracking + meal analysis for best results.",
+                    features: [
+                        "Customized meal plan",
+                        "Personal nutrition plan",
+                        "Fast feedback within 2–3 hours",
+                        "AI nutrition analysis",
+                        "Priority support",
+                    ],
+                    buttonText: "Choose Full Package",
+                    buttonLink: "/checkout?plan=full",
+                },
+                {
+                    type: "pricing",
+                    variant: "custom",
+                    title: "Custom Plan",
+                    price: "dynamic",
+                    tokens: 0,
+                    badgeTop: "Flexible Option",
+                    description:
+                        "Combine services — AI, chef, or nutrition as you prefer.",
+                    features: [
+                        "Choose AI or chef focus",
+                        "Flexible token usage",
+                        "Pay only for what you need",
+                    ],
+                    buttonText: "Customize Plan",
+                    buttonLink: "/checkout?plan=custom",
+                },
+            ],
+        },
 
         {
             type: "section",
@@ -136,29 +312,6 @@ So we built a platform where real chefs craft courses with AI support — combin
         },
 
         {
-            type: "section",
-            title: "Meet Our Chefs",
-            description:
-                "Our chefs combine skill, nutrition knowledge, and passion. Every plan is handcrafted and verified.",
-            left: {
-                type: "slider",
-                images: ["coach1", "coach2", "coach3", "coach4"],
-            },
-            right: {
-                type: "custom",
-                component: "InfoBlock",
-                title: "Only Certified Professionals",
-                description:
-                    "All chefs are trained, certified, and experienced. You’ll be matched with the best expert for your dietary style.",
-                bullets: [
-                    "Certified culinary and nutrition experts",
-                    "Specializations: weight loss, muscle gain, healthy cooking",
-                    
-                ],
-            },
-        },
-
-        {
             type: "custom",
             component: "MissionBanner",
             title: "Healthy Meals Made Easy",
@@ -175,107 +328,6 @@ So we built a platform where real chefs craft courses with AI support — combin
                 "Watch chefs create personalized courses, review nutritional data, and see AI suggestions in action.",
             video: "coachWork",
         },
-
-        {
-            type: "custom",
-            component: "InfoBlock",
-            title: "Featured Recipes",
-            description: "A few popular recipes from our chefs — quick, nutritious, and delicious.",
-            align: "center",
-        },
-        {
-            type: "custom",
-            component: "CardSlider",
-            cards: [
-                { image: "recipe1", title: "Herb Roasted Chicken", description: "Juicy chicken with garlic herb rub and seasonal veg.", buttonText: "View Recipe", buttonLink: "/recipes/herb-roasted-chicken" },
-                { image: "recipe2", title: "Quinoa Buddha Bowl", description: "Balanced bowl with grains, veggies, and tahini dressing.", buttonText: "View Recipe", buttonLink: "/recipes/quinoa-buddha" },
-                { image: "recipe3", title: "Spicy Chickpea Stew", description: "Comforting stew, rich in flavor and protein.", buttonText: "View Recipe", buttonLink: "/recipes/chickpea-stew" },
-            ],
-        },
-
-        {
-            type: "custom",
-            component: "CalorieCalculator",
-        },
-
-        {
-    type: "grid",
-    columns: 4,
-    gap: "2rem",
-    cards: [
-        {
-            type: "pricing",
-            variant: "starter",
-            title: "AI Starter Plan",
-            price: "£10",
-            tokens: 1000,
-            badgeTop: "AI-Generated Plan",
-            description:
-                "Instant meal plan generated by AI based on your preferences.",
-            features: [
-                "Instant course generation",
-                "AI cooking adjustments",
-                "Basic tracking",
-            ],
-            buttonText: "Try AI Plan",
-            buttonLink: "/checkout?plan=ai",
-        },
-        {
-            type: "pricing",
-            variant: "pro",
-            title: "Chef Plan",
-            price: "€59",
-            tokens: 5900,
-            badgeTop: "Most Popular",
-            description:
-                "Work directly with a professional chef for a fully customized plan.",
-            features: [
-                "1-on-1 chef guidance",
-                "Plan review and adjustment",
-                "Direct chat with chef",
-                "Priority feedback",
-            ],
-            buttonText: "Get Chef Plan",
-            buttonLink: "/checkout?plan=chef",
-        },
-        {
-            type: "pricing",
-            variant: "premium",
-            title: "Full Culinary Pack",
-            price: "€99",
-            tokens: 9900,
-            badgeTop: "Complete Culinary Experience",
-            description:
-                "Chef guidance + AI nutrition tracking + meal analysis for best results.",
-            features: [
-                "Customized meal plan",
-                "Personal nutrition plan",
-                "Fast feedback within 2–3 hours",
-                "AI nutrition analysis",
-                "Priority support",
-            ],
-            buttonText: "Choose Full Package",
-            buttonLink: "/checkout?plan=full",
-        },
-        {
-            type: "pricing",
-            variant: "custom",
-            title: "Custom Plan",
-            price: "dynamic",
-            tokens: 0,
-            badgeTop: "Flexible Option",
-            description:
-                "Combine services — AI, chef, or nutrition as you prefer.",
-            features: [
-                "Choose AI or chef focus",
-                "Flexible token usage",
-                "Pay only for what you need",
-            ],
-            buttonText: "Customize Plan",
-            buttonLink: "/checkout?plan=custom",
-        },
-    ],
-},
 
         {
             type: "section",
@@ -305,6 +357,11 @@ So we built a platform where real chefs craft courses with AI support — combin
                 buttonText: "Start Tracking",
                 buttonLink: "/profile",
             },
+        },
+
+        {
+            type: "custom",
+            component: "NutritionFactsTicker",
         },
 
         {

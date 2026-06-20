@@ -1,0 +1,284 @@
+/* ===================================================
+   ChefMatchQuiz — interactive plan recommender
+   =================================================== */
+
+.section {
+  width: 100%;
+  padding: 5rem 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.inner {
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pill {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(45, 90, 39, 0.1), rgba(184, 134, 11, 0.1));
+  border: 1px solid rgba(184, 134, 11, 0.25);
+  color: var(--secondary-color);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.35rem 1rem;
+  border-radius: 50px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+
+  @media (max-width: 600px) {
+    font-size: 2rem;
+  }
+}
+
+.highlight {
+  background: var(--premium-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Card ── */
+.card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(223, 218, 208, 0.6);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(45, 90, 39, 0.07);
+}
+
+/* ── Progress bar ── */
+.progressBar {
+  height: 4px;
+  background: rgba(223, 218, 208, 0.5);
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--premium-gradient);
+  border-radius: 4px;
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Question wrap ── */
+.questionWrap {
+  padding: 2.8rem 2.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.2rem;
+  animation: fadeUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @media (max-width: 500px) {
+    padding: 2rem 1.5rem;
+  }
+}
+
+.stepCount {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.questionEmoji {
+  font-size: 2.8rem;
+  line-height: 1;
+}
+
+.question {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* ── Options grid ── */
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+  width: 100%;
+  margin-top: 0.5rem;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.2rem;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1.5px solid rgba(223, 218, 208, 0.6);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+  font-family: var(--font-family);
+
+  &:hover {
+    border-color: var(--primary-color);
+    background: rgba(45, 90, 39, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(45, 90, 39, 0.1);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.optionEmoji {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.optionLabel {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ── Result ── */
+.result {
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @media (max-width: 500px) {
+    padding: 2rem 1.5rem;
+  }
+}
+
+.resultEmoji {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.resultBadge {
+  display: inline-block;
+  background: var(--premium-gradient);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.3rem 1rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.resultTitle {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.35;
+
+  span {
+    color: var(--primary-color);
+  }
+}
+
+.resultDesc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 440px;
+  margin: 0;
+}
+
+.resultActions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.ctaBtn {
+  padding: 0.9rem 2rem;
+  background: var(--premium-gradient);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 20px rgba(45, 90, 39, 0.2);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(45, 90, 39, 0.3);
+  }
+}
+
+.retryBtn {
+  padding: 0.9rem 1.5rem;
+  background: transparent;
+  border: 1.5px solid rgba(45, 90, 39, 0.25);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+  }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

@@ -15,6 +15,7 @@ export const headerContent = {
     links: [
         {label: "About Company", href: "/about-us"},
         {label: "Process", href: "/get-started"},
+        {label: "Example Plans", href: "/templates"},
         {label: "Pricing", href: "/pricing"},
         {label: "Contact", href: "/contact-us"},
         {label: "Faq", href: "/faq"},
@@ -29,6 +30,7 @@ export const footerContent = {
             title: "Navigate",
             links: [
                 {label: "About Us", href: "/about-us"},
+                {label: "Example Plans", href: "/templates"},
                 {label: "Pricing", href: "/pricing"},
                 {label: "Faq", href: "/faq"},
                 {label: "Get Started", href: "/get-started"},
@@ -43,6 +45,10 @@ export const footerContent = {
                 {label: "Privacy Policy", href: "/privacy-policy"},
                 {label: "Allergy & Dietary Safety", href: "/allergy-policy"},
                 {label: "Token Usage Policy", href: "/token-usage-policy"},
+                {label: "VIP Retainer Agreement", href: "/vip-retainer-policy"},
+                {label: "Chef Standards & Certification", href: "/chef-standards"},
+                {label: "Dietary Disclaimer", href: "/dietary-disclaimer"},
+                {label: "AI Transparency Notice", href: "/ai-transparency"},
             ],
         },
     ],

@@ -6,18 +6,16 @@ import { useSearchParams } from "next/navigation";
 import { AlertCircle, ArrowLeft, CheckCircle2, Clock3, Loader2, Wallet } from "lucide-react";
 import styles from "./PaymentStatus.module.scss";
 
-type PaymentState =
-    | { loading: true }
-    | {
-          loading: false;
-          status: "credited" | "pending" | "failed" | "invalid";
-          tokens?: number;
-          balanceAfter?: number | null;
-          message?: string;
-          providerStatus?: string;
-          providerResolution?: string | null;
-          alreadyCredited?: boolean;
-      };
+type PaymentState = {
+    loading: boolean;
+    status?: "credited" | "pending" | "failed" | "invalid";
+    tokens?: number;
+    balanceAfter?: number | null;
+    message?: string;
+    providerStatus?: string;
+    providerResolution?: string | null;
+    alreadyCredited?: boolean;
+};
 
 type Tone = "emerald" | "amber" | "rose";
 

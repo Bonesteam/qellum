@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, Model } from "mongoose";
 
 export type SpoyntCreditStatus = "pending" | "crediting" | "credited" | "failed";
 
@@ -48,6 +48,7 @@ const spoyntPaymentSchema = new Schema<SpoyntPaymentDocument>(
     { timestamps: true }
 );
 
-export const SpoyntPayment =
+export const SpoyntPayment: Model<SpoyntPaymentDocument> =
     mongoose.models.SpoyntPayment ||
     mongoose.model<SpoyntPaymentDocument>("SpoyntPayment", spoyntPaymentSchema);
+

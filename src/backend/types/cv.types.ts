@@ -26,6 +26,7 @@ export interface CVOrderType {
     extrasData?: Record<string, string>;
 
     status: "pending" | "ready";
+    languages?: string;
     readyAt: Date;
     createdAt: Date;
 }

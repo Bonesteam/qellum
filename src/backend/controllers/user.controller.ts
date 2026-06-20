@@ -85,6 +85,7 @@ export const userController = {
             invoiceNumber,
         });
 
+        try {
             await sendEmail(
                 user.email,
                 purchaseEmail.subject,

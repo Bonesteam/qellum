@@ -10,13 +10,7 @@
   position: relative;
   overflow: hidden;
 
-  // Фон з легким градієнтом, використовується системна палітра
-  background: linear-gradient(
-                  180deg,
-                  rgba(255, 255, 255, 1) 0%,
-                  var(--background-light) 40%,
-                  var(--surface-muted) 100%
-  );
+  background: transparent;
 
   // 🪄 Декоративні світлі плями
   &::before,

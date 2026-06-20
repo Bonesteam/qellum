@@ -1,10 +1,9 @@
 import React from 'react';
-import Dashboard from "@/components/features/dashboard/Dashboard";
-import ManualGenerator from "@/components/widgets/manual-generator/ManualGenerator";
+import Profile from "@/components/widgets/profile/Profile";
 
 const Page = () => {
     return (
-        <ManualGenerator/>
+        <Profile defaultTab="generator" />
     );
 };
 

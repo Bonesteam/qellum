@@ -8,4 +8,5 @@ export type SmartLinkProps = {
     title?: string;
     target?: string;
     rel?: string;
-};
+    style?: React.CSSProperties;
+};

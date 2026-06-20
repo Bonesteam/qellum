@@ -1,24 +1,27 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import { media } from "@/resources/media";
 import styles from "./TopBar.module.scss";
+
+const MESSAGES = [
+    "🌿 Certified Personal Chefs & Smart AI Planning",
+    "👩‍🍳 Over 100 certified chefs & nutritionists worldwide",
+    "🔒 100% Secure Checkout — PCI DSS Compliant",
+    "⚡ AI meal plans ready in minutes",
+    "🥗 Allergy & dietary preferences always respected",
+];
 
 const TopBar: React.FC = () => {
     return (
         <div className={styles.topBar}>
-            <div className={styles.container}>
-                <div className={styles.message}>
-                    <span>🌿 Certified Personal Chefs & Smart AI Planning</span>
-                </div>
-                <div className={styles.payments}>
-                    <span className={styles.label}>100% Secure Checkout:</span>
-                    <div className={styles.logos}>
-                        <Image src={media.visaLogo} alt="Visa" width={32} height={10} className={styles.logo} />
-                        <Image src={media.mastercardLogo} alt="Mastercard" width={24} height={14} className={styles.logo} />
-                        <Image src={media.pciDssLogo} alt="PCI DSS" width={36} height={12} className={styles.logo} />
-                    </div>
+            <div className={styles.ticker}>
+                <div className={styles.track}>
+                    {[...MESSAGES, ...MESSAGES].map((msg, i) => (
+                        <span key={i} className={styles.item}>
+                            {msg}
+                            <span className={styles.sep}>·</span>
+                        </span>
+                    ))}
                 </div>
             </div>
         </div>

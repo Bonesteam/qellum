@@ -1,0 +1,754 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* 🔧 Dev Bar Styles */
+.devBar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(236, 115, 49, 0.08);
+  border: 1px dashed rgba(236, 115, 49, 0.3);
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+
+  .switchLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--secondary-color);
+
+    input {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+  }
+
+  .devNote {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+  }
+}
+
+/* 👑 VIP Banner */
+.vipBanner {
+  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+  border-radius: 16px;
+  padding: 1.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  border: 1px solid rgba(181, 148, 16, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), inset 0 2px 8px rgba(255, 255, 255, 0.05);
+  margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+.vipBannerLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+
+  .crownIcon {
+    font-size: 2.5rem;
+    color: #B59410; /* Gold */
+    filter: drop-shadow(0 0 10px rgba(181, 148, 16, 0.4));
+    animation: pulse 2.5s infinite alternate;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(181, 148, 16, 0.3)); }
+  100% { transform: scale(1.08); filter: drop-shadow(0 0 16px rgba(181, 148, 16, 0.6)); }
+}
+
+.vipTitle {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.vipSubtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.vipBadge {
+  background: linear-gradient(90deg, #B59410, #d4af37);
+  color: #000;
+  font-weight: 800;
+  font-size: 0.75rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 12px rgba(181, 148, 16, 0.3);
+}
+
+/* SubTabs Navigation */
+.subTabNav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.subTabButton {
+  background: transparent;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  border-bottom: 3px solid transparent;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+
+  &.active {
+    color: var(--secondary-color);
+    border-bottom-color: var(--secondary-color);
+  }
+}
+
+/* 💬 Chat View */
+.chatView {
+  display: flex;
+  flex-direction: column;
+  height: 520px;
+  background: var(--surface-muted);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.chefProfileSummary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--surface-color);
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.chefAvatarWrapper {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  background: #f3f4f6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--secondary-color);
+
+  .chefAvatarEmoji {
+    font-size: 1.8rem;
+  }
+
+  .chefOnlineDot {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    background: #10b981;
+    border-radius: 50%;
+    border: 2px solid #fff;
+  }
+}
+
+.chefName {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.chefBio {
+  margin: 0.15rem 0 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.chatMessages {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  background: radial-gradient(circle at center, rgba(236,115,49,0.02) 0%, transparent 100%), #fdfdfc;
+}
+
+.messageRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.8rem;
+  max-width: 75%;
+}
+
+.msgChef {
+  align-self: flex-start;
+
+  .messageBubble {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+  }
+
+  .msgAvatar {
+    font-size: 1.2rem;
+    padding-bottom: 4px;
+  }
+}
+
+.msgUser {
+  align-self: flex-end;
+  margin-left: auto;
+  flex-direction: row-reverse;
+
+  .messageBubble {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 14px rgba(236, 115, 49, 0.15);
+  }
+
+  .messageTime {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+.messageBubble {
+  padding: 0.8rem 1.1rem;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.messageText {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.messageTime {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  align-self: flex-end;
+}
+
+/* Typing Bubble */
+.typingBubble {
+  padding: 0.9rem 1.2rem !important;
+}
+
+.typingIndicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  span {
+    width: 6px;
+    height: 6px;
+    background: var(--text-muted);
+    border-radius: 50%;
+    animation: typing 1s infinite alternate;
+
+    &:nth-child(2) { animation-delay: 0.2s; }
+    &:nth-child(3) { animation-delay: 0.4s; }
+  }
+}
+
+@keyframes typing {
+  0% { transform: translateY(0px); opacity: 0.4; }
+  100% { transform: translateY(-4px); opacity: 1; }
+}
+
+.chatInputForm {
+  display: flex;
+  padding: 1rem;
+  background: var(--surface-color);
+  border-top: 1px solid var(--border-color);
+  gap: 0.8rem;
+}
+
+.chatInput {
+  flex: 1;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 0.92rem;
+  background: var(--surface-muted);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    border-color: var(--secondary-color);
+  }
+}
+
+.sendBtn {
+  padding: 0.8rem 1.8rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(236,115,49,0.25);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+/* 📅 Booking View */
+.bookingView {
+  background: var(--surface-color);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bookingIntro {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+
+  .videoIcon {
+    font-size: 2.2rem;
+    color: var(--secondary-color);
+    margin-top: 0.2rem;
+  }
+
+  h3 {
+    margin: 0 0 0.4rem;
+    font-weight: 800;
+    color: var(--primary-color);
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+}
+
+.alertSuccess {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #065f46;
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.92rem;
+  animation: slideIn 0.3s ease;
+
+  .checkIcon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.bookingLayout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.bookingForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+  }
+
+  input, select {
+    padding: 0.8rem 1.1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    outline: none;
+    background: var(--surface-muted);
+
+    &:focus {
+      border-color: var(--secondary-color);
+    }
+  }
+}
+
+.submitBookingBtn {
+  padding: 0.9rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(236,115,49,0.3);
+  }
+}
+
+.bookedSlotsCard {
+  background: var(--surface-muted);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+
+  h4 {
+    margin: 0 0 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+}
+
+.noBookings {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.bookingsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.bookingItem {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+
+  .bookingCheck {
+    color: #10b981;
+  }
+}
+
+/* 🔒 Lock View (Non-VIP) */
+.lockView {
+  background: linear-gradient(180deg, #fffbf7 0%, #fff7ef 100%);
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  padding: 3rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.lockHeader {
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+
+  .lockCrownWrap {
+    width: 68px;
+    height: 68px;
+    background: rgba(181, 148, 16, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.2rem;
+    border: 2px solid rgba(181, 148, 16, 0.25);
+  }
+
+  .lockCrown {
+    font-size: 2.2rem;
+    color: #B59410;
+  }
+
+  h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary-color);
+  }
+
+  .lockSubtitle {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+}
+
+.planFeatureGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+  max-width: 900px;
+  margin: 0 auto 3rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.featureCard {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+
+  .featIcon {
+    font-size: 1.8rem;
+    color: var(--secondary-color);
+    margin-bottom: 0.8rem;
+  }
+
+  h5 {
+    margin: 0 0 0.4rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+}
+
+.lockPricingSection {
+  border-top: 1px solid rgba(70,46,34,0.1);
+  padding-top: 2.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.lockUpgradeTitle {
+  margin: 0 0 2rem;
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--text-primary);
+}
+
+.lockGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.upgradeCard {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+
+  .upgradeBadge {
+    align-self: flex-start;
+    background: rgba(236,115,49,0.08);
+    color: var(--secondary-color);
+    font-weight: 800;
+    font-size: 0.72rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+  }
+
+  .upgradeTitle {
+    margin: 0;
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+  }
+
+  .upgradePrice {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .upgradePriceVal {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--secondary-color);
+  }
+
+  .upgradePriceLabel {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-left: 0.3rem;
+  }
+
+  .upgradeDesc {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+
+  .upgradeBtn {
+    display: block;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;
+    padding: 0.8rem;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(236,115,49,0.25);
+    }
+  }
+}
+
+.upgradeCardPremium {
+  border-color: rgba(181, 148, 16, 0.4);
+  box-shadow: 0 8px 24px rgba(181, 148, 16, 0.08);
+
+  .upgradeBadge {
+    background: rgba(181, 148, 16, 0.1);
+    color: #B59410;
+  }
+
+  .upgradePriceVal {
+    color: #B59410;
+  }
+
+  .upgradeBtnPremium {
+    background: linear-gradient(135deg, #111827, #1f2937);
+    border: 1px solid rgba(181, 148, 16, 0.4);
+
+    &:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+/* Base styles for no user */
+.noUser {
+  text-align: center;
+  padding: 3rem;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  .lockIcon {
+    color: var(--text-muted);
+  }
+
+  h3 {
+    margin: 0;
+    font-weight: 800;
+    color: var(--primary-color);
+  }
+
+  p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .loginBtn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    padding: 0.8rem 2.5rem;
+    border-radius: 10px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(236,115,49,0.25);
+    }
+  }
+}

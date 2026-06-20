@@ -792,6 +792,11 @@ export async function downloadTrainingPDF(order: UniversalOrderType) {
                 {/* Header: різний для AI/Coach */}
                 {isCoach ? (
                     <View style={styles.header}>
+                        {order.totalTokens >= 49000 && (
+                            <Text style={{ fontSize: 9, fontWeight: "bold", color: "#B59410", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 4 }}>
+                                ★ Qellum VIP Premium Culinary Signature Plan ★
+                            </Text>
+                        )}
                         <View style={styles.headerRow}>
                             <Text style={styles.title}>Meal Plan — {fullName}</Text>
                         </View>
@@ -826,6 +831,21 @@ export async function downloadTrainingPDF(order: UniversalOrderType) {
                         {cleanText("Happy cooking — small, consistent changes make delicious results.")}
                     </Text>
                 </View>
+
+                {isCoach && order.totalTokens >= 49000 && (
+                    <View style={{ marginTop: 30, borderTopWidth: 1, borderTopColor: "#B59410", borderTopStyle: "solid", paddingTop: 14, textAlign: "center" }}>
+                        <Text style={{ fontSize: 11, fontWeight: "bold", color: "#B59410", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 4 }}>
+                            Approved & Signed by Qellum Culinary Board
+                        </Text>
+                        <Text style={{ fontSize: 9, color: "#5B6361", marginBottom: 2 }}>
+                            Executive Chef: Jean-Pierre Dubois  |  Senior Dietitian: Sarah Jenkins, MS, RD
+                        </Text>
+                        <Text style={{ fontSize: 8, color: "#B59410", fontStyle: "italic" }}>
+                            Official Certified VIP Nutrition & Retainer Plan
+                        </Text>
+                    </View>
+                )}
+
                 <Text style={styles.footer} render={({ pageNumber, totalPages }) => `${COMPANY_NAME || ""} • ${COMPANY_PHONE || ""} — Page ${pageNumber} / ${totalPages}`} />
             </Page>
         </Document>

@@ -4,14 +4,18 @@ import BalanceCard from "@/components/features/balance-card/BalanceCard";
 import Dashboard from "@/components/features/dashboard/Dashboard";
 import styles from "./Profile.module.scss";
 
-const Profile = () => {
+interface ProfileProps {
+    defaultTab?: "orders" | "transactions" | "tracker" | "generator";
+}
+
+const Profile: React.FC<ProfileProps> = ({ defaultTab }) => {
     return (
         <div className={styles.profilePage}>
             <ProfileHead />
             <div className={styles.cardsRow}>
                 <BalanceCard />
             </div>
-            <Dashboard />
+            <Dashboard defaultTab={defaultTab} />
         </div>
     );
 };

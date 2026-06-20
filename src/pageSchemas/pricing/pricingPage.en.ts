@@ -124,6 +124,55 @@ No hidden fees — just real culinary experiences.`,
                 },
             ],
         },
+        {
+            type: "section",
+            title: "Qellum VIP Elite Retention Plans",
+            description: "For clients seeking the ultimate level of culinary guidance, individual chef coaching, and certified medical nutrition review.",
+            align: "center",
+        },
+        {
+            type: "grid",
+            columns: 2,
+            gap: "2.5rem",
+            cards: [
+                {
+                    type: "pricing",
+                    variant: "premium",
+                    title: "VIP Chef Retainer (3 Months)",
+                    price: "€499",
+                    tokens: 49900,
+                    badgeTop: "VIP Elite",
+                    description: "Your own dedicated professional chef on retainer for 1-on-1 diet coaching and signature recipe customization.",
+                    features: [
+                        "Dedicated Chef on retainer for 3 months",
+                        "Weekly 60-minute Zoom cooking & diet consultations",
+                        "Unlimited personalized recipe swaps and modifications",
+                        "Kitchen & equipment audit with your chef",
+                        "Printable Premium Signed VIP PDFs",
+                    ],
+                    buttonText: "Enroll in VIP (3 Mo)",
+                    buttonLink: "/checkout?plan=vip3",
+                },
+                {
+                    type: "pricing",
+                    variant: "custom",
+                    title: "Ultimate Culinary Suite (6 Months)",
+                    price: "€999",
+                    tokens: 99000,
+                    badgeTop: "Ultimate VIP",
+                    description: "The complete 6-month elite transformation with direct chef support and board-certified nutritionist supervision.",
+                    features: [
+                        "Direct WhatsApp check-ins with your assigned executive chef",
+                        "Continuous real-time ingredient and recipe adjustments",
+                        "Monthly senior nutritionist laboratory/diet review",
+                        "Personalized custom video guides for recipes",
+                        "Certified culinary board signature stamp on plans",
+                    ],
+                    buttonText: "Enroll in Ultimate (6 Mo)",
+                    buttonLink: "/checkout?plan=vip6",
+                },
+            ]
+        },
 
         // 🔹 SECTION: WHY UPGRADE
         {

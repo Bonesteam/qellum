@@ -27,7 +27,7 @@ const Card: React.FC<CardProps> = ({
                 src={image}
                 type="image"
                 width="100%"
-                height="220px"
+                height="100%"
                 alt={title}
                 objectFit="cover"
             />

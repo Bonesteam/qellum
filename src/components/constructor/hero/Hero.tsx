@@ -104,6 +104,22 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                             priority
                         />
                     )}
+                    {/* Floating Premium Badges */}
+                    <div className={`${styles.hero__floatingBadge} ${styles.hero__floatingBadge1} animate-float`}>
+                        <span className={styles.hero__floatingIcon}>👩‍🍳</span>
+                        <div className={styles.hero__floatingText}>
+                            <p className={styles.hero__floatingTitle}>Chef-Reviewed</p>
+                            <p className={styles.hero__floatingSubtitle}>Guaranteed Quality</p>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.hero__floatingBadge} ${styles.hero__floatingBadge2} animate-float`} style={{ animationDelay: "1s" }}>
+                        <span className={styles.hero__floatingIcon}>📊</span>
+                        <div className={styles.hero__floatingText}>
+                            <p className={styles.hero__floatingTitle}>AI Calorie Tracker</p>
+                            <p className={styles.hero__floatingSubtitle}>99.8% Accuracy</p>
+                        </div>
+                    </div>
                 </motion.div>
             </div>
         </section>

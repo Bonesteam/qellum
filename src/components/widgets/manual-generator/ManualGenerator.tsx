@@ -83,7 +83,7 @@ export interface FormValues {
     extras: string[];
 }
 
-const MealPlannerForm = () => {
+const MealPlannerForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
     const { showAlert } = useAlert();
     const user = useUser();
     const { refreshOrders } = useAllOrders();
@@ -167,6 +167,7 @@ const MealPlannerForm = () => {
                         );
                         // Refresh orders list after successful creation
                         await refreshOrders();
+                        if (onSuccess) onSuccess();
                     } else {
                         showAlert("Error", data.message || "Failed to create plan", "error");
                     }

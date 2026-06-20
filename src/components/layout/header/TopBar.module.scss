@@ -1,63 +1,59 @@
 .topBar {
-  background-color: var(--background-dark);
+  background: var(--background-dark);
   color: var(--text-inverse);
   font-family: var(--font-family);
   font-size: 13px;
   font-weight: 500;
-  padding: 8px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 100;
+  overflow: hidden;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
+  z-index: 100;
 }
 
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.message {
+.ticker {
+  width: 100%;
+  overflow: hidden;
   display: flex;
   align-items: center;
-  gap: 6px;
 }
 
-.payments {
+.track {
   display: flex;
   align-items: center;
-  gap: 8px;
-}
+  white-space: nowrap;
+  animation: tickerScroll 38s linear infinite;
 
-.label {
-  opacity: 0.8;
-  font-size: 12px;
-}
-
-.logos {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-
-.logo {
-  object-fit: contain;
-  filter: brightness(0) invert(1); /* make logos white to match dark background */
-  opacity: 0.95;
-}
-
-@media (max-width: 768px) {
-  .container {
-    justify-content: center;
-    text-align: center;
+  &:hover {
+    animation-play-state: paused;
   }
-  .payments {
-    display: none; /* Hide logos on mobile to save vertical space */
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 0.5rem;
+  opacity: 0.9;
+  letter-spacing: 0.01em;
+}
+
+.sep {
+  margin: 0 1.5rem;
+  opacity: 0.35;
+  font-size: 1rem;
+}
+
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (max-width: 480px) {
+  .topBar {
+    font-size: 12px;
+    height: 32px;
   }
 }

@@ -15,6 +15,8 @@ interface MediaProps {
     loop?: boolean;
     muted?: boolean;
     aspectRatio?: string;
+    width?: string;
+    height?: string;
 }
 
 const Media: React.FC<MediaProps> = ({
@@ -28,11 +30,17 @@ const Media: React.FC<MediaProps> = ({
                                          loop = false,
                                          muted = false,
                                          aspectRatio = "16/9",
+                                         width,
+                                         height,
                                      }) => {
     return (
         <div
             className={`${styles.mediaWrapper} ${className}`}
-            style={{ aspectRatio }}
+            style={{
+                aspectRatio: width || height ? undefined : aspectRatio,
+                width,
+                height,
+            }}
         >
             {type === "image" ? (
                 <Image

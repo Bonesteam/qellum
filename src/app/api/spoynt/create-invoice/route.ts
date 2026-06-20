@@ -26,9 +26,6 @@ function basicAuthHeader(username: string, password: string) {
     return `Basic ${Buffer.from(`${username}:${password}`).toString("base64")}`;
 }
 
-function round2(value: number) {
-    return Math.round(value * 100) / 100;
-}
 
 function compactObject<T extends Record<string, unknown>>(value: T) {
     return Object.fromEntries(

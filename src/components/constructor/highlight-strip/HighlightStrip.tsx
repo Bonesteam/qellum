@@ -9,12 +9,32 @@ interface HighlightItem {
 }
 
 interface HighlightStripProps {
-    items: HighlightItem[];
+    items?: HighlightItem[];
+    messages?: string[];
 }
 
-const HighlightStrip: React.FC<HighlightStripProps> = ({ items }) => {
+const HighlightStrip: React.FC<HighlightStripProps> = ({ items = [], messages }) => {
+    const parsedItems: HighlightItem[] = [...items];
+
+    if (messages) {
+        for (const msg of messages) {
+            const match = msg.match(/^([^\w\s\d,.:;'"?!()\-]{1,3})\s*(.*)$/u);
+            if (match) {
+                parsedItems.push({
+                    icon: match[1].trim(),
+                    text: match[2].trim(),
+                });
+            } else {
+                parsedItems.push({
+                    icon: "✨",
+                    text: msg,
+                });
+            }
+        }
+    }
+
     // дублюємо масив для безкінечного скролу
-    const repeatedItems = [...items, ...items];
+    const repeatedItems = [...parsedItems, ...parsedItems];
 
     return (
         <div className={styles.strip}>

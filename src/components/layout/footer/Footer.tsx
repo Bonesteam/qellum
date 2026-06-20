@@ -19,11 +19,12 @@ const SmartLink: React.FC<SmartLinkProps> = ({
                                                  title,
                                                  target,
                                                  rel,
+                                                 style,
                                              }) => {
     const isInternal = href?.startsWith("/");
     if (isInternal) {
         return (
-            <Link href={href} className={className} aria-label={ariaLabel} title={title}>
+            <Link href={href} className={className} aria-label={ariaLabel} title={title} style={style}>
                 {children}
             </Link>
         );
@@ -36,6 +37,7 @@ const SmartLink: React.FC<SmartLinkProps> = ({
             title={title}
             target={target}
             rel={rel}
+            style={style}
         >
             {children}
         </a>
@@ -164,31 +166,17 @@ const Footer: React.FC = () => {
         >
             {footerStyles.type === "columns" && (
                 <div className={styles["footer__inner"]}>
-                    <div className={styles.logoAndSocials}>
-                        <SmartLink href={logo.href} className={styles["footer__logo"]} ariaLabel="Logo">
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", borderBottom: "1px solid var(--footer-border)", paddingBottom: "20px", marginBottom: "20px", flexWrap: "wrap", gap: "16px" }}>
+                        <SmartLink href={logo.href} className={styles["footer__logo"]} ariaLabel="Logo" style={{ marginBottom: 0 }}>
                             <Image
                                 src={logo.src}
                                 alt={logo.alt}
                                 width={0}
                                 height={0}
                                 sizes="120px"
-                                style={{ width: "var(--footer-logo-w)", height: "var(--footer-logo-h)" }}
+                                style={{ width: "var(--footer-logo-w)", height: "var(--footer-logo-h)", margin: 0 }}
                             />
                         </SmartLink>
-                        <div className={styles.footer__socials}>
-                            {socialLinks.map((social) => (
-                                <a
-                                    key={social.label}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label={social.label}
-                                    className={styles["footer__social-link"]}
-                                >
-                                    {social.icon}
-                                </a>
-                            ))}
-                        </div>
                     </div>
 
                     <div className={styles["footer__columns"]}>
@@ -379,13 +367,32 @@ const Footer: React.FC = () => {
 
 
             <div className={styles["footer__bottom"]}>
+                {/* Left: social icons */}
+                <div className={styles["footer__bottom-socials"]}>
+                    {socialLinks.map((social) => (
+                        <a
+                            key={social.label}
+                            href={social.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={social.label}
+                            className={styles["footer__social-link"]}
+                        >
+                            {social.icon}
+                        </a>
+                    ))}
+                </div>
+
+                {/* Center: payment logos */}
+                <div className={styles["footer__bottom-payments"]}>
+                    <Image src={media.visaLogo} alt="Visa" width={44} height={14} className={styles["footer__payment-logo"]} />
+                    <Image src={media.mastercardLogo} alt="Mastercard" width={30} height={18} className={styles["footer__payment-logo"]} />
+                    <Image src={media.pciDssLogo} alt="PCI DSS" width={44} height={13} className={styles["footer__payment-logo"]} />
+                </div>
+
+                {/* Right: copyright */}
                 <div className={styles["footer__rights"]}>
                     © {new Date().getFullYear()} All rights reserved.
-                </div>
-                <div className={styles.footerBottomPayments} style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                    <Image src={media.visaLogo} alt="Visa" width={48} height={16} style={{ filter: 'brightness(0) invert(1)', opacity: 0.8 }} />
-                    <Image src={media.mastercardLogo} alt="Mastercard" width={32} height={20} style={{ filter: 'brightness(0) invert(1)', opacity: 0.8 }} />
-                    <Image src={media.pciDssLogo} alt="PCI DSS" width={48} height={14} style={{ filter: 'brightness(0) invert(1)', opacity: 0.8 }} />
                 </div>
             </div>
         </footer>

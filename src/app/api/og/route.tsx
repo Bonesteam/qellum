@@ -1,8 +1,8 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const contentType = "image/png";
-export const size = { width: 1200, height: 630 };
+const contentType = "image/png";
+const size = { width: 1200, height: 630 };
 
 function getBaseUrl(req: Request): string {
     const url = new URL(req.url);

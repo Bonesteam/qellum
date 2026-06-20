@@ -1,15 +1,18 @@
 .strip {
   width: 100%;
   overflow: hidden;
-  background: linear-gradient(to right, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0) 100%);
-  padding: 2rem 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+  padding: 2.5rem 0;
   position: relative;
+  border-top: 1px solid rgba(223, 218, 208, 0.4);
+  border-bottom: 1px solid rgba(223, 218, 208, 0.4);
+  backdrop-filter: blur(8px);
   
   &::before, &::after {
     content: '';
     position: absolute;
     top: 0;
-    width: 200px;
+    width: 250px;
     height: 100%;
     z-index: 2;
     pointer-events: none;
@@ -17,21 +20,20 @@
   
   &::before {
     left: 0;
-    background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
+    background: linear-gradient(to right, rgba(249, 247, 242, 0.95) 0%, transparent 100%);
   }
   
   &::after {
     right: 0;
-    background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
+    background: linear-gradient(to left, rgba(245, 239, 228, 0.95) 0%, transparent 100%);
   }
 }
 
 .track {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
-  gap: 3rem;
-  animation: scroll 50s linear infinite;
+  display: flex;
+  gap: 2.5rem;
+  animation: scroll 45s linear infinite;
+  width: max-content;
   
   &:hover {
     animation-play-state: paused;
@@ -40,80 +42,57 @@
 
 .card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  text-align: center;
-  gap: 1rem;
-  background: transparent;
-  padding: 1rem;
-  min-width: 200px;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  padding: 12px 28px;
+  border-radius: 50px;
+  box-shadow: 0 8px 24px rgba(45, 90, 39, 0.03);
   flex-shrink: 0;
-  position: relative;
-  transform-origin: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--transition-smooth);
 
   &:hover {
-    transform: scale(1.05);
-    
-    .iconBox {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-    }
+    transform: translateY(-3px) scale(1.03);
+    border-color: var(--secondary-color);
+    box-shadow: 0 12px 28px rgba(184, 134, 11, 0.12);
   }
 }
 
 .iconBox {
-  width: 80px;
-  height: 80px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  background: linear-gradient(135deg, var(--tertiary-color), var(--quaternary-color));
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1),
-              inset 0 2px 4px rgba(255,255,255,0.3);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
-    border-radius: inherit;
-    z-index: 1;
-    pointer-events: none;
-  }
+  background: var(--premium-gradient);
+  box-shadow: 0 4px 10px rgba(45, 90, 39, 0.15);
+  transition: transform 0.3s ease;
 }
 
 .iconImg {
-  width: 48px;
-  height: 48px;
+  width: 22px;
+  height: 22px;
   object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
 .iconEmoji {
-  font-size: 2.2rem;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  font-size: 1.35rem;
+  line-height: 1;
 }
 
 .text {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--text-primary, #2d3748);
-  line-height: 1.4;
-  max-width: 180px;
-  opacity: 0.9;
-  transition: opacity 0.3s ease;
-  
-  .card:hover & {
-    opacity: 1;
-  }
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
 }
 
 @keyframes scroll {

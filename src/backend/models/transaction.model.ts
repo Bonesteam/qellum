@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, Model } from "mongoose";
 
 export interface TransactionDocument extends Document {
     userId: mongoose.Types.ObjectId;
@@ -20,6 +20,7 @@ const transactionSchema = new Schema<TransactionDocument>({
     createdAt: { type: Date, default: Date.now },
 });
 
-export const Transaction =
+export const Transaction: Model<TransactionDocument> =
     mongoose.models.Transaction ||
     mongoose.model<TransactionDocument>("Transaction", transactionSchema);
+

@@ -36,7 +36,118 @@
     --font-family: 'Outfit', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
 
     --main-padding: 0 50px 0 50px;
+
+    /* 🌟 Преміальні ефекти та градієнти */
+    --premium-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    --gold-gradient: linear-gradient(135deg, var(--secondary-color), #DAA520, var(--tertiary-color));
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(223, 218, 208, 0.5);
+    --glass-blur: blur(16px);
+    --glass-shadow: 0 8px 32px 0 rgba(45, 90, 39, 0.05);
+
+    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* 🌀 Аврора-ефекти (задній фон) */
+.aurora-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+    opacity: 0.5;
+}
+
+.aurora-blob {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    filter: blur(160px);
+    opacity: 0.28;
+}
+
+.aurora-blob--green {
+    background: radial-gradient(circle, rgba(45, 90, 39, 0.7) 0%, rgba(45, 90, 39, 0.1) 70%);
+    top: -250px;
+    left: -180px;
+    animation: floatBlob 22s infinite alternate ease-in-out;
+}
+
+.aurora-blob--gold {
+    background: radial-gradient(circle, rgba(184, 134, 11, 0.6) 0%, rgba(184, 134, 11, 0.05) 70%);
+    bottom: -180px;
+    right: -180px;
+    animation: floatBlob 28s infinite alternate-reverse ease-in-out;
+}
+
+.aurora-blob--warm {
+    background: radial-gradient(circle, rgba(226, 212, 168, 0.5) 0%, rgba(226, 212, 168, 0.05) 70%);
+    top: 35%;
+    left: calc(50% - 300px);
+    width: 600px;
+    height: 600px;
+    animation: floatBlobWarm 38s infinite alternate ease-in-out;
+}
+
+@keyframes floatBlobWarm {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(-60px, 50px) scale(1.08); }
+    100% { transform: translate(60px, -30px) scale(0.94); }
+}
+
+/* ✨ Корисні класи */
+.text-gradient {
+    background: var(--premium-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-gradient-gold {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+/* 🎬 Анімації */
+@keyframes floatBlob {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(80px, 40px) scale(1.1);
+    }
+    100% {
+        transform: translate(-40px, 80px) scale(0.95);
+    }
+}
+
+@keyframes floatElement {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-8px);
+    }
+}
+
+.animate-float {
+    animation: floatElement 4s infinite alternate ease-in-out;
+}
+
 
 /* Базові стилі */
 * {
@@ -49,7 +160,8 @@ html,
 body {
     max-width: 100vw;
     font-family: var(--font-family);
-    background-color: var(--background-light);
+    background: linear-gradient(160deg, #F9F7F2 0%, #EDE7D9 45%, #F5EFE4 100%);
+    background-attachment: fixed;
     color: var(--text-primary);
 }
 

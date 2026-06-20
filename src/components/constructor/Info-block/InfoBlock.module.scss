@@ -5,13 +5,15 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(180deg, #fefefe 0%, #f7fafa 100%);
-  border: 1px solid var(--border);
-  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 2rem;
   padding: 2.5rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--glass-shadow);
   color: var(--text-primary);
-  transition: all 0.4s ease;
+  transition: var(--transition-smooth);
   z-index: 1;
   overflow: hidden;
 

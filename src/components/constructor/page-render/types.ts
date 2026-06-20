@@ -83,11 +83,18 @@ export type GridItem = {
 };
 
 export type LegacyCard = {
-    image: string;
+    type?: "card" | "pricing";
+    image?: string;
     title: string;
     description: string;
     buttonLink?: string;
     buttonText?: string;
+    variant?: "starter" | "pro" | "premium" | "custom";
+    price?: string;
+    tokens?: number;
+    features?: string[];
+    badgeTop?: string;
+    badgeBottom?: string;
 };
 
 export type GridBlock = {
@@ -101,7 +108,7 @@ export type GridBlock = {
 
 export type PricingBlock = {
     type: "pricing";
-    variant?: "basic" | "highlight" | "premium";
+    variant?: "starter" | "pro" | "premium" | "custom";
     title: string;
     price: string;
     tokens: number;
@@ -183,11 +190,12 @@ export type CardSliderBlock = {
 export type HighlightStripBlock = {
     type: "custom";
     component: "HighlightStrip";
-    items: {
+    items?: {
         icon: string;
         text: string;
         color?: string;
     }[];
+    messages?: string[];
 };
 
 export type MarqueeBlock = {
@@ -247,6 +255,21 @@ export type TestimonialsSliderBlock = {
     }[];
 };
 
+export type CalorieCalculatorBlock = {
+    type: "custom";
+    component: "CalorieCalculator";
+};
+
+export type ChefMatchQuizBlock = {
+    type: "custom";
+    component: "ChefMatchQuiz";
+};
+
+export type NutritionFactsTickerBlock = {
+    type: "custom";
+    component: "NutritionFactsTicker";
+};
+
 // ---------------- Union Types ----------------
 
 export type CustomBlock =
@@ -263,6 +286,9 @@ export type CustomBlock =
     | HeroSectionBlock
     | TestimonialsSliderBlock
     | VideoDemoBlock
+    | CalorieCalculatorBlock
+    | ChefMatchQuizBlock
+    | NutritionFactsTickerBlock
     | InfoBlock;
 
 export type PageBlock =

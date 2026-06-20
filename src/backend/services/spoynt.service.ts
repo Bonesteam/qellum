@@ -351,6 +351,8 @@ export const spoyntService = {
                         tokens: input.tokens,
                         balanceAfter: existingTx.balanceAfter,
                         alreadyCredited: true,
+                        providerStatus: input.status,
+                        providerResolution: input.resolution,
                     };
                 }
             }

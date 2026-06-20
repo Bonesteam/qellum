@@ -106,11 +106,11 @@ export const footerStyles = {
 
 // Hover effects
 export const hoverEffects: Record<HoverEffect, { transform: string; shadow: string }> = {
-    none: { transform: "shadow", shadow: "shadow" },
-    shadow: { transform: "translateY(-6px)", shadow: "0 12px 28px rgba(0,0,0,0.18)" },
-    lift: { transform: "translateY(-12px)", shadow: "0 16px 32px rgba(0,0,0,0.22)" },
-    glow: { transform: "scale(1.03)", shadow: "0 0 25px rgba(45,90,39,0.7), 0 0 40px rgba(45,90,39,0.4)" },
-    tilt: { transform: "rotate3d(1,1,0,6deg) scale(1.02)", shadow: "0 18px 30px var(--primary-color)" },
+    none: { transform: "none", shadow: "none" },
+    shadow: { transform: "translateY(-6px)", shadow: "0 20px 40px rgba(45, 90, 39, 0.12)" },
+    lift: { transform: "translateY(-10px)", shadow: "0 24px 48px rgba(45, 90, 39, 0.16)" },
+    glow: { transform: "scale(1.025)", shadow: "0 0 25px rgba(184, 134, 11, 0.35), 0 0 45px rgba(45, 90, 39, 0.15)" },
+    tilt: { transform: "rotate3d(1, 1, 0, 4deg) scale(1.02)", shadow: "0 20px 35px rgba(184, 134, 11, 0.2)" },
 };
 
 // Card variants
@@ -121,14 +121,14 @@ export const cardVariants: Record<CardVariant, {
     label?: CardLabel;
 }> = {
     basic: {
-        border: "1px solid var(--border-color)",
-        background: "linear-gradient(145deg, #fbfbfa, #ffffff)",
+        border: "1px solid rgba(223, 218, 208, 0.6)",
+        background: "rgba(255, 255, 255, 0.5)",
         hover: "shadow",
     },
     highlight: {
-        border: "2px solid var(--primary-color)",
-        background: "linear-gradient(145deg, #f1f6f0, #e6efe4)",
-        hover: "shadow",
+        border: "1px solid rgba(45, 90, 39, 0.3)",
+        background: "linear-gradient(145deg, rgba(241, 246, 240, 0.75), rgba(230, 239, 228, 0.8))",
+        hover: "lift",
         label: {
             text: "Most Popular",
             bg: "linear-gradient(135deg, var(--primary-color), #558b2f)",
@@ -136,9 +136,9 @@ export const cardVariants: Record<CardVariant, {
         },
     },
     premium: {
-        border: "2px solid var(--secondary-color)",
-        background: "linear-gradient(145deg, #fbf7ec, #f4ecd2)",
-        hover: "shadow",
+        border: "1px solid rgba(184, 134, 11, 0.3)",
+        background: "linear-gradient(145deg, rgba(251, 247, 236, 0.75), rgba(244, 236, 210, 0.8))",
+        hover: "glow",
         label: {
             text: "Premium",
             bg: "linear-gradient(135deg, var(--secondary-color), #daa520)",

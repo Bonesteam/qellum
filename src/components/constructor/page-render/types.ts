@@ -260,11 +260,6 @@ export type CalorieCalculatorBlock = {
     component: "CalorieCalculator";
 };
 
-export type ChefMatchQuizBlock = {
-    type: "custom";
-    component: "ChefMatchQuiz";
-};
-
 export type NutritionFactsTickerBlock = {
     type: "custom";
     component: "NutritionFactsTicker";
@@ -287,7 +282,6 @@ export type CustomBlock =
     | TestimonialsSliderBlock
     | VideoDemoBlock
     | CalorieCalculatorBlock
-    | ChefMatchQuizBlock
     | NutritionFactsTickerBlock
     | InfoBlock;
 

@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
-export type Currency = "EUR";
+export type Currency = "GBP" | "EUR" | "USD";
 
 interface CurrencyContextType {
     currency: Currency;
@@ -14,11 +14,15 @@ interface CurrencyContextType {
 }
 
 const CURRENCY_SIGNS: Record<Currency, string> = {
+    GBP: "£",
     EUR: "€",
+    USD: "$",
 };
 
 const RATES: Record<Currency, number> = {
+    GBP: 1.0,
     EUR: 1.17,
+    USD: 1.22,
 };
 
 const CurrencyContext = createContext<CurrencyContextType>({

@@ -8,6 +8,8 @@ import ValuesIcons from "@/components/constructor/values-icons/ValuesIcons";
 import HighlightStrip from "@/components/constructor/highlight-strip/HighlightStrip";
 import FAQ from "@/components/constructor/faq/FAQ";
 import { media as mediaMap } from "@/resources/media";
+import { useEffect } from "react";
+import { COMPANY_NAME } from "@/resources/constants";
 
 function resolveMedia(key?: string) {
     if (!key) return undefined;
@@ -19,6 +21,10 @@ function resolveMedia(key?: string) {
 }
 
 const Page = () => {
+    useEffect(() => {
+        document.title = `Example Meal Plans — ${COMPANY_NAME || "Qellum"}`;
+    }, []);
+
     return (
         <>
             {/* Intro */}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { AlertCircle, ArrowLeft, CheckCircle2, Clock3, Loader2, Wallet } from "lucide-react";
 import styles from "./PaymentStatus.module.scss";
+import { COMPANY_NAME } from "@/resources/constants";
 
 type PaymentState = {
     loading: boolean;
@@ -30,6 +31,7 @@ export default function PaymentStatusPage() {
     const [state, setState] = useState<PaymentState>({ loading: true });
 
     useEffect(() => {
+        document.title = `Payment Status — ${COMPANY_NAME || "Qellum"}`;
         if (!reference) {
             setState({ loading: false, status: "invalid", message: "Missing payment reference." });
             return;

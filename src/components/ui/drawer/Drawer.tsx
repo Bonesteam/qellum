@@ -58,10 +58,13 @@ const DrawerMenu: FC<DrawerMenuProps> = ({ open, onClose }) => {
                         <div className={styles.currencySwitch}>
                             <select
                                 value={currency}
-                                onChange={() => setCurrency("EUR")}
+                                onChange={(e) => setCurrency(e.target.value as any)}
                                 className={styles.currencySelect}
+                                aria-label="Currency"
                             >
+                                <option value="GBP">£ GBP</option>
                                 <option value="EUR">€ EUR</option>
+                                <option value="USD">$ USD</option>
                             </select>
                         </div>
                 </div>

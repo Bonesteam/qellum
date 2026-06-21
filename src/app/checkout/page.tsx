@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import Button from "@/components/ui/button/ButtonUI";
 import { Loader2 } from "lucide-react";
 import CheckoutLayout from "@/components/constructor/checkout/CheckoutLayout";
+import { COMPANY_NAME } from "@/resources/constants";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -13,6 +14,7 @@ export default function CheckoutPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
+    document.title = `Checkout — ${COMPANY_NAME || "Qellum"}`;
     const data = localStorage.getItem("checkoutData");
     if (!data) router.push("/pricing");
     else setCheckout(JSON.parse(data));

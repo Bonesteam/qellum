@@ -97,11 +97,6 @@ const schema: PageSchema = {
 
         {
             type: "custom",
-            component: "ChefMatchQuiz",
-        },
-
-        {
-            type: "custom",
             component: "InfoBlock",
             title: "How It Works",
             description: "Create your account, add preferences, choose AI or Chef plan, and receive recipes and a grocery list within hours.",

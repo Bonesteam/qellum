@@ -81,11 +81,6 @@ Oavsett om målet är viktkontroll, muskeluppbyggnad eller balanserad näring �
 
         {
             type: "custom",
-            component: "ChefMatchQuiz",
-        },
-
-        {
-            type: "custom",
             component: "Timeline",
             title: "Hur Det Fungerar",
             steps: [

@@ -1,9 +1,7 @@
 "use client";
 
-import { IoIosArrowDown } from "react-icons/io";
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import styles from "./FAQ.module.scss";
 
 interface FAQItem {
@@ -13,90 +11,59 @@ interface FAQItem {
 
 interface FAQProps {
     items: FAQItem[];
-    image?: string; // 🟢 фото праворуч
+    image?: string; // більше не використовується, але лишаємо для сумісності зі схемою
 }
 
-const FAQ: React.FC<FAQProps> = ({ items, image }) => {
+const FAQ: React.FC<FAQProps> = ({ items }) => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     const toggle = (idx: number) => {
         setOpenIndex(openIndex === idx ? null : idx);
     };
 
-    // ✅ якщо фото немає — додаємо клас для центрування
-    const wrapperClass = image
-        ? styles.wrapper
-        : `${styles.wrapper} ${styles.centered}`;
-
     return (
         <section className={styles.section}>
-            <div className={wrapperClass}>
-                <div className={styles.left}>
-                    <h2 className={styles.title}>Frequently Asked Questions</h2>
+            <div className={styles.header}>
+                <h2 className={styles.title}>Questions?<br />We've got answers.</h2>
+                <p className={styles.headerNote}>
+                    Still need help?<br />
+                    Email us at support@qellum.co.uk
+                </p>
+            </div>
 
-                    <div className={styles.faqList}>
-                        {items.map((item, idx) => {
-                            const isOpen = openIndex === idx;
-                            return (
-                                <motion.div
-                                    key={idx}
-                                    className={`${styles.item} ${isOpen ? styles.active : ""}`}
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: idx * 0.1, duration: 0.4 }}
-                                    viewport={{ once: true }}
-                                >
-                                    <button
-                                        className={styles.question}
-                                        onClick={() => toggle(idx)}
-                                        aria-expanded={isOpen}
+            <div className={styles.faqList}>
+                {items.map((item, idx) => {
+                    const isOpen = openIndex === idx;
+                    return (
+                        <div key={idx} className={styles.item}>
+                            <button
+                                className={`${styles.question} ${isOpen ? styles.open : ""}`}
+                                onClick={() => toggle(idx)}
+                                aria-expanded={isOpen}
+                            >
+                                <span className={styles.questionNum}>
+                                    {String(idx + 1).padStart(2, "0")}
+                                </span>
+                                <span className={styles.questionText}>{item.question}</span>
+                                <span className={styles.questionIcon} aria-hidden="true">+</span>
+                            </button>
+
+                            <AnimatePresence initial={false}>
+                                {isOpen && (
+                                    <motion.div
+                                        className={styles.answer}
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: "auto", opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        transition={{ duration: 0.3, ease: "easeInOut" }}
                                     >
-                                        <span>{item.question}</span>
-                                        <motion.span
-                                            animate={{ rotate: isOpen ? 180 : 0 }}
-                                            transition={{ duration: 0.3 }}
-                                            className={isOpen ? styles.arrowOpen : styles.arrow}
-                                        >
-                                            <IoIosArrowDown />
-                                        </motion.span>
-                                    </button>
-
-                                    <AnimatePresence initial={false}>
-                                        {isOpen && (
-                                            <motion.div
-                                                key="answer"
-                                                className={styles.answer}
-                                                initial={{ height: 0, opacity: 0 }}
-                                                animate={{ height: "auto", opacity: 1 }}
-                                                exit={{ height: 0, opacity: 0 }}
-                                                transition={{ duration: 0.35, ease: "easeInOut" }}
-                                            >
-                                                <div className={styles.answerContent}>
-                                                    {item.answer}
-                                                </div>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </motion.div>
-                            );
-                        })}
-                    </div>
-                </div>
-
-                {/* 🖼️ показуємо праву частину лише якщо є зображення */}
-                {image && (
-                    <div className={styles.right}>
-                        <div className={styles.imageWrapper}>
-                            <Image
-                                src={image}
-                                alt="FAQ Illustration"
-                                width={500}
-                                height={600}
-                                className={styles.image}
-                            />
+                                        <div className={styles.answerContent}>{item.answer}</div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
-                    </div>
-                )}
+                    );
+                })}
             </div>
         </section>
     );

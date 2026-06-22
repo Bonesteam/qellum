@@ -1,103 +1,130 @@
+/*
+ * FAQ.module.scss — НОВИЙ ДИЗАЙН
+ *
+ * ❌ ПРИБРАНО: glassmorphism фон, gradient заголовок, права колонка з фото
+ * ✅ НОВИЙ: нумерований список, чітка типографіка, border-bottom divider
+ */
+
 .section {
   width: 100%;
-  border-radius: 2rem;
-  padding: 6rem var(--footer-pad-x, 40px);
-  position: relative;
-  overflow: hidden;
-}
-
-.wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 80px;
+  padding: 7rem 6rem;
+  background: var(--text-primary);    /* ← темний фон — інвертований блок */
 
   @media (max-width: 900px) {
-    flex-direction: column-reverse;
-    align-items: center;
-    gap: 40px;
+    padding: 5rem 2rem;
   }
 }
 
-.left {
-  flex: 1.2;
+.header {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.5rem;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 4rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .title {
-  font-size: 2.8rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  background: var(--premium-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 2rem;
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: var(--background-light);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0;
+  /* ❌ БЕЗ gradient clip */
 
   @media (max-width: 768px) {
-    text-align: center;
     font-size: 2.2rem;
+  }
+}
+
+.headerNote {
+  font-size: 0.9rem;
+  color: rgba(247, 245, 240, 0.45);
+  max-width: 220px;
+  line-height: 1.6;
+  text-align: right;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    text-align: left;
+    max-width: 100%;
   }
 }
 
 .faqList {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  width: 100%;
+  /* ❌ БЕЗ gap — divider через border */
 }
 
 .item {
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  border-radius: 18px;
-  padding: 1.4rem 1.8rem;
-  box-shadow: var(--glass-shadow);
-  transition: var(--transition-smooth);
+  border-top: 1px solid rgba(247, 245, 240, 0.12);
 
-  &.active {
-    border-color: var(--secondary-color);
-    background: rgba(255, 255, 255, 0.7);
-    box-shadow: 0 15px 35px rgba(184, 134, 11, 0.08);
+  &:last-child {
+    border-bottom: 1px solid rgba(247, 245, 240, 0.12);
   }
 }
+
+/* ❌ БЕЗ glassmorphism .item.active */
 
 .question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.6rem 0;
   background: none;
   border: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  text-align: left;
+  gap: 1.5rem;
+  transition: none;
+}
+
+.questionNum {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+  width: 28px;
+}
+
+.questionText {
   font-size: 1.15rem;
   font-weight: 700;
-  cursor: pointer;
-  text-align: left;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--text-primary);
-  transition: color 0.2s ease;
-  font-family: var(--font-family);
+  color: var(--background-light);
+  flex: 1;
+  line-height: 1.3;
+  transition: color 0.15s ease;
 
-  &:hover {
-    color: var(--primary-color);
+  .question:hover & {
+    color: var(--tertiary-color);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
   }
 }
 
-.arrow,
-.arrowOpen {
-  font-size: 1.5rem;
-  color: var(--secondary-color);
+.questionIcon {
+  font-size: 1.2rem;
+  color: rgba(247, 245, 240, 0.4);
+  flex-shrink: 0;
+  transition: transform 0.25s ease, color 0.15s ease;
   display: flex;
   align-items: center;
-  justify-content: center;
-}
 
-.arrowOpen {
-  color: var(--primary-color);
+  .open & {
+    transform: rotate(45deg);
+    color: var(--primary-color);
+  }
 }
 
 .answer {
@@ -105,70 +132,13 @@
 }
 
 .answerContent {
-  padding: 1rem 0 0.2rem;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  max-width: 720px;
-}
+  padding: 0 0 1.8rem 40px;
+  font-size: 1rem;
+  color: rgba(247, 245, 240, 0.6);
+  line-height: 1.8;
+  max-width: 680px;
 
-.right {
-  flex: 0.8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.imageWrapper {
-  width: 100%;
-  border-radius: 40px 40px 40px 10px; /* Asymmetric corners */
-  overflow: hidden;
-  box-shadow: 0 25px 50px rgba(45, 90, 39, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-
-  @media (max-width: 900px) {
-    display: none;
-  }
-}
-
-.image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: inherit;
-}
-
-.centered {
-  justify-content: center;
-  text-align: center;
-
-  .left {
-    align-items: center;
-    width: 100%;
-  }
-
-  .title {
-    text-align: center;
-    width: 100%;
-  }
-
-  .faqList {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-}
-
-/* 📱 Responsive viewports */
-@media (max-width: 768px) {
-  .section {
-    padding: 4rem 1.5rem;
-  }
-
-  .faqList {
-    gap: 0.8rem;
-  }
-
-  .question {
-    font-size: 1.05rem;
+  @media (max-width: 768px) {
+    padding-left: 0;
   }
 }

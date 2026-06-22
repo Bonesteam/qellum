@@ -1,272 +1,224 @@
+/*
+ * PricingCard.module.scss — НОВИЙ ДИЗАЙН
+ *
+ * ❌ ПРИБРАНО: glassmorphism, gold glow hover, premium-gradient на кнопці,
+ *              ::before radial glow, декоративні тіні
+ * ✅ НОВИЙ: чіткі рамки, editorial look, "most popular" — просто інвертована картка,
+ *           flat кнопки
+ */
+
 .card {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  border-radius: 2rem;
-  padding: 3.5rem 2.2rem 2.5rem;
-  overflow: visible;
-  isolation: isolate;
+  border: 1.5px solid var(--border-color);
+  border-radius: 6px;
+  padding: 2.4rem 2rem 2rem;
+  background: var(--surface-color);
   height: 100%;
-  transition: var(--transition-smooth);
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
+  transition: border-color 0.2s ease;
 
   &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(45, 90, 39, 0.08), 0 0 30px rgba(184, 134, 11, 0.15);
-    border-color: rgba(184, 134, 11, 0.35);
-  }
-
-  /* 🌌 Subtle top-right background accent glow */
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 150px;
-    height: 150px;
-    background: radial-gradient(circle at top right, rgba(184, 134, 11, 0.15) 0%, transparent 70%);
-    z-index: -1;
-    border-radius: 0 2rem 0 0;
-    pointer-events: none;
-  }
-
-  .inputWrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    z-index: 3;
-    margin-bottom: 0.6rem;
-
-    input,
-    .MuiInput-root {
-      position: relative;
-      z-index: 3;
-    }
-  }
-
-  .badgeTop {
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 6px 18px;
-    border-radius: 30px;
-    font-size: 0.72rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    background: var(--premium-gradient);
-    color: var(--text-inverse);
-    letter-spacing: 0.08em;
-    box-shadow: 0 4px 15px rgba(45, 90, 39, 0.2);
-    z-index: 2;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    white-space: nowrap;
-  }
-
-  .title {
-    font-size: 1.5rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-    color: var(--text-primary);
-    position: relative;
-    z-index: 2;
-    letter-spacing: -0.01em;
-  }
-
-  .price {
-    font-size: 2.6rem;
-    font-weight: 900;
-    color: var(--primary-color);
-    margin: 0.8rem 0 0.5rem;
-    letter-spacing: -0.03em;
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .tokens {
-      display: inline-block;
-      font-size: 0.85rem;
-      background: rgba(45, 90, 39, 0.08);
-      color: var(--primary-color);
-      padding: 3px 10px;
-      border-radius: 12px;
-      margin-top: 0.4rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-  }
-
-  .dynamicPrice {
-    font-size: 1.15rem;
-    color: var(--secondary-color);
-    font-weight: 700;
-    margin-top: 0.6rem;
-    z-index: 3;
-    position: relative;
-  }
-
-  .description {
-    color: var(--text-secondary);
-    font-size: 0.92rem;
-    line-height: 1.6;
-    margin: 0.8rem 0 1.6rem;
-    z-index: 2;
-    min-height: 48px;
-  }
-
-  .features {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 2rem;
-    width: 100%;
-    text-align: left;
-    position: relative;
-    z-index: 2;
-    flex-grow: 1;
-
-    li {
-      position: relative;
-      padding-left: 1.8rem;
-      margin: 0.6rem 0;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      transition: color 0.3s ease;
-      line-height: 1.5;
-
-      &::before {
-        content: "✓";
-        position: absolute;
-        left: 0;
-        color: var(--secondary-color);
-        font-weight: 800;
-        font-size: 1.05rem;
-        top: -1px;
-      }
-    }
-
-    li:hover {
-      color: var(--text-primary);
-    }
-  }
-
-  .badgeBottom {
-    margin-top: 1rem;
-    padding: 4px 14px;
-    border-radius: 30px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    background: rgba(184, 134, 11, 0.08);
-    color: var(--secondary-color);
-    border: 1px solid rgba(184, 134, 11, 0.15);
-  }
-
-  .buttonContainer {
-    width: 100%;
-    margin-top: auto;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* Unify pricing button styling to premium gold/green */
-  button {
-    width: 100%;
-    font-family: var(--font-family);
-    background: var(--premium-gradient);
-    color: var(--text-inverse) !important;
-    font-weight: 700;
-    border: none;
-    border-radius: 12px;
-    padding: 0.9rem 1.6rem;
-    box-shadow: 0 6px 20px rgba(45, 90, 39, 0.15);
-    transition: var(--transition-smooth);
-    cursor: pointer;
-    letter-spacing: 0.02em;
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(184, 134, 11, 0.3);
-      background: var(--gold-gradient);
-    }
+    border-color: var(--text-primary);
   }
 }
 
-/* 🎨 Theme styles for specific variants */
-.starter {
-  border: 1px solid rgba(45, 90, 39, 0.15);
-}
+/* ── "MOST POPULAR" — повністю інвертований блок ───────── */
 
 .pro {
-  border: 2px solid rgba(45, 90, 39, 0.3);
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 10px 30px rgba(45, 90, 39, 0.04);
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+
+  .title        { color: var(--background-light); }
+  .price        { color: var(--background-light); }
+  .priceUnit    { color: rgba(247,245,240,0.5); }
+  .description  { color: rgba(247,245,240,0.6); }
+  .features li  { color: rgba(247,245,240,0.7); }
+  .features li::before { background: var(--tertiary-color); }
+  .buttonOutline {
+    border-color: rgba(247,245,240,0.4);
+    color: var(--background-light);
+    &:hover {
+      background: rgba(247,245,240,0.1);
+      border-color: var(--background-light);
+    }
+  }
+  .badgeTop {
+    background: var(--primary-color);
+    color: #fff;
+  }
 
   &:hover {
     border-color: var(--primary-color);
-    box-shadow: 0 20px 45px rgba(45, 90, 39, 0.12);
-  }
-
-  .badgeTop {
-    background: var(--premium-gradient);
   }
 }
 
-.premium {
-  border: 2px solid rgba(184, 134, 11, 0.4);
-  background: linear-gradient(180deg, rgba(251, 247, 236, 0.85) 0%, rgba(255, 255, 255, 0.7) 100%);
-  box-shadow: 0 15px 35px rgba(184, 134, 11, 0.08);
+/* ── Badge ──────────────────────────────────────────────── */
 
-  &:hover {
-    border-color: var(--secondary-color);
-    box-shadow: 0 20px 45px rgba(184, 134, 11, 0.22);
-  }
+.badgeTop {
+  position: absolute;
+  top: -13px;
+  left: 2rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 2px;
+  background: var(--text-primary);
+  color: var(--background-light);
+}
 
-  .badgeTop {
-    background: var(--gold-gradient);
-    color: #1e2b1a;
-  }
+/* ── Variant accent lines (top border) ─────────────────── */
 
-  button {
-    background: var(--gold-gradient);
-    color: #1e2b1a !important;
-    box-shadow: 0 6px 20px rgba(184, 134, 11, 0.22);
+.starter  { border-top: 3px solid var(--border-color); }
+.pro      { border-top: 3px solid var(--primary-color); }
+.premium  { border-top: 3px solid var(--secondary-color); }
+.custom   { border-top: 3px dashed var(--border-color); }
 
-    &:hover {
-      background: var(--premium-gradient);
-      color: #fff !important;
+/* ── Контент ────────────────────────────────────────────── */
+
+.title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 1.4rem;
+}
+
+.price {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin: 0 0 0.3rem;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.priceUnit {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0;
+}
+
+.tokensBadge {
+  display: inline-block;
+  margin: 0.6rem 0 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  background: rgba(45, 90, 39, 0.07);
+  padding: 3px 10px;
+  border-radius: 2px;
+  letter-spacing: 0.04em;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 1.2rem 0 1.6rem;
+  flex: 0;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 0 0 1.4rem;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    padding-left: 1.4rem;
+    position: relative;
+    line-height: 1.5;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--primary-color);
     }
   }
 }
 
-.custom {
-  border: 1px dashed rgba(184, 134, 11, 0.5);
-  background: rgba(255, 255, 255, 0.4);
+/* ── Кнопки — flat, без градієнтів ─────────────────────── */
+
+.buttonWrapper {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
-/* 📱 Responsive viewports */
-@media (max-width: 768px) {
-  .card {
-    padding: 2.5rem 1.6rem 2rem;
-  }
+.buttonFill {
+  display: block;
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  background: var(--primary-color);
+  color: #fff;
+  border: 2px solid var(--primary-color);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: background 0.2s ease;
+  letter-spacing: 0.01em;
 
-  .title {
-    font-size: 1.35rem;
+  &:hover {
+    background: var(--button-hover);
+    border-color: var(--button-hover);
   }
+}
 
-  .price {
-    font-size: 2.1rem;
-  }
+.buttonOutline {
+  display: block;
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: border-color 0.2s ease, background 0.2s ease;
+  letter-spacing: 0.01em;
 
-  .features li {
-    font-size: 0.85rem;
+  &:hover {
+    border-color: var(--text-primary);
+    background: rgba(30, 43, 26, 0.04);
   }
+}
+
+.badgeBottom {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding-top: 0.4rem;
 }

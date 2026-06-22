@@ -1,166 +1,217 @@
-.slider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 3rem 1rem;
-  width: 100%;
-  box-sizing: border-box;
-}
+/*
+ * TestimonialsSlider.module.scss — НОВИЙ ДИЗАЙН
+ *
+ * ❌ ПРИБРАНО: glassmorphism cards, gold quotation watermark, avatar pull-up trick,
+ *              framer slide animation, arrow buttons
+ * ✅ НОВИЙ: Горизонтальна смуга горизонтального скролу без JS-слайдера,
+ *           картки без фону — просто текст + лінія,
+ *           великий ініціальний аватар
+ */
 
-.slideWrapper {
-  flex: 1;
+.section {
+  width: 100%;
+  padding: 7rem 0 7rem 6rem;
   overflow: hidden;
+
+  @media (max-width: 900px) {
+    padding: 5rem 0 5rem 2rem;
+  }
+}
+
+.header {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.cardsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-right: 6rem;
+  margin-bottom: 4rem;
   gap: 2rem;
-  width: 100%;
-  max-width: 960px;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 2rem;
+  }
 }
 
-/* === Картка відгуку (Glassmorphism + Watermark) === */
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.75rem;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background: var(--primary-color);
+  }
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0;
+  /* ❌ БЕЗ gradient */
+
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+  }
+}
+
+.desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 260px;
+  line-height: 1.6;
+  text-align: right;
+  flex-shrink: 0;
+
+  @media (max-width: 900px) {
+    text-align: left;
+    max-width: 100%;
+  }
+}
+
+/* ── ГОРИЗОНТАЛЬНИЙ СКРОЛ БЕЗ СЛАЙДЕРА ─────────────────── */
+
+.track {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-right: 6rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ── КАРТКА ──────────────────────────────────────────────── */
+
 .card {
-  position: relative;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  border-radius: 1.8rem;
-  padding: 3rem 2rem 2.2rem;
-  box-shadow: var(--glass-shadow);
-  text-align: center;
+  flex: 0 0 360px;
+  scroll-snap-align: start;
+  background: var(--surface-muted);     /* ❌ БЕЗ rgba/backdrop */
+  border-radius: 4px;
+  padding: 2.4rem 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  transition: var(--transition-smooth);
-  overflow: hidden; /* hides overflow of quotation watermark */
-
-  /* Large luxury gold quotation watermark */
-  &::before {
-    content: "“";
-    position: absolute;
-    top: 5px;
-    left: 15px;
-    font-size: 8.5rem;
-    font-family: "Playfair Display", Georgia, serif;
-    color: rgba(184, 134, 11, 0.08);
-    line-height: 1;
-    pointer-events: none;
-    z-index: 0;
-  }
+  gap: 1.6rem;
+  transition: background 0.2s ease;
 
   &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(45, 90, 39, 0.08), 0 0 15px rgba(184, 134, 11, 0.1);
-    border-color: rgba(184, 134, 11, 0.35);
+    background: var(--surface-color);
   }
-}
 
-.avatar {
-  width: 84px;
-  height: 84px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 0 0 1rem 0;
-  margin-top: -46px; /* pull avatar upwards */
-  z-index: 2;
-  position: relative;
-  
-  /* Double ring gold & green border */
-  border: 3px solid var(--secondary-color);
-  outline: 3px solid rgba(45, 90, 39, 0.15);
-  box-shadow: 0 8px 24px rgba(45, 90, 39, 0.15);
-}
-
-.text {
-  font-size: 0.98rem;
-  color: var(--text-primary);
-  margin-bottom: 1.2rem;
-  font-style: italic;
-  line-height: 1.75;
-  min-height: 80px;
-  z-index: 1;
-  position: relative;
+  @media (max-width: 600px) {
+    flex: 0 0 300px;
+    padding: 2rem 1.5rem;
+  }
 }
 
 .stars {
   display: flex;
+  gap: 3px;
+  color: var(--secondary-color);
+  font-size: 1rem;
+  /* ❌ БЕЗ .starFilled/.starEmpty через react-icons */
+}
+
+.quote {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  line-height: 1.7;
+  flex: 1;
+  font-style: normal; /* ❌ БЕЗ italic */
+  margin: 0;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* аватар-ініціали якщо нема фото */
+.avatarInitials {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 0.9rem;
-  z-index: 1;
-  position: relative;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
 
-  .starFilled {
-    color: #facc15;
-    font-size: 1.25rem;
-    margin: 0 2px;
-  }
-
-  .starEmpty {
-    color: #e5e7eb;
-    font-size: 1.25rem;
-    margin: 0 2px;
-  }
+.authorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .name {
-  font-weight: 800;
-  font-size: 1.1rem;
-  color: var(--primary-color);
-  margin-bottom: 0.25rem;
-  z-index: 1;
-  position: relative;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
   letter-spacing: -0.01em;
 }
 
 .role {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+  /* ❌ БЕЗ uppercase */
+}
+
+/* ── Scroll hint ─────────────────────────────────────────── */
+
+.scrollHint {
+  margin-top: 2rem;
+  padding-right: 6rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
   font-weight: 600;
-  color: var(--text-secondary);
-  text-transform: uppercase;
   letter-spacing: 0.05em;
-  z-index: 1;
-  position: relative;
-}
+  text-transform: uppercase;
 
-/* 📱 Responsive viewports */
-@media (max-width: 992px) {
-  .cardsGrid {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .slider {
-    padding: 2rem 1rem;
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
   }
 
-  .cardsGrid {
-    grid-template-columns: 1fr;
-    max-width: 450px;
-  }
-
-  .text {
-    font-size: 0.95rem;
-  }
-
-  .avatar {
-    width: 76px;
-    height: 76px;
-  }
-}
-
-@media (max-width: 480px) {
-  .slider {
-    flex-direction: column;
-    gap: 2rem;
+  @media (max-width: 900px) {
+    padding-right: 2rem;
   }
 }

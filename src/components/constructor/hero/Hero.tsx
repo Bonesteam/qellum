@@ -2,8 +2,6 @@
 
 import React from "react";
 import styles from "./Hero.module.scss";
-import { motion } from "framer-motion";
-import ButtonUI from "@/components/ui/button/ButtonUI";
 import Image from "next/image";
 import { media } from "@/resources/media";
 import type { StaticImageData } from "next/image";
@@ -17,17 +15,25 @@ interface HeroSectionProps {
     secondaryCta?: { text: string; link: string };
     image?: string;
     align?: "left" | "right";
+    trustBadge?: string;
+    stats?: { value: string; label: string }[];
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({
-                                                     title,
-                                                     highlight,
-                                                     description,
-                                                     primaryCta,
-                                                     secondaryCta,
-                                                     image,
-                                                     align = "right",
-                                                 }) => {
+    title,
+    highlight,
+    description,
+    primaryCta,
+    secondaryCta,
+    image,
+    align = "right",
+    trustBadge = "Personalized by real chefs",
+    stats = [
+        { value: "100+", label: "Certified Chefs" },
+        { value: "12k+", label: "Plans Created" },
+        { value: "14",   label: "Allergen Filters" },
+    ],
+}) => {
     const bgImage = image
         ? (media as Record<string, string | StaticImageData>)[image]
         : undefined;
@@ -37,91 +43,71 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             ? bgImage
             : (bgImage as StaticImageData)?.src || "";
 
-    const orientationClass =
-        align === "left" ? styles.hero__reverse : styles.hero__default;
+    const isReverse = align === "left";
 
     return (
-        <section className={`${styles.hero} ${orientationClass}`}>
-            <div className={styles.hero__inner}>
-                <motion.div
-                    className={styles.hero__content}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <h1 className={styles.hero__title}>
-                        {title}{" "}
-                        {highlight && (
-                            <span className={styles.hero__highlight}>{highlight}</span>
-                        )}
-                    </h1>
+        <section className={`${styles.hero} ${isReverse ? styles.heroReverse : ""}`}>
 
-                    <p className={styles.hero__desc}>{description}</p>
+            {/* ── ЛІВА: контент ── */}
+            <div className={styles.content}>
 
-                    <div className={styles.hero__actions}>
-                        {primaryCta && (
-                            <Link href={primaryCta.link} className={styles.hero__link}>
-                                <ButtonUI
-                                    variant="solid"
-                                    color="secondary"
-                                    size="lg"
-                                    hoverEffect="none"
-                                    hoverColor="primary"
-                                >
-                                    {primaryCta.text}
-                                </ButtonUI>
-                            </Link>
-                        )}
+                {trustBadge && (
+                    <span className={styles.trustBadge}>{trustBadge}</span>
+                )}
 
-                        {secondaryCta && (
-                            <Link href={secondaryCta.link} className={styles.hero__link}>
-                                <ButtonUI
-                                    variant="outlined"
-                                    color="primary"
-                                    size="lg"
-                                    hoverEffect="none"
-                                    hoverTextColor="secondary"
-                                >
-                                    {secondaryCta.text}
-                                </ButtonUI>
-                            </Link>
-                        )}
-                    </div>
-                </motion.div>
-
-                <motion.div
-                    className={styles.hero__imageWrapper}
-                    initial={{ opacity: 0, x: align === "left" ? -80 : 80 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 1 }}
-                >
-                    {imageSrc && (
-                        <Image
-                            src={imageSrc}
-                            alt="Hero Illustration"
-                            fill
-                            className={styles.hero__image}
-                            priority
-                        />
+                <h1 className={styles.title}>
+                    {title}
+                    {highlight && (
+                        <>
+                            {" "}
+                            <span className={styles.highlight}>{highlight}</span>
+                        </>
                     )}
-                    {/* Floating Premium Badges */}
-                    <div className={`${styles.hero__floatingBadge} ${styles.hero__floatingBadge1} animate-float`}>
-                        <span className={styles.hero__floatingIcon}>👩‍🍳</span>
-                        <div className={styles.hero__floatingText}>
-                            <p className={styles.hero__floatingTitle}>Chef-Reviewed</p>
-                            <p className={styles.hero__floatingSubtitle}>Guaranteed Quality</p>
-                        </div>
-                    </div>
+                </h1>
 
-                    <div className={`${styles.hero__floatingBadge} ${styles.hero__floatingBadge2} animate-float`} style={{ animationDelay: "1s" }}>
-                        <span className={styles.hero__floatingIcon}>📊</span>
-                        <div className={styles.hero__floatingText}>
-                            <p className={styles.hero__floatingTitle}>AI Calorie Tracker</p>
-                            <p className={styles.hero__floatingSubtitle}>99.8% Accuracy</p>
-                        </div>
+                <p className={styles.desc}>{description}</p>
+
+                <div className={styles.actions}>
+                    {primaryCta && (
+                        <Link href={primaryCta.link} className={styles.btnPrimary}>
+                            {primaryCta.text}
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                                <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                        </Link>
+                    )}
+                    {secondaryCta && (
+                        <Link href={secondaryCta.link} className={styles.btnSecondary}>
+                            {secondaryCta.text}
+                        </Link>
+                    )}
+                </div>
+
+                {stats && stats.length > 0 && (
+                    <div className={styles.stats}>
+                        {stats.map((s, i) => (
+                            <div key={i} className={styles.stat}>
+                                <span className={styles.statValue}>{s.value}</span>
+                                <span className={styles.statLabel}>{s.label}</span>
+                            </div>
+                        ))}
                     </div>
-                </motion.div>
+                )}
             </div>
+
+            {/* ── ПРАВА: фото панель ── */}
+            <div className={styles.visual}>
+                {imageSrc && (
+                    <Image
+                        src={imageSrc}
+                        alt="Qellum chef meal"
+                        fill
+                        className={styles.image}
+                        priority
+                    />
+                )}
+            </div>
+
         </section>
     );
 };

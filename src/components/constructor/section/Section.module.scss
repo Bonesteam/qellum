@@ -1,11 +1,17 @@
+/*
+ * Section.module.scss — ФІКС
+ * ❌ Прибрано: opacity:0 + translateY(40px) на .section (конфлікт з framer-motion)
+ * ❌ Прибрано: color: var(--secondary-color) на заголовку (золотий — як у всіх інших сайтах)
+ * ❌ Прибрано: text-transform: capitalize на заголовку
+ * ✅ Заголовок тепер темний: var(--text-primary)
+ */
+
 .section {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  color: var(--text-inverse);
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.4s ease;
+  color: var(--text-primary);
+  /* ❌ ПРИБРАНО: opacity: 0; transform: translateY(40px); transition: all 0.4s ease; */
   justify-content: center;
   align-items: center;
   gap: 3rem;
@@ -39,9 +45,14 @@
 .title {
   font-size: 2.5rem;
   font-weight: 800;
-  color: var(--secondary-color);
-  text-transform: capitalize;
+  /* ❌ ЗМІНЕНО: було var(--secondary-color) — золотий, як у всіх сайтах мережі */
+  color: var(--text-primary);
+  /* ❌ ПРИБРАНО: text-transform: capitalize */
   letter-spacing: -0.02em;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 }
 
 .description {

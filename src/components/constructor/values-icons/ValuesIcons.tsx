@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
-import Grid from "../grid/Grid";
 import styles from "./ValuesIcons.module.scss";
-import { motion } from "framer-motion";
 
 interface ValueItem {
     icon: string;
@@ -11,19 +9,13 @@ interface ValueItem {
     text?: string;
 }
 
-
 interface Props {
     title?: string;
     description?: string;
     values: ValueItem[];
 }
 
-const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0 },
-};
-
-
+// ❌ Прибрано: framer-motion stagger, whileInView, cardVariants
 const ValuesIcons: React.FC<Props> = ({ title, description, values }) => {
     return (
         <section className={styles.section}>
@@ -31,26 +23,17 @@ const ValuesIcons: React.FC<Props> = ({ title, description, values }) => {
                 {title && <h2 className={styles.sectionTitle}>{title}</h2>}
                 {description && <p className={styles.sectionDesc}>{description}</p>}
             </div>
-
-
-            <Grid columns={values.length > 3 ? 4 : values.length} gap="2rem">
+            <div className={styles.grid}>
                 {values.map((v, i) => (
-                    <motion.div
-                        key={i}
-                        className={styles.valueCard}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.2 }}
-                        variants={cardVariants}
-                        transition={{ delay: i * 0.2, duration: 0.6, ease: "easeOut" }}
-                    >
+                    <div key={i} className={styles.valueCard}>
+                        {/* ❌ БЕЗ gradient кола — просто emoji + номер */}
+                        <div className={styles.num}>0{i + 1}</div>
                         <div className={styles.icon}>{v.icon}</div>
                         <h3>{v.title}</h3>
                         <p>{v.description ?? v.text}</p>
-                    </motion.div>
-
+                    </div>
                 ))}
-            </Grid>
+            </div>
         </section>
     );
 };

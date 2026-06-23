@@ -1,105 +1,78 @@
 :root {
     /* Основні */
-    --primary-color: #2D5A27;       /* глибокий лісовий зелений — головний акцент */
-    --secondary-color: #B8860B;     /* шляхетне темне золото для контрасту */
-    --tertiary-color: #E2D4A8;      /* м'який колір шампанського / пшениці */
-    --quaternary-color: #F7F5F0;    /* вишуканий теплий кремовий фон */
+    --primary-color: #2D5A27;
+    --secondary-color: #B8860B;
+    --tertiary-color: #E2D4A8;
+    --quaternary-color: #F7F5F0;
 
     /* Фон та поверхні */
-    --background-light: #F7F5F0;    /* світлий теплий кремовий фон */
-    --background-dark: #1A3017;     /* глибокий темно-зелений для інверсій */
-    --surface-color: #FFFFFF;       /* поверхні (карточки, блоки) */
-    --surface-muted: #EAE6DF;       /* приглушений сіро-кремовий фон секцій */
+    --background-light: #F7F5F0;
+    --background-dark: #1A3017;
+    --surface-color: #FFFFFF;
+    --surface-muted: #EAE6DF;
 
     /* Тексти */
-    --text-primary: #1E2B1A;        /* глибокий темний лісовий */
-    --text-secondary: #4A5D4E;      /* середній зеленувато-сірий для підписів */
-    --text-muted: #7A8D7E;          /* світлий листяний для підписів */
-    --text-inverse: #FFFFFF;        /* білий текст на темному фоні */
-    --text-accent: #2D5A27;         /* лісовий акцент у тексті */
+    --text-primary: #1E2B1A;
+    --text-secondary: #4A5D4E;
+    --text-muted: #7A8D7E;
+    --text-inverse: #FFFFFF;
+    --text-accent: #2D5A27;
 
     /* Статуси */
-    --success-color: #2E7D32;       /* насичений зелений */
-    --warning-color: #F9A825;       /* теплий бурштиновий */
-    --error-color: #C62828;         /* глибокий червоний */
-    --info-color: #B8860B;          /* золотистий акцент */
+    --success-color: #2E7D32;
+    --warning-color: #F9A825;
+    --error-color: #C62828;
+    --info-color: #B8860B;
 
     /* Інтерактивні */
-    --button-hover: #1E3F1A;        /* темніший зелений при наведенні */
-    --link-color: #2D5A27;          /* зелений для посилань */
-    --link-hover: #1E3F1A;          /* більш насичений зелений при ховері */
+    --button-hover: #1E3F1A;
+    --link-color: #2D5A27;
+    --link-hover: #1E3F1A;
 
     /* Система */
-    --border-color: #DFDAD0;        /* світлі органічні бордери */
+    --border-color: #DFDAD0;
     --shadow-color: rgba(45, 90, 39, 0.08);
 
     --font-family: 'Outfit', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-
     --main-padding: 0 50px 0 50px;
 
-    /* 🌟 Преміальні ефекти та градієнти */
+    /* Градієнти — залишаємо для сумісності але НЕ використовуємо в нових компонентах */
     --premium-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     --gold-gradient: linear-gradient(135deg, var(--secondary-color), #DAA520, var(--tertiary-color));
+
+    /* ❌ ПРИБРАНО З ВИКОРИСТАННЯ (залишено для сумісності зі старим кодом): */
     --glass-bg: rgba(255, 255, 255, 0.45);
     --glass-border: rgba(223, 218, 208, 0.5);
     --glass-blur: blur(16px);
     --glass-shadow: 0 8px 32px 0 rgba(45, 90, 39, 0.05);
-
     --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 🌀 Аврора-ефекти (задній фон) */
-.aurora-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    z-index: -1;
-    overflow: hidden;
-    opacity: 0.5;
+/* ❌ ПРИБРАНО: aurora blobs (.aurora-container, .aurora-blob) */
+/* Вони давали плаваючий розмитий фон — спільна ознака всіх сайтів мережі */
+
+/* ✅ Чистий однотонний фон */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
-.aurora-blob {
-    position: absolute;
-    width: 800px;
-    height: 800px;
-    border-radius: 50%;
-    filter: blur(160px);
-    opacity: 0.28;
+html,
+body {
+    max-width: 100vw;
+    font-family: var(--font-family);
+    /* ❌ ЗМІНЕНО: було linear-gradient(160deg, ...) background-attachment: fixed */
+    background-color: var(--background-light);
+    color: var(--text-primary);
 }
 
-.aurora-blob--green {
-    background: radial-gradient(circle, rgba(45, 90, 39, 0.7) 0%, rgba(45, 90, 39, 0.1) 70%);
-    top: -250px;
-    left: -180px;
-    animation: floatBlob 22s infinite alternate ease-in-out;
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
-.aurora-blob--gold {
-    background: radial-gradient(circle, rgba(184, 134, 11, 0.6) 0%, rgba(184, 134, 11, 0.05) 70%);
-    bottom: -180px;
-    right: -180px;
-    animation: floatBlob 28s infinite alternate-reverse ease-in-out;
-}
-
-.aurora-blob--warm {
-    background: radial-gradient(circle, rgba(226, 212, 168, 0.5) 0%, rgba(226, 212, 168, 0.05) 70%);
-    top: 35%;
-    left: calc(50% - 300px);
-    width: 600px;
-    height: 600px;
-    animation: floatBlobWarm 38s infinite alternate ease-in-out;
-}
-
-@keyframes floatBlobWarm {
-    0%   { transform: translate(0, 0) scale(1); }
-    50%  { transform: translate(-60px, 50px) scale(1.08); }
-    100% { transform: translate(60px, -30px) scale(0.94); }
-}
-
-/* ✨ Корисні класи */
+/* Залишаємо утилітарні класи для сумісності */
 .text-gradient {
     background: var(--premium-gradient);
     -webkit-background-clip: text;
@@ -114,58 +87,6 @@
     background-clip: text;
 }
 
-.glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
-}
-
-/* 🎬 Анімації */
-@keyframes floatBlob {
-    0% {
-        transform: translate(0, 0) scale(1);
-    }
-    50% {
-        transform: translate(80px, 40px) scale(1.1);
-    }
-    100% {
-        transform: translate(-40px, 80px) scale(0.95);
-    }
-}
-
-@keyframes floatElement {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-8px);
-    }
-}
-
-.animate-float {
-    animation: floatElement 4s infinite alternate ease-in-out;
-}
-
-
-/* Базові стилі */
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
-
-html,
-body {
-    max-width: 100vw;
-    font-family: var(--font-family);
-    background: linear-gradient(160deg, #F9F7F2 0%, #EDE7D9 45%, #F5EFE4 100%);
-    background-attachment: fixed;
-    color: var(--text-primary);
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
+/* ❌ ПРИБРАНО: .glass-card — глобальний glassmorphism клас */
+/* ❌ ПРИБРАНО: .animate-float — анімація плаваючих badges */
+/* ❌ ПРИБРАНО: @keyframes floatBlob, floatBlobWarm, floatElement */

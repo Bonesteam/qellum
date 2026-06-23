@@ -1,154 +1,53 @@
-.infoBlock {
-  --border: rgba(0, 0, 0, 0.08);
-  --glow: rgba(219, 206, 123, 0.18);
+/*
+ * InfoBlock.module.scss — НОВИЙ ДИЗАЙН
+ * ❌ Прибрано: glassmorphism, radial glow ::after, border-radius:2rem, hover translateY
+ * ✅ Новий: простий flex без фону/тіні — текст сам по собі
+ */
 
-  position: relative;
+.infoBlock {
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  border-radius: 2rem;
-  padding: 2.5rem;
-  box-shadow: var(--glass-shadow);
+  gap: 1.2rem;
   color: var(--text-primary);
-  transition: var(--transition-smooth);
-  z-index: 1;
-  overflow: hidden;
 
-  &:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 24px var(--glow), 0 6px 20px rgba(0, 0, 0, 0.1);
-    border-color: var(--secondary-color);
-  }
+  /* ❌ БЕЗ background, backdrop-filter, border, box-shadow, border-radius */
 
-  /* світловий ефект при hover */
-  &::after {
-    content: "";
-    position: absolute;
-    top: -40%;
-    right: -40%;
-    width: 80%;
-    height: 80%;
-    background: radial-gradient(circle at top right, var(--secondary-color) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    z-index: 0;
-  }
-
-  /* 🟢 іконка або emoji */
   .icon {
-    font-size: 2.8rem;
-    margin-bottom: 1.2rem;
-    color: var(--secondary-color);
-    background: rgba(232, 201, 27, 0.08);
-    padding: 0.8rem 1rem;
-    border-radius: 1rem;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--primary-color);
   }
 
-  /* 🖼️ зображення */
   .imageWrapper {
     width: 100%;
-    max-height: 260px;
-    margin-bottom: 1.5rem;
-    border-radius: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
     overflow: hidden;
-    z-index: 1;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
     img {
       transition: transform 0.4s ease;
     }
 
-  }
-
-  /* 🧭 заголовок */
-  .title {
-    font-size: 1.9rem;
-    font-weight: 800;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-    line-height: 1.3;
-    position: relative;
-    z-index: 2;
-  }
-
-  /* 📜 опис */
-  .description {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--text-secondary);
-    margin-bottom: 1.4rem;
-    white-space: pre-line; /* зберігає перенос рядків */
-    position: relative;
-    z-index: 2;
-  }
-
-  /* ✅ bullets */
-  .bullets {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    z-index: 2;
-
-    li {
-      position: relative;
-      padding-left: 1.6rem;
-      list-style: none;
-      color: var(--text-primary);
-      font-size: 0.95rem;
-
-      &::before {
-        content: "✔";
-        position: absolute;
-        left: 0;
-        color: var(--secondary-color);
-        font-weight: 700;
-      }
+    &:hover img {
+      transform: scale(1.02);
     }
   }
+}
 
-  /* 🔸 вирівнювання */
-  &.left {
-    text-align: left;
-    align-items: flex-start;
-  }
+/* ❌ БЕЗ :hover translateY і glow */
 
-  &.center {
-    text-align: center;
-    align-items: center;
+/* Вирівнювання */
+.left {
+  text-align: left;
+  align-items: flex-start;
+}
 
-    .icon,
-    .imageWrapper {
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
+.center {
+  text-align: center;
+  align-items: center;
+}
 
-  &.right {
-    text-align: right;
-    align-items: flex-end;
-  }
-
-  /* 📱 адаптив */
-  @media (max-width: 992px) {
-    padding: 1.8rem 1.4rem;
-
-    .title {
-      font-size: 1.5rem;
-    }
-
-    .description {
-      font-size: 0.95rem;
-    }
-
-    .bullets li {
-      font-size: 0.9rem;
-    }
-  }
+.right {
+  text-align: right;
+  align-items: flex-end;
 }

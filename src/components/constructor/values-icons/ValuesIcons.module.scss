@@ -1,135 +1,108 @@
+/*
+ * ValuesIcons.module.scss — НОВИЙ ДИЗАЙН
+ * ❌ Прибрано: glassmorphism valueCard, gradient коло іконки, framer stagger, scale hover
+ * ✅ Новий: великі порядкові номери, flat картки з border-top акцентом
+ */
+
 .section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-  text-align: center;
-  border-radius: 20px;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
+  width: 100%;
+  padding: 7rem 6rem;
 
-  .sectionTitle {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--secondary-color);
-    letter-spacing: -0.5px;
-  }
-
-  .sectionDesc {
-    font-size: 1.25rem;
-    color: var(--text-secondary);
-    max-width: 800px;
-    line-height: 1.8;
+  @media (max-width: 900px) {
+    padding: 5rem 2rem;
   }
 }
 
 .head {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  align-items: center;
-}
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: end;
+  margin-bottom: 5rem;
 
-.valueCard {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  border-radius: 28px;
-  padding: 3rem 2rem;
-  text-align: center;
-  transition: var(--transition-smooth);
-  box-shadow: var(--glass-shadow);
-  cursor: default;
-  position: relative;
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-
-  &:hover {
-    transform: translateY(-10px) scale(1.025);
-    border-color: rgba(184, 134, 11, 0.35);
-    box-shadow: 0 20px 40px rgba(45, 90, 39, 0.08), 0 0 15px rgba(184, 134, 11, 0.1);
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 0.8rem;
-    color: var(--secondary-color);
-  }
-
-  p {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
-    max-width: 340px;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 3rem;
   }
 }
 
-.icon {
+/* ❌ БЕЗ gradient clip */
+.sectionTitle {
   font-size: 3rem;
-  margin-bottom: 1.5rem;
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0;
 
-  background: linear-gradient(145deg, var(--primary-color), var(--tertiary-color));
-  color: var(--text-inverse);
-  box-shadow: 0 6px 20px rgba(45, 90, 39, 0.15),
-  inset 0 2px 4px rgba(255, 255, 255, 0.3);
-  transition: all 0.4s ease;
-
-  &:hover {
-    transform: scale(1.1) rotate(8deg);
-    box-shadow: 0 12px 30px rgba(184, 134, 11, 0.25),
-    inset 0 2px 6px rgba(255, 255, 255, 0.4);
-  }
-}
-
-.valueCard:hover .icon {
-  background: linear-gradient(145deg, var(--secondary-color), var(--primary-color));
-}
-
-/* 🔹 Responsive */
-@media (max-width: 992px) {
-  .sectionTitle {
+  @media (max-width: 768px) {
     font-size: 2.2rem;
   }
+}
 
-  .sectionDesc {
-    font-size: 1.05rem;
-  }
+.sectionDesc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+  align-self: end;
+}
 
-  .icon {
-    width: 80px;
-    height: 80px;
-    font-size: 2.4rem;
-  }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
 
-  .valueCard {
-    padding: 2rem 1.5rem;
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 2px;
   }
 }
 
-@media (max-width: 600px) {
-  .section {
-    padding: 2rem 1rem;
-  }
+/* ❌ БЕЗ glassmorphism, БЕЗ scale hover */
+.valueCard {
+  padding: 2.4rem 2rem;
+  background: var(--surface-muted);
+  border-top: 3px solid transparent;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
-  .icon {
-    width: 70px;
-    height: 70px;
+  &:hover {
+    background: var(--surface-color);
+    border-top-color: var(--primary-color);
   }
+}
 
-  .valueCard {
-    padding: 1.5rem;
-  }
+/* ❌ БЕЗ gradient кола — просто великий номер */
+.icon {
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.num {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.valueCard h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.valueCard p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
 }

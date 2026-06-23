@@ -1,82 +1,62 @@
-export const EUROPEAN_COUNTRIES = [
-    { code: "AL", name: "Albania" },
-    { code: "AD", name: "Andorra" },
-    { code: "AT", name: "Austria" },
-    { code: "BE", name: "Belgium" },
-    { code: "BA", name: "Bosnia and Herzegovina" },
-    { code: "BG", name: "Bulgaria" },
-    { code: "HR", name: "Croatia" },
-    { code: "CY", name: "Cyprus" },
-    { code: "CZ", name: "Czech Republic" },
-    { code: "DK", name: "Denmark" },
-    { code: "EE", name: "Estonia" },
-    { code: "FI", name: "Finland" },
-    { code: "FR", name: "France" },
-    { code: "DE", name: "Germany" },
-    { code: "GR", name: "Greece" },
-    { code: "HU", name: "Hungary" },
-    { code: "IS", name: "Iceland" },
-    { code: "IE", name: "Ireland" },
-    { code: "IT", name: "Italy" },
-    { code: "XK", name: "Kosovo" },
-    { code: "LV", name: "Latvia" },
-    { code: "LI", name: "Liechtenstein" },
-    { code: "LT", name: "Lithuania" },
-    { code: "LU", name: "Luxembourg" },
-    { code: "MT", name: "Malta" },
-    { code: "MD", name: "Moldova" },
-    { code: "MC", name: "Monaco" },
-    { code: "ME", name: "Montenegro" },
-    { code: "NL", name: "Netherlands" },
-    { code: "MK", name: "North Macedonia" },
-    { code: "NO", name: "Norway" },
-    { code: "PL", name: "Poland" },
-    { code: "PT", name: "Portugal" },
-    { code: "RO", name: "Romania" },
-    { code: "SM", name: "San Marino" },
-    { code: "RS", name: "Serbia" },
-    { code: "SK", name: "Slovakia" },
-    { code: "SI", name: "Slovenia" },
-    { code: "ES", name: "Spain" },
-    { code: "SE", name: "Sweden" },
-    { code: "CH", name: "Switzerland" },
-    { code: "UA", name: "Ukraine" },
-    { code: "GB", name: "United Kingdom" },
-    { code: "VA", name: "Vatican City" },
-] as const;
+/**
+ * src/constants/countries.ts
+ *
+ * Вимога 5: повний список світових країн
+ * з виключенням: Sudan, DRC, Iran, Mali, Myanmar, North Korea,
+ * South Sudan, Syria, Yemen, Afghanistan, Belarus, CAR, Cuba,
+ * Haiti, Iraq, Russia, Somalia, Venezuela, Zimbabwe
+ */
 
-const countryLookup = new Map<string, (typeof EUROPEAN_COUNTRIES)[number]>();
+export const EXCLUDED_COUNTRIES = new Set([
+    "Afghanistan", "Belarus", "Central African Republic", "Cuba",
+    "Democratic Republic of the Congo", "Haiti", "Iran", "Iraq",
+    "Mali", "Myanmar", "North Korea", "Russia", "Somalia",
+    "South Sudan", "Sudan", "Syria", "Venezuela", "Yemen", "Zimbabwe",
+]);
 
-for (const country of EUROPEAN_COUNTRIES) {
-    countryLookup.set(country.name.toLowerCase(), country);
-    countryLookup.set(country.code.toLowerCase(), country);
+// Повний список країн світу (ISO 3166-1), відсортований
+export const ALL_WORLD_COUNTRIES = [
+    "Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia",
+    "Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados",
+    "Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana",
+    "Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia",
+    "Cameroon","Canada","Chad","Chile","China","Colombia","Comoros","Congo",
+    "Costa Rica","Croatia","Cyprus","Czech Republic","Denmark","Djibouti","Dominica",
+    "Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea",
+    "Estonia","Eswatini","Ethiopia","Fiji","Finland","France","Gabon","Gambia",
+    "Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea",
+    "Guinea-Bissau","Guyana","Honduras","Hungary","Iceland","India","Indonesia",
+    "Ireland","Israel","Italy","Ivory Coast","Jamaica","Japan","Jordan","Kazakhstan",
+    "Kenya","Kiribati","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho",
+    "Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi",
+    "Malaysia","Maldives","Malta","Marshall Islands","Mauritania","Mauritius","Mexico",
+    "Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique",
+    "Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger",
+    "Nigeria","North Macedonia","Norway","Oman","Pakistan","Palau","Palestine",
+    "Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal",
+    "Qatar","Romania","Rwanda","Saint Kitts and Nevis","Saint Lucia",
+    "Saint Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe",
+    "Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia",
+    "Slovenia","Solomon Islands","South Africa","South Korea","Spain","Sri Lanka",
+    "Suriname","Sweden","Switzerland","Taiwan","Tajikistan","Tanzania","Thailand",
+    "Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey",
+    "Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom",
+    "United States","Uruguay","Uzbekistan","Vanuatu","Vatican City","Vietnam","Zambia",
+];
+
+export const ALLOWED_COUNTRIES = ALL_WORLD_COUNTRIES
+    .filter((c) => !EXCLUDED_COUNTRIES.has(c))
+    .sort();
+
+export function isCountryAllowed(country: string): boolean {
+    return ALLOWED_COUNTRIES.includes(country);
 }
 
-countryLookup.set("uk", { code: "GB", name: "United Kingdom" });
-countryLookup.set("great britain", { code: "GB", name: "United Kingdom" });
-countryLookup.set("england", { code: "GB", name: "United Kingdom" });
-countryLookup.set("scotland", { code: "GB", name: "United Kingdom" });
-countryLookup.set("wales", { code: "GB", name: "United Kingdom" });
-countryLookup.set("northern ireland", { code: "GB", name: "United Kingdom" });
-countryLookup.set("czechia", { code: "CZ", name: "Czech Republic" });
-
-export function getAllowedCountryNames() {
-    return EUROPEAN_COUNTRIES.map((country) => country.name);
-}
-
-export function getAllowedCountryCodes() {
-    return EUROPEAN_COUNTRIES.map((country) => country.code);
-}
-
-export function normalizeAllowedCountry(value: unknown) {
+// Сумісність з normalizeAllowedCountry (використовується в create-invoice і auth.service)
+export function normalizeAllowedCountry(value: unknown): { code: string; name: string } | null {
     if (typeof value !== "string") return null;
-
-    const normalized = value.trim().toLowerCase();
-    if (!normalized) return null;
-
-    return countryLookup.get(normalized) ?? null;
-}
-
-export function isAllowedCountry(value: unknown) {
-    return normalizeAllowedCountry(value) !== null;
+    const name = value.trim();
+    if (!name || !isCountryAllowed(name)) return null;
+    // Повертаємо мінімальний об'єкт — code не критичний для нашого flow
+    return { code: name.slice(0, 2).toUpperCase(), name };
 }

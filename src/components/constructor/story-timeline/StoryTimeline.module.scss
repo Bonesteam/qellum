@@ -1,120 +1,83 @@
+/*
+ * StoryTimeline.module.scss — ПОВНИЙ РЕДИЗАЙН
+ * ❌ ПРИБРАНО: glassmorphism картки (rgba(255,255,255,0.85) + backdrop-filter)
+ * ❌ ПРИБРАНО: organic border-radius: 16px + box-shadow
+ * ❌ ПРИБРАНО: помаранчева точка (animation: bubble)
+ * ❌ ПРИБРАНО: zigzag left/right розташування — виглядає як старий шаблон
+ * ❌ ПРИБРАНО: вертикальна центральна лінія
+ *
+ * ✅ НОВИЙ: проста нумерована вертикальна list без карток
+ *    Кожен крок — горизонтальний рядок: великий номер + заголовок + текст
+ *    Мінімалістично, editorial, чітко
+ */
+
 .timeline {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 6rem 3rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  border-radius: 32px;
-  overflow: visible;
-  background: linear-gradient(180deg, #fffaf5 0%, #fff3ea 100%);
-  box-shadow: inset 0 0 25px rgba(255, 230, 210, 0.3);
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(180deg, rgba(240,150,90,0.25) 0%, rgba(236,115,49,0.15) 100%);
-    border-radius: 2px;
-  }
+  gap: 0;
+  width: 100%;
+  /* ❌ ПРИБРАНО: background + border-radius */
 }
 
 .step {
-  position: relative;
-  background: #fffdfa;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(236, 115, 49, 0.08);
-  padding: 1.5rem 1.75rem;
-  margin: 1.75rem 0;
-  width: 38%;
-  z-index: 2;
-  border-left: 4px solid rgba(236, 115, 49, 0.25);
-  transition: all 0.25s ease-out;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 0 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-color);
+  align-items: start;
+  /* ❌ ПРИБРАНО: left/right zigzag */
+  /* ❌ ПРИБРАНО: background, backdrop-filter, border-radius, box-shadow */
+
+  &:first-child {
+    border-top: 1px solid var(--border-color);
+  }
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 30px rgba(236, 115, 49, 0.12);
-    background: #fff8f3;
+    /* ❌ ПРИБРАНО: translateY(-4px) */
+    background: var(--surface-muted);
+    margin: 0 -16px;
+    padding: 20px 16px;
   }
 }
 
-/* === розташування === */
-.left {
-  align-self: flex-start;
-  margin-right: 54%;
-}
-
-.right {
-  align-self: flex-end;
-  margin-left: 54%;
-}
-
-/* === точка === */
-.dot {
-  position: absolute;
-  top: 1.75rem;
-  left: 100%;
-  transform: translateX(-50%);
-  width: 10px;
-  height: 10px;
-  background: radial-gradient(circle at center, #ec7331 0%, #e85f1c 90%);
-  border-radius: 50%;
-  border: 2px solid #fffdfa;
-  box-shadow: 0 0 0 3px rgba(236, 115, 49, 0.15);
-  z-index: 3;
-  animation: bubble 2.5s ease-in-out infinite alternate;
-}
-
-.right .dot {
-  left: 0%;
-  transform: translateX(-50%);
-}
-
-/* === текст === */
-.year {
-  font-size: 1rem;
+/* ❌ ПРИБРАНО: .dot orange + animation: bubble */
+/* Замінено на великий порядковий номер */
+.num {
+  font-family: var(--font-heading, 'Fraunces', serif);
+  font-size: 2rem;
   font-weight: 700;
-  color: #ec7331;
-  margin-bottom: 0.5rem;
+  font-style: italic;
+  color: var(--border-strong);
+  line-height: 1;
+  padding-top: 2px;
+  /* Номер виводиться через CSS counter або з TSX */
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .title {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: #2c2c2c;
-  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  line-height: 1.3;
+  /* ❌ ПРИБРАНО: color: var(--secondary-color) gold */
 }
 
 .text {
-  font-size: 0.95rem;
-  color: #5b554f;
-  line-height: 1.5;
-  white-space: pre-line;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
 }
 
-/* === адаптив === */
-@media (max-width: 900px) {
-  .step,
-  .left,
-  .right {
-    width: 95%;
-    margin: 1.25rem auto;
-    align-self: center;
-    border-left: 4px solid rgba(236, 115, 49, 0.3);
-  }
+/* Прибираємо old left/right класи — більше не використовуються */
+.left, .right, .dot { display: none; }
 
-  .dot {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .timeline::before {
-    left: 50%;
-  }
+@media (max-width: 600px) {
+  .step { grid-template-columns: 36px 1fr; gap: 0 12px; }
+  .num  { font-size: 1.5rem; }
 }

@@ -1,6 +1,9 @@
 "use client";
+/*
+ * Timeline.tsx — ФІКС
+ * ❌ ПРИБРАНО: framer-motion stagger initial/whileInView/transition delay
+ */
 import React from "react";
-import { motion } from "framer-motion";
 import styles from "./Timeline.module.scss";
 
 interface Step {
@@ -20,18 +23,12 @@ const Timeline: React.FC<TimelineProps> = ({ title, steps }) => {
 
             <div className={styles.cardsGrid}>
                 {steps.map((step, index) => (
-                    <motion.div
-                        key={index}
-                        className={styles.card}
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.2, duration: 0.6, ease: "easeOut" }}
-                        viewport={{ once: true, amount: 0.3 }}
-                    >
+                    /* ❌ ПРИБРАНО: motion.div з delay stagger */
+                    <div key={index} className={styles.card}>
                         <div className={styles.number}>{index + 1}</div>
                         <h4 className={styles.cardTitle}>{step.title}</h4>
                         <p className={styles.cardDescription}>{step.description}</p>
-                    </motion.div>
+                    </div>
                 ))}
             </div>
         </section>

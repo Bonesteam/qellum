@@ -1,3 +1,12 @@
+/*
+ * Text.module.scss — ФІКС
+ * ❌ ПРИБРАНО: bullet list orange glow (rgba(255,127,80,0.40/0.60))
+ * ❌ ПРИБРАНО: bullet gradient (secondary → primary)
+ * ❌ ПРИБРАНО: bullet hover translateX(4px) + scale(1.3)
+ * ❌ ПРИБРАНО: title ::after gradient underline (primary → secondary)
+ * ✅ Проста зелена точка, статичні bullets
+ */
+
 .textBlock {
   line-height: 1.6;
   display: flex;
@@ -15,18 +24,21 @@
   font-weight: 800;
   font-size: 2.5rem;
   margin: 0;
-  color: var(--background-dark);
+  color: var(--text-primary);
   letter-spacing: -0.02em;
   position: relative;
 
+  /* ❌ ПРИБРАНО: ::after gradient underline */
+  /* Замінено на простий solid border */
   &::after {
     content: "";
     display: block;
-    width: 60px;
+    width: 48px;
     height: 3px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    margin-top: 0.6rem;
-    border-radius: 3px;
+    background: var(--primary-color);
+    margin-top: 0.7rem;
+    border-radius: 2px;
+    /* ❌ ПРИБРАНО: gradient secondary→primary */
   }
 
   @media screen and (max-width: 1028px) {
@@ -37,15 +49,19 @@
 .description {
   margin: 0;
   color: var(--text-secondary);
-  font-size: 1.1rem;
-  line-height: 1.7;
-  text-align: justify;
-  opacity: 0.95;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  text-align: left;
+  /* ❌ ПРИБРАНО: text-align: justify (погано читається) */
 }
 
 .center {
   text-align: center;
   align-items: center;
+
+  .description {
+    text-align: center;
+  }
 
   .title::after {
     margin-left: auto;
@@ -53,56 +69,42 @@
   }
 }
 
-/* 🎨 Новий тип маркерів — "енергетичні" точки */
 .bulletList {
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  position: relative;
+  gap: 0.65rem;
   width: 100%;
 
   li {
     list-style: none;
     position: relative;
-    padding-left: 1.75rem;
-    color: var(--text-primary);
+    padding-left: 1.5rem;
+    color: var(--text-secondary);
     font-size: 1rem;
     line-height: 1.6;
-    transition: color 0.3s ease, transform 0.3s ease;
-    cursor: default;
     text-align: left;
+    /* ❌ ПРИБРАНО: transition + cursor:default + hover */
 
     &::before {
       content: "";
       position: absolute;
       left: 0;
-      top: 0.55rem;
-      width: 10px;
-      height: 10px;
+      top: 0.6rem;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-  box-shadow: 0 0 8px rgba(255, 127, 80, 0.40);
-      transform: scale(1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    &:hover {
-      transform: translateX(4px);
-
-      &::before {
-        transform: scale(1.3);
-  box-shadow: 0 0 14px rgba(255, 127, 80, 0.60);
-      }
+      /* ❌ ПРИБРАНО: gradient + orange box-shadow */
+      background: var(--primary-color);
     }
   }
 }
 
 .descriptionWithBullets {
-  margin-top: 1rem;
+  margin-top: 0.8rem;
 
   .bulletList {
-    margin-top: 0.5rem;
+    margin-top: 0.4rem;
   }
 }

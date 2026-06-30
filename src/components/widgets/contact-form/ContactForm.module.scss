@@ -1,137 +1,202 @@
+/*
+ * ContactForm.module.scss — ФІКС
+ * ❌ ПРИБРАНО: border-radius:1rem на formBlock (pill картка)
+ * ❌ ПРИБРАНО: border-radius:8px на input/textarea (rounded)
+ * ❌ ПРИБРАНО: box-shadow:rgba(37,99,235,0.1) blue focus glow
+ * ❌ ПРИБРАНО: border:#d1d5db hardcoded
+ * ❌ ПРИБРАНО: background:#fafafa hardcoded
+ * ❌ ПРИБРАНО: motion.div framer анімації x:-40/40
+ * ✅ Flat inputs, border-radius:4px, brand кольори
+ */
+
 .section {
-  padding: 6rem 2rem;
-  max-width: 1200px;
+  padding: 6rem 6rem;
+  max-width: 1400px;
   margin: 0 auto;
-  color: var(--text-primary, #111);
+  color: var(--text-primary);
+
+  @media (max-width: 900px) {
+    padding: 4rem 2rem;
+  }
 }
 
 .header {
-  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: end;
   margin-bottom: 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
 
   h2 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: var(--text-primary, #111);
-    margin-bottom: 0.8rem;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0;
   }
 
   p {
-    color: var(--text-secondary, #555);
-    font-size: 1.05rem;
-    line-height: 1.6;
-    max-width: 620px;
-    margin: 0 auto;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0;
+    align-self: end;
   }
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 5rem;
+  align-items: start;
 
-  @media (max-width: 992px) {
+  @media (max-width: 900px) {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
 }
 
+/* ── Info block (ліва колонка) ── */
 .infoBlock {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
+  gap: 0;
 
   h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin: 0 0 1.2rem;
   }
 
   .subtext {
-    color: var(--text-secondary, #555);
+    color: var(--text-secondary);
     font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.infoItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-color);
+
+  &:first-child {
+    border-top: 1px solid var(--border-color);
   }
 
-  .infoItem {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    color: var(--text-secondary, #333);
-    font-size: 0.95rem;
+  svg {
+    color: var(--primary-color);
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
 
-    svg {
-      color: var(--primary-color, #2563eb);
-      font-size: 1.1rem;
-    }
+  span, a {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    text-decoration: none;
+    transition: color 0.15s ease;
 
-    a {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.2s ease;
-
-      &:hover {
-        color: var(--primary-color, #2563eb);
-      }
+    &:hover {
+      color: var(--primary-color);
     }
   }
 }
 
+/* ── Form block (права колонка) ── */
+/* ❌ ПРИБРАНО: border-radius:1rem + box-shadow rgba(0,0,0,0.03) */
 .formBlock {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 1rem;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  border-top: 3px solid var(--primary-color);
   padding: 2.5rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1rem;
 
   .row {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
 
-    @media (max-width: 768px) {
-      flex-direction: column;
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
     }
   }
 
+  /* ❌ ПРИБРАНО: border-radius:8px + #d1d5db + #fafafa + blue focus glow */
   input,
   textarea {
-    border: 1px solid #d1d5db !important;
-    background: #fafafa;
-    border-radius: 8px !important;
-    font-size: 1rem;
-    padding: 0.9rem 1rem;
-    transition: all 0.2s ease;
+    width: 100%;
+    border: 1.5px solid var(--border-color) !important;
+    background: var(--surface-color) !important;
+    border-radius: 4px !important;
+    font-size: 0.95rem;
+    font-family: var(--font-body, var(--font-family));
+    color: var(--text-primary);
+    padding: 0.85rem 1rem;
+    transition: border-color 0.15s ease;
+    outline: none;
+
+    &::placeholder {
+      color: var(--text-muted);
+    }
 
     &:focus {
-      border-color: var(--primary-color, #2563eb) !important;
-      background: #fff;
-      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+      border-color: var(--primary-color) !important;
+      background: var(--surface-color) !important;
+      /* ❌ ПРИБРАНО: box-shadow rgba(37,99,235,0.1) blue */
+      box-shadow: 0 0 0 3px rgba(27, 67, 50, 0.07) !important;
     }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 140px;
   }
 
   button {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     height: 3rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: none;
+    letter-spacing: 0.01em;
   }
 }
 
 .successMsg {
-  font-size: 1.1rem;
-  color: #15803d;
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  border-radius: 0.75rem;
+  font-size: 1rem;
+  color: var(--primary-color);
+  background: rgba(27, 67, 50, 0.06);
+  border: 1px solid rgba(27, 67, 50, 0.2);
+  border-radius: 4px;
   padding: 2rem;
   text-align: center;
-  font-weight: 500;
+  font-weight: 600;
 }

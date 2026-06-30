@@ -1,8 +1,12 @@
 "use client";
-
+/*
+ * ContactForm.tsx — ФІКС
+ * ❌ ПРИБРАНО: motion.div framer анімації (x:-40/40, y:30) — однакові на всіх сайтах мережі
+ * ✅ Оновлена структура header (2-col grid замість center)
+ * ✅ infoItem тепер в .infoList для border-bottom
+ */
 import React, { useState } from "react";
 import { Formik, Form, Field, FormikHelpers } from "formik";
-import { motion } from "framer-motion";
 import ButtonUI from "@/components/ui/button/ButtonUI";
 import { validationSchema, initialValues, sendContactRequest } from "./schema";
 import { useAlert } from "@/context/AlertContext";
@@ -40,54 +44,43 @@ const ContactForm: React.FC = () => {
 
     return (
         <section className={styles.section}>
-            <motion.div
-                className={styles.header}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-            >
+            {/* ❌ ПРИБРАНО: motion.div initial y:30 whileInView */}
+            <div className={styles.header}>
                 <h2>Contact Our Team</h2>
                 <p>
                     Have a question about our plans or need tailored advice?
                     Our experts typically respond within 24 hours.
                 </p>
-            </motion.div>
+            </div>
 
             <div className={styles.grid}>
-                {/* === LEFT SIDE === */}
-                <motion.div
-                    className={styles.infoBlock}
-                    initial={{ opacity: 0, x: -40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
+                {/* ── LEFT: info ── */}
+                {/* ❌ ПРИБРАНО: motion.div initial x:-40 */}
+                <div className={styles.infoBlock}>
                     <h3>Get in touch</h3>
                     <p className={styles.subtext}>
-                        We’re here to answer your questions and help you find the right solution for your needs.
+                        We're here to answer your questions and help you find the right solution for your needs.
                     </p>
 
-                    <div className={styles.infoItem}>
-                        <FaMapMarkerAlt />
-                        <span>{COMPANY_ADDRESS}</span>
+                    <div className={styles.infoList}>
+                        <div className={styles.infoItem}>
+                            <FaMapMarkerAlt />
+                            <span>{COMPANY_ADDRESS}</span>
+                        </div>
+                        <div className={styles.infoItem}>
+                            <FaEnvelope />
+                            <a href={`mailto:${COMPANY_EMAIL}`}>{COMPANY_EMAIL}</a>
+                        </div>
+                        <div className={styles.infoItem}>
+                            <FaPhoneAlt />
+                            <a href={`tel:${COMPANY_PHONE}`}>{COMPANY_PHONE}</a>
+                        </div>
                     </div>
-                    <div className={styles.infoItem}>
-                        <FaEnvelope />
-                        <a href={`mailto:${COMPANY_EMAIL}`}>{COMPANY_EMAIL}</a>
-                    </div>
-                    <div className={styles.infoItem}>
-                        <FaPhoneAlt />
-                        <a href={`tel:${COMPANY_PHONE}`}>{COMPANY_PHONE}</a>
-                    </div>
-                </motion.div>
-                
+                </div>
 
-                {/* === RIGHT SIDE === */}
-                <motion.div
-                    className={styles.formBlock}
-                    initial={{ opacity: 0, x: 40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
+                {/* ── RIGHT: form ── */}
+                {/* ❌ ПРИБРАНО: motion.div initial x:40 */}
+                <div className={styles.formBlock}>
                     {successMsg ? (
                         <div className={styles.successMsg}>{successMsg}</div>
                     ) : (
@@ -104,9 +97,7 @@ const ContactForm: React.FC = () => {
                                     </div>
 
                                     <Field as="input" name="email" type="email" placeholder="Email address" />
-
                                     <Field as="input" name="phone" type="tel" placeholder="Phone number" />
-
                                     <Field as="textarea" name="message" placeholder="Your message" rows={5} />
 
                                     <ButtonUI
@@ -114,18 +105,18 @@ const ContactForm: React.FC = () => {
                                         fullWidth
                                         loading={isSubmitting}
                                         text="Send Message"
-                                        color="secondary"
+                                        color="primary"
                                         textColor="backgroundLight"
+                                        hoverEffect="none"
                                     />
                                 </Form>
                             )}
                         </Formik>
                     )}
-                </motion.div>
+                </div>
             </div>
         </section>
     );
 };
 
 export default ContactForm;
-

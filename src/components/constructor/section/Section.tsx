@@ -1,6 +1,11 @@
 "use client";
+/*
+ * ❌ ПРИБРАНО: motion.section initial={{opacity:0,y:40}} whileInView
+ * ❌ ПРИБРАНО: motion.div x:-50/x:50 на left/right
+ * ❌ ПРИБРАНО: viewport once:true amount:0.2/0.3
+ * ✅ Контент рендериться одразу без анімацій
+ */
 import React from "react";
-import { motion } from "framer-motion";
 import styles from "./Section.module.scss";
 
 interface SectionProps {
@@ -15,33 +20,27 @@ interface SectionProps {
 }
 
 const Section: React.FC<SectionProps> = ({
-                                             title,
-                                             description,
-                                             left,
-                                             right,
-                                             reverse = false,
-                                             gap = "3rem",
-                                             align = "center",
-                                             justify = "center",
-                                         }) => {
+    title,
+    description,
+    left,
+    right,
+    reverse = false,
+    gap = "3rem",
+    align = "center",
+    justify = "center",
+}) => {
     const isSingle = !left || !right;
 
     return (
         <section className={styles.wrapper}>
             {(title || description) && (
-                <motion.div
-                    className={styles.header}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                >
-                    {title && <h2 className={styles.title}>{title}</h2>}
-                    {description && <p className={styles.description}>{description}</p>}
-                </motion.div>
+                <div className={styles.header}>
+                    {title       && <h2 className={styles.title}>{title}</h2>}
+                    {description && <p  className={styles.description}>{description}</p>}
+                </div>
             )}
 
-            <motion.div
+            <div
                 className={`${styles.section} ${isSingle ? styles.single : ""}`}
                 style={{
                     flexDirection: reverse ? "row-reverse" : "row",
@@ -49,34 +48,10 @@ const Section: React.FC<SectionProps> = ({
                     alignItems: align,
                     justifyContent: isSingle ? "center" : justify,
                 }}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
             >
-                {left && (
-                    <motion.div
-                        className={styles.left}
-                        initial={{ opacity: 0, x: reverse ? 50 : -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                    >
-                        {left}
-                    </motion.div>
-                )}
-                {right && (
-                    <motion.div
-                        className={styles.right}
-                        initial={{ opacity: 0, x: reverse ? -50 : 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                    >
-                        {right}
-                    </motion.div>
-                )}
-            </motion.div>
+                {left  && <div className={styles.left}>{left}</div>}
+                {right && <div className={styles.right}>{right}</div>}
+            </div>
         </section>
     );
 };

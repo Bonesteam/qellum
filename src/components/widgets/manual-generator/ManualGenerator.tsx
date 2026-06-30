@@ -13,68 +13,66 @@ import { useUser } from "@/context/UserContext";
 import { useAllOrders } from "@/context/AllOrdersContext";
 
 const PACKAGE_TIERS = [
-    { id: "basic", label: "Basic", base: 20, description: "Simple 1-week plan, minimal details" },
-    { id: "standard", label: "Standard", base: 35, description: "1–2 weeks with recipes and shopping list" },
-    { id: "premium", label: "Premium", base: 60, description: "3–4 weeks, recipes, shopping list, calorie breakdown" },
-    { id: "pro", label: "Pro", base: 100, description: "Nutrition expert review + extended materials" },
+    { id: "basic",    label: "Basic",    base: 20,  description: "Simple 1-week plan, minimal details" },
+    { id: "standard", label: "Standard", base: 35,  description: "1–2 weeks with recipes and shopping list" },
+    { id: "premium",  label: "Premium",  base: 60,  description: "3–4 weeks, recipes, shopping list, calorie breakdown" },
+    { id: "pro",      label: "Pro",      base: 100, description: "Nutrition expert review + extended materials" },
 ];
 
-const BASE_COST = 20; // fallback base cost
-
 const LANGUAGES = [
-    { value: "English", label: "English (default)", cost: 0 },
-    { value: "Ukrainian", label: "Ukrainian", cost: 5 },
-    { value: "German", label: "German", cost: 5 },
-    { value: "French", label: "French", cost: 5 },
+    { value: "English",   label: "English (default)",  cost: 0 },
+    { value: "Swedish",   label: "Swedish",             cost: 5 },
+    { value: "German",    label: "German",              cost: 5 },
+    { value: "French",    label: "French",              cost: 5 },
 ];
 
 const EXTRA_CATEGORIES = {
     core: [
-        { name: "weeklyMenu", label: "Weekly Menu (structured)", cost: 15 },
-        { name: "recipes", label: "Detailed Recipes (step-by-step)", cost: 12 },
-        { name: "shoppingList", label: "Shopping List (grouped)", cost: 10 },
-        { name: "calorieBreakdown", label: "Calorie & Macro Breakdown", cost: 12 },
-        { name: "mealPrepGuide", label: "Meal Prep Guide & Schedule", cost: 10 },
-        { name: "snackPlans", label: "Healthy snacks & alternatives", cost: 6 },
+        { name: "weeklyMenu",       label: "Weekly Menu (structured)",        cost: 15 },
+        { name: "recipes",          label: "Detailed Recipes (step-by-step)", cost: 12 },
+        { name: "shoppingList",     label: "Shopping List (grouped)",         cost: 10 },
+        { name: "calorieBreakdown", label: "Calorie & Macro Breakdown",       cost: 12 },
+        { name: "mealPrepGuide",    label: "Meal Prep Guide & Schedule",      cost: 10 },
+        { name: "snackPlans",       label: "Healthy snacks & alternatives",   cost: 6  },
     ],
     personalization: [
-        { name: "customAllergies", label: "Allergy-safe customization", cost: 8 },
-        { name: "portionSizing", label: "Custom portion sizing", cost: 6 },
-        { name: "tasteProfile", label: "Taste preferences tuning", cost: 6 },
-        { name: "familyFriendly", label: "Family-friendly variations", cost: 7 },
-        { name: "kidFriendly", label: "Kid-friendly recipes", cost: 6 },
+        { name: "customAllergies", label: "Allergy-safe customization",  cost: 8 },
+        { name: "portionSizing",   label: "Custom portion sizing",        cost: 6 },
+        { name: "tasteProfile",    label: "Taste preferences tuning",     cost: 6 },
+        { name: "familyFriendly",  label: "Family-friendly variations",   cost: 7 },
+        { name: "kidFriendly",     label: "Kid-friendly recipes",         cost: 6 },
     ],
     services: [
         { name: "groceryListLocalized", label: "Localized grocery list (store mapping)", cost: 8 },
-        { name: "leftoversPlan", label: "Leftovers & reuse plan", cost: 5 },
-        { name: "shoppingBudgeting", label: "Budget optimization", cost: 7 },
-        { name: "seasonalAdjustments", label: "Seasonal ingredient adjustments", cost: 6 },
-        { name: "groceryCostEstimates", label: "Grocery cost estimates per week", cost: 6 },
-        { name: "variationSwaps", label: "Recipe variations & swaps", cost: 5 },
-        { name: "mealTiming", label: "Meal timing & schedule", cost: 4 },
-        { name: "hydrationSchedule", label: "Hydration schedule & tips", cost: 3 },
-        { name: "ingredientPrepTips", label: "Ingredient prep & storage tips", cost: 4 },
+        { name: "leftoversPlan",        label: "Leftovers & reuse plan",                cost: 5 },
+        { name: "shoppingBudgeting",    label: "Budget optimization",                   cost: 7 },
+        { name: "seasonalAdjustments",  label: "Seasonal ingredient adjustments",       cost: 6 },
+        { name: "groceryCostEstimates", label: "Grocery cost estimates per week",       cost: 6 },
+        { name: "variationSwaps",       label: "Recipe variations & swaps",             cost: 5 },
+        { name: "mealTiming",           label: "Meal timing & schedule",                cost: 4 },
+        { name: "hydrationSchedule",    label: "Hydration schedule & tips",             cost: 3 },
+        { name: "ingredientPrepTips",   label: "Ingredient prep & storage tips",        cost: 4 },
     ],
     expert: [
-        { name: "nutritionistReview", label: "Nutritionist review & notes", cost: 30 },
-        { name: "1on1Consult", label: "1:1 consultation (30 min)", cost: 50 },
-        { name: "followupWeek", label: "Follow-up week plan", cost: 25 },
-        { name: "specialOccasionMenu", label: "Special occasion menu (1-day)", cost: 12 },
+        { name: "nutritionistReview", label: "Nutritionist review & notes",  cost: 30 },
+        { name: "1on1Consult",        label: "1:1 consultation (30 min)",     cost: 50 },
+        { name: "followupWeek",       label: "Follow-up week plan",           cost: 25 },
+        { name: "specialOccasionMenu",label: "Special occasion menu (1-day)", cost: 12 },
     ],
 };
 
 const schema = Yup.object().shape({
-    fullName: Yup.string().required("Required"),
-    goal: Yup.string().required("Required"),
+    fullName:          Yup.string().required("Required"),
+    goal:              Yup.string().required("Required"),
     dietaryPreference: Yup.string().required("Required"),
-    days: Yup.number().min(1).required("Required"),
-    planType: Yup.string().oneOf(["coach", "ai"]).required("Required"),
-    language: Yup.string().oneOf(LANGUAGES.map((l) => l.value)),
+    days:              Yup.number().min(1).required("Required"),
+    planType:          Yup.string().oneOf(["coach", "ai"]).required("Required"),
+    language:          Yup.string().oneOf(LANGUAGES.map((l) => l.value)),
 });
 
 export interface FormValues {
     fullName: string;
-    goal: string; // dietary goal, e.g., weight loss, muscle gain, maintain
+    goal: string;
     dietaryPreference: string;
     packageId?: string;
     days: number;
@@ -83,9 +81,44 @@ export interface FormValues {
     extras: string[];
 }
 
+/*
+ * ✅ ВИПРАВЛЕНА функція розрахунку токенів
+ * Єдине місце розрахунку — використовується і в UI і в onSubmit
+ * ❌ БУЛО: BASE_COST (hardcoded 20) в UI і packageObj.base в onSubmit → різні числа
+ * ❌ БУЛО: durationCost = Math.floor(days/7)*10 — рахував +10 навіть за перший тиждень
+ * ✅ ТЕПЕР: (weeks - 1)*10 — перший тиждень вже включений у пакет
+ */
+function calcTokens(values: FormValues): {
+    packageBase: number;
+    extraCost: number;
+    durationCost: number;
+    languageCost: number;
+    total: number;
+} {
+    const allExtras = Object.values(EXTRA_CATEGORIES).flat();
+
+    const packageObj  = PACKAGE_TIERS.find((p) => p.id === values.packageId);
+    const packageBase = packageObj?.base ?? 20;
+
+    const extraCost = values.extras.reduce((sum, name) => {
+        const opt = allExtras.find((o) => o.name === name);
+        return sum + (opt?.cost ?? 0);
+    }, 0);
+
+    // Перший тиждень входить у пакет → додатково платимо тільки за 2+
+    const weeks       = Math.max(1, Math.floor(values.days / 7));
+    const durationCost = (weeks - 1) * 10;
+
+    const languageCost = values.language && values.language !== "English" ? 5 : 0;
+
+    const total = packageBase + extraCost + durationCost + languageCost;
+
+    return { packageBase, extraCost, durationCost, languageCost, total };
+}
+
 const MealPlannerForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
-    const { showAlert } = useAlert();
-    const user = useUser();
+    const { showAlert }    = useAlert();
+    const user             = useUser();
     const { refreshOrders } = useAllOrders();
     const [loading, setLoading] = useState(false);
 
@@ -100,7 +133,6 @@ const MealPlannerForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) =>
         extras: [],
     };
 
-    // 🧩 Mock data for testing
     const mockData: FormValues = {
         fullName: "Olena Kovalenko",
         goal: "Lose 5 kg in a healthy way with focus on sustainable habits",
@@ -119,41 +151,33 @@ const MealPlannerForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) =>
             onSubmit={async (values) => {
                 setLoading(true);
                 try {
-                    const allExtras = Object.values(EXTRA_CATEGORIES).flat();
-                    const extraCost = values.extras.reduce((sum, name) => {
-                        const opt = allExtras.find((o) => o.name === name);
-                        return sum + (opt?.cost || 0);
-                    }, 0);
-
-                    const packageObj = PACKAGE_TIERS.find((p) => p.id === values.packageId);
-                    const packageBase = packageObj ? packageObj.base : BASE_COST;
-                    const durationCost = Math.floor(values.days / 7) * 10;
-                    const languageCost = values.language && values.language !== "English" ? 5 : 0;
-                    const totalTokens = packageBase + extraCost + durationCost + languageCost;
+                    // ✅ Той самий calcTokens що і в UI — числа завжди збігаються
+                    const { total: totalTokens, ...breakdown } = calcTokens(values);
 
                     const payload = {
-                        category: "nutrition",
-                        planType: values.planType === "coach" ? "reviewed" : "instant",
-                        language: values.language || "English",
-                        extras: values.extras,
-                        packageId: values.packageId,
+                        category:    "nutrition",
+                        planType:    values.planType === "coach" ? "reviewed" : "instant",
+                        language:    values.language || "English",
+                        extras:      values.extras,
+                        packageId:   values.packageId,
                         totalTokens,
-                        email: user?.email,
+                        breakdown,
+                        email:       user?.email,
                         fields: {
-                            fullName: values.fullName,
-                            goal: values.goal,
+                            fullName:          values.fullName,
+                            goal:              values.goal,
                             dietaryPreference: values.dietaryPreference,
-                            packageId: values.packageId,
-                            days: values.days,
-                            language: values.language || "English",
+                            packageId:         values.packageId,
+                            days:              values.days,
+                            language:          values.language || "English",
                         },
                     };
 
                     const res = await fetch("/api/universal/create-order", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
+                        method:      "POST",
+                        headers:     { "Content-Type": "application/json" },
                         credentials: "include",
-                        body: JSON.stringify(payload),
+                        body:        JSON.stringify(payload),
                     });
 
                     const data = await res.json();
@@ -161,11 +185,10 @@ const MealPlannerForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) =>
                         showAlert(
                             "Success",
                             values.planType === "coach"
-                                ? "Your meal plan will be reviewed by a nutrition expert and delivered in PDF within 24 hours."
+                                ? "Your meal plan will be reviewed by a nutrition expert and delivered in PDF within 2–3 hours."
                                 : "Your instant meal plan is ready in PDF format.",
                             "success"
                         );
-                        // Refresh orders list after successful creation
                         await refreshOrders();
                         if (onSuccess) onSuccess();
                     } else {
@@ -179,23 +202,16 @@ const MealPlannerForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) =>
             }}
         >
             {({ values, setFieldValue, setValues }) => {
-                const allExtras = Object.values(EXTRA_CATEGORIES).flat();
-                const extraCost = values.extras.reduce((sum, name) => {
-                    const opt = allExtras.find((o) => o.name === name);
-                    return sum + (opt?.cost || 0);
-                }, 0);
-
-                const durationCost = Math.floor(values.days / 7) * 10;
-                const languageCost = values.language && values.language !== "English" ? 5 : 0;
-                const totalTokens = BASE_COST + extraCost + durationCost + languageCost;
+                // ✅ Той самий calcTokens — UI і submit завжди показують однакове число
+                const { packageBase, extraCost, durationCost, languageCost, total } = calcTokens(values);
 
                 return (
                     <Form className={styles.form}>
                         <header className={styles.header}>
                             <h2>Meal Plan Configuration</h2>
                             <p>
-                                Configure your dietary goals, preferences and custom modules for a complete meal
-                                plan (recipes, shopping list, calorie breakdown). Use demo data to test the flow.
+                                Configure your dietary goals, preferences and custom modules.
+                                Use demo data to test the flow.
                             </p>
                         </header>
 
@@ -210,7 +226,6 @@ const MealPlannerForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) =>
                             </ButtonUI>
                         </div>
 
-                        {/* === GRID SECTION === */}
                         <div className={styles.grid}>
                             <div className={styles.block}>
                                 <h3>Personal Information</h3>
@@ -251,9 +266,7 @@ const MealPlannerForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) =>
                                             </Option>
                                         ))}
                                     </Select>
-                                    <span className={styles.note}>
-                    English is free, other languages cost +5 tokens
-                  </span>
+                                    <span className={styles.note}>English is free · other languages +5 tokens</span>
                                 </div>
                                 <div className={styles.inputGroup}>
                                     <label>Package</label>
@@ -271,13 +284,9 @@ const MealPlannerForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) =>
                             </div>
 
                             <div className={styles.block}>
-                                        <h3>Plan Details</h3>
+                                <h3>Plan Details</h3>
                                 <div className={styles.radioGroup}>
-                                    <label
-                                        className={`${styles.radioCard} ${
-                                            values.planType === "coach" ? styles.active : ""
-                                        }`}
-                                    >
+                                    <label className={`${styles.radioCard} ${values.planType === "coach" ? styles.active : ""}`}>
                                         <input
                                             type="radio"
                                             name="planType"
@@ -286,16 +295,12 @@ const MealPlannerForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) =>
                                             onChange={() => setFieldValue("planType", "coach")}
                                         />
                                         <div>
-                                            <strong>Сhef Plan</strong>
-                                            <p>Personal chef will review and deliver personalized meal plan within 2–3 hours</p>
+                                            <strong>Chef Plan</strong>
+                                            <p>Personal chef will review and deliver personalised meal plan within 2–3 hours</p>
                                         </div>
                                     </label>
 
-                                    <label
-                                        className={`${styles.radioCard} ${
-                                            values.planType === "ai" ? styles.active : ""
-                                        }`}
-                                    >
+                                    <label className={`${styles.radioCard} ${values.planType === "ai" ? styles.active : ""}`}>
                                         <input
                                             type="radio"
                                             name="planType"
@@ -310,30 +315,31 @@ const MealPlannerForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) =>
                                     </label>
                                 </div>
 
-                                    <div className={styles.inputGroup}>
+                                <div className={styles.inputGroup}>
                                     <label>Duration</label>
                                     <Select
                                         value={values.days}
                                         onChange={(_, v) => setFieldValue("days", v)}
                                     >
                                         <Option value={1}>1 day</Option>
-                                        <Option value={7}>1 week</Option>
-                                        <Option value={14}>2 weeks</Option>
-                                        <Option value={21}>3 weeks</Option>
-                                        <Option value={28}>4 weeks</Option>
+                                        <Option value={7}>1 week (included in package)</Option>
+                                        <Option value={14}>2 weeks (+10 tokens)</Option>
+                                        <Option value={21}>3 weeks (+20 tokens)</Option>
+                                        <Option value={28}>4 weeks (+30 tokens)</Option>
                                     </Select>
-                                    <span className={styles.note}>Each week adds +10 tokens</span>
+                                    {/* ✅ Показуємо реальну вартість тривалості */}
+                                    <span className={styles.note}>
+                                        1 week included · each additional week +10 tokens
+                                    </span>
                                 </div>
                             </div>
                         </div>
 
-                        {/* === EXTRAS === */}
+                        {/* Extras */}
                         <div className={styles.sectionGroup}>
                             {Object.entries(EXTRA_CATEGORIES).map(([category, options]) => (
                                 <div key={category} className={styles.section}>
-                                    <h3>
-                                        {category.charAt(0).toUpperCase() + category.slice(1)} Modules
-                                    </h3>
+                                    <h3>{category.charAt(0).toUpperCase() + category.slice(1)} Modules</h3>
                                     <div className={styles.optionsGrid}>
                                         {options.map((opt) => (
                                             <label key={opt.name} className={styles.option}>
@@ -344,10 +350,7 @@ const MealPlannerForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) =>
                                                         if (e.target.checked)
                                                             setFieldValue("extras", [...values.extras, opt.name]);
                                                         else
-                                                            setFieldValue(
-                                                                "extras",
-                                                                values.extras.filter((x) => x !== opt.name)
-                                                            );
+                                                            setFieldValue("extras", values.extras.filter((x) => x !== opt.name));
                                                     }}
                                                 />
                                                 <span className={styles.optionLabel}>{opt.label}</span>
@@ -359,17 +362,20 @@ const MealPlannerForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) =>
                             ))}
                         </div>
 
+                        {/* ✅ Summary — горизонтальна смуга */}
                         <div className={styles.summary}>
-                                <div className={styles.summaryContent}>
-                                <div>
-                                    <p>Package base: {PACKAGE_TIERS.find(p => p.id === values.packageId)?.base ?? BASE_COST} tokens</p>
-                                    <p>Extras: +{extraCost}</p>
-                                    <p>Duration: +{durationCost}</p>
-                                    <p>Language: +{languageCost}</p>
+                            <div className={styles.summaryContent}>
+                                <div className={styles.summaryBreakdown}>
+                                    <p>Package ({PACKAGE_TIERS.find(p => p.id === values.packageId)?.label}): <strong>{packageBase}</strong></p>
+                                    <p>Extras: <strong>+{extraCost}</strong></p>
+                                    <p>Duration: <strong>+{durationCost}</strong></p>
+                                    <p>Language: <strong>+{languageCost}</strong></p>
                                 </div>
-                                <h4>
-                                    Total: <span>{totalTokens}</span> tokens
-                                </h4>
+                                <div className={styles.summaryTotal}>
+                                    <span>Total</span>
+                                    <strong>{total}</strong>
+                                    <span>tokens</span>
+                                </div>
                             </div>
                         </div>
 
@@ -379,7 +385,7 @@ const MealPlannerForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) =>
                                 color="primary"
                                 variant="solid"
                                 textColor="backgroundLight"
-                                hoverEffect="glow"
+                                hoverEffect="shadow"
                                 loading={loading}
                             >
                                 Generate Meal Plan

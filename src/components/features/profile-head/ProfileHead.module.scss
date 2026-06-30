@@ -1,62 +1,127 @@
-/* ProfileHead.module.scss */
+/*
+ * ProfileHead.module.scss — РЕДИЗАЙН
+ * ❌ ПРИБРАНО: linear-gradient(135deg, secondary, primary) — gold→green generic банер
+ * ❌ ПРИБРАНО: border-radius:20px organic
+ * ❌ ПРИБРАНО: box-shadow rgba(0,0,0,0.15)
+ * ❌ ПРИБРАНО: #ffd369 yellow на імені та stats
+ * ❌ ПРИБРАНО: rgba(255,255,255,0.15) glassmorphism на stats pills
+ * ❌ ПРИБРАНО: border-radius:12px на stats pills
+ * ❌ ПРИБРАНО: font-size:5rem avatar іконка — виглядала дуже generic
+ *
+ * ✅ НОВИЙ: темний editorial banner
+ *    - Темний фон var(--text-primary) — контрастний і авторитетний
+ *    - Ім'я виділено кольором secondary (теракота) — не yellow
+ *    - Stats — прості border-right розділювачі замість pills
+ *    - Avatar — ініціали в колі замість generic іконки
+ */
+
 .hero {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: 2rem;
-  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-  border-radius: 20px;
-  padding: 2rem 3rem;
-  color: #fff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  background: var(--text-primary);
+  /* ❌ ПРИБРАНО: border-radius:20px */
+  border-radius: 4px;
+  padding: 2.2rem 3rem;
+  color: var(--text-inverse);
+  /* ❌ ПРИБРАНО: box-shadow rgba(0,0,0,0.15) */
+  border-left: 4px solid var(--secondary-color);
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
+    grid-template-columns: 1fr;
+    padding: 1.5rem 1.5rem;
+    gap: 1.2rem;
+  }
+}
+
+/* ❌ ПРИБРАНО: FaUserCircle font-size:5rem
+ * ✅ Ініціали в колі — персональніше */
+.hero__avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading, 'Fraunces', serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--secondary-color);
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.hero__title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--text-inverse);
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+
+  /* ❌ ПРИБРАНО: span color:#ffd369 yellow */
+  span {
+    color: var(--secondary-color);
   }
 
-  &__avatar {
-    font-size: 5rem;
-    color: #fff;
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
   }
+}
 
-  &__text {
-    flex: 1;
-  }
+.hero__subtitle {
+  font-size: 0.9rem;
+  color: rgba(250, 248, 245, 0.55);
+  margin: 0;
+  line-height: 1.6;
+  max-width: 560px;
+}
 
-  &__title {
-    font-size: 2.2rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
+.hero__stats {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 
-    span {
-      color: #ffd369;
-    }
-  }
-
-  &__subtitle {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    margin-bottom: 1.5rem;
-  }
-
-  &__stats {
+  div {
     display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(250, 248, 245, 0.8);
+    /* ❌ ПРИБРАНО: rgba(255,255,255,0.15) glassmorphism background */
+    /* ❌ ПРИБРАНО: border-radius:12px pill */
+    padding: 0 1.5rem 0 0;
+    margin-right: 1.5rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
 
-    div {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 1rem;
-      font-weight: 600;
-      background: rgba(255, 255, 255, 0.15);
-      padding: 0.6rem 1rem;
-      border-radius: 12px;
+    &:last-child {
+      border-right: none;
+      padding-right: 0;
+      margin-right: 0;
+    }
 
-      svg {
-        font-size: 1.2rem;
-      }
+    svg {
+      font-size: 0.9rem;
+      color: var(--secondary-color);
+      opacity: 0.9;
     }
   }
 }

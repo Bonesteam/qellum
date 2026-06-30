@@ -1,29 +1,27 @@
+/*
+ * ❌ ПРИБРАНО: backdrop-filter glassmorphism
+ * ❌ ПРИБРАНО: ::after/::before gradient dividers
+ * ❌ ПРИБРАНО: border-radius:12px + transform hover на select
+ * ❌ ПРИБРАНО: border-radius:50% на socialLink
+ * ✅ Solid white, flat border, 4px radius
+ */
+
 .sticky {
   position: sticky;
   top: 0;
   z-index: 100;
   width: 100%;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border-bottom: 1px solid rgba(223, 218, 208, 0.3);
+  background: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+  transition: box-shadow 0.2s ease;
 }
 
 .scrolled {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: var(--glass-shadow);
-  
-  .headerInner {
-    height: 70px;
-  }
+  background: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 1px 12px rgba(27, 67, 50, 0.06);
 
-  .logo img {
-    transform: scale(0.95);
-  }
+  .headerInner { height: 66px; }
 }
 
 .headerInner {
@@ -34,36 +32,21 @@
   padding: 0 40px;
   width: 100%;
   max-width: 1440px;
-  height: 80px;
-  position: relative;
-  z-index: 1;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 76px;
+  transition: height 0.2s ease;
+
+  @media (max-width: 768px) { padding: 0 20px; }
 }
 
 .logo {
   flex: 0 0 auto;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
-  position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    right: -30px;
-    height: 40px;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.1), transparent);
-  }
+  /* ❌ ПРИБРАНО: ::after gradient divider */
 
   img {
-    max-height: 50px;
+    max-height: 46px;
     object-fit: contain;
-    transition: transform 0.3s ease;
-    
-    &:hover {
-      transform: scale(1.02);
-    }
   }
 }
 
@@ -72,136 +55,102 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  margin: 0 40px;
-  
+  gap: 4px;
+  margin: 0 32px;
+
   a {
-    position: relative;
+    font-size: 0.9rem;
     font-weight: 500;
-    color: #64748b;
+    color: var(--text-secondary);
     text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    
+    padding: 6px 14px;
+    border-radius: 4px;
+    transition: color 0.15s ease, background 0.15s ease;
+
     &:hover {
-      color: var(--primary-color);
-      background: #f8fafc;
+      color: var(--text-primary);
+      background: var(--surface-muted);
     }
-    
+
     &.active {
       color: var(--primary-color);
-      background: #f1f5f9;
       font-weight: 600;
     }
   }
 }
 
+.link { /* alias for nav a */ }
+
 .actionsNav {
   flex: 0 0 auto;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  gap: 20px;
-  position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    left: -30px;
-    height: 40px;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.1), transparent);
-  }
-}
-
-
-.currencySwitch {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 1rem;
-
-  .currencySelect {
-    height: 42px;
-    padding: 0 12px;
-    border-radius: 12px;
-    background: #f8f9fa;
-    border: 2px solid #e9ecef;
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--text-color);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    min-width: 120px;
-
-    &:hover {
-      border-color: var(--primary-color);
-      background: #fff;
-      transform: translateY(-1px);
-    }
-
-    &:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
-    }
-
-    option {
-      padding: 8px;
-      font-weight: 500;
-    }
-  }
-}
-
-
-.menuButton {
-  display: none;
-  color: var(--text-inverse);
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-@media (max-width: 1024px) {
-  .nav {
-    display: none;
-  }
-  .actionsNav {
-    display: none;
-  }
-  .menuButton {
-    display: block;
-  }
+  gap: 16px;
+  /* ❌ ПРИБРАНО: ::before gradient divider */
 }
 
 .headerSocials {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-right: 12px;
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  gap: 10px;
   padding-right: 16px;
+  border-right: 1px solid var(--border-color);
 }
 
 .socialLink {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: rgba(45, 90, 39, 0.08);
-  color: var(--primary-color);
-  transition: all 0.25s ease;
-  font-size: 1.1rem;
+  width: 32px;
+  height: 32px;
+  /* ❌ ПРИБРАНО: border-radius:50% pill */
+  border-radius: 4px;
+  color: var(--text-muted);
+  transition: color 0.15s ease, background 0.15s ease;
+  font-size: 1rem;
 
   &:hover {
-    background: var(--primary-color);
-    color: #ffffff;
-    transform: translateY(-2px);
+    color: var(--primary-color);
+    background: var(--surface-muted);
   }
+}
+
+.currencySwitch {
+  display: flex;
+  align-items: center;
+
+  .currencySelect {
+    height: 36px;
+    padding: 0 10px;
+    /* ❌ ПРИБРАНО: border-radius:12px */
+    border-radius: 4px;
+    background: var(--surface-muted);
+    border: 1px solid var(--border-color);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-family: var(--font-family);
+    transition: border-color 0.15s ease;
+    min-width: 90px;
+
+    &:hover { border-color: var(--primary-color); }
+    &:focus { outline: none; border-color: var(--primary-color); }
+  }
+}
+
+.menuButton {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 22px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+@media (max-width: 1024px) {
+  .nav        { display: none; }
+  .actionsNav { display: none; }
+  .menuButton { display: flex; align-items: center; }
 }

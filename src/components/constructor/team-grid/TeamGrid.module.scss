@@ -1,3 +1,9 @@
+/*
+ * TeamGrid.module.scss — ФІКС
+ * ❌ ПРИБРАНО: .memberCard hover translateY(-8px) scale(1.02)
+ * ✅ Hover — тільки border-color через Card.module.scss
+ */
+
 .section {
   max-width: 1100px;
   margin: 0 auto;
@@ -16,29 +22,22 @@
 .sectionTitle {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--text-inverse, #111827);
+  color: var(--text-primary);
+  /* ❌ ПРИБРАНО: text-inverse fallback */
 }
 
 .sectionDesc {
   font-size: 1.05rem;
-  color: var(--text-secondary, #4b5563);
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
+/* ❌ ПРИБРАНО: .memberCard hover transform — Card.module.scss сам обробляє */
 .memberCard {
-  transition: all 0.3s ease, transform 0.3s ease;
-
-  &:hover {
-    transform: translateY(-8px) scale(1.02);
-  }
+  height: 100%;
 }
 
 @media (max-width: 768px) {
-  .sectionTitle {
-    font-size: 1.6rem;
-  }
-
-  .sectionDesc {
-    font-size: 0.95rem;
-  }
+  .sectionTitle { font-size: 1.6rem; }
+  .sectionDesc  { font-size: 0.95rem; }
 }

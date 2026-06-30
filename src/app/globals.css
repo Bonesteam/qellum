@@ -1,57 +1,86 @@
+/*
+ * globals.css — QELLUM НОВИЙ ДИЗАЙН
+ *
+ * Що змінено щоб відрізнятись від мережі:
+ * ─────────────────────────────────────────
+ * ШРИФТ:  Outfit (всі 11 сайтів) → Fraunces (serif заголовки) + DM Sans (текст)
+ *         Fraunces — виразний culinary editorial шрифт, якого немає на жодному сайті мережі
+ *
+ * КОЛІР:  #2D5A27 зелений + #B8860B золотий (averis, shapeai, qellum — 3 сайти однакові)
+ *         → Глибокий лісовий зелений #1B4332 + теплий теракота акцент #C25E3A
+ *         Фон: теплий офф-вайт #FAF8F5 замість #F7F5F0 (майже однаковий на всіх)
+ *
+ * ТИПОГРАФІКА: font-weight:900 скрізь → заголовки serif Fraunces weight:700 italic
+ *              Це дає "авторський" характер замість generic SaaS
+ */
+
 :root {
-    /* Основні */
-    --primary-color: #2D5A27;
-    --secondary-color: #B8860B;
-    --tertiary-color: #E2D4A8;
-    --quaternary-color: #F7F5F0;
+    /* ── Основний акцент — лісовий зелений (темніший і глибший ніж #2D5A27 мережі) */
+    --primary-color: #1B4332;
+    --primary-hover: #14362A;
 
-    /* Фон та поверхні */
-    --background-light: #F7F5F0;
-    --background-dark: #1A3017;
+    /* ── Другорядний акцент — теракота (замість золотого #B8860B який на 3+ сайтах) */
+    --secondary-color: #C25E3A;
+    --secondary-hover: #A84E2F;
+
+    /* ── Tertiary — теплий sage */
+    --tertiary-color: #7D9E8C;
+    --quaternary-color: #FAF8F5;
+
+    /* ── Фони */
+    --background-light: #FAF8F5;    /* теплий але не ідентичний іншим */
+    --background-dark: #0D2118;
     --surface-color: #FFFFFF;
-    --surface-muted: #EAE6DF;
+    --surface-muted: #F0EDE8;
+    --surface-warm: #F7F0E8;        /* новий — для виділених блоків */
 
-    /* Тексти */
-    --text-primary: #1E2B1A;
-    --text-secondary: #4A5D4E;
-    --text-muted: #7A8D7E;
-    --text-inverse: #FFFFFF;
-    --text-accent: #2D5A27;
+    /* ── Тексти */
+    --text-primary: #1A1F1C;        /* майже чорний з зеленим підтоном */
+    --text-secondary: #3D4D45;
+    --text-muted: #7A8A82;
+    --text-inverse: #FAF8F5;
+    --text-accent: #1B4332;
 
-    /* Статуси */
-    --success-color: #2E7D32;
-    --warning-color: #F9A825;
-    --error-color: #C62828;
-    --info-color: #B8860B;
+    /* ── Інтерактивні */
+    --button-hover: #14362A;
+    --link-color: #1B4332;
+    --link-hover: #14362A;
 
-    /* Інтерактивні */
-    --button-hover: #1E3F1A;
-    --link-color: #2D5A27;
-    --link-hover: #1E3F1A;
+    /* ── Статуси */
+    --success-color: #1B4332;
+    --warning-color: #D4870A;
+    --error-color: #B91C1C;
+    --info-color: #C25E3A;
 
-    /* Система */
-    --border-color: #DFDAD0;
-    --shadow-color: rgba(45, 90, 39, 0.08);
+    /* ── Система */
+    --border-color: #E4DDD6;
+    --border-strong: #C8BFB7;
+    --shadow-color: rgba(27, 67, 50, 0.07);
 
-    --font-family: 'Outfit', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    /*
+     * ── ШРИФТИ
+     * Fraunces — для заголовків (h1, h2, h3)
+     * DM Sans  — для тексту (body, nav, labels, кнопки)
+     * Обидва завантажуються в layout.tsx (замінити currentFont)
+     */
+    --font-heading: 'Fraunces', 'Georgia', serif;
+    --font-body: 'DM Sans', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --font-family: var(--font-body);   /* сумісність зі старим кодом */
+
     --main-padding: 0 50px 0 50px;
 
-    /* Градієнти — залишаємо для сумісності але НЕ використовуємо в нових компонентах */
+    /* ── Градієнти (тільки для сумісності зі старим кодом — не використовувати в нових) */
     --premium-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    --gold-gradient: linear-gradient(135deg, var(--secondary-color), #DAA520, var(--tertiary-color));
-
-    /* ❌ ПРИБРАНО З ВИКОРИСТАННЯ (залишено для сумісності зі старим кодом): */
+    --gold-gradient: linear-gradient(135deg, var(--secondary-color), #E8835A, var(--tertiary-color));
     --glass-bg: rgba(255, 255, 255, 0.45);
-    --glass-border: rgba(223, 218, 208, 0.5);
+    --glass-border: rgba(228, 221, 214, 0.5);
     --glass-blur: blur(16px);
-    --glass-shadow: 0 8px 32px 0 rgba(45, 90, 39, 0.05);
-    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --glass-shadow: 0 8px 32px 0 rgba(27, 67, 50, 0.05);
+    --transition-smooth: all 0.3s ease;
 }
 
-/* ❌ ПРИБРАНО: aurora blobs (.aurora-container, .aurora-blob) */
-/* Вони давали плаваючий розмитий фон — спільна ознака всіх сайтів мережі */
+/* ─────────────────────────────────────────────── */
 
-/* ✅ Чистий однотонний фон */
 * {
     box-sizing: border-box;
     padding: 0;
@@ -61,10 +90,28 @@
 html,
 body {
     max-width: 100vw;
-    font-family: var(--font-family);
-    /* ❌ ЗМІНЕНО: було linear-gradient(160deg, ...) background-attachment: fixed */
+    font-family: var(--font-body);
     background-color: var(--background-light);
     color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/*
+ * Заголовки — Fraunces serif
+ * Це ключова відмінність від решти мережі (всі без винятку sans-serif Outfit)
+ */
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    /* italic курсив — характерна риса Fraunces, дає "авторський" tone of voice */
+    font-style: italic;
+    letter-spacing: -0.02em;
+}
+
+h4, h5, h6 {
+    font-family: var(--font-body);
+    font-weight: 700;
 }
 
 a {
@@ -72,21 +119,10 @@ a {
     color: inherit;
 }
 
-/* Залишаємо утилітарні класи для сумісності */
+/* ─── Утилітарні класи (сумісність) ─────────── */
 .text-gradient {
     background: var(--premium-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
-
-.text-gradient-gold {
-    background: var(--gold-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* ❌ ПРИБРАНО: .glass-card — глобальний glassmorphism клас */
-/* ❌ ПРИБРАНО: .animate-float — анімація плаваючих badges */
-/* ❌ ПРИБРАНО: @keyframes floatBlob, floatBlobWarm, floatElement */

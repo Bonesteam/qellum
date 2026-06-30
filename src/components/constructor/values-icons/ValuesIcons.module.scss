@@ -1,9 +1,3 @@
-/*
- * ValuesIcons.module.scss — НОВИЙ ДИЗАЙН
- * ❌ Прибрано: glassmorphism valueCard, gradient коло іконки, framer stagger, scale hover
- * ✅ Новий: великі порядкові номери, flat картки з border-top акцентом
- */
-
 .section {
   width: 100%;
   padding: 7rem 6rem;
@@ -27,7 +21,6 @@
   }
 }
 
-/* ❌ БЕЗ gradient clip */
 .sectionTitle {
   font-size: 3rem;
   font-weight: 900;
@@ -49,18 +42,21 @@
   align-self: end;
 }
 
+/*
+ * ✅ ФІКС: grid-template-columns прибрано з CSS —
+ * тепер передається через inline style з ValuesIcons.tsx
+ * (getColumns: 3→3col, 4→2col, 6→3col)
+ */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* ❌ ПРИБРАНО: repeat(3, 1fr) хардкод */
   gap: 2px;
 
   @media (max-width: 900px) {
-    grid-template-columns: 1fr;
-    gap: 2px;
+    grid-template-columns: 1fr !important;
   }
 }
 
-/* ❌ БЕЗ glassmorphism, БЕЗ scale hover */
 .valueCard {
   padding: 2.4rem 2rem;
   background: var(--surface-muted);
@@ -76,7 +72,6 @@
   }
 }
 
-/* ❌ БЕЗ gradient кола — просто великий номер */
 .icon {
   font-size: 2rem;
   line-height: 1;

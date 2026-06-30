@@ -1,7 +1,11 @@
+/*
+ * VideoDemo.module.scss — ФІКС
+ * ❌ ПРИБРАНО: opacity:0 + translateY(40px) CSS анімація (дублює framer-motion)
+ * ✅ Блок одразу видимий, framer в tsx керує якщо потрібно
+ */
+
 .fadeBlock {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  /* ❌ ПРИБРАНО: opacity: 0; transform: translateY(40px); transition: ... */
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -12,7 +16,4 @@
   padding: var(--main-padding);
 }
 
-.fadeBlock.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* ❌ ПРИБРАНО: .fadeBlock.visible — більше не потрібен */

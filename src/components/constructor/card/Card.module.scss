@@ -1,22 +1,31 @@
+/*
+ * Card.module.scss — НОВИЙ ДИЗАЙН
+ * ❌ ПРИБРАНО: glassmorphism (rgba(255,255,255,0.5) + backdrop-filter)
+ * ❌ ПРИБРАНО: border-radius: 2rem (organic)
+ * ❌ ПРИБРАНО: imageWrapper border-radius: 2rem 2rem 0 2rem (organic corners)
+ * ❌ ПРИБРАНО: gold glow hover (0 0 20px rgba(184,134,11,0.1))
+ * ❌ ПРИБРАНО: translateY(-8px) hover
+ * ✅ НОВИЙ: solid white, flat border, прямокутні кути, subtle hover
+ */
+
 .card {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid rgba(223, 218, 208, 0.5);
-  border-radius: 2rem;
-  box-shadow: var(--glass-shadow);
+  background: var(--surface-color);
+  /* ❌ ПРИБРАНО: backdrop-filter */
+  border: 1px solid var(--border-color);
+  /* ❌ ПРИБРАНО: border-radius: 2rem */
+  border-radius: 6px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
   min-height: 520px;
-  transition: var(--transition-smooth);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    box-shadow: 0 20px 40px rgba(45, 90, 39, 0.08), 0 0 20px rgba(184, 134, 11, 0.1);
-    transform: translateY(-8px);
-    border-color: rgba(184, 134, 11, 0.35);
+    border-color: var(--text-primary);
+    /* ❌ ПРИБРАНО: translateY(-8px) та gold glow */
+    box-shadow: 0 4px 16px rgba(30, 43, 26, 0.07);
   }
 }
 
@@ -25,27 +34,35 @@
   height: 280px;
   position: relative;
   overflow: hidden;
-  border-radius: 2rem 2rem 0 2rem; /* Organic corners */
-  border-bottom: 1px solid rgba(223, 218, 208, 0.3);
+  /* ❌ ПРИБРАНО: border-radius: 2rem 2rem 0 2rem (organic corners) */
+  border-bottom: 1px solid var(--border-color);
+
+  img {
+    transition: transform 0.4s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.03);
+  }
 }
 
 .content {
-  padding: 2.2rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 1.4rem;
+  gap: 1.2rem;
 }
 
 .title {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--text-primary);
   line-height: 1.3;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 .description {
@@ -57,24 +74,9 @@
 }
 
 @media (max-width: 992px) {
-  .card {
-    min-height: 480px;
-  }
-
-  .imageWrapper {
-    height: 240px;
-  }
-
-  .content {
-    padding: 1.6rem;
-    gap: 1rem;
-  }
-
-  .title {
-    font-size: 1.35rem;
-  }
-
-  .description {
-    font-size: 0.9rem;
-  }
+  .card      { min-height: 460px; }
+  .imageWrapper { height: 230px; }
+  .content   { padding: 1.5rem; gap: 1rem; }
+  .title     { font-size: 1.3rem; }
+  .description { font-size: 0.9rem; }
 }

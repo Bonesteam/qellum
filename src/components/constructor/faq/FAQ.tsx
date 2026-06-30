@@ -1,28 +1,22 @@
 "use client";
-
+/*
+ * ❌ ПРИБРАНО: motion.div initial={{opacity:0,y:30}} на header
+ * ✅ AnimatePresence залишено — тільки для accordion відкриття/закриття
+ */
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "./FAQ.module.scss";
 
-interface FAQItem {
-    question: string;
-    answer: string;
-}
-
-interface FAQProps {
-    items: FAQItem[];
-    image?: string; // більше не використовується, але лишаємо для сумісності зі схемою
-}
+interface FAQItem { question: string; answer: string; }
+interface FAQProps { items: FAQItem[]; image?: string; }
 
 const FAQ: React.FC<FAQProps> = ({ items }) => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-    const toggle = (idx: number) => {
-        setOpenIndex(openIndex === idx ? null : idx);
-    };
+    const toggle = (idx: number) => setOpenIndex(openIndex === idx ? null : idx);
 
     return (
         <section className={styles.section}>
+            {/* ❌ ПРИБРАНО: motion.div initial={{opacity:0,y:30}} whileInView */}
             <div className={styles.header}>
                 <h2 className={styles.title}>Questions?<br />We've got answers.</h2>
                 <p className={styles.headerNote}>

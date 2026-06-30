@@ -1,52 +1,77 @@
+/*
+ * BalanceCard.module.scss — РЕДИЗАЙН
+ * ❌ ПРИБРАНО: linear-gradient(135deg, #222, #333) hardcoded чорний
+ * ❌ ПРИБРАНО: border-radius:16px
+ * ❌ ПРИБРАНО: box-shadow rgba(0,0,0,0.25)
+ * ❌ ПРИБРАНО: #ffd369 yellow на сумі та іконці
+ * ❌ ПРИБРАНО: GiTwoCoins іконка (монети) — не відповідає валютному балансу
+ * ✅ Горизонтальна смуга з border-left акцентом, зелена іконка, чіткий текст
+ */
+
 .balanceCard {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(135deg, #222, #333);
-  border-radius: 16px;
-  padding: 1.5rem 2rem;
-  color: #fff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  /* ❌ ПРИБРАНО: gradient #222 → #333 */
+  background: var(--surface-muted);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--primary-color);
+  /* ❌ ПРИБРАНО: border-radius:16px */
+  border-radius: 4px;
+  padding: 1.4rem 2rem;
   width: 100%;
+  /* ❌ ПРИБРАНО: box-shadow rgba(0,0,0,0.25) */
 
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
     gap: 1.2rem;
+    padding: 1.2rem 1.5rem;
   }
+}
 
-  .left {
-    h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-      opacity: 0.9;
-    }
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 
-    .amount {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #ffd369;
-
-      span {
-        font-size: 1rem;
-        opacity: 0.8;
-        color: #fff;
-      }
-
-      svg {
-        font-size: 1.6rem;
-        color: #ffd369;
-      }
-    }
+  h3 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    /* ❌ ПРИБРАНО: opacity:0.9 white */
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
   }
+}
 
-  .right {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.amount {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.9rem;
+  font-weight: 900;
+  /* ❌ ПРИБРАНО: color:#ffd369 yellow */
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  margin: 0;
+
+  svg {
+    font-size: 1.3rem;
+    /* ❌ ПРИБРАНО: #ffd369 yellow */
+    color: var(--primary-color);
+  }
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  @media (max-width: 768px) {
+    width: 100%;
+
+    a, button { flex: 1; }
   }
 }

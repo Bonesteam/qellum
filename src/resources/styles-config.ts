@@ -1,119 +1,125 @@
 import {
-    GoogleFont,
-    ButtonColor,
-    HeaderType,
-    HeaderScrollMode,
-    SideBarDirection,
-    FooterType,
-    FooterLogoAlign,
-    HoverEffect,
-    CardVariant,
-    CardLabel,
+    GoogleFont, ButtonColor, HeaderType, HeaderScrollMode,
+    SideBarDirection, FooterType, FooterLogoAlign,
+    HoverEffect, CardVariant, CardLabel,
 } from "./types";
 
-// Шрифти
+/*
+ * styles-config.ts — QELLUM НОВИЙ ДИЗАЙН
+ *
+ * Що змінено:
+ * - googleFonts: додано Fraunces + DM Sans, currentFontIndex → DM Sans
+ * - layout.tsx треба оновити щоб завантажував обидва шрифти
+ */
+
 export const googleFonts: GoogleFont[] = [
-    { name: "Roboto", css: "'Roboto', sans-serif", url: "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" },
-    { name: "Inter", css: "'Inter', sans-serif", url: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" },
-    { name: "Montserrat", css: "'Montserrat', sans-serif", url: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" },
-    { name: "Poppins", css: "'Poppins', sans-serif", url: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" },
-    { name: "Outfit", css: "'Outfit', sans-serif", url: "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" },
+    {
+        name: "DM Sans",
+        css: "'DM Sans', sans-serif",
+        url: "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap",
+    },
+    {
+        name: "Fraunces",
+        css: "'Fraunces', serif",
+        url: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap",
+    },
+    { name: "Roboto",     css: "'Roboto', sans-serif",     url: "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" },
+    { name: "Inter",      css: "'Inter', sans-serif",      url: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" },
+    { name: "Outfit",     css: "'Outfit', sans-serif",     url: "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" },
 ];
 
-export const currentFontIndex = 4;
+// DM Sans як основний body шрифт
+export const currentFontIndex = 0;
 export const currentFont = googleFonts[currentFontIndex];
 
-// Кольори для кнопок
+// Fraunces для заголовків — підключається окремо в layout.tsx
+export const headingFont = googleFonts[1];
+
 export const buttonColors: Record<ButtonColor, string> = {
-    primary: "var(--primary-color)",
-    secondary: "var(--secondary-color)",
-    tertiary: "var(--tertiary-color)",
-    quaternary: "var(--quaternary-color)",
-    success: "var(--success-color)",
-    warning: "var(--warning-color)",
-    danger: "var(--error-color)",
-    info: "var(--info-color)",
-    text: "var(--text-primary)",
-    textSecondary: "var(--text-secondary)",
-    muted: "var(--text-muted)",
-    inverse: "var(--text-inverse)",
-    hover: "var(--button-hover)",
-    link: "var(--text-accent)",
-    linkHover: "var(--link-hover)",
+    primary:         "var(--primary-color)",
+    secondary:       "var(--secondary-color)",
+    tertiary:        "var(--tertiary-color)",
+    quaternary:      "var(--quaternary-color)",
+    success:         "var(--success-color)",
+    warning:         "var(--warning-color)",
+    danger:          "var(--error-color)",
+    info:            "var(--info-color)",
+    text:            "var(--text-primary)",
+    textSecondary:   "var(--text-secondary)",
+    muted:           "var(--text-muted)",
+    inverse:         "var(--text-inverse)",
+    hover:           "var(--button-hover)",
+    link:            "var(--text-accent)",
+    linkHover:       "var(--link-hover)",
     backgroundLight: "var(--background-light)",
-    backgroundDark: "var(--text-primary)",
-    surface: "var(--surface-color)",
-    surfaceMuted: "var(--surface-muted)",
-    border: "var(--border-color)",
-    shadow: "var(--shadow-color)",
+    backgroundDark:  "var(--text-primary)",
+    surface:         "var(--surface-color)",
+    surfaceMuted:    "var(--surface-muted)",
+    border:          "var(--border-color)",
+    shadow:          "var(--shadow-color)",
 };
 
-// Header
 export const headerStyles = {
-    type: "sticky-rounded" as HeaderType,
+    type:             "sticky" as HeaderType,
     sideBarDirection: "bottom" as SideBarDirection,
-    linkColor: "var(--text-primary)",
-    linkHoverColor: "var(--link-hover)",
-    scrollMode: "blur" as HeaderScrollMode,
-    scrollBackground: "var(--quaternary-color)",
-    scrollBlur: "50px",
+    linkColor:        "var(--text-secondary)",
+    linkHoverColor:   "var(--text-primary)",
+    scrollMode:       "solid" as HeaderScrollMode,
+    scrollBackground: "var(--surface-color)",
+    scrollBlur:       "0px",
 };
 
-// Drawer
 export const drawerConfig = {
-    anchor: "left" as SideBarDirection,
-    width: "50%",
-    padding: "20px",
-    logoWidth: 150,
-    logoHeight: 50,
-    contentGap: "40px",
-    navGap: "20px",
+    anchor:       "left" as SideBarDirection,
+    width:        "50%",
+    padding:      "20px",
+    logoWidth:    150,
+    logoHeight:   50,
+    contentGap:   "40px",
+    navGap:       "20px",
     contentAlign: "center" as "flex-start" | "center" | "space-between" | "flex-end",
 };
 
-// Footer
 export const footerStyles = {
-    type: "columns" as FooterType,
-    showTopBorder: true,
+    type:             "columns" as FooterType,
+    showTopBorder:    true,
     showBottomBorder: true,
-    maxWidth: 1400,
-    paddings: { x: 40, y: 10 },
-    gap: 30,
-    columnsGap: 50,
-    logo: { width: 240, height: 100, align: "center" as FooterLogoAlign },
+    maxWidth:         1400,
+    paddings:         { x: 40, y: 10 },
+    gap:              30,
+    columnsGap:       50,
+    logo:             { width: 240, height: 100, align: "center" as FooterLogoAlign },
     colors: {
-        bg: "var(--primary-color)",
-        title: "var(--text-inverse)",
-        text: "var(--quaternary-color)",
-        muted: "var(--tertiary-color)",
-        border: "rgba(255, 255, 255, 0.15)",
-        link: "var(--quaternary-color)",
-        linkHover: "var(--tertiary-color)",
+        bg:           "var(--primary-color)",
+        title:        "var(--text-inverse)",
+        text:         "var(--quaternary-color)",
+        muted:        "var(--tertiary-color)",
+        border:       "rgba(255, 255, 255, 0.12)",
+        link:         "var(--quaternary-color)",
+        linkHover:    "var(--surface-color)",
         contactLabel: "var(--tertiary-color)",
         contactHover: "var(--surface-color)",
-        socialHover: "var(--surface-color)",
+        socialHover:  "var(--surface-color)",
     },
-    grid: { colsXL: 1, colsLG: 2, colsMD: 2, colsSM: 1 },
-    font: { size: 18, legalSize: 24 },
+    grid:   { colsXL: 1, colsLG: 2, colsMD: 2, colsSM: 1 },
+    font:   { size: 18, legalSize: 24 },
     sizes: {
         titles: { xl: 20, lg: 18, md: 18, sm: 16 },
-        links: { xl: 18, lg: 18, md: 18, sm: 16 },
-        icons: { xl: 26, lg: 24, md: 22, sm: 18 },
+        links:  { xl: 18, lg: 18, md: 18, sm: 16 },
+        icons:  { xl: 26, lg: 24, md: 22, sm: 18 },
     },
     radius: "0",
     shadow: "none",
 };
 
-// Hover effects
 export const hoverEffects: Record<HoverEffect, { transform: string; shadow: string }> = {
-    none: { transform: "none", shadow: "none" },
-    shadow: { transform: "translateY(-6px)", shadow: "0 20px 40px rgba(45, 90, 39, 0.12)" },
-    lift: { transform: "translateY(-10px)", shadow: "0 24px 48px rgba(45, 90, 39, 0.16)" },
-    glow: { transform: "scale(1.025)", shadow: "0 0 25px rgba(184, 134, 11, 0.35), 0 0 45px rgba(45, 90, 39, 0.15)" },
-    tilt: { transform: "rotate3d(1, 1, 0, 4deg) scale(1.02)", shadow: "0 20px 35px rgba(184, 134, 11, 0.2)" },
+    none:   { transform: "none",             shadow: "none" },
+    shadow: { transform: "translateY(-3px)", shadow: "0 6px 20px rgba(27, 67, 50, 0.08)" },
+    lift:   { transform: "translateY(-6px)", shadow: "0 12px 28px rgba(27, 67, 50, 0.11)" },
+    glow:   { transform: "translateY(-3px)", shadow: "0 6px 20px rgba(27, 67, 50, 0.08)" },
+    tilt:   { transform: "translateY(-3px)", shadow: "0 6px 20px rgba(27, 67, 50, 0.08)" },
 };
 
-// Card variants
 export const cardVariants: Record<CardVariant, {
     border: string;
     background: string;
@@ -121,29 +127,28 @@ export const cardVariants: Record<CardVariant, {
     label?: CardLabel;
 }> = {
     basic: {
-        border: "1px solid rgba(223, 218, 208, 0.6)",
-        background: "rgba(255, 255, 255, 0.5)",
-        hover: "shadow",
+        border:     "1px solid var(--border-color)",
+        background: "var(--surface-color)",
+        hover:      "shadow",
     },
     highlight: {
-        border: "1px solid rgba(45, 90, 39, 0.3)",
-        background: "linear-gradient(145deg, rgba(241, 246, 240, 0.75), rgba(230, 239, 228, 0.8))",
-        hover: "lift",
+        border:     "2px solid var(--primary-color)",
+        background: "var(--surface-color)",
+        hover:      "lift",
         label: {
-            text: "Most Popular",
-            bg: "linear-gradient(135deg, var(--primary-color), #558b2f)",
-            color: "#fff",
+            text:  "Most Popular",
+            bg:    "var(--primary-color)",
+            color: "var(--text-inverse)",
         },
     },
     premium: {
-        border: "1px solid rgba(184, 134, 11, 0.3)",
-        background: "linear-gradient(145deg, rgba(251, 247, 236, 0.75), rgba(244, 236, 210, 0.8))",
-        hover: "glow",
+        border:     "2px solid var(--secondary-color)",
+        background: "var(--surface-color)",
+        hover:      "lift",
         label: {
-            text: "Premium",
-            bg: "linear-gradient(135deg, var(--secondary-color), #daa520)",
-            color: "#fff",
+            text:  "Premium",
+            bg:    "var(--secondary-color)",
+            color: "var(--text-inverse)",
         },
     },
 };
-

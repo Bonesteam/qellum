@@ -1,10 +1,14 @@
 "use client";
-
+/*
+ * TeamGrid.tsx — ФІКС
+ * ❌ ПРИБРАНО: framer-motion stagger (delay: i * 0.2) на кожній картці
+ * ❌ ПРИБРАНО: framer-motion whileInView на header
+ * ✅ Простий рендер — анімація не потрібна для сітки
+ */
 import React from "react";
 import Grid from "../grid/Grid";
 import Card from "../card/Card";
 import { media as mediaMap } from "@/resources/media";
-import { motion } from "framer-motion";
 import styles from "./TeamGrid.module.scss";
 
 interface TeamMember {
@@ -25,42 +29,24 @@ function resolveMedia(key?: string) {
     return (mediaMap as Record<string, unknown>)[key] as any;
 }
 
-const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0 },
-};
-
 const TeamGrid: React.FC<TeamGridProps> = ({ title, description, members }) => {
     return (
         <section className={styles.section}>
-            <motion.div
-                className={styles.head}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                variants={cardVariants}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-            >
+            <div className={styles.head}>
                 {title && <h2 className={styles.sectionTitle}>{title}</h2>}
                 {description && <p className={styles.sectionDesc}>{description}</p>}
-            </motion.div>
+            </div>
 
             <Grid columns={members.length > 3 ? 3 : members.length} gap="2rem">
                 {members.map((m, i) => (
-                    <motion.div
-                        key={i}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.2 }}
-                        variants={cardVariants}
-                        transition={{ delay: i * 0.2, duration: 0.6, ease: "easeOut" }}
-                    >
+                    /* ❌ ПРИБРАНО: motion.div з variants + delay stagger */
+                    <div key={i} className={styles.memberCard}>
                         <Card
                             image={resolveMedia(m.image)}
                             title={`${m.name} — ${m.role}`}
                             description={m.bio}
                         />
-                    </motion.div>
+                    </div>
                 ))}
             </Grid>
         </section>

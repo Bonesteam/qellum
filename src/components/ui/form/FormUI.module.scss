@@ -1,46 +1,61 @@
+/*
+ * FormUI.module.scss — НОВИЙ ДИЗАЙН
+ * ❌ ПРИБРАНО: помаранчева тема (#ec7331, #fff9f3, #fff4e8, #4b342c)
+ * ❌ ПРИБРАНО: radial-gradient фон wrapper
+ * ❌ ПРИБРАНО: glassmorphism на .shell (rgba(255,255,255,0.65))
+ * ❌ ПРИБРАНО: orange brandPanel linear-gradient
+ * ❌ ПРИБРАНО: border-radius: 32px на shell
+ * ❌ ПРИБРАНО: .heroDot orange (#ec7331)
+ * ✅ НОВИЙ: зелена brand-палітра, чіткі рамки, editorial split layout
+ */
+
 .wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - 76px);
   width: 100%;
   padding: 32px 20px;
-  background:
-    radial-gradient(circle at top left, rgba(255, 213, 128, 0.35), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(255, 127, 80, 0.18), transparent 32%),
-    linear-gradient(180deg, #fff9f3 0%, #fff4e8 100%);
+  /* ❌ ПРИБРАНО: radial/linear gradient */
+  background: var(--surface-muted);
 }
 
 .shell {
   width: 100%;
-  max-width: 1120px;
+  max-width: 1100px;
   display: grid;
-  grid-template-columns: minmax(320px, 1.05fr) minmax(360px, 0.95fr);
-  border-radius: 32px;
+  grid-template-columns: minmax(300px, 1fr) minmax(340px, 0.9fr);
+  /* ❌ ПРИБРАНО: border-radius: 32px */
+  border-radius: 6px;
   overflow: hidden;
-  border: 1px solid rgba(210, 105, 30, 0.12);
-  background: rgba(255, 255, 255, 0.65);
-  box-shadow: 0 30px 80px rgba(91, 60, 34, 0.08);
+  border: 1px solid var(--border-color);
+  /* ❌ ПРИБРАНО: rgba(255,255,255,0.65) */
+  background: var(--surface-color);
+  box-shadow: 0 4px 24px rgba(30, 43, 26, 0.06);
 }
 
+/* ── Ліва панель (brand) ── */
 .brandPanel {
-  padding: 42px 40px;
-  background:
-    linear-gradient(160deg, rgba(255, 245, 230, 0.96) 0%, rgba(255, 233, 209, 0.98) 100%);
-  border-right: 1px solid rgba(210, 105, 30, 0.1);
+  padding: 48px 40px;
+  /* ❌ ПРИБРАНО: orange linear-gradient */
+  background: var(--text-primary);
+  /* ❌ ПРИБРАНО: orange border */
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 28px;
+  gap: 32px;
 }
 
 .logoWrap {
   display: inline-flex;
   width: fit-content;
+  /* фільтр щоб білий логотип на темному фоні */
+  filter: brightness(0) invert(1);
 }
 
 .logo {
-  width: 160px;
+  width: 150px;
   height: auto;
 }
 
@@ -49,13 +64,16 @@
   display: inline-flex;
   width: fit-content;
   align-items: center;
-  border-radius: 999px;
-  padding: 8px 14px;
-  background: rgba(236, 115, 49, 0.1);
-  color: #b86d40;
-  font-size: 12px;
+  /* ❌ ПРИБРАНО: border-radius:999px (pill) */
+  border-radius: 4px;
+  padding: 6px 12px;
+  /* ❌ ПРИБРАНО: rgba(236,115,49,0.1) orange */
+  background: rgba(255, 255, 255, 0.1);
+  /* ❌ ПРИБРАНО: #b86d40 orange */
+  color: rgba(247, 245, 240, 0.7);
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -66,47 +84,57 @@
 }
 
 .heroTitle {
-  font-size: clamp(2.2rem, 4vw, 3.5rem);
-  line-height: 1;
-  color: #4b342c;
-  max-width: 12ch;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  /* ❌ ПРИБРАНО: #4b342c */
+  color: var(--background-light);
+  max-width: 14ch;
 }
 
 .heroText {
-  max-width: 48ch;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  color: #7d6558;
+  max-width: 44ch;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  /* ❌ ПРИБРАНО: #7d6558 */
+  color: rgba(247, 245, 240, 0.6);
 }
 
 .heroList {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .heroItem {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
-  font-size: 0.98rem;
-  line-height: 1.6;
-  color: #5c4539;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  /* ❌ ПРИБРАНО: #5c4539 */
+  color: rgba(247, 245, 240, 0.7);
 }
 
+/* ❌ ПРИБРАНО: orange dot (#ec7331) */
 .heroDot {
-  flex: 0 0 10px;
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #ec7331 0%, #d86222 100%);
-  box-shadow: 0 0 0 6px rgba(236, 115, 49, 0.1);
+  flex: 0 0 6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 6px;
+  /* ✅ Зелений dot */
+  background: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(45, 90, 39, 0.25);
 }
 
+/* ── Права панель (форма) ── */
 .formContainer {
   width: 100%;
-  background: rgba(255, 255, 255, 0.92);
-  padding: 42px 36px;
+  /* ❌ ПРИБРАНО: rgba(255,255,255,0.92) */
+  background: var(--surface-color);
+  padding: 48px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -116,59 +144,74 @@
 .formHead {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .title {
-  font-size: 2.3rem;
-  font-weight: 700;
-  color: #4b342c;
+  font-size: 2.1rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  /* ❌ ПРИБРАНО: #4b342c */
+  color: var(--text-primary);
+  line-height: 1.15;
 }
 
 .description {
-  font-size: 1rem;
-  color: #7d6558;
-  line-height: 1.7;
+  font-size: 0.95rem;
+  /* ❌ ПРИБРАНО: #7d6558 */
+  color: var(--text-secondary);
+  line-height: 1.65;
 }
 
 .formContent {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
 
   button {
-    margin-top: 12px;
+    margin-top: 8px;
   }
 }
 
 .switchRow {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
   align-items: center;
-  color: #7d6558;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  /* ❌ ПРИБРАНО: #7d6558 */
+  color: var(--text-muted);
 
   a {
-    color: #d86222;
+    /* ❌ ПРИБРАНО: #d86222 orange */
+    color: var(--primary-color);
     font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover {
+      color: var(--button-hover);
+    }
   }
 }
 
+/* MUI Input overrides — зелена тема */
 .formContent :global(.MuiInput-root) {
   font-family: var(--font-family);
+  border-radius: 4px !important;
 }
 
 .formContent :global(.MuiInput-input) {
   font-family: var(--font-family);
-  color: #4b342c;
+  color: var(--text-primary);
 }
 
 .formContent :global(.MuiInput-input::placeholder) {
-  color: #b09383;
+  color: var(--text-muted);
   opacity: 1;
 }
 
+/* ── Responsive ── */
 @media (max-width: 900px) {
   .shell {
     grid-template-columns: 1fr;
@@ -176,7 +219,7 @@
 
   .brandPanel {
     border-right: 0;
-    border-bottom: 1px solid rgba(210, 105, 30, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding: 32px 24px 28px;
   }
 
@@ -185,16 +228,12 @@
   }
 
   .formContainer {
-    padding: 32px 24px;
+    padding: 36px 24px;
   }
 }
 
 @media (max-width: 480px) {
-  .wrapper {
-    padding: 16px;
-  }
-
-  .title {
-    font-size: 1.9rem;
-  }
+  .wrapper  { padding: 0; }
+  .shell    { border-radius: 0; border-left: none; border-right: none; }
+  .title    { font-size: 1.75rem; }
 }

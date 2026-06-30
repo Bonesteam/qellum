@@ -436,7 +436,7 @@
     background: var(--primary-color);
     color: var(--background-dark);
     transform: translateY(-2px);
-  box-shadow: 0 0 12px rgba(255, 127, 80, 0.45);
+  box-shadow: 0 0 10px rgba(45, 90, 39, 0.25); /* ❌ orange → ✅ green */
   }
 
   svg,

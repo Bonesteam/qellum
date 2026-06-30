@@ -1,116 +1,95 @@
+/*
+ * Timeline.module.scss — ФІКС
+ * ❌ ПРИБРАНО: .card border-radius:24px organic
+ * ❌ ПРИБРАНО: .card hover box-shadow rgba(255,127,80,0.15) orange glow
+ * ❌ ПРИБРАНО: .card::before gradient top bar + hover width animation
+ * ❌ ПРИБРАНО: .number border-radius:16px + gradient + rgba(255,127,80,0.40) orange glow
+ * ❌ ПРИБРАНО: .card:hover .number rotate(5deg) + orange glow
+ * ❌ ПРИБРАНО: .title color: var(--secondary-color) gold + text-transform:capitalize
+ * ❌ ПРИБРАНО: .timelineSection border-radius:32px
+ */
+
 .timelineSection {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
-  border-radius: 32px;
+  /* ❌ ПРИБРАНО: border-radius:32px */
 }
 
 .title {
   font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--secondary-color);
+  font-weight: 900;
+  /* ❌ ПРИБРАНО: color: var(--secondary-color) gold */
+  color: var(--text-primary);
   margin-bottom: 30px;
-  text-transform: capitalize;
-  letter-spacing: -0.02em;
+  /* ❌ ПРИБРАНО: text-transform: capitalize */
+  letter-spacing: -0.03em;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 }
 
 .cardsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  gap: 2px;
   justify-content: center;
   align-items: stretch;
 }
 
 .card {
   position: relative;
-  background: var(--surface-color);
-  border-radius: 24px;
+  background: var(--surface-muted);
+  /* ❌ ПРИБРАНО: border-radius:24px */
   padding: 2.5rem 2rem 2rem;
   text-align: left;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  /* ❌ ПРИБРАНО: box-shadow */
   border: 1px solid var(--border-color);
-  transition: all 0.35s ease;
-  overflow: hidden;
+  border-top: 3px solid transparent;
+  transition: border-top-color 0.2s ease, background 0.2s ease;
   cursor: default;
 
   &:hover {
-    transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(255, 127, 80, 0.15);
-    border-color: var(--primary-color);
+    background: var(--surface-color);
+    border-top-color: var(--primary-color);
+    /* ❌ ПРИБРАНО: translateY(-10px) і orange glow */
   }
 
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 4px;
-    width: 0%;
-    background: linear-gradient(90deg, var(--primary-color), var(--tertiary-color));
-    transition: width 0.4s ease;
-  }
-
-  &:hover::before {
-    width: 100%;
-  }
+  /* ❌ ПРИБРАНО: ::before gradient bar + hover width animation */
 }
 
 .number {
-  width: 56px;
-  height: 56px;
-  background: linear-gradient(145deg, var(--primary-color), var(--tertiary-color));
-  border-radius: 16px;
+  width: 48px;
+  height: 48px;
+  /* ❌ ПРИБРАНО: gradient + border-radius:16px + orange glow */
+  background: var(--text-primary);
+  border-radius: 4px;
   color: white;
-  font-size: 1.4rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 14px rgba(255, 127, 80, 0.40);
   margin-bottom: 1.2rem;
-  transition: all 0.2s;
-
+  /* ❌ ПРИБРАНО: hover rotate(5deg) */
 }
 
 .cardTitle {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 0.6rem;
-  transition: all 0.2s;
-
 }
 
 .cardDescription {
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   color: var(--text-secondary);
   line-height: 1.6;
-  transition: all 0.2s;
 }
 
-/* 🌙 Hover glow */
-.card:hover .number {
-  background: linear-gradient(145deg, var(--secondary-color), var(--primary-color));
-  box-shadow: 0 8px 20px rgba(255, 127, 80, 0.50);
-  transform: rotate(5deg);
-  transition: all 0.2s;
-}
-
-/* 📱 Responsive */
 @media (max-width: 768px) {
-  .title {
-    font-size: 2rem;
-  }
-
-  .card {
-    padding: 2rem 1.5rem;
-  }
-
-  .number {
-    width: 48px;
-    height: 48px;
-    font-size: 1.2rem;
-  }
+  .card { padding: 2rem 1.5rem; }
+  .number { width: 40px; height: 40px; font-size: 1rem; }
 }

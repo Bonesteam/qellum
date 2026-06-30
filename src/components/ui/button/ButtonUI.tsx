@@ -1,8 +1,14 @@
 "use client";
+/**
+ * ButtonUI.tsx — ФІКС
+ * ❌ ПРИБРАНО: shape==="rounded" → borderRadius:"30px" (pill форма)
+ * ✅ НОВИЙ: shape==="rounded" → borderRadius:"4px" (flat editorial)
+ * Решта логіки не змінена
+ */
 import * as React from "react";
 import Button from "@mui/joy/Button";
-import {ButtonUIProps} from "@/types/button-ui";
-import {buttonColors} from "@/resources/styles-config";
+import { ButtonUIProps } from "@/types/button-ui";
+import { buttonColors } from "@/resources/styles-config";
 
 const resolveColor = (color?: string) => {
     if (!color) return "";
@@ -25,102 +31,88 @@ const hexToRgba = (hex: string, alpha = 1) => {
 const ButtonUI: React.FC<ButtonUIProps & {
     hoverEffect?: "none" | "shadow" | "glow" | "scale";
 }> = ({
-          variant = "solid",
-          shape = "default",
-          size = "md",
-          fullWidth = false,
-          color = "primary",
-          hoverColor = "hover",
-          textColor,
-          hoverTextColor,
-          hoverEffect = "shadow",
-          disabled,
-          children,
-          sx,
-          loading,
-          text,
-          type,
-          startIcon,
-          endIcon,
-          onClick,
-      }) => {
-    const resolvedBase = resolveColor(color);
-    const resolvedHover = resolveColor(hoverColor) || resolvedBase;
-    const resolvedText = textColor ? resolveColor(textColor) : undefined;
-    const resolvedHoverText = hoverTextColor
-        ? resolveColor(hoverTextColor)
-        : resolvedText;
+    variant = "solid",
+    shape = "default",
+    size = "md",
+    fullWidth = false,
+    color = "primary",
+    hoverColor = "hover",
+    textColor,
+    hoverTextColor,
+    hoverEffect = "shadow",
+    disabled,
+    children,
+    sx,
+    loading,
+    text,
+    type,
+    startIcon,
+    endIcon,
+    onClick,
+}) => {
+    const resolvedBase      = resolveColor(color);
+    const resolvedHover     = resolveColor(hoverColor) || resolvedBase;
+    const resolvedText      = textColor ? resolveColor(textColor) : undefined;
+    const resolvedHoverText = hoverTextColor ? resolveColor(hoverTextColor) : resolvedText;
 
-    const circleSizes: Record<"sm" | "md" | "lg", number> = {
-        sm: 32,
-        md: 40,
-        lg: 56,
-    };
+    const circleSizes: Record<"sm" | "md" | "lg", number> = { sm: 32, md: 40, lg: 56 };
     const isCircle = shape === "circle";
     const side = circleSizes[size];
 
-    const hoverEffects: Record<NonNullable<typeof hoverEffect>, any> = {
-        none: {},
-        shadow: {
-            boxShadow: "0 4px 14px rgba(0,0,0,0.2)",
-            transform: "translateY(-2px)",
-        },
-        glow: {
-            boxShadow: `0 0 10px ${resolvedHover}`,
-            transform: "translateY(-1px)",
-        },
-        scale: {
-            transform: "translateY(-2px) scale(1.05)",
-        },
+    const hoverEffects: Record<NonNullable<typeof hoverEffect>, object> = {
+        none:   {},
+        shadow: { boxShadow: "0 4px 14px rgba(0,0,0,0.15)", transform: "translateY(-2px)" },
+        glow:   { boxShadow: `0 0 10px ${resolvedHover}`,   transform: "translateY(-1px)" },
+        scale:  { transform: "translateY(-2px) scale(1.04)" },
     };
 
     const byVariant =
         variant === "outlined"
             ? {
-                color: resolvedText || resolvedBase,
+                color:       resolvedText || resolvedBase,
                 borderColor: resolvedBase,
-                bgcolor: "transparent",
-                transition: "all 0.25s ease-in-out",
+                bgcolor:     "transparent",
+                transition:  "all 0.2s ease",
                 "&:hover": {
-                    color: resolvedHoverText || resolvedHover,
+                    color:       resolvedHoverText || resolvedHover,
                     borderColor: resolvedHover,
-                    bgcolor: hexToRgba(resolvedHover, 0.08),
+                    bgcolor:     hexToRgba(resolvedHover, 0.07),
                     ...hoverEffects[hoverEffect],
                 },
             }
             : variant === "soft"
-                ? {
-                    color: resolvedText || resolveColor("inverse"),
-                    bgcolor: hexToRgba(resolvedBase, 0.85),
-                    transition: "all 0.25s ease-in-out",
-                    "&:hover": {
-                        color: resolvedHoverText || resolveColor("inverse"),
-                        bgcolor: hexToRgba(resolvedHover, 1),
-                        ...hoverEffects[hoverEffect],
-                    },
-                }
-                : variant === "plain"
-                    ? {
-                        color: resolvedText || resolvedBase,
-                        bgcolor: "transparent",
-                        transition: "all 0.25s ease-in-out",
-                        "&:hover": {
-                            color: resolvedHoverText || resolvedHover,
-                            bgcolor: hexToRgba(resolvedHover, 0.12),
-                            ...hoverEffects[hoverEffect],
-                        },
-                    }
-                    : {
-                        // solid
-                        color: resolvedText || resolveColor("inverse"),
-                        bgcolor: resolvedBase,
-                        transition: "all 0.25s ease-in-out",
-                        "&:hover": {
-                            color: resolvedHoverText || resolveColor("inverse"),
-                            bgcolor: resolvedHover,
-                            ...hoverEffects[hoverEffect],
-                        },
-                    };
+            ? {
+                color:      resolvedText || resolveColor("inverse"),
+                bgcolor:    hexToRgba(resolvedBase, 0.85),
+                transition: "all 0.2s ease",
+                "&:hover": {
+                    color:   resolvedHoverText || resolveColor("inverse"),
+                    bgcolor: hexToRgba(resolvedHover, 1),
+                    ...hoverEffects[hoverEffect],
+                },
+            }
+            : variant === "plain"
+            ? {
+                color:      resolvedText || resolvedBase,
+                bgcolor:    "transparent",
+                transition: "all 0.2s ease",
+                "&:hover": {
+                    color:   resolvedHoverText || resolvedHover,
+                    bgcolor: hexToRgba(resolvedHover, 0.1),
+                    ...hoverEffects[hoverEffect],
+                },
+            }
+            : {
+                // solid
+                color:      resolvedText || resolveColor("inverse"),
+                bgcolor:    resolvedBase,
+                transition: "all 0.2s ease",
+                "&:hover": {
+                    color:   resolvedHoverText || resolveColor("inverse"),
+                    bgcolor: resolvedHover,
+                    ...hoverEffects[hoverEffect],
+                },
+            };
 
     return (
         <Button
@@ -134,11 +126,13 @@ const ButtonUI: React.FC<ButtonUIProps & {
             endDecorator={endIcon}
             onClick={onClick}
             sx={{
-                borderRadius: isCircle ? "50%" : shape === "rounded" ? "30px" : "8px",
+                /*
+                 * ❌ ЗМІНЕНО: shape==="rounded" було "30px" (pill)
+                 * ✅ ТЕПЕР:  shape==="rounded" → "4px" (flat editorial)
+                 */
+                borderRadius: isCircle ? "50%" : shape === "rounded" ? "4px" : "4px",
                 ...(isCircle && {
-                    width: side,
-                    height: side,
-                    minWidth: side,
+                    width: side, height: side, minWidth: side,
                     padding: 0,
                     display: "inline-flex",
                     alignItems: "center",
@@ -148,7 +142,9 @@ const ButtonUI: React.FC<ButtonUIProps & {
                     alignSelf: "center",
                     "--Button-gap": "0px",
                 }),
-                fontFamily: "var(--font-family, 'Roboto', sans-serif)",
+                fontFamily: "var(--font-family, 'Outfit', sans-serif)",
+                fontWeight: 700,
+                letterSpacing: "0.01em",
                 ...byVariant,
                 ...sx,
             }}

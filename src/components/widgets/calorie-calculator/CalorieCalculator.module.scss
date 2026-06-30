@@ -1,3 +1,13 @@
+/*
+ * CalorieCalculator.module.scss — ФІКС
+ * ❌ ПРИБРАНО: .calculatorCard glassmorphism (rgba(255,255,255,0.55) + backdrop-filter + border-radius:2rem)
+ * ❌ ПРИБРАНО: .submitButton hover transform + box-shadow glow
+ * ❌ ПРИБРАНО: .badge border-radius:20px (pill) → 4px
+ * ❌ ПРИБРАНО: .genderSelect button border-radius:8px → 4px
+ * ❌ ПРИБРАНО: .group input/select border-radius:8px → 4px
+ * ❌ ПРИБРАНО: @keyframes fadeIn translateY анімація
+ */
+
 .calculatorSection {
   padding: 80px 20px;
   background-color: transparent;
@@ -11,7 +21,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
-  align-items: center;
+  align-items: start;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 }
 
 .info {
@@ -20,14 +35,17 @@
   gap: 20px;
 
   h2 {
-    font-size: 2.5rem;
-    line-height: 1.2;
-    color: var(--primary-color);
+    font-size: 2.4rem;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    /* ❌ ПРИБРАНО: color: var(--primary-color) */
   }
 
   p {
-    font-size: 1.1rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.7;
     color: var(--text-secondary);
   }
 }
@@ -35,35 +53,48 @@
 .badge {
   display: inline-block;
   align-self: flex-start;
-  background-color: rgba(45, 90, 39, 0.1);
+  background: none;
+  /* ❌ ПРИБРАНО: border-radius:20px pill */
+  font-size: 0.78rem;
+  font-weight: 700;
   color: var(--primary-color);
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.09em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background: var(--primary-color);
+  }
 }
 
 .chefTip {
-  background-color: var(--surface-color);
-  border-left: 4px solid var(--secondary-color);
+  background: var(--surface-muted);
+  border-left: 3px solid var(--secondary-color);
   padding: 16px;
-  border-radius: 0 8px 8px 0;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  /* ❌ ПРИБРАНО: border-radius: 0 8px 8px 0 → flat */
+  border-radius: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
   color: var(--text-secondary);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
 }
 
+/* ❌ ПРИБРАНО: glassmorphism rgba + backdrop-filter + border-radius:2rem */
 .calculatorCard {
-  background-color: rgba(255, 255, 255, 0.55);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border-radius: 2rem;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
   padding: 40px;
-  box-shadow: var(--glass-shadow);
-  border: 1px solid var(--glass-border);
+  box-shadow: 0 2px 12px rgba(30, 43, 26, 0.05);
+
+  @media (max-width: 576px) {
+    padding: 24px;
+  }
 }
 
 .form {
@@ -72,26 +103,30 @@
   gap: 20px;
 
   h3 {
-    font-size: 1.4rem;
-    color: var(--primary-color);
-    margin-bottom: 8px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
   }
 }
 
 .genderSelect {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
 
   button {
-    padding: 12px;
-    border: 2px solid var(--border-color);
+    padding: 11px;
+    border: 1.5px solid var(--border-color);
     background: transparent;
     color: var(--text-secondary);
-    border-radius: 8px;
+    /* ❌ ПРИБРАНО: border-radius:8px */
+    border-radius: 4px;
     font-weight: 600;
+    font-family: var(--font-family);
+    font-size: 0.9rem;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
 
     &:hover {
       border-color: var(--primary-color);
@@ -99,8 +134,8 @@
     }
 
     &.active {
-      background-color: var(--primary-color);
-      border-color: var(--primary-color);
+      background: var(--text-primary);
+      border-color: var(--text-primary);
       color: var(--text-inverse);
     }
   }
@@ -110,28 +145,35 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 
   label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-secondary);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
 
   input, select {
-    padding: 12px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 1rem;
+    padding: 11px 12px;
+    border: 1.5px solid var(--border-color);
+    /* ❌ ПРИБРАНО: border-radius:8px */
+    border-radius: 4px;
+    font-size: 0.95rem;
     font-family: var(--font-family);
     color: var(--text-primary);
-    background-color: var(--surface-color);
-    transition: border-color 0.25s ease;
+    background: var(--surface-color);
+    transition: border-color 0.15s ease;
 
     &:focus {
       outline: none;
@@ -141,177 +183,166 @@
 }
 
 .submitButton {
-  padding: 14px;
-  background-color: var(--primary-color);
+  padding: 13px;
+  background: var(--text-primary);
   color: var(--text-inverse);
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
+  /* ❌ ПРИБРАНО: border-radius:8px */
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: var(--font-family);
   cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 12px rgba(45, 90, 39, 0.2);
+  letter-spacing: 0.01em;
+  transition: background 0.15s ease;
+  /* ❌ ПРИБРАНО: box-shadow glow */
 
   &:hover {
-    background-color: var(--button-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(45, 90, 39, 0.3);
+    background: var(--primary-color);
+    /* ❌ ПРИБРАНО: transform + box-shadow */
   }
 }
+
+/* ── Results ── */
 
 .results {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  animation: fadeIn 0.4s ease-out;
+  /* ❌ ПРИБРАНО: animation fadeIn translateY */
 
   h3 {
-    font-size: 1.4rem;
-    color: var(--primary-color);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
   }
 }
 
 .caloriesDisplay {
-  background-color: rgba(45, 90, 39, 0.05);
-  border-radius: 12px;
+  background: var(--surface-muted);
+  border-left: 3px solid var(--primary-color);
   padding: 24px;
   text-align: center;
 }
 
 .caloriesNumber {
   font-size: 3rem;
-  font-weight: 700;
+  font-weight: 900;
   color: var(--primary-color);
   line-height: 1;
+  letter-spacing: -0.04em;
 }
 
 .caloriesLabel {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  margin-top: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 6px;
 }
 
 .macros {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  text-align: center;
+  gap: 2px;
 }
 
 .macroCol {
-  background-color: var(--surface-muted);
-  padding: 12px;
-  border-radius: 8px;
+  background: var(--surface-muted);
+  padding: 14px 12px;
   display: flex;
   flex-direction: column;
   gap: 4px;
   align-items: center;
+  border-bottom: 3px solid transparent;
+
+  &:nth-child(1) { border-color: var(--secondary-color); }
+  &:nth-child(2) { border-color: var(--primary-color); }
+  &:nth-child(3) { border-color: var(--tertiary-color); }
 }
 
 .macroValue {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 900;
   color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
 .macroLabel {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
-.macroBar {
-  margin-top: 6px;
-  border-radius: 3px;
-}
+.macroBar { display: none; } /* замінено border-bottom на .macroCol */
 
 .recommendedBox {
-  border: 2px dashed var(--secondary-color);
-  background-color: rgba(184, 134, 11, 0.03);
+  border: 1.5px solid var(--border-color);
+  border-top: 3px solid var(--secondary-color);
+  background: var(--surface-color);
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 
   h4 {
-    font-size: 1.15rem;
-    color: var(--primary-color);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
   }
 
   p {
-    font-size: 0.9rem;
-    line-height: 1.4;
+    font-size: 0.88rem;
+    line-height: 1.55;
     color: var(--text-secondary);
   }
 }
 
 .recommendationTag {
   align-self: flex-start;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  background-color: var(--secondary-color);
+  background: var(--text-primary);
   color: var(--text-inverse);
-  padding: 2px 8px;
-  border-radius: 4px;
+  padding: 3px 8px;
+  border-radius: 2px;
   text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .orderBtn {
   display: block;
   text-align: center;
   padding: 12px;
-  background-color: var(--secondary-color);
+  background: var(--primary-color);
   color: var(--text-inverse);
-  border-radius: 6px;
-  font-weight: 600;
+  border-radius: 4px;
+  font-weight: 700;
   text-decoration: none;
-  transition: all 0.25s ease;
+  font-size: 0.9rem;
+  transition: background 0.15s ease;
 
   &:hover {
-    background-color: #8b6508;
-    transform: translateY(-1px);
+    background: var(--button-hover);
   }
 }
 
 .resetBtn {
   background: none;
   border: none;
-  color: var(--primary-color);
+  color: var(--text-muted);
   font-weight: 600;
   cursor: pointer;
   align-self: center;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
+  font-family: var(--font-family);
+  transition: color 0.15s ease;
 
   &:hover {
-    text-decoration: underline;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 992px) {
-  .container {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-}
-
-@media (max-width: 576px) {
-  .calculatorCard {
-    padding: 24px;
-  }
-  .row {
-    grid-template-columns: 1fr;
+    color: var(--text-primary);
   }
 }

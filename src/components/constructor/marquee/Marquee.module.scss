@@ -1,11 +1,19 @@
+/*
+ * Marquee.module.scss — ФІКС
+ * ❌ ПРИБРАНО: background:#f5f7fa (hardcoded, не бренд)
+ * ❌ ПРИБРАНО: border-color:#e0e0e0 (hardcoded)
+ * ❌ ПРИБРАНО: color:#333 (hardcoded)
+ * ❌ ПРИБРАНО: .item:hover color:#6a11cb (purple — чужий бренд!)
+ */
+
 .marquee {
   position: relative;
   overflow: hidden;
   white-space: nowrap;
   width: 100%;
-  background: #f5f7fa;
-  border-top: 2px solid #e0e0e0;
-  border-bottom: 2px solid #e0e0e0;
+  background: var(--surface-muted);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   padding: 1rem 0;
 }
 
@@ -19,20 +27,17 @@
   display: inline-block;
   margin: 0 2rem;
   font-size: 1.1rem;
-  font-weight: 500;
-  color: #333;
-  transition: color 0.3s ease;
-}
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
 
-.item:hover {
-  color: #6a11cb;
+  &:hover {
+    /* ❌ ПРИБРАНО: #6a11cb purple */
+    color: var(--primary-color);
+  }
 }
 
 @keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }

@@ -1,6 +1,7 @@
 import { connectDB } from "@/backend/config/db";
 import { SpoyntPayment } from "@/backend/models/spoyntPayment.model";
 import { userController } from "@/backend/controllers/user.controller";
+import { TOKENS_PER_GBP } from "@/utils/wallet";
 import { userService } from "@/backend/services/user.service";
 import { transactionService } from "@/backend/services/transaction.service";
 
@@ -294,7 +295,7 @@ export const spoyntService = {
         try {
             const creditedUser = await userController.topUpWallet(
                 input.userId,
-                input.tokens / 100,
+                input.tokens / TOKENS_PER_GBP, // explicit: tokens → GBP
                 {
                     chargedAmount: input.chargedAmount,
                     chargedCurrency: input.chargedCurrency,

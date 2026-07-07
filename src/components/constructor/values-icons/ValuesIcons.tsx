@@ -33,12 +33,12 @@ const ValuesIcons: React.FC<Props> = ({ title, description, values }) => {
 
     return (
         <section className={styles.section}>
-            <div className={styles.head}>
+            <div className={`${styles.head} reveal`}>
                 {title       && <h2 className={styles.sectionTitle}>{title}</h2>}
                 {description && <p  className={styles.sectionDesc}>{description}</p>}
             </div>
             <div
-                className={styles.grid}
+                className={`${styles.grid} reveal-stagger`}
                 style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}
             >
                 {values.map((v, i) => (

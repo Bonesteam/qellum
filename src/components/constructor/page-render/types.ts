@@ -265,6 +265,34 @@ export type NutritionFactsTickerBlock = {
     component: "NutritionFactsTicker";
 };
 
+export type SeasonalMenuPreviewBlock = {
+    type: "custom";
+    component: "SeasonalMenuPreview";
+    title?: string;
+    description?: string;
+    ctaText?: string;
+    ctaLink?: string;
+    seasons?: {
+        label: string;
+        icon: string;
+        color: string;
+        dishes: {
+            name: string;
+            description: string;
+            tags?: string[];
+            kcal?: number;
+        }[];
+    }[];
+};
+
+export type ChefMatchTeaserBlock = {
+    type: "custom";
+    component: "ChefMatchTeaser";
+    title?: string;
+    description?: string;
+    ctaLink?: string;
+};
+
 // ---------------- Union Types ----------------
 
 export type CustomBlock =
@@ -283,6 +311,8 @@ export type CustomBlock =
     | VideoDemoBlock
     | CalorieCalculatorBlock
     | NutritionFactsTickerBlock
+    | SeasonalMenuPreviewBlock
+    | ChefMatchTeaserBlock
     | InfoBlock;
 
 export type PageBlock =

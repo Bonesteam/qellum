@@ -10,9 +10,11 @@
 
 .calculatorSection {
   padding: 80px 20px;
-  background-color: transparent;
+  background-color: var(--surface-warm);
   font-family: var(--font-family);
   color: var(--text-primary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .container {

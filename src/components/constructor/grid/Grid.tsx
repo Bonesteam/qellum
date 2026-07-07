@@ -12,7 +12,7 @@ const Grid: React.FC<GridProps> = ({
                                    }) => {
     return (
         <div
-            className={styles.grid}
+            className={`${styles.grid} reveal-stagger`}
             style={{
                 gridTemplateColumns: `repeat(${columns}, 1fr)`,
                 gap,

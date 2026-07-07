@@ -1,6 +1,7 @@
 .section {
   width: 100%;
   padding: 7rem 6rem;
+  background: var(--primary-color);   /* ← ТЕМНИЙ фон — важливий візуальний перехват */
 
   @media (max-width: 900px) {
     padding: 5rem 2rem;
@@ -24,7 +25,7 @@
 .sectionTitle {
   font-size: 3rem;
   font-weight: 900;
-  color: var(--text-primary);
+  color: var(--text-inverse);          /* світлий текст на темному фоні */
   letter-spacing: -0.03em;
   line-height: 1.1;
   margin: 0;
@@ -36,20 +37,14 @@
 
 .sectionDesc {
   font-size: 1rem;
-  color: var(--text-secondary);
+  color: rgba(250, 248, 245, 0.65);    /* приглушений на темному */
   line-height: 1.7;
   margin: 0;
   align-self: end;
 }
 
-/*
- * ✅ ФІКС: grid-template-columns прибрано з CSS —
- * тепер передається через inline style з ValuesIcons.tsx
- * (getColumns: 3→3col, 4→2col, 6→3col)
- */
 .grid {
   display: grid;
-  /* ❌ ПРИБРАНО: repeat(3, 1fr) хардкод */
   gap: 2px;
 
   @media (max-width: 900px) {
@@ -59,16 +54,17 @@
 
 .valueCard {
   padding: 2.4rem 2rem;
-  background: var(--surface-muted);
+  background: rgba(255, 255, 255, 0.05);   /* скляний ефект на темному */
   border-top: 3px solid transparent;
+  border-left: none;
   transition: border-color 0.2s ease, background 0.2s ease;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 
   &:hover {
-    background: var(--surface-color);
-    border-top-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.09);
+    border-top-color: var(--secondary-color);   /* терракота акцент */
   }
 }
 
@@ -76,12 +72,13 @@
   font-size: 2rem;
   line-height: 1;
   margin-bottom: 0.5rem;
+  filter: grayscale(0);
 }
 
 .num {
   font-size: 0.75rem;
   font-weight: 800;
-  color: var(--primary-color);
+  color: var(--secondary-color);             /* терракота */
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
@@ -90,14 +87,14 @@
 .valueCard h3 {
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--text-inverse);               /* світлий */
   margin: 0;
   letter-spacing: -0.01em;
 }
 
 .valueCard p {
   font-size: 0.95rem;
-  color: var(--text-secondary);
+  color: rgba(250, 248, 245, 0.65);         /* приглушений світлий */
   line-height: 1.6;
   margin: 0;
 }

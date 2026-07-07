@@ -42,6 +42,8 @@ import StoryTimeline from "@/components/constructor/story-timeline/StoryTimeline
 import InfoBlock from "@/components/constructor/Info-block/InfoBlock";
 import CalorieCalculator from "@/components/widgets/calorie-calculator/CalorieCalculator";
 import NutritionFactsTicker from "@/components/constructor/nutrition-ticker/NutritionFactsTicker";
+import SeasonalMenuPreview from "@/components/constructor/seasonal-menu/SeasonalMenuPreview";
+import ChefMatchTeaser from "@/components/constructor/chef-match-teaser/ChefMatchTeaser";
 
 // ------------------- helpers -------------------
 
@@ -152,6 +154,26 @@ function RenderCustom(b: CustomBlock) {
                     secondaryCta={b.secondaryCta}
                     image={b.image}
                     align={b.align} // ➕ передаємо напрям
+                />
+            );
+
+        case "SeasonalMenuPreview":
+            return (
+                <SeasonalMenuPreview
+                    title={b.title}
+                    description={b.description}
+                    seasons={b.seasons}
+                    ctaText={b.ctaText}
+                    ctaLink={b.ctaLink}
+                />
+            );
+
+        case "ChefMatchTeaser":
+            return (
+                <ChefMatchTeaser
+                    title={b.title}
+                    description={b.description}
+                    ctaLink={b.ctaLink}
                 />
             );
 

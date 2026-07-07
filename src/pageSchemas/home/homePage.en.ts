@@ -42,10 +42,12 @@ const schema: PageSchema = {
             type: "custom",
             component: "HighlightStrip",
             items: [
-                {icon: "👩‍🍳", text: "Chef-crafted Plans"},
-                {icon: "🤖", text: "Instant AI Recipes"},
-                {icon: "🧠", text: "Smart Grocery Lists"},
-                {icon: "🌿", text: "Allergy & Diet Friendly"},
+                {icon: "chef", text: "120+ Certified Chefs"},
+                {icon: "plans", text: "8,400 Meal Plans Created"},
+                {icon: "rating", text: "4.9★ Average Rating"},
+                {icon: "allergy", text: "Allergy & Diet Safe"},
+                {icon: "speed", text: "Plans Ready in 2–3 Hours"},
+                {icon: "countries", text: "Clients in 30+ Countries"},
             ],
         },
 
@@ -65,9 +67,9 @@ const schema: PageSchema = {
             type: "custom",
             component: "CardSlider",
             cards: [
-                { image: "recipe1", title: "Herb Roasted Chicken", description: "Juicy chicken with garlic herb rub and seasonal veg.", buttonText: "View Recipe", buttonLink: "/recipes/herb-roasted-chicken" },
-                { image: "recipe2", title: "Quinoa Buddha Bowl", description: "Balanced bowl with grains, veggies, and tahini dressing.", buttonText: "View Recipe", buttonLink: "/recipes/quinoa-buddha" },
-                { image: "recipe3", title: "Spicy Chickpea Stew", description: "Comforting stew, rich in flavor and protein.", buttonText: "View Recipe", buttonLink: "/recipes/chickpea-stew" },
+                { image: "recipe1", title: "Herb Roasted Chicken", description: "Juicy chicken with garlic herb rub and seasonal veg." },
+                { image: "recipe2", title: "Quinoa Buddha Bowl", description: "Balanced bowl with grains, veggies, and tahini dressing." },
+                { image: "recipe3", title: "Spicy Chickpea Stew", description: "Comforting stew, rich in flavor and protein." },
             ],
         },
 
@@ -325,6 +327,15 @@ So we built a platform where real chefs craft courses with AI support — combin
         },
 
         {
+            type: "custom",
+            component: "SeasonalMenuPreview",
+            title: "Seasonal Menus — Always Fresh",
+            description: "Our chefs craft menus around the finest seasonal produce. Every dish is created fresh, nutritionally balanced, and tailored to your preferences.",
+            ctaText: "Get My Personal Menu",
+            ctaLink: "/get-started",
+        },
+
+        {
             type: "section",
             title: `Join the ${COMPANY_NAME} Community`,
             description:
@@ -361,13 +372,21 @@ So we built a platform where real chefs craft courses with AI support — combin
 
         {
             type: "custom",
+            component: "ChefMatchTeaser",
+            title: "Find Your Perfect Chef in 3 Questions",
+            description: "Answer a few quick questions and we'll match you with the ideal certified chef for your goals, preferences and schedule.",
+            ctaLink: "/get-started",
+        },
+
+        {
+            type: "custom",
             component: "TestimonialsSlider",
             title: "Real Users. Real Results.",
             description:
                 "See how our members improved their nutrition and cooking with chefs and AI support.",
             testimonials: [
                 {
-                    name: "Alex Rossi",
+                    name: "Elena Rossi",
                     role: "Entrepreneur",
                     image: "review1",
                     text: "My chef created a perfect plan in hours. AI tracking keeps me on target daily!",
@@ -388,7 +407,7 @@ So we built a platform where real chefs craft courses with AI support — combin
                     rating: 5,
                 },
                 {
-                    name: "Anna Kowalski",
+                    name: "Mark Kowalski",
                     role: "Engineer",
                     image: "review4",
                     text: "Chef adapted the plan to my dietary needs. I've never felt better.",
@@ -429,14 +448,7 @@ So we built a platform where real chefs craft courses with AI support — combin
             ],
         },
 
-        {
-            type: "custom",
-            component: "MissionBanner",
-            title: "Start Your Culinary Journey Today",
-            description:
-                `Join thousands improving their meals and nutrition with ${COMPANY_NAME}. Choose your chef or AI plan and begin now.`,
-            image: "ctaBanner",
-        },
+
 
         {
             type: "custom",

@@ -10,6 +10,7 @@ import { currentFont } from "@/resources/styles-config";
 import { I18nProvider } from "@/context/i18nContext";
 import { AllOrdersProvider } from "@/context/AllOrdersContext";
 import { CurrencyProvider } from "@/context/CurrencyContext";
+import ScrollReveal from "@/components/features/scroll-reveal/ScrollReveal";
 
 function Layout({ children }: { children: React.ReactNode }) {
     return (
@@ -46,6 +47,7 @@ function Layout({ children }: { children: React.ReactNode }) {
                             <PageWrapper>
                                 {children}
                             </PageWrapper>
+                            <ScrollReveal />
                             <Footer />
                         </CurrencyProvider>
                     </ProtectedRoute>

@@ -42,13 +42,15 @@ Oavsett om målet är viktkontroll, muskeluppbyggnad eller balanserad näring �
             type: "custom",
             component: "HighlightStrip",
             items: [
-                {icon: "👩‍🍳", text: "Personliga Kockmåltider"},
-                {icon: "🤖", text: "AI-genererade Recept"},
-                {icon: "📊", text: "Närings- & Kaloriuppföljning"},
-                {icon: "💬", text: "Direktkontakt med Kock"},
-                {icon: "🔥", text: "Skräddarsydda Måltider på Några Timmar"},
+                {icon: "chef", text: "120+ Certifierade Kockar"},
+                {icon: "plans", text: "8 400 Måltidsplaner Skapade"},
+                {icon: "rating", text: "4.9★ Genomsnittligt Betyg"},
+                {icon: "allergy", text: "Allergi- & Kostvänlig"},
+                {icon: "speed", text: "Planer Klara på 2–3 Timmar"},
+                {icon: "countries", text: "Klienter i 30+ Länder"},
             ],
         },
+
 
         {
             type: "custom",
@@ -197,6 +199,57 @@ Så vi byggde en plattform där riktiga kockar skapar kurser med AI-stöd — ko
             description:
                 "Se hur kockar skapar personliga kurser, granskar näringsdata och visar AI-förslag i praktiken.",
             video: "coachWork",
+        },
+
+        {
+            type: "custom",
+            component: "SeasonalMenuPreview",
+            title: "Säsongsmenyer — Alltid Färskt",
+            description: "Våra kockar skapar menyer baserade på säsongens finaste råvaror. Varje rätt är nyskapad, näringsbalanserad och anpassad efter dina önskemål.",
+            ctaText: "Få Min Personliga Meny",
+            ctaLink: "/get-started",
+            seasons: [
+                {
+                    label: "Vår",
+                    icon: "🌱",
+                    color: "#4A7C59",
+                    dishes: [
+                        { name: "Citronrisotto med sparris", description: "Krämig arborio med färsk sparris, citronskal och lagrad parmesan.", tags: ["Vegetarisk"], kcal: 480 },
+                        { name: "Vårärtssoppa med mynta", description: "Silkeslen blandad ärtssoppa med färsk mynta, crème fraîche och rostade frön.", tags: ["Vegansk"], kcal: 210 },
+                        { name: "Pannstekt öring", description: "Filé med örtsmör, kapris och en sallad på källfräne.", tags: ["Högprotein"], kcal: 390 }
+                    ]
+                },
+                {
+                    label: "Sommar",
+                    icon: "☀️",
+                    color: "#C25E3A",
+                    dishes: [
+                        { name: "Grillad persika & Burrata", description: "Kolgrillade persikor, färsk burrata, basilikaolja och rostade pinjenötter.", tags: ["Vegetarisk"], kcal: 310 },
+                        { name: "Örtmarinerade kycklingspett", description: "Kyckling från frigående djur med chimichurri, söt paprika och grillad majs.", tags: ["Högprotein", "Glutenfri"], kcal: 420 },
+                        { name: "Kall gazpacho", description: "Klassisk andalusisk tomatbaserad kall soppa med krispiga krutonger.", tags: ["Vegansk"], kcal: 180 }
+                    ]
+                },
+                {
+                    label: "Höst",
+                    icon: "🍂",
+                    color: "#9E6B3A",
+                    dishes: [
+                        { name: "Butternutpumpa- & salviapasta", description: "Brynt smör, rostad pumpa och krispig salvia över handgjord pappardelle.", tags: ["Vegetarisk"], kcal: 520 },
+                        { name: "Långkokt högrev", description: "8-timmars bräsering med rött vin, rotfrukter och krämig polenta.", tags: ["Högprotein"], kcal: 610 },
+                        { name: "Vildsvampstart", description: "Karljohansvamp, kastanj och tryffelolja i ett smörigt mördegsskal.", tags: ["Vegetarisk"], kcal: 440 }
+                    ]
+                },
+                {
+                    label: "Vinter",
+                    icon: "❄️",
+                    color: "#2A5F8A",
+                    dishes: [
+                        { name: "Viltgryta med enbär", description: "Fyllig långkokt hjortgryta med enbär, portvin och rotfrukter.", tags: ["Högprotein", "Glutenfri"], kcal: 580 },
+                        { name: "Rostad rotsellerisoppa", description: "Krämig rotsellerisoppa med tryffelcrème och rostade hasselnötter.", tags: ["Vegetarisk"], kcal: 240 },
+                        { name: "Kryddat lammlägg", description: "Långsamt rostat med ras el hanout, konserverad citron och couscous.", tags: ["Högprotein"], kcal: 650 }
+                    ]
+                }
+            ]
         },
 
         {
@@ -369,6 +422,14 @@ Så vi byggde en plattform där riktiga kockar skapar kurser med AI-stöd — ko
 
         {
             type: "custom",
+            component: "ChefMatchTeaser",
+            title: "Hitta din perfekta kock med 3 frågor",
+            description: "Svara på några snabba frågor så matchar vi dig med den perfekta certifierade kocken för dina mål, preferenser och ditt schema.",
+            ctaLink: "/get-started",
+        },
+
+        {
+            type: "custom",
             component: "TestimonialsSlider",
             title: "Verkliga Användare. Verkliga Resultat.",
             description:
@@ -437,14 +498,7 @@ Så vi byggde en plattform där riktiga kockar skapar kurser med AI-stöd — ko
             ],
         },
 
-        {
-            type: "custom",
-            component: "MissionBanner",
-            title: "Starta Din Kulinariska Resa Idag",
-            description:
-                `Gå med tusentals som förbättrar sina måltider och näring med ${COMPANY_NAME}. Välj din kock eller AI-plan och börja nu.`,
-            image: "ctaBanner",
-        },
+
 
         {
             type: "custom",

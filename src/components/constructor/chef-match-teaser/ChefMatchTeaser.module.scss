@@ -1,0 +1,228 @@
+/* ChefMatchTeaser.module.scss */
+
+.section {
+  padding: 80px 50px;
+  background: var(--primary-color);
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* ── Left side ── */
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--secondary-color);
+  border: 1px solid rgba(194, 94, 58, 0.4);
+  padding: 5px 14px;
+  border-radius: 999px;
+  align-self: flex-start;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 700;
+  color: var(--text-inverse);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.description {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.65;
+  max-width: 440px;
+}
+
+.trust {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.trustItem {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.04em;
+}
+
+/* ── Right side: quiz card ── */
+.right {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 36px;
+  backdrop-filter: blur(8px);
+}
+
+/* Progress bar */
+.progress {
+  margin-bottom: 28px;
+}
+
+.progressBar {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--secondary-color);
+  border-radius: 999px;
+  transition: width 0.35s ease;
+}
+
+.progressLabel {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.question {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-inverse);
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.answer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  text-align: left;
+  font-family: var(--font-body);
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.13);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.answerSelected {
+  background: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+  transform: scale(0.98);
+}
+
+.answerIcon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.answerLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.3;
+}
+
+/* ── Result state ── */
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.resultIcon {
+  font-size: 3rem;
+}
+
+.resultTitle {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-inverse);
+}
+
+.resultText {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.6;
+
+  strong {
+    color: var(--secondary-color);
+  }
+}
+
+.resultBtn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: var(--secondary-color);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  transition: all 0.2s ease;
+  margin-top: 4px;
+
+  &:hover {
+    background: var(--secondary-hover);
+    transform: translateY(-2px);
+  }
+}
+
+.resetBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: var(--font-body);
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}

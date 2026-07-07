@@ -11,17 +11,21 @@
   flex-wrap: wrap;
   width: 100%;
   color: var(--text-primary);
-  /* ❌ ПРИБРАНО: opacity: 0; transform: translateY(40px); transition: all 0.4s ease; */
   justify-content: center;
   align-items: center;
   gap: 3rem;
-  padding: var(--main-padding);
+  padding: 80px 50px;
+
+  @media (max-width: 1100px) {
+    padding: 60px 32px;
+  }
 
   @media (max-width: 768px) {
     flex-direction: column !important;
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 48px 20px;
   }
 }
 

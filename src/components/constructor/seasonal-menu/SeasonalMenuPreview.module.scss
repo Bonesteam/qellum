@@ -1,0 +1,230 @@
+/* SeasonalMenuPreview.module.scss */
+
+.section {
+  padding: 80px 50px;
+  background: var(--background-light);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.description {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ── Season Tabs ── */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border: 1.5px solid var(--border-color);
+  background: var(--surface-color);
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all 0.22s ease;
+  letter-spacing: 0.02em;
+
+  &:hover {
+    border-color: var(--primary-color);
+    color: var(--text-primary);
+    background: var(--surface-muted);
+  }
+}
+
+.tabActive {
+  border-color: var(--season-color, var(--primary-color));
+  background: var(--season-color, var(--primary-color));
+  color: #fff;
+
+  &:hover {
+    background: var(--season-color, var(--primary-color));
+    border-color: var(--season-color, var(--primary-color));
+    color: #fff;
+  }
+}
+
+.tabIcon {
+  font-size: 1.1rem;
+}
+
+.tabLabel {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+/* ── Dishes Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  animation: fadeInUp 0.35s ease both;
+  animation-delay: calc(var(--idx, 0) * 0.08s);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(27, 67, 50, 0.1);
+  }
+}
+
+/* Left accent bar */
+.cardAccent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--season-color, var(--secondary-color));
+  border-radius: 16px 0 0 16px;
+}
+
+.cardBody {
+  padding: 24px 24px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+}
+
+.dishName {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.dishDesc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.kcal {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+/* ── CTA ── */
+.cta {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.ctaBtn {
+  display: inline-block;
+  padding: 14px 36px;
+  background: var(--primary-color);
+  color: var(--text-inverse);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  transition: background 0.2s ease, transform 0.15s ease;
+
+  &:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+  }
+}
+
+.ctaNote {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

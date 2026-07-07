@@ -15,7 +15,7 @@ export const headerContent = {
     links: [
         {label: "About Company", href: "/about-us"},
         {label: "Process", href: "/get-started"},
-        {label: "Example Plans", href: "/templates"},
+        // {label: "Example Plans", href: "/templates"},
         {label: "Pricing", href: "/pricing"},
         {label: "Contact", href: "/contact-us"},
         {label: "Faq", href: "/faq"},

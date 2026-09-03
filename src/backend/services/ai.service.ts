@@ -2,6 +2,7 @@ import { AiOrder } from "../models/aiOrder.model";
 import { User } from "../models/user.model";
 import { ENV } from "../config/env";
 import OpenAI from "openai";
+import { round2, TOKENS_PER_GBP } from "@/utils/wallet";
 
 const openai = new OpenAI({ apiKey: ENV.OPENAI_API_KEY });
 
@@ -20,8 +21,14 @@ export const aiService = {
         const finalCost = cost ?? parseInt(ENV.AI_COST_PER_REQUEST || "30", 10);
         if (user.tokens < finalCost) throw new Error("InsufficientTokens");
 
-        user.tokens -= finalCost;
-        await user.save();
+        const nextTokens = user.tokens - finalCost;
+        // Atomic update keeps balanceGBP (canonical) in sync and avoids full-document
+        // validation, which would throw for legacy users missing required profile fields.
+        await User.updateOne(
+            { _id: user._id },
+            { $set: { tokens: nextTokens, balanceGBP: round2(nextTokens / TOKENS_PER_GBP) } }
+        );
+        user.tokens = nextTokens;
 
         let chunksCount = 1;
         for (const key in LENGTH_MAP) {

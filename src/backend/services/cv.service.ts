@@ -5,6 +5,7 @@ import OpenAI from "openai";
 import { CVOrderType } from "../types/cv.types";
 import mongoose from "mongoose";
 import { transactionService } from "../services/transaction.service";
+import { round2, TOKENS_PER_GBP } from "@/utils/wallet";
 
 const openai = new OpenAI({ apiKey: ENV.OPENAI_API_KEY });
 
@@ -134,7 +135,12 @@ export const cvService = {
 
         // 💳 Списуємо токени та записуємо транзакцію
         user.tokens -= totalCost;
-        await user.save();
+        // Atomic update keeps balanceGBP (canonical) in sync and avoids full-document
+        // validation, which would throw for legacy users missing required profile fields.
+        await User.updateOne(
+            { _id: user._id },
+            { $set: { tokens: user.tokens, balanceGBP: round2(user.tokens / TOKENS_PER_GBP) } }
+        );
 
         await transactionService.record(
             user._id,

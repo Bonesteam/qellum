@@ -33,6 +33,27 @@ async function copyImages() {
         }
       })
   );
+  const templatesDir = path.join(__dirname, '..', 'public', 'templates');
+  await ensureDir(templatesDir);
+  const templateCopies = [
+    ['meal-plan-weight-loss.jpg', 'weight-loss.jpg'],
+    ['meal-plan-weight-loss.jpg', 'weight-loss.png'],
+    ['meal-plan-muscle-gain.jpg', 'muscle-gain.jpg'],
+    ['meal-plan-muscle-gain.jpg', 'muscle-gain.png'],
+    ['meal-plan-keto.jpg', 'keto-diet.jpg'],
+    ['meal-plan-keto.jpg', 'keto-diet.png'],
+    ['meal-plan-weight-loss.jpg', 'classic.png'],
+    ['meal-plan-muscle-gain.jpg', 'modern.png'],
+    ['meal-plan-keto.jpg', 'creative.png'],
+  ];
+  for (const [srcFile, dstFile] of templateCopies) {
+    const srcPath = path.join(srcDir, srcFile);
+    if (fs.existsSync(srcPath)) {
+      try {
+        await fs.promises.copyFile(srcPath, path.join(templatesDir, dstFile));
+      } catch (e) {}
+    }
+  }
 }
 
 copyImages();

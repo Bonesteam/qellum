@@ -6,7 +6,7 @@
   "predev": "rimraf .next-dev",
   "dev": "node ./scripts/copy-images.js && cross-env NEXT_DIST_DIR=.next-dev next dev",
   "prebuild": "rimraf .next",
-  "build": "node ./scripts/copy-images.js && next build",
+  "build": "node ./scripts/copy-images.js && node ./scripts/generate-template-pdfs.js && next build",
   "start": "next start",
   "lint": "eslint",
   "postinstall": "node ./scripts/copy-images.js"

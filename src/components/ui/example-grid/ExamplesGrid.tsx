@@ -1,15 +1,23 @@
 import React from "react";
 import styles from "./ExamplesGrid.module.scss";
-import { cvExamples } from "@/data/cvExample";
+import { mealPlanExamples } from "@/data/mealPlanExamples";
 import CVCard from "@/components/ui/cv-card/CVCard";
 
 const ExamplesGrid = () => {
     return (
-        <section className={styles.grid}>
-            {cvExamples.map((cv) => (
-                <CVCard key={cv.id} {...cv} />
-            ))}
-        </section>
+        <div className={styles.wrapper}>
+            <section className={styles.grid}>
+                {mealPlanExamples.map((plan) => (
+                    <CVCard
+                        key={plan.slug}
+                        title={plan.title}
+                        description={plan.description}
+                        preview={plan.preview}
+                        pdf={`/pdf/${plan.slug}-meal-plan.pdf`}
+                    />
+                ))}
+            </section>
+        </div>
     );
 };
 

@@ -51,7 +51,7 @@ const tokenUsagePolicySchema: PageSchema = {
             type: "text",
             title: "2. How Tokens Are Acquired",
             bullets: [
-                "Tokens are purchased via our secure payment gateway using Visa, Mastercard, or other accepted payment methods.",
+                "Tokens are purchased via our secure payment gateway using Mastercard or other accepted payment methods.",
                 "Tokens may be included as part of subscription packages (AI Starter, Chef Plan, Full Culinary Pack).",
                 "Promotional or bonus tokens may be issued at the platform's discretion during campaigns or events — these are clearly labelled as promotional.",
                 "Tokens are credited to your account immediately upon successful payment confirmation.",
@@ -127,7 +127,7 @@ const tokenUsagePolicySchema: PageSchema = {
             bullets: [
                 "Tokens may be purchased in GBP (£), EUR (€), or USD ($). Prices are converted at the prevailing rate at time of purchase.",
                 "All payments are processed via a PCI DSS-compliant payment gateway. We do not store your card details.",
-                "Accepted payment methods: Visa, Mastercard.",
+                "Accepted payment methods: Mastercard.",
                 "In case of payment disputes, please contact your bank AND notify us at the email below so we can resolve the issue promptly.",
             ],
             centerTitle: true,

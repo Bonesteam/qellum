@@ -16,8 +16,7 @@ export function useAuthActions() {
             const data = (await res.json()) as LogoutResponse | AuthError;
 
             if (res.ok && "message" in data) {
-                router.replace("/");
-                router.refresh();
+                window.location.href = "/";
                 return true;
             }
         } catch (e) {
@@ -36,8 +35,7 @@ export function useAuthActions() {
             const data = (await res.json()) as LogoutResponse | AuthError;
 
             if (res.ok && "message" in data) {
-                router.replace("/");
-                router.refresh();
+                window.location.href = "/";
                 return true;
             }
         } catch (e) {

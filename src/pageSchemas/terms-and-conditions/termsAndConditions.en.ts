@@ -95,7 +95,7 @@ const termsSchema: PageSchema = {
             type: "text",
             title: "5. Ordering, Payment & Checkout",
             bullets: [
-                "Accepted payment methods: Visa, Mastercard · Accepted currencies: GBP (£), EUR (€), USD ($)",
+                "Accepted payment methods: Mastercard · Accepted currencies: EUR (€), USD ($)",
                 "5.1. Acceptance: All Orders are subject to acceptance. We may refuse or cancel an Order to prevent fraud/abuse, correct obvious errors, comply with law, or address technical issues.",
                 "5.2. Payment Methods: By submitting a payment, you confirm you are authorised to use the selected method. We may use third-party payment processors; their terms may apply.",
                 "5.3. Currencies, VAT & Taxes: Prices may be shown in GBP/EUR/USD. You may choose your Checkout Currency where available. If your card is billed in another currency, your bank may apply its FX rate and fees. VAT/consumption taxes may apply depending on your billing country; where applicable, we collect/remit taxes and display them at checkout. Invoices/receipts are issued in the Checkout Currency.",

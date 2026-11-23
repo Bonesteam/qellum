@@ -90,7 +90,6 @@ const Header: React.FC = () => {
                                 className={styles.currencySelect}
                                 aria-label="Currency"
                             >
-                                <option value="GBP">£ GBP</option>
                                 <option value="EUR">€ EUR</option>
                                 <option value="USD">$ USD</option>
                             </select>

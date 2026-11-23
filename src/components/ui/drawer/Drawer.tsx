@@ -62,9 +62,8 @@ const DrawerMenu: FC<DrawerMenuProps> = ({ open, onClose }) => {
                             className={styles.currencySelect}
                             aria-label="Currency"
                         >
-                            <option value="GBP">£ GBP</option>
                             <option value="EUR">€ EUR</option>
-                            {/* ❌ ПРИБРАНО: USD — Spoynt не підтримує */}
+                            <option value="USD">$ USD</option>
                         </select>
                     </div>
                 </div>

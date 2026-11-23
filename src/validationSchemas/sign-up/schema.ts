@@ -69,8 +69,9 @@ export const signUpOnSubmit = async (
 
         if (res.ok && data?.user) {
             showAlert("Registration successful!", "A confirmation email has been sent to your inbox.", "success");
-            router.replace("/");
-            router.refresh();
+            setTimeout(() => {
+                window.location.href = "/";
+            }, 300);
         } else {
             showAlert(data?.message || "Registration failed", "", "error");
         }

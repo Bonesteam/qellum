@@ -77,7 +77,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
         ? Math.max(minTopUp, Number(customAmount) || minTopUp)
         : convertedPrice;
       if (amount < minTopUp) throw new Error(`Minimum top-up is ${sign}${minTopUp.toFixed(2)}`);
-      const response = await fetch("/api/spoynt/create-invoice", {
+      const response = await fetch("/api/corefy/create-invoice", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ currency, amount }),

@@ -385,7 +385,6 @@ const Footer: React.FC = () => {
 
                 {/* Center: payment logos */}
                 <div className={styles["footer__bottom-payments"]}>
-                    <Image src={media.visaLogo} alt="Visa" width={44} height={14} className={styles["footer__payment-logo"]} />
                     <Image src={media.mastercardLogo} alt="Mastercard" width={30} height={18} className={styles["footer__payment-logo"]} />
                     <Image src={media.pciDssLogo} alt="PCI DSS" width={44} height={13} className={styles["footer__payment-logo"]} />
                 </div>

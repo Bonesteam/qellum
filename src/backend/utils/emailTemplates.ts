@@ -96,7 +96,7 @@ export function buildWelcomeEmail(firstName: string) {
     const html = baseHtml(subject, `
         ${h1(`Welcome, ${firstName}!`)}
         ${p("Your account has been successfully created. You can now top up your balance and start exploring personalised meal plans from our certified chefs and AI assistant.")}
-        ${p("Accepted payment methods: Visa, Mastercard.", true)}
+        ${p("Accepted payment methods: Mastercard.", true)}
         ${btn("Go to Dashboard", `${SITE_URL}/dashboard`)}
     `);
     return { subject, text, html };

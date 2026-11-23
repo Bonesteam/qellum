@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/spoynt/reconcile",
-      "schedule": "*/5 * * * *"
+      "schedule": "0 0 * * *"
     }
   ]
 }

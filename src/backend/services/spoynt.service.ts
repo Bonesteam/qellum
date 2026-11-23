@@ -4,6 +4,7 @@ import { userController } from "@/backend/controllers/user.controller";
 import { TOKENS_PER_GBP } from "@/utils/wallet";
 import { userService } from "@/backend/services/user.service";
 import { transactionService } from "@/backend/services/transaction.service";
+import mongoose from "mongoose";
 
 type SupportedCurrency = "GBP" | "EUR" | "USD";
 
@@ -58,7 +59,6 @@ function normalizeOutcome(status: string, resolution: string | null) {
         "success",
         "successful",
         "settled",
-        "process_pending",
     ]);
     const failedStatuses = new Set([
         "failed",
@@ -84,6 +84,7 @@ function normalizeOutcome(status: string, resolution: string | null) {
         "review",
         "awaiting_customer",
         "awaiting_redirect_result",
+        "process_pending",
     ]);
     const successResolutions = new Set(["success", "successful", "completed", "approved"]);
     const failedResolutions = new Set([
@@ -195,7 +196,7 @@ export const spoyntService = {
         } else {
             payment.cpi = input.cpi || payment.cpi;
             payment.referenceId = input.referenceId || payment.referenceId;
-            payment.userId = input.userId as any;
+            payment.userId = new mongoose.Types.ObjectId(input.userId);
             payment.tokens = input.tokens;
             payment.requestedCurrency = input.requestedCurrency;
             payment.requestedAmount = input.requestedAmount;

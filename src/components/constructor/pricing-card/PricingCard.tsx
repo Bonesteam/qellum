@@ -7,8 +7,6 @@ import { useUser } from "@/context/UserContext";
 import Input from "@mui/joy/Input";
 import { useCurrency } from "@/context/CurrencyContext";
 import { minTopUpForCurrency } from "@/utils/wallet";
-import Link from "next/link";
-
 interface PricingCardProps {
   variant?: "starter" | "pro" | "premium" | "custom";
   title: string;
@@ -33,7 +31,6 @@ const PricingCard: React.FC<PricingCardProps> = ({
   buttonText,
   badgeTop,
   badgeBottom,
-  index = 0,
 }) => {
   const { showAlert } = useAlert();
   const user = useUser();
@@ -126,7 +123,9 @@ const PricingCard: React.FC<PricingCardProps> = ({
             <span className={styles.priceUnit}>/ pack</span>
           </div>
           {tokens > 0 && (
-            <span className={styles.tokensBadge}>{tokens.toLocaleString()} tokens</span>
+            <span className={styles.tokensBadge}>
+              {new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(tokens)} tokens
+            </span>
           )}
         </>
       )}

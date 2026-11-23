@@ -1,5 +1,6 @@
 "use client";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 /**
  * ScrollReveal — глобальний ініціатор анімацій.
@@ -8,12 +9,10 @@ import { useEffect } from "react";
  * Монтується один раз у layout.tsx.
  */
 export default function ScrollReveal() {
+    const pathname = usePathname();
+
     useEffect(() => {
         const selectors = ".reveal, .reveal-stagger";
-        const elements = document.querySelectorAll<HTMLElement>(selectors);
-
-        if (!elements.length) return;
-
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -26,10 +25,34 @@ export default function ScrollReveal() {
             { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
         );
 
-        elements.forEach((el) => observer.observe(el));
+        const revealElements = () => {
+            document.querySelectorAll<HTMLElement>(selectors).forEach((el) => {
+                if (!el.classList.contains("revealed")) {
+                    observer.observe(el);
+                }
+            });
+        };
 
-        return () => observer.disconnect();
-    }, []);
+        const frame = window.requestAnimationFrame(revealElements);
+        const fallbackFrame = window.requestAnimationFrame(() => {
+            document.querySelectorAll<HTMLElement>(selectors).forEach((el) => {
+                el.classList.add("revealed");
+            });
+        });
+
+        const mutationObserver = new MutationObserver(revealElements);
+        mutationObserver.observe(document.body, {
+            childList: true,
+            subtree: true,
+        });
+
+        return () => {
+            window.cancelAnimationFrame(frame);
+            window.cancelAnimationFrame(fallbackFrame);
+            observer.disconnect();
+            mutationObserver.disconnect();
+        };
+    }, [pathname]);
 
     return null;
 }

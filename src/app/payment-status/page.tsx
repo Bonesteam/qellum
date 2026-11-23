@@ -42,7 +42,7 @@ export default function PaymentStatusPage() {
 
         const loadStatus = async () => {
             try {
-                const response = await fetch(`/api/spoynt/status/${reference}`, { cache: "no-store", credentials: "include" });
+                const response = await fetch(`/api/corefy/status/${reference}`, { cache: "no-store", credentials: "include" });
                 const data = await response.json();
 
                 if (!response.ok) {
@@ -112,7 +112,7 @@ export default function PaymentStatusPage() {
         ? {
               badge: "Processing",
               title: "We are verifying your payment",
-              description: "Please wait a moment while we receive the final response from Spoynt and update your balance.",
+              description: "Please wait a moment while we receive the final response from the payment gateway and update your balance.",
               tone: "amber" as Tone,
               icon: <Loader2 size={24} className="animate-spin" />,
           }
@@ -228,7 +228,7 @@ export default function PaymentStatusPage() {
                                         <div>
                                             <p className={styles.stepTitle}>Status verification</p>
                                             <p className={styles.stepText}>
-                                                We rely on the live invoice status from Spoynt and only match it with your account after that verification step.
+                                                We rely on the live invoice status from the payment provider and only match it with your account after that verification step.
                                             </p>
                                         </div>
                                     </div>
@@ -314,7 +314,7 @@ export default function PaymentStatusPage() {
                                 <p className={styles.metricLabel}>Live verification</p>
                                 <p className={styles.noteTitle}>Waiting for final provider confirmation</p>
                                 <p className={styles.detailText}>
-                                    This page auto-checks the payment status and will update as soon as Spoynt confirms the transaction.
+                                    This page auto-checks the payment status and will update as soon as the provider confirms the transaction.
                                 </p>
                             </div>
                         )}

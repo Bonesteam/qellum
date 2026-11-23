@@ -5,12 +5,13 @@ import { aiService } from "@/backend/services/ai.service";
 
 export async function GET(
     req: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const auth = await requireAuth(req);
+        const { id } = await params;
         await connectDB();
-        const order = await aiService.getOrderById(auth.sub, params.id);
+        const order = await aiService.getOrderById(auth.sub, id);
         if (!order) {
             return NextResponse.json({ message: "Order not found" }, { status: 404 });
         }

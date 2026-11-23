@@ -236,7 +236,12 @@ export const universalService = {
                 const pdfBase64 = await generateInvoicePDF(orderObj);
                 const planName = `${orderObj.planType === "reviewed" ? "Chef Reviewed" : "AI Instant"} ${orderObj.category.charAt(0).toUpperCase() + orderObj.category.slice(1)} Plan`;
                 const amount = `${orderObj.totalTokens} Tokens`;
-                const emailContent = buildOrderConfirmationEmail(user?.firstName || "Customer", planName, amount, orderObj._id.toString());
+                const emailContent = buildOrderConfirmationEmail({
+                    firstName: user?.firstName || "Customer",
+                    referenceId: orderObj._id.toString(),
+                    amount: orderObj.totalTokens,
+                    currency: "EUR",
+                });
 
                 await sendEmail(
                     orderObj.email,

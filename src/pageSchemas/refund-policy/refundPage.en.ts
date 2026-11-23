@@ -48,7 +48,7 @@ const refundPolicySchema: PageSchema = {
                 `Submit requests to ${COMPANY_EMAIL} with your order reference and details.`,
                 "This Policy may be updated; material changes will be notified as described in §8.",
                 "If you consented to immediate supply and opened/downloaded the digital content, your statutory right to cancel may be lost (see §4.7).",
-                "Accepted currencies: GBP (£), EUR (€), USD ($). All conversions are calculated from GBP. Payment methods: Visa, Mastercard."
+                "Accepted currencies: EUR (€), USD ($). Payment methods: Mastercard."
             ],
             centerTitle: true
         },

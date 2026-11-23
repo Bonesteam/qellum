@@ -46,7 +46,7 @@ export default function CheckoutPage() {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/spoynt/create-invoice", {
+      const res = await fetch("/api/corefy/create-invoice", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
